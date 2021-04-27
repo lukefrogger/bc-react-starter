@@ -1733,9 +1733,9 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bigcommerce/bigcommerce-react-theme-components@moderntribe/bigcommerce-react-theme-components#feature/fixes-for-react-starter":
+"@bigcommerce/bigcommerce-react-theme-components@git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#feature/fixes-for-react-starter":
   version "0.0.1"
-  resolved "git+ssh://git@github.com/moderntribe/bigcommerce-react-theme-components.git#9e5b235b25f2b01ee8e79cb31d11720ad9fcf1dd"
+  resolved "git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#9e5b235b25f2b01ee8e79cb31d11720ad9fcf1dd"
   dependencies:
     "@storybook/addon-actions" "^6.0.21"
     "@storybook/react" "^6.0.21"
