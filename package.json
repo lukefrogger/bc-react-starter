@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
-    "@bigcommerce/bigcommerce-react-theme-components": "git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#feature/fixes-for-react-starter",
+    "@bigcommerce/bigcommerce-react-theme-components": "git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#test",
     "@bigcommerce/storefront-data-hooks": "^1.2.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@svgr/webpack": "5.5.0",
