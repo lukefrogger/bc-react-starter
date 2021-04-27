@@ -12,10 +12,10 @@ export default function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/about">Cart</Link>
+            <Link to="/cart">Cart</Link>
           </li>
           <li>
-            <Link to="/dashboard">Login</Link>
+            <Link to="/login">Login</Link>
           </li>
         </ul>
 
@@ -25,11 +25,11 @@ export default function App() {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/about">
-            <About />
+          <Route path="/cart">
+            <Cart />
           </Route>
-          <Route path="/dashboard">
-            <Dashboard />
+          <Route path="/login">
+            <Login />
           </Route>
         </Switch>
       </div>
@@ -37,18 +37,18 @@ export default function App() {
   );
 }
 
-function About() {
+function Cart() {
   return (
     <div>
-      <h2>About</h2>
+      <h2>Cart</h2>
     </div>
   );
 }
 
-function Dashboard() {
+function Login() {
   return (
     <div>
-      <h2>Dashboard</h2>
+      <h2>Login</h2>
     </div>
   );
 }
