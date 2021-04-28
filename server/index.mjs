@@ -51,7 +51,7 @@ app.use((req,res) =>{
 });
 
 //create node.js http server and listen on port
-http.createServer(app).listen(3030);
+http.createServer(app).listen(process.env.PORT || 3030);
 
 // const BC_CONFIG = {
 	// token: process.env.BIGCOMMERCE_STORE_API_TOKEN,
