@@ -3,7 +3,7 @@
  */
 
 import first from "lodash/first";
-import { apiBase, apiHeaders } from "./config";
+import { apiBase, apiHeaders, cartBase } from "./config";
 
 const buildUrl = (url: string, data?: any) => {
   const query = new URLSearchParams(data);
