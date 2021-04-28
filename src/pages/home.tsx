@@ -11,7 +11,7 @@ import {
   Core,
   Widgets,
   Utilities,
-} from "@bigcommerce/bigcommerce-react-theme-components";
+} from "@jingtribe/bigcommerce-react-theme-components";
 import A11yDialog from "mt-a11y-dialog";
 
 const style: any = {};
