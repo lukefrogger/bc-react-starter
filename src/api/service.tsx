@@ -101,7 +101,7 @@ export const postProductReview = async (productId: number, data = {}) => {
 
 export const postCart = async (cartId: string, item?: any) => {
   const body = { item };
-  const response = await fetch(`http://localhost:3000/cart/${cartId}`, {
+  const response = await fetch(`${cartBase}/${cartId}`, {
     method: "POST",
     headers: apiHeaders,
     body: JSON.stringify(body),
@@ -115,7 +115,7 @@ export const postCart = async (cartId: string, item?: any) => {
 };
 
 export const getCart = async (cartId: string) => {
-  const response = await fetch(`http://localhost:3000/cart/${cartId}`);
+  const response = await fetch(`${cartBase}/${cartId}`);
   const json = await response.json();
   return json.data;
 };
