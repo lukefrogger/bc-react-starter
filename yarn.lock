@@ -1733,27 +1733,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bigcommerce/bigcommerce-react-theme-components@git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#test":
-  version "0.0.1"
-  resolved "git+https://jivewise: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@github.com/moderntribe/bigcommerce-react-theme-components.git#9e5b235b25f2b01ee8e79cb31d11720ad9fcf1dd"
-  dependencies:
-    "@storybook/addon-actions" "^6.0.21"
-    "@storybook/react" "^6.0.21"
-    "@types/react-flatpickr" "^3.8.1"
-    classnames "^2.2.6"
-    country-state-city "^1.0.5"
-    date-fns "^2.16.1"
-    enzyme "^3.11.0"
-    enzyme-adapter-react-16 "^1.15.2"
-    flatpickr "^4.6.9"
-    i "^0.3.6"
-    js-cookie "^2.2.1"
-    lodash "^4.17.15"
-    npm "^6.14.7"
-    react-docgen-typescript "^1.21.0"
-    react-docgen-typescript-loader "^3.7.2"
-    react-flatpickr "^3.10.0"
-
 "@bigcommerce/storefront-data-hooks@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.2.0.tgz#d7e2d7009491a81199d11c843a2e8c7aac30d55a"
@@ -2128,6 +2107,28 @@
     "@types/node" "*"
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
+
+"@jingtribe/test-bc-react-components@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@jingtribe/test-bc-react-components/-/test-bc-react-components-0.0.1.tgz#478770c6229bd08a15d2d5ed358e76640bd5ba0e"
+  integrity sha512-7x0mTLqGcpaeyu/CPLSk+9dV/z+dCqXXWSaCwOpgMT9+V0C3jbGLint6b/r/T3kUCfTBZNg5LCQdpycxdYMQLg==
+  dependencies:
+    "@storybook/addon-actions" "^6.0.21"
+    "@storybook/react" "^6.0.21"
+    "@types/react-flatpickr" "^3.8.1"
+    classnames "^2.2.6"
+    country-state-city "^1.0.5"
+    date-fns "^2.16.1"
+    enzyme "^3.11.0"
+    enzyme-adapter-react-16 "^1.15.2"
+    flatpickr "^4.6.9"
+    i "^0.3.6"
+    js-cookie "^2.2.1"
+    lodash "^4.17.15"
+    npm "^6.14.7"
+    react-docgen-typescript "^1.21.0"
+    react-docgen-typescript-loader "^3.7.2"
+    react-flatpickr "^3.10.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
