@@ -7,11 +7,7 @@ import {
   getStorefront,
 } from "../api/service";
 import { BCStorefront } from "../api/storefront";
-import {
-  Core,
-  Widgets,
-  Utilities,
-} from "@jingtribe/bigcommerce-react-theme-components";
+import { Core, Widgets, Utilities } from "@jingtribe/test-bc-react-components";
 import A11yDialog from "mt-a11y-dialog";
 
 const style: any = {};

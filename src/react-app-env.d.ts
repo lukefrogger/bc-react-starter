@@ -10,7 +10,7 @@ declare namespace NodeJS {
 }
 
 declare module 'mt-a11y-dialog';
-declare module '@jingtribe/bigcommerce-react-theme-components';
+declare module '@jingtribe/test-bc-react-components';
 
 declare module '*.avif' {
   const src: string;
