@@ -7,7 +7,7 @@ import {
   getStorefront,
 } from "../api/service";
 import { BCStorefront } from "../api/storefront";
-import { Core, Widgets, Utilities } from "@jingtribe/test-bc-react-components";
+import { Core, Widgets, Utilities } from "unsafe-bc-react-components";
 import A11yDialog from "mt-a11y-dialog";
 
 const style: any = {};
@@ -111,34 +111,32 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product Title Component</h3>
         <Core.ProductTitle
-          tag="h1"
-          classes="bc-example-product-title"
-          styles={{}}
+          as="h1"
+          className="bc-example-product-title"
+          style={{}}
           text={product.name}
-          dataAttributes={{
+/*           dataAttributes={{
             "data-title": product.name,
             "aria-label": product.type,
-          }}
+          }} */
         />
       </div>
 
       <div className={style.bcComponent}>
         <h3>Product Price Component</h3>
         <Core.ProductPrice
-          tag="div"
-          tagID={product.id}
-          classes="bc-example-price"
+          as="div"
+          className="bc-example-price"
           currencySettings={store_config}
           price={product.price}
           salePrice={product.sale_price}
-          hasSalePrice={product.sale_price !== 0}
         />
       </div>
 
       <div className={style.bcComponent}>
         <h3>Product Condition Component</h3>
         <Core.ProductCondition
-          tag="span"
+          as="span"
           text="Used"
           styles={{
             "background-color": "silver",
@@ -151,8 +149,8 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product SKU Component</h3>
         <Core.ProductSKU
-          tag="span"
-          classes="bc-example-sku"
+          as="span"
+          className="bc-example-sku"
           styles={{
             background: "teal",
             color: "white",
@@ -165,8 +163,8 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product Brand Component</h3>
         <Core.Brand
-          tag="span"
-          classes="bc-example-brand"
+          as="span"
+          className="bc-example-brand"
           styles={{ "font-weight": "700", color: "#555" }}
           text={brand.name}
         />
@@ -175,8 +173,8 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product Description Component</h3>
         <Core.Description
-          tag="div"
-          classes="bc-example-brand"
+          as="div"
+          className="bc-example-brand"
           styles={{ "font-size": "14px", "line-height": "18px" }}
           text={product.description}
         />
@@ -186,10 +184,9 @@ const Home = () => {
         <h3>Product Image Component</h3>
         <Core.ProductImage
           src={image.url_standard}
-          altText={image.meta}
-          wrapperClasses="bc-image-wrapper-example"
-          classes="bc-image-example"
-          styles={{
+          alt={image.meta}
+          className="bc-image-example"
+          style={{
             background: "#efefef",
             border: "2px solid lightgrey",
           }}
@@ -199,8 +196,8 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product Specs Component</h3>
         <Core.ProductSpecs
-          tag="ul"
-          classes="bc-example-specs"
+          as="ul"
+          className="bc-example-specs"
           styles={{ "font-size": "18px", "line-height": "22px" }}
           textObject={product}
           customFields={specs}
@@ -210,8 +207,8 @@ const Home = () => {
       <div className={style.bcComponent}>
         <h3>Product Inventory Level Component</h3>
         <Core.ProductInventory
-          tag="div"
-          classes="bc-example-inventory-level"
+          as="div"
+          className="bc-example-inventory-level"
           styles={{}}
           showInventoryLevel={true}
           inventoryLevel={8}
@@ -258,7 +255,6 @@ const Home = () => {
           brand={brand}
           currencySettings={store_config}
           className="bc-product-card--example"
-          cardStyles={{ "max-width": "33.3333%" }}
         />
       </div>
 
