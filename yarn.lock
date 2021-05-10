@@ -13802,7 +13802,7 @@ reakit-warning@^0.6.1:
   dependencies:
     reakit-utils "^0.15.1"
 
-reakit@^1.3.6:
+reakit@^1.3.6, reakit@^1.3.8:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/reakit/-/reakit-1.3.8.tgz#717e1a3b7cc6da803362a0edc2c55d2b6a001baf"
   integrity sha512-8SVejx6FUaFi2+Q9eXoDAd4wWi/xAn6v8JgXH8x2xnzye8pb6v5bYvegACVpYVZnrS5w/JUgMTGh1Xy8MkkPww==
@@ -15854,10 +15854,10 @@ unquote@^1.1.0, unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
-unsafe-bc-react-components@^0.0.1-beta.0:
-  version "0.0.1-beta.0"
-  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.1-beta.0.tgz#8110e1e0a59cfa22fbabba2f51cdfd80b262ac90"
-  integrity sha512-XkIpG5AgNBwRp47Qq/niyCrK0FyL9hgI2jV0m4oPThjslZJMbO3PldpJCWAVnnzN1/VWKXegQ8LYCJ8/ofuxBQ==
+unsafe-bc-react-components@^0.0.1-beta.2:
+  version "0.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.1-beta.2.tgz#d54a6324c8b7f95ac19a95b594f63ead4d934755"
+  integrity sha512-glhAnMRB1i7uXpsFX8uE8z6ONDdJ4EmG9mQgupv0IoGPyHDBgFAQ4UyNJhFFhLnSXvJkWU9Efl38ZEJvVFK76w==
   dependencies:
     "@storybook/addon-actions" "^6.2.7"
     "@storybook/react" "^6.2.7"
@@ -15875,6 +15875,7 @@ unsafe-bc-react-components@^0.0.1-beta.0:
     npm "^6.14.7"
     react-docgen-typescript "^1.21.0"
     react-docgen-typescript-loader "^3.7.2"
+    react-easy-swipe "^0.0.21"
     react-flatpickr "^3.10.0"
     react-responsive-carousel "^3.2.18"
     reakit "^1.3.6"
