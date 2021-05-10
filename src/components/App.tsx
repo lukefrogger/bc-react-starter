@@ -5,6 +5,7 @@ import { theme } from 'unsafe-bc-react-components';
 import emotionReset from 'emotion-reset';
 
 import Home from "../pages/home";
+import KitchenSink from "../pages/kitchen-sink";
 
 export default function App() {
   return (
@@ -22,29 +23,13 @@ export default function App() {
       />
       <Router>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-
-          <hr />
-
+          <Header></Header>
           <Switch>
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/cart">
-              <Cart />
-            </Route>
-            <Route path="/login">
-              <Login />
+            <Route path="/kitchen-sink">
+              <KitchenSink />
             </Route>
           </Switch>
         </div>
@@ -54,18 +39,10 @@ export default function App() {
   );
 }
 
-function Cart() {
+function Header() {
   return (
     <div>
-      <h2>Cart</h2>
-    </div>
-  );
-}
-
-function Login() {
-  return (
-    <div>
-      <h2>Login</h2>
+      <p style={{ backgroundColor: "blue", width: "100%", height: 80, color: 'white', fontSize: 32, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Header</p>
     </div>
   );
 }
