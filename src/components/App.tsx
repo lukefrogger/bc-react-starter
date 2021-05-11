@@ -8,6 +8,7 @@ import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 
 import Home from "../pages/home";
 import KitchenSink from "../pages/kitchen-sink";
+import Cart from "../pages/cart";
 
 export default function App() {
   return (
@@ -33,6 +34,9 @@ export default function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="/cart">
+                <Cart />
               </Route>
               <Route path="/kitchen-sink">
                 <KitchenSink />
