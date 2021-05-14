@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Typography, ProductRow, ProductRowProps } from 'unsafe-bc-react-components';
+import { Typography, ProductRow, ProductRowProps, Pricing, Button  } from 'unsafe-bc-react-components';
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
@@ -20,16 +20,17 @@ const Grid = styled.div`
     display: flex;
     flex-wrap: wrap;
     column-gap: 10%;
+    > * {
+      min-width: 320px;
+    }
   }
 `
 
-const Checkout = styled.div`
-  min-width: 376px;
-  height: 418px;
-  background: #F5F5F5;
-  margin-top: 32px;
+const ProductList = styled.div`
+  margin-bottom: 48px;
+  flex: 1;
   @media(min-width: 1024px) {
-    margin-top: inherit;
+    margin-bottom: inherit;
   }
 `
 
@@ -50,8 +51,8 @@ const Feature = styled.div`
   gap: 16px;
 `
 
-const product: ProductRowProps = {
-  name: 'Prodctu',
+const PRODUCT: ProductRowProps = {
+  name: productMock.name,
   variant: 'Blue',
   quantity: {
     defaultQuantity: 1
@@ -67,6 +68,8 @@ const product: ProductRowProps = {
   }
 }
 
+const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
+
 const Cart = () => {
   return (
     <Container>
@@ -74,25 +77,60 @@ const Cart = () => {
         // TODO: Add Breadcrumbs
       }
       <Typography
+        variant="body-small"
+        css={css`
+          padding-top: 32px;
+        `}>
+          Home / Cart
+      </Typography>
+      <Typography
         as="h1"
         variant="display-xx-small"
         css={css`
-          padding: 20px 0;
+          padding: 32px 0 24px;
         `}
       >
         YOUR ORDER
       </Typography>
       <Grid>
-        <div style={{ flex: 1}}>
-          <ProductRow {...product}/>
-          <ProductRow {...product}/>
-          <ProductRow {...product}/>
+        <ProductList>
+          {PRODUCTS.map(product => (
+            <ProductRow {...product}/>
+          ))}
+        </ProductList>
+        <div>
+          <Pricing
+            items={[
+              {
+                label: 'Subtotal',
+                price: {
+                  price: 80,
+                  salePrice: 0,
+                  currencySettings: {}
+                }
+              },
+              {
+                label: 'Taxes',
+                price: {
+                  price: 11,
+                  salePrice: 0,
+                  currencySettings: {}
+                }
+              },
+            ]}
+            total={
+              {
+                label: 'Total',
+                price: {
+                  price: 91,
+                  salePrice: 0,
+                  currencySettings: {}
+                }
+              }
+            }
+          />
+          <Button style={{ width: "100%", marginTop: 48 }}>Proceed to checkout</Button>
         </div>
-        <Checkout>
-          {
-            // TODO: Add checkout component
-          }
-        </Checkout>
       </Grid>
       <Features>
         <Feature>
