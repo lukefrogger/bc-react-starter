@@ -13556,15 +13556,6 @@ react-refresh@^0.8.3:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.8.3.tgz#721d4657672d400c5e3c75d063c4a85fb2d5d68f"
   integrity sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg==
 
-react-responsive-carousel@^3.2.18:
-  version "3.2.18"
-  resolved "https://registry.yarnpkg.com/react-responsive-carousel/-/react-responsive-carousel-3.2.18.tgz#5e44b3aab6c482c63cd1c6045ea48c97b49a69b9"
-  integrity sha512-A6eXp/HofjZ8p23Q/b25dqtokHFFXKhKKn82ZJkCI0edxjtAUid8SImr8rHp0rRi9aEYXej3ynWOzaUHFE4RKA==
-  dependencies:
-    classnames "^2.2.5"
-    prop-types "^15.5.8"
-    react-easy-swipe "^0.0.21"
-
 react-router-dom@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-5.2.0.tgz#9e65a4d0c45e13289e66c7b17c7e175d0ea15662"
@@ -15854,10 +15845,10 @@ unquote@^1.1.0, unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
-unsafe-bc-react-components@^0.0.1-beta.3:
-  version "0.0.1-beta.3"
-  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.1-beta.3.tgz#bb929b438d5175e5e1ca49decb07af414cb08408"
-  integrity sha512-MSqwaBIwlCfuPkKpq1lYLhzzKQOmtEVi2JIKllVYUNtfJ8VYFF3ke1XCVZZ5R79Le9DYuEsjzwB4HYB10/PIlg==
+unsafe-bc-react-components@^0.0.1-beta.12:
+  version "0.0.1-beta.12"
+  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.1-beta.12.tgz#da29cbdd55c1911bd581f66e81f510a6448eccf4"
+  integrity sha512-+iCJYCb0HXu2HfU89OvbjTQuD6/xr9OKseqC1XK+hxPbyMgkmp9uYRYRx9uCQyg93QkCyrB76SOLaXJTDscpDw==
   dependencies:
     "@storybook/addon-actions" "^6.2.7"
     "@storybook/react" "^6.2.7"
@@ -15877,7 +15868,6 @@ unsafe-bc-react-components@^0.0.1-beta.3:
     react-docgen-typescript-loader "^3.7.2"
     react-easy-swipe "^0.0.21"
     react-flatpickr "^3.10.0"
-    react-responsive-carousel "^3.2.18"
     reakit "^1.3.6"
 
 unset-value@^1.0.0:
