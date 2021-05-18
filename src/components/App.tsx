@@ -6,6 +6,7 @@ import emotionReset from 'emotion-reset';
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 
 
+import Category from "../pages/category";
 import Home from "../pages/home";
 import KitchenSink from "../pages/kitchen-sink";
 
@@ -33,6 +34,9 @@ export default function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route exact path="/category/:slug">
+                <Category />
               </Route>
               <Route path="/kitchen-sink">
                 <KitchenSink />
