@@ -1,0 +1,23 @@
+{
+  "data": [
+    {
+      "id": 41,
+      "authentication": { "force_password_reset": false },
+      "company": "",
+      "customer_group_id": 2,
+      "email": "nick.i@tri.be",
+      "first_name": "Nicholas",
+      "last_name": "Ioannou",
+      "notes": "",
+      "phone": "",
+      "registration_ip_address": "",
+      "tax_exempt_category": "nick.i@tri.be",
+      "date_created": "2018-07-22T12:13:22Z",
+      "date_modified": "2019-08-05T15:35:09Z",
+      "accepts_product_review_abandoned_cart_emails": false
+    }
+  ],
+  "meta": {
+    "pagination": { "total": 1, "count": 1, "per_page": 50, "current_page": 1, "total_pages": 1 }
+  }
+}
