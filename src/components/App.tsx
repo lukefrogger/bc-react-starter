@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Global, css, ThemeProvider } from '@emotion/react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { theme, Banner } from 'unsafe-bc-react-components';
@@ -11,10 +11,27 @@ import Home from "../pages/home";
 import KitchenSink from "../pages/kitchen-sink";
 import Product from "../pages/product";
 import Cart from "../pages/cart";
+import { getDismissedBannerIds, setDismissedBannerId } from "../utils/local-storage";
 
-export default function App() {
-  // TODO: mocked, will come from API
-  const activeBanner = { content: 'Free international shipping on $50+'}
+const getActiveBanner = () => {
+  // TODO: API request
+  const banner = { id: 1, content: 'Free international shipping on $50+'};
+  const dismissedBanners = getDismissedBannerIds();
+
+  if (!dismissedBanners.includes(banner.id)) {
+    return banner
+  }
+}
+
+export default function App() {  
+  const activeBanner = getActiveBanner();
+  const [isBannerVisible, setBannerVisible] = React.useState(!!activeBanner)
+
+  const handleBannerClose = () => {
+    if (!activeBanner) return;
+    setBannerVisible(false);
+    setDismissedBannerId(activeBanner.id);
+  };
 
   return (
     <CommerceProvider locale={'en-US'}>
@@ -34,8 +51,8 @@ export default function App() {
           `}
         />
         <Router>
-          <div style={{ marginTop: activeBanner ? 48 : 0 }}>
-            {activeBanner && <Banner>{activeBanner.content}</Banner>}
+          <div style={{ marginTop: isBannerVisible ? 48 : 0 }}>
+            {isBannerVisible && <Banner onClose={handleBannerClose}>Free international shipping on $50+</Banner>}
             <Header />
             <Switch>
               <Route exact path="/">
