@@ -1,7 +1,7 @@
 import React from "react";
 import { Global, css, ThemeProvider } from '@emotion/react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { theme } from 'unsafe-bc-react-components';
+import { theme, Banner } from 'unsafe-bc-react-components';
 import emotionReset from 'emotion-reset';
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 
@@ -13,6 +13,9 @@ import Product from "../pages/product";
 import Cart from "../pages/cart";
 
 export default function App() {
+  // TODO: mocked, will come from API
+  const activeBanner = { content: 'Free international shipping on $50+'}
+
   return (
     <CommerceProvider locale={'en-US'}>
       <ThemeProvider theme={theme}>
@@ -31,8 +34,9 @@ export default function App() {
           `}
         />
         <Router>
-          <div>
-            <Header></Header>
+          <div style={{ marginTop: activeBanner ? 48 : 0 }}>
+            {activeBanner && <Banner>{activeBanner.content}</Banner>}
+            <Header />
             <Switch>
               <Route exact path="/">
                 <Home />
