@@ -24,7 +24,7 @@ const getActiveBanner = () => {
 }
 
 export default function App() {  
-  const activeBanner = getActiveBanner();
+  const activeBanner = React.useMemo(getActiveBanner, []);
   const [isBannerVisible, setBannerVisible] = React.useState(!!activeBanner)
 
   const handleBannerClose = () => {
@@ -52,7 +52,9 @@ export default function App() {
         />
         <Router>
           <div style={{ marginTop: isBannerVisible ? 48 : 0 }}>
-            {isBannerVisible && <Banner onClose={handleBannerClose}>Free international shipping on $50+</Banner>}
+            {isBannerVisible && (
+              <Banner onClose={handleBannerClose}>{activeBanner?.content}</Banner>
+            )}
             <Header />
             <Switch>
               <Route exact path="/">
