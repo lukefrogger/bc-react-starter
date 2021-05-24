@@ -3,8 +3,8 @@ import { Card, SideMenu, ProductCard, Props as ProductCardProps, Typography, Pag
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import productMock from '../__mocks__/data/product.json';
-import storeMock from '../__mocks__/data/store_config.json'
+import productMock from '../../__mocks__/data/product.json';
+import storeMock from '../../__mocks__/data/store_config.json'
 
 type Level = {
   title: string
@@ -124,7 +124,7 @@ const Meta = styled.div`
 `
 
 
-const Home = () => {
+export function CategoryPage() {
 
   const [active, setActive] = React.useState(levels[0].items[0])
 
@@ -188,5 +188,3 @@ const Home = () => {
     </Container>
   );
 };
-
-export default Home;

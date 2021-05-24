@@ -3,8 +3,8 @@ import { Typography, ProductRow, ProductRowProps, Pricing, Button  } from 'unsaf
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import productMock from '../__mocks__/data/product.json';
-import storeMock from '../__mocks__/data/store_config.json'
+import productMock from '../../__mocks__/data/product.json';
+import storeMock from '../../__mocks__/data/store_config.json'
 
 
 
@@ -70,7 +70,7 @@ const PRODUCT: ProductRowProps = {
 
 const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
 
-const Cart = () => {
+export function CartPage() {
   return (
     <Container>
       {
@@ -217,5 +217,3 @@ const Cart = () => {
     </Container>
   );
 };
-
-export default Cart;

@@ -3,8 +3,8 @@ import { Typography, ProductPrice, StarRating, Button,  QuantitySelector, Produc
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import productMock from '../__mocks__/data/product.json';
-import storeMock from '../__mocks__/data/store_config.json'
+import productMock from '../../__mocks__/data/product.json';
+import storeMock from '../../__mocks__/data/store_config.json'
 
 
 const products: ProductCardProps[] = [
@@ -179,7 +179,7 @@ const RelatedProducts = styled.div`
   }
 `
 
-function ProductPage() {
+export function ProductPage() {
   return (
     <Container>
       {
@@ -292,5 +292,3 @@ function ProductPage() {
     </Container>
   );
 };
-
-export default ProductPage;

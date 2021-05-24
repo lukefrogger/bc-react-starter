@@ -3,8 +3,8 @@ import { Hero, HeroProps, SideMenu, ProductCard, Props as ProductCardProps } fro
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import productMock from '../__mocks__/data/product.json';
-import storeMock from '../__mocks__/data/store_config.json'
+import productMock from '../../__mocks__/data/product.json';
+import storeMock from '../../__mocks__/data/store_config.json'
 
 const HERO: HeroProps = {
   headline: {
@@ -136,7 +136,7 @@ const Grid = styled.div`
 `
 
 
-const Home = () => {
+export function HomePage() {
 
   const [active, setActive] = React.useState(levels[0].items[0])
 
@@ -174,5 +174,3 @@ const Home = () => {
     </Container>
   );
 };
-
-export default Home;
