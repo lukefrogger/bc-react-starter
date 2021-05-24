@@ -1,12 +1,11 @@
 import React from "react";
 import { Global, css, ThemeProvider } from '@emotion/react'
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { theme } from 'unsafe-bc-react-components';
 import emotionReset from 'emotion-reset';
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 
 
-import {CartPage, CategoryPage, HomePage, ProductPage} from "./pages";
+import { Router } from "./pages/router";
 
 export default function App() {
   return (
@@ -26,34 +25,8 @@ export default function App() {
             }
           `}
         />
-        <Router>
-          <div>
-            <Header></Header>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route exact path="/category/:slug">
-                <CategoryPage />
-              </Route>
-              <Route path="/product/:slug">
-                <ProductPage />
-              </Route>
-              <Route path="/cart">
-                <CartPage />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
+        <Router/>
       </ThemeProvider>
     </CommerceProvider>
-  );
-}
-
-function Header() {
-  return (
-    <div>
-      <p style={{ backgroundColor: "blue", width: "100%", height: 80, color: 'white', fontSize: 32, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Header</p>
-    </div>
   );
 }
