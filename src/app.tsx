@@ -1,15 +1,15 @@
-import React from "react";
-import { Global, css, ThemeProvider } from '@emotion/react'
-import { theme } from 'unsafe-bc-react-components';
-import emotionReset from 'emotion-reset';
+import * as React from 'react'
+
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
+import { css, Global, ThemeProvider } from '@emotion/react'
+import emotionReset from 'emotion-reset'
+import { theme } from 'unsafe-bc-react-components'
 
+import { Router } from './pages/router'
 
-import { Router } from "./pages/router";
-
-export default function App() {
+export function App(): React.ReactElement {
   return (
-    <CommerceProvider locale={'en-US'}>
+    <CommerceProvider locale="en-US">
       <ThemeProvider theme={theme}>
         <Global
           styles={css`
@@ -25,8 +25,8 @@ export default function App() {
             }
           `}
         />
-        <Router/>
+        <Router />
       </ThemeProvider>
     </CommerceProvider>
-  );
+  )
 }

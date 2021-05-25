@@ -1,11 +1,20 @@
-import * as React from "react";
-import { Typography, ProductPrice, StarRating, Button,  QuantitySelector, ProductReview, ProductCard, Props as ProductCardProps } from 'unsafe-bc-react-components';
+import * as React from 'react'
+
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import {
+  Button,
+  ProductCard,
+  ProductPrice,
+  ProductReview,
+  Props as ProductCardProps,
+  QuantitySelector,
+  StarRating,
+  Typography,
+} from 'unsafe-bc-react-components'
 
-import productMock from '../../__mocks__/data/product.json';
+import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
-
 
 const products: ProductCardProps[] = [
   {
@@ -55,7 +64,7 @@ const products: ProductCardProps[] = [
       name: productMock.brand,
     },
     currencySettings: { currency: storeMock.currency },
-  }
+  },
 ]
 
 const Container = styled.div`
@@ -69,8 +78,8 @@ const Grid = styled.div`
   --horizontal-setback: 104px;
   padding-top: 32px;
   padding-bottom: 48px;
-  @media(min-width: 1024px) {
-  padding-left: var(--horizontal-setback);
+  @media (min-width: 1024px) {
+    padding-left: var(--horizontal-setback);
     display: flex;
     column-gap: 40px;
     > * {
@@ -84,12 +93,12 @@ const Image = styled.div`
   height: 340px;
   width: 100%;
   position: relative;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     height: 584px;
     width: 584px;
   }
   margin-bottom: 20px;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     margin-bottom: inherit;
     ::before {
       position: absolute;
@@ -113,7 +122,7 @@ const ProductDescription = styled.div`
   flex-direction: column;
   gap: 16px;
 `
-const ProductOptions= styled.div`
+const ProductOptions = styled.div`
   margin-top: 32px;
   display: flex;
   flex-direction: column;
@@ -134,15 +143,14 @@ const Row = styled.div`
 
 const ProductDetail = styled.div`
   --horizontal-setback: 104px;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     padding-left: var(--horizontal-setback);
   }
   > * {
     :not(:first-child) {
-      border-top: 2px solid #EAEAEA;
+      border-top: 2px solid #eaeaea;
     }
   }
-
 `
 const ProductDetailRow = styled.div`
   display: flex;
@@ -154,18 +162,17 @@ const ProductDetailRow = styled.div`
     max-width: 580px;
   }
   flex-direction: column;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     flex-direction: row;
   }
 `
 
 const ReviewList = styled.div`
-
   > * {
     padding-bottom: 20px;
     :not(:first-child) {
       padding-top: 20px;
-      border-top: 2px solid #EAEAEA;
+      border-top: 2px solid #eaeaea;
     }
   }
 `
@@ -174,12 +181,12 @@ const RelatedProducts = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     flex-wrap: nowrap;
   }
 `
 
-export function ProductPage() {
+export function ProductPage(): React.ReactElement {
   return (
     <Container>
       {
@@ -189,19 +196,28 @@ export function ProductPage() {
         variant="body-small"
         css={css`
           padding-top: 32px;
-        `}>
-          Home / Category / Product name
+        `}
+      >
+        Home / Category / Product name
       </Typography>
       <Grid>
-        <Image/>
+        <Image />
         <Product>
           <ProductDescription>
-            <Typography variant="overline">{productMock.brand.toUpperCase()}</Typography>
+            <Typography variant="overline">
+              {productMock.brand.toUpperCase()}
+            </Typography>
             <Typography variant="display">{productMock.name}</Typography>
-            <ProductPrice price={21} salePrice={20} currencySettings={{}}></ProductPrice>
-            <Typography variant="body-small" dangerouslySetInnerHTML={{ __html: productMock.description}}/>
+            <ProductPrice price={21} salePrice={20} currencySettings={{}} />
+            <Typography
+              variant="body-small"
+              dangerouslySetInnerHTML={{ __html: productMock.description }}
+            />
             <StarRow>
-              <StarRating rating={4} style={{ marginTop: 0, marginBottom: 0}}></StarRating>
+              <StarRating
+                rating={4}
+                style={{ marginTop: 0, marginBottom: 0 }}
+              />
               <Typography variant="body-small">2 reviews</Typography>
             </StarRow>
             <div>
@@ -222,10 +238,10 @@ export function ProductPage() {
             </div>
             <div>
               <Typography variant="display-xx-small">QUANTITY</Typography>
-                <Row>
-                  <QuantitySelector defaultQuantity={1}/>
-                  <Button>Add to Cart</Button>
-                </Row>
+              <Row>
+                <QuantitySelector defaultQuantity={1} />
+                <Button>Add to Cart</Button>
+              </Row>
             </div>
           </ProductOptions>
         </Product>
@@ -233,45 +249,49 @@ export function ProductPage() {
       <ProductDetail>
         <ProductDetailRow>
           <Typography variant="display-small">Product Description</Typography>
-          <Typography dangerouslySetInnerHTML={{ __html: productMock.description }}/>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: productMock.description }}
+          />
         </ProductDetailRow>
         <ProductDetailRow>
           <Typography variant="display-small">Specifications</Typography>
-          <Typography dangerouslySetInnerHTML={{ __html: productMock.description }}/>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: productMock.description }}
+          />
         </ProductDetailRow>
         <ProductDetailRow>
           <Typography variant="display-small">Reviews</Typography>
           <ReviewList>
-              <ProductReview
-                review={{
-                  author: productMock.review.name,
-                  rating: productMock.review.rating,
-                  date: new Date(productMock.review.date_modified),
-                  text: productMock.review.text,
-                  title: productMock.review.title,
-                }}
-                style={{ marginTop: 0 }}
-              />
-              <ProductReview
-                review={{
-                  author: productMock.review.name,
-                  rating: productMock.review.rating,
-                  date: new Date(productMock.review.date_modified),
-                  text: productMock.review.text,
-                  title: productMock.review.title,
-                }}
-                style={{ marginTop: 0 }}
-              />
-              <ProductReview
-                review={{
-                  author: productMock.review.name,
-                  rating: productMock.review.rating,
-                  date: new Date(productMock.review.date_modified),
-                  text: productMock.review.text,
-                  title: productMock.review.title,
-                }}
-                style={{ marginTop: 0 }}
-              />
+            <ProductReview
+              review={{
+                author: productMock.review.name,
+                rating: productMock.review.rating,
+                date: new Date(productMock.review.date_modified),
+                text: productMock.review.text,
+                title: productMock.review.title,
+              }}
+              style={{ marginTop: 0 }}
+            />
+            <ProductReview
+              review={{
+                author: productMock.review.name,
+                rating: productMock.review.rating,
+                date: new Date(productMock.review.date_modified),
+                text: productMock.review.text,
+                title: productMock.review.title,
+              }}
+              style={{ marginTop: 0 }}
+            />
+            <ProductReview
+              review={{
+                author: productMock.review.name,
+                rating: productMock.review.rating,
+                date: new Date(productMock.review.date_modified),
+                text: productMock.review.text,
+                title: productMock.review.title,
+              }}
+              style={{ marginTop: 0 }}
+            />
           </ReviewList>
         </ProductDetailRow>
       </ProductDetail>
@@ -285,10 +305,10 @@ export function ProductPage() {
         You might also enjoy
       </Typography>
       <RelatedProducts>
-        {products.map(product => (
+        {products.map((product) => (
           <ProductCard {...product} />
         ))}
       </RelatedProducts>
     </Container>
-  );
-};
+  )
+}
