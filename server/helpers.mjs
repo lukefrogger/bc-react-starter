@@ -1,5 +1,6 @@
 import fetchProduct from "@bigcommerce/storefront-data-hooks/api/operations/get-product.js";
 import cartApi from "@bigcommerce/storefront-data-hooks/api/cart";
+import csc from "country-state-city";
 
 export const onStoreProxyReq = (proxyReq, req, res) => {
 	proxyReq.setHeader(
@@ -7,7 +8,7 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
 		process.env.BIGCOMMERCE_STORE_API_CLIENT_ID
 	);
 	proxyReq.setHeader("X-Auth-Token", process.env.BIGCOMMERCE_STORE_API_TOKEN);
-}
+};
 
 export const getProductHelper = async (req, res) => {
 	const [first, slug, ...rest] = req.url.split("/");
@@ -18,7 +19,7 @@ export const getProductHelper = async (req, res) => {
 
 	res.write(JSON.stringify(data));
 	res.end();
-}
+};
 
 export const wrapResponse = (res) => {
 	res.json = (data) => {
@@ -30,7 +31,7 @@ export const wrapResponse = (res) => {
 		return res;
 	};
 	return res;
-}
+};
 
 export const cartHelper = async (req, res) => {
 	const [first, cartId, ...rest] = req.url.split("/");
@@ -38,4 +39,22 @@ export const cartHelper = async (req, res) => {
 	req.cookies = { bc_cartId: cartId || null };
 	const cart = await handler(req, wrapResponse(res), cartApi.handlers);
 	res.end();
-}
+};
+
+export const countryHelper = (req, res) => {
+	const data = csc.default.getAllCountries().map((country) => {
+		const { name, isoCode } = country;
+		return { name, sortname: name, id: isoCode };
+	});
+	res.write(JSON.stringify(data));
+	res.end();
+};
+
+export const stateHelper = (req, res) => {
+	const [host, code] = req.url.split("/");
+	const states = csc.default.getStatesOfCountry(code);
+
+	const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }));
+	res.write(JSON.stringify(data));
+	res.end();
+};
