@@ -1,0 +1,71 @@
+{
+  "data": [
+    {
+      "id": 63,
+      "address1": "123 Fake St",
+      "address2": "",
+      "address_type": "residential",
+      "city": "Oklahoma",
+      "company": "",
+      "country": "United States",
+      "country_code": "US",
+      "customer_id": 41,
+      "first_name": "Nick",
+      "last_name": "Ioa",
+      "phone": "555678545",
+      "postal_code": "123456",
+      "state_or_province": "Florida"
+    },
+    {
+      "id": 81,
+      "address1": "31",
+      "address2": "Aspin Park Road",
+      "address_type": "residential",
+      "city": "Knaresborough",
+      "company": "",
+      "country": "United Kingdom",
+      "country_code": "GB",
+      "customer_id": 41,
+      "first_name": "Nick",
+      "last_name": "Ioannou",
+      "phone": "",
+      "postal_code": "HG5 8HF",
+      "state_or_province": "North Yorkshire"
+    },
+    {
+      "id": 103,
+      "address1": "3534 Rhode Island Avenue",
+      "address2": "",
+      "address_type": "residential",
+      "city": "Los Angeles",
+      "company": "eCommerce Merchant",
+      "country": "United States",
+      "country_code": "US",
+      "customer_id": 41,
+      "first_name": "John",
+      "last_name": "Doe",
+      "phone": "5555555555",
+      "postal_code": "90001",
+      "state_or_province": "California"
+    },
+    {
+      "id": 104,
+      "address1": "3534 Rhode Island Avenue",
+      "address2": "",
+      "address_type": "residential",
+      "city": "Los Angeles",
+      "company": "eCommerce Merchant",
+      "country": "United States",
+      "country_code": "US",
+      "customer_id": 41,
+      "first_name": "Johny",
+      "last_name": "Doey",
+      "phone": "5555555555",
+      "postal_code": "90001",
+      "state_or_province": "California"
+    }
+  ],
+  "meta": {
+    "pagination": { "total": 4, "count": 4, "per_page": 50, "current_page": 1, "total_pages": 1 }
+  }
+}
