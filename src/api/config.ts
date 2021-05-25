@@ -5,12 +5,12 @@
  */
 
 // API Url for the node proxy
-const apiBase = process.env.REACT_APP_API_ENDPOINT;
-const cartBase = process.env.REACT_APP_CART_ENDPOINT;
+const apiBase = process.env.REACT_APP_API_ENDPOINT
+const cartBase = process.env.REACT_APP_CART_ENDPOINT
 
 const apiHeaders = {
   'Content-Type': 'application/json',
-  'Accept': 'application/json',
+  Accept: 'application/json',
 }
 
 export { apiBase, cartBase, apiHeaders }
