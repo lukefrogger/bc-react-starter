@@ -8,7 +8,7 @@ import path from "path";
 import serveStatic from "serve-static";
 import fs from 'fs';
 
-import { onStoreProxyReq, getProductHelper, cartHelper } from "./helpers";
+import { onStoreProxyReq, getProductHelper, cartHelper, countryHelper, stateHelper } from "./helpers";
 
 const app = connect();
 
@@ -26,7 +26,9 @@ app.use(serveStatic(path.join(__dirname, 'build')))
 app.use(serveStatic(path.join(__dirname, 'public')))
 
 // respond to all requests
-app.use("/cart", cartHelper);
+app.use("/cart-helper", cartHelper);
+app.use("/countries", countryHelper);
+app.use("/country/", stateHelper);
 app.use("/product", getProductHelper);
 app.use(
 	"/api",

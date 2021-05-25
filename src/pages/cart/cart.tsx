@@ -1,12 +1,17 @@
-import * as React from "react";
-import { Typography, ProductRow, ProductRowProps, Pricing, Button  } from 'unsafe-bc-react-components';
+import * as React from 'react'
+
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import {
+  Button,
+  Pricing,
+  ProductRow,
+  ProductRowProps,
+  Typography,
+} from 'unsafe-bc-react-components'
 
-import productMock from '../__mocks__/data/product.json';
-import storeMock from '../__mocks__/data/store_config.json'
-
-
+import productMock from '../../__mocks__/data/product.json'
+import storeMock from '../../__mocks__/data/store_config.json'
 
 const Container = styled.div`
   --horizontal-spacing: 24px;
@@ -16,7 +21,7 @@ const Container = styled.div`
 `
 
 const Grid = styled.div`
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     display: flex;
     flex-wrap: wrap;
     column-gap: 10%;
@@ -29,7 +34,7 @@ const Grid = styled.div`
 const ProductList = styled.div`
   margin-bottom: 48px;
   flex: 1;
-  @media(min-width: 1024px) {
+  @media (min-width: 1024px) {
     margin-bottom: inherit;
   }
 `
@@ -40,7 +45,7 @@ const Features = styled.div`
   grid-gap: 2rem;
   align-items: center;
   padding: 48px 0;
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     padding: 80px 0;
   }
 `
@@ -55,22 +60,22 @@ const PRODUCT: ProductRowProps = {
   name: productMock.name,
   variant: 'Blue',
   quantity: {
-    defaultQuantity: 1
+    defaultQuantity: 1,
   },
   prices: {
     currencySettings: { currency: storeMock.currency },
     price: 23,
-    salePrice: 0
+    salePrice: 0,
   },
   image: {
     src: productMock.image_src,
-    alt: productMock.image_alt
-  }
+    alt: productMock.image_alt,
+  },
 }
 
 const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
 
-const Cart = () => {
+export function CartPage(): React.ReactElement {
   return (
     <Container>
       {
@@ -80,8 +85,9 @@ const Cart = () => {
         variant="body-small"
         css={css`
           padding-top: 32px;
-        `}>
-          Home / Cart
+        `}
+      >
+        Home / Cart
       </Typography>
       <Typography
         as="h1"
@@ -94,8 +100,8 @@ const Cart = () => {
       </Typography>
       <Grid>
         <ProductList>
-          {PRODUCTS.map(product => (
-            <ProductRow {...product}/>
+          {PRODUCTS.map((product) => (
+            <ProductRow {...product} />
           ))}
         </ProductList>
         <div>
@@ -106,30 +112,30 @@ const Cart = () => {
                 price: {
                   price: 80,
                   salePrice: 0,
-                  currencySettings: {}
-                }
+                  currencySettings: {},
+                },
               },
               {
                 label: 'Taxes',
                 price: {
                   price: 11,
                   salePrice: 0,
-                  currencySettings: {}
-                }
+                  currencySettings: {},
+                },
               },
             ]}
-            total={
-              {
-                label: 'Total',
-                price: {
-                  price: 91,
-                  salePrice: 0,
-                  currencySettings: {}
-                }
-              }
-            }
+            total={{
+              label: 'Total',
+              price: {
+                price: 91,
+                salePrice: 0,
+                currencySettings: {},
+              },
+            }}
           />
-          <Button style={{ width: "100%", marginTop: 48 }}>Proceed to checkout</Button>
+          <Button style={{ width: '100%', marginTop: 48 }}>
+            Proceed to checkout
+          </Button>
         </div>
       </Grid>
       <Features>
@@ -150,7 +156,9 @@ const Cart = () => {
               strokeLinecap="square"
             />
           </svg>
-          <Typography as="span" variant="overline">100% secure</Typography>
+          <Typography as="span" variant="overline">
+            100% secure
+          </Typography>
         </Feature>
         <Feature>
           <svg width={47} height={35} viewBox="0 0 47 35" fill="none">
@@ -168,7 +176,9 @@ const Cart = () => {
               strokeLinecap="square"
             />
           </svg>
-          <Typography as="span" variant="overline">Fast shipping</Typography>
+          <Typography as="span" variant="overline">
+            Fast shipping
+          </Typography>
         </Feature>
         <Feature>
           <svg width={40} height={38} viewBox="0 0 40 38" fill="none">
@@ -186,7 +196,9 @@ const Cart = () => {
               strokeLinecap="square"
             />
           </svg>
-          <Typography as="span" variant="overline">Easy returns</Typography>
+          <Typography as="span" variant="overline">
+            Easy returns
+          </Typography>
         </Feature>
         <Feature>
           <svg width={37} height={37} viewBox="0 0 37 37" fill="none">
@@ -211,11 +223,11 @@ const Cart = () => {
               strokeLinecap="square"
             />
           </svg>
-          <Typography as="span" variant="overline">Safely packaged</Typography>
+          <Typography as="span" variant="overline">
+            Safely packaged
+          </Typography>
         </Feature>
       </Features>
     </Container>
-  );
-};
-
-export default Cart;
+  )
+}
