@@ -5,33 +5,15 @@ import { theme, Banner } from 'unsafe-bc-react-components';
 import emotionReset from 'emotion-reset';
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 
-
+import Cart from "../pages/cart";
 import Category from "../pages/category";
 import Home from "../pages/home";
 import KitchenSink from "../pages/kitchen-sink";
 import Product from "../pages/product";
-import Cart from "../pages/cart";
-import { getDismissedBannerIds, setDismissedBannerId } from "../utils/local-storage";
-
-const getActiveBanner = () => {
-  // TODO: API request
-  const banner = { id: 1, content: 'Free international shipping on $50+'};
-  const dismissedBanners = getDismissedBannerIds();
-
-  if (!dismissedBanners.includes(banner.id)) {
-    return banner
-  }
-}
+import useBanners from "../hooks/useBanners";
 
 export default function App() {  
-  const activeBanner = React.useMemo(getActiveBanner, []);
-  const [isBannerVisible, setBannerVisible] = React.useState(!!activeBanner)
-
-  const handleBannerClose = () => {
-    if (!activeBanner) return;
-    setBannerVisible(false);
-    setDismissedBannerId(activeBanner.id);
-  };
+  const { banner, onBannerClose } = useBanners()
 
   return (
     <CommerceProvider locale={'en-US'}>
@@ -51,9 +33,9 @@ export default function App() {
           `}
         />
         <Router>
-          <div style={{ marginTop: isBannerVisible ? 48 : 0 }}>
-            {isBannerVisible && (
-              <Banner onClose={handleBannerClose}>{activeBanner?.content}</Banner>
+          <div style={{ marginTop: banner ? 48 : 0 }}>
+            {banner && (
+              <Banner onClose={onBannerClose}>{banner?.content}</Banner>
             )}
             <Header />
             <Switch>
