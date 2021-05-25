@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { Header } from '@components/header'
+import { Footer, Header } from '@components'
 import { CartPage, CategoryPage, HomePage, ProductPage } from '@pages'
 
 export function Router(): React.ReactElement {
@@ -24,6 +24,7 @@ export function Router(): React.ReactElement {
             <CartPage />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </BrowserRouter>
   )
