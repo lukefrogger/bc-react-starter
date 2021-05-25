@@ -77,7 +77,7 @@ module.exports = {
           // Packages.
           ["^@?\\w"],
           // Internal packages.
-          ["^(@hooks|@theme)(/.*|$)"], // Match this with ts paths
+          ["^(@api|@components|@config|@hooks|@pages|@utile)(/.*|$)"], // Match this with ts paths
           // Side effect imports.
           ["^\\u0000"],
           // Other relative imports. Put same-folder imports and `.` last.
@@ -91,5 +91,5 @@ module.exports = {
     '@typescript-eslint/ban-ts-ignore': 'off',
     'jest/no-mocks-import': 'off',
   },
-  ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts']
+  ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts', 'src/config/reportWebVitals.ts']
 }

@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/core": "7.12.3",
     "@bigcommerce/storefront-data-hooks": "^1.2.0",
-    "@emotion/react": "^11.4.0",
+    "@emotion/react": "link:../bigcommerce-react-theme-components/node_modules/@emotion/react",
     "@emotion/styled": "^11.3.0",
     "@jingtribe/test-bc-react-components": "^0.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
@@ -75,10 +75,10 @@
     "postcss-safe-parser": "5.0.2",
     "prettier": "^2.3.0",
     "prompts": "2.4.0",
-    "react": "^17.0.2",
+    "react": "link:../bigcommerce-react-theme-components/node_modules/react",
     "react-app-polyfill": "^2.0.0",
     "react-dev-utils": "^11.0.3",
-    "react-dom": "^17.0.2",
+    "react-dom": "link:../bigcommerce-react-theme-components/node_modules/react-dom",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.2.0",
     "reakit": "^1.3.8",
@@ -91,7 +91,7 @@
     "terser-webpack-plugin": "4.2.3",
     "ts-pnp": "1.2.0",
     "typescript": "^4.1.2",
-    "unsafe-bc-react-components": "^0.0.1-beta.22",
+    "unsafe-bc-react-components": "link:../bigcommerce-react-theme-components",
     "url-loader": "4.1.1",
     "web-vitals": "^1.0.1",
     "webpack": "4.44.2",
@@ -157,7 +157,13 @@
     "modulePaths": [],
     "moduleNameMapper": {
       "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
+      "^@api(.*)$": "<rootDir>/src/api/$1",
+      "^@components(.*)$": "<rootDir>/src/components/$1",
+      "^@config(.*)$": "<rootDir>/src/config/$1",
+      "^@hooks(.*)$": "<rootDir>/src/hooks/$1",
+      "^@pages(.*)$": "<rootDir>/src/pages/$1",
+      "^@utils(.*)$": "<rootDir>/src/utils/$1"
     },
     "moduleFileExtensions": [
       "web.js",
