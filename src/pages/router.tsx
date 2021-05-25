@@ -2,28 +2,8 @@ import * as React from 'react'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import { CartPage, CategoryPage, HomePage, ProductPage } from '.'
-
-function Header(): React.ReactElement {
-  return (
-    <div>
-      <p
-        style={{
-          backgroundColor: 'blue',
-          width: '100%',
-          height: 80,
-          color: 'white',
-          fontSize: 32,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Header
-      </p>
-    </div>
-  )
-}
+import { Header } from '@components/header'
+import { CartPage, CategoryPage, HomePage, ProductPage } from '@pages'
 
 export function Router(): React.ReactElement {
   return (
