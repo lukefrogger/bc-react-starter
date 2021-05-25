@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
+import { useBanners } from '@hooks/useBanners'
 import {
   AddressesPage,
   AddressPage,
@@ -17,10 +18,9 @@ import {
   WishListPage,
   WishListsPage,
 } from '@pages'
-import useBanners from '@hooks/useBanners'
 
 export function Router(): React.ReactElement {
-  const { banner, onBannerClose } = useBanners();
+  const { banner, onBannerClose } = useBanners()
 
   return (
     <BrowserRouter>

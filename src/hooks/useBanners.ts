@@ -1,24 +1,28 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react'
+
 import {
-    getDismissedBannerIds,
-    setDismissedBannerId,
-} from '../utils/local-storage';
+  getDismissedBannerIds,
+  setDismissedBannerId,
+} from '../utils/local-storage'
 
-const useBanners = () => {
-    // TODO: API request
-    const banner = { id: 1, content: 'Free international shipping on $50+' };
-    const dismissedBanners = useMemo(getDismissedBannerIds, []);
-    const activeBanner = !dismissedBanners.includes(banner.id) ? banner : null;
-    const [isBannerVisible, setBannerVisible] = useState(!!activeBanner);
+type UseBannersType = () => {
+  banner: { id: number; content: string } | null
+  onBannerClose: () => void
+}
 
-    return {
-        banner: isBannerVisible ? activeBanner : null,
-        onBannerClose: () => {
-            if (!activeBanner) return;
-            setBannerVisible(false);
-            setDismissedBannerId(activeBanner.id);
-        },
-    };
-};
+export const useBanners: UseBannersType = () => {
+  // TODO: API request
+  const banner = { id: 1, content: 'Free international shipping on $50+' }
+  const dismissedBanners = useMemo(getDismissedBannerIds, [])
+  const activeBanner = !dismissedBanners.includes(banner.id) ? banner : null
+  const [isBannerVisible, setBannerVisible] = useState(!!activeBanner)
 
-export default useBanners;
+  return {
+    banner: isBannerVisible ? activeBanner : null,
+    onBannerClose: () => {
+      if (!activeBanner) return
+      setBannerVisible(false)
+      setDismissedBannerId(activeBanner.id)
+    },
+  }
+}
