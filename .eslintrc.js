@@ -91,5 +91,5 @@ module.exports = {
     '@typescript-eslint/ban-ts-ignore': 'off',
     'jest/no-mocks-import': 'off',
   },
-  ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts', 'src/config/reportWebVitals.ts']
+  ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts', 'src/config/reportWebVitals.ts', 'src/setupTests.ts']
 }
