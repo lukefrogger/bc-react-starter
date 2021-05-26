@@ -1,83 +1,69 @@
 import * as React from 'react'
 
-import styled from '@emotion/styled'
+import { useMediaQuery } from 'react-responsive'
+import { Link } from 'react-router-dom'
 import { Button } from 'reakit/Button'
+import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog'
 
+import { useCartBadge, useCategories } from '@hooks'
+
+import * as Icons from './icons'
 import { Logo } from './logo'
+import * as styles from './styles'
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 32px;
-  align-items: center;
-`
-const Icon = styled(Button)`
-  cursor: pointer;
-  border: none;
-  padding: 8px;
-  background-color: transparent;
-  display: flex;
-  position: relative;
-  :first-child {
-    margin-left: -8px;
-    margin-right: 8px;
-  }
-  :last-child {
-    margin-right: -8px;
-    margin-left: 8px;
-  }
-`
-const Badge = styled.span`
-  position: absolute;
-  right: 4px;
-  top: 4px;
-  height: 16px;
-  width: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #5400dc; // TODO: primary-50
-  color: white; // TODO: neutral 0
-  font-family: 'Red Hat Text';
-  font-size: 12px;
-  font-weight: 700;
-  border-radius: 100%;
-`
 export function Header(): React.ReactElement {
+  const dialog = useDialogState({ animated: true })
+  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+
+  const badge = useCartBadge()
+  const categories = useCategories()
+
   return (
-    <Container>
-      <Icon>
-        <svg width={24} height={20} viewBox="0 0 24 20" fill="none">
-          <path
-            d="M1 19h22M1 1h22M1 10h22"
-            stroke="#191919"
-            strokeWidth={2}
-            strokeLinecap="square"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Icon>
-      <Logo />
-      <Icon>
-        <Badge>1</Badge>
-        <svg width={24} height={24} viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 23H3V6h18v17z"
-            stroke="#191919"
-            strokeWidth={2}
-            strokeMiterlimit={10}
-            strokeLinecap="square"
-          />
-          <path
-            d="M8 9V5c0-2.2 1.8-4 4-4s4 1.8 4 4v4"
-            stroke="#191919"
-            strokeWidth={2}
-            strokeMiterlimit={10}
-            strokeLinecap="square"
-          />
-        </svg>
-      </Icon>
-    </Container>
+    <div css={styles.container}>
+      {isMobile && (
+        <div css={styles.section}>
+          <DialogDisclosure css={styles.icon} {...dialog}>
+            {dialog.visible ? <Icons.Close /> : <Icons.Hamburger />}
+          </DialogDisclosure>
+          <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
+            {categories.map((category) => (
+              <Link
+                css={styles.category}
+                to={`category/${category.slug}`}
+                onClick={dialog.hide}
+              >
+                {category.label}
+              </Link>
+            ))}
+            <Link css={styles.category} to="profile" onClick={dialog.hide}>
+              <Icons.User />
+            </Link>
+          </Dialog>
+        </div>
+      )}
+      <div css={styles.section}>
+        <Logo />
+      </div>
+      {!isMobile && (
+        <div css={styles.desktopMenu}>
+          {categories.map((category) => (
+            <Link css={styles.category} to={`category/${category.slug}`}>
+              {category.label}
+            </Link>
+          ))}
+        </div>
+      )}
+      <div css={styles.section}>
+        <Button css={styles.button}>
+          <span css={styles.badge}>{badge}</span>
+          <Icons.Bag />
+        </Button>
+        {!isMobile && (
+          <Button css={styles.button}>
+            <Icons.User />
+          </Button>
+        )}
+      </div>
+    </div>
   )
 }
