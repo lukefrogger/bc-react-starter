@@ -27,6 +27,12 @@ export const section = css`
   gap: 8px;
 `
 
+export const logo = css`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`
+
 export const icon = css`
   cursor: pointer;
   border: none;

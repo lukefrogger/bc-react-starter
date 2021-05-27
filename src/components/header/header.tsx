@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
-import { Button } from 'reakit/Button'
 import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog'
 
 import { useCartBadge, useCategories } from '@hooks'
@@ -41,7 +40,9 @@ export function Header(): React.ReactElement {
         </div>
       )}
       <div css={styles.section}>
-        <Logo />
+        <Link css={styles.logo} to="/">
+          <Logo />
+        </Link>
       </div>
       {!isMobile && (
         <div css={styles.desktopMenu}>
@@ -51,14 +52,14 @@ export function Header(): React.ReactElement {
         </div>
       )}
       <div css={styles.section}>
-        <Button css={styles.button}>
+        <Link css={styles.button} to="/cart">
           <span css={styles.badge}>{badge}</span>
           <Icons.Bag />
-        </Button>
+        </Link>
         {!isMobile && (
-          <Button css={styles.button}>
+          <Link css={styles.button} to="/profile">
             <Icons.User />
-          </Button>
+          </Link>
         )}
       </div>
     </div>
