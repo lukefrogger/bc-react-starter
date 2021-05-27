@@ -17,26 +17,38 @@ type Props<S = unknown> = Omit<LinkProps<S>, 'to'> &
   React.RefAttributes<HTMLAnchorElement> & {
     category: Category
     behaviour?: 'disclosure' | 'popover'
+    nested?: boolean
   }
 
 export function HeaderItem(props: Props): React.ReactElement {
-  const { category, behaviour, ...rest } = props
-  const popover = usePopoverState()
+  const { category, behaviour, nested = false, ...rest } = props
+  const popover = usePopoverState({
+    placement: nested ? 'right-start' : 'bottom',
+    gutter: nested ? 0 : 12,
+  })
   const disclosure = useDisclosureState()
 
   if (category.categories) {
     if (behaviour === 'disclosure') {
       return (
         <>
-          <Disclosure {...disclosure} css={styles.category}>
+          <Disclosure
+            {...disclosure}
+            css={nested ? styles.subcategory : styles.category}
+          >
             {category.label}
             <Icons.ArrowDown />
           </Disclosure>
-          <DisclosureContent {...disclosure} css={styles.disclosure}>
+          <DisclosureContent
+            {...disclosure}
+            css={nested ? styles.disclosureNested : styles.disclosure}
+          >
             {category.categories.map((subcategory) => (
               <HeaderItem
                 category={subcategory}
                 css={styles.subcategory}
+                behaviour={nested ? undefined : 'disclosure'} // Only supports 2 levels of subcategories
+                nested
                 {...rest}
               />
             ))}
@@ -55,16 +67,26 @@ export function HeaderItem(props: Props): React.ReactElement {
     if (behaviour === 'popover') {
       return (
         <>
-          <PopoverDisclosure {...popover} css={styles.category}>
+          <PopoverDisclosure
+            {...popover}
+            css={nested ? styles.subcategory : styles.category}
+          >
             {category.label}
             <Icons.ArrowDown />
           </PopoverDisclosure>
-          <Popover {...popover} aria-label="Welcome" css={styles.popover}>
+          <Popover
+            {...popover}
+            aria-label="Welcome"
+            css={nested ? styles.popoverNested : styles.popover}
+          >
             {category.categories.map((subcategory) => (
               <HeaderItem
                 category={subcategory}
                 css={styles.subcategory}
                 onClick={popover.hide}
+                behaviour={nested ? undefined : 'popover'} // Only supports 2 levels of subcategories
+                nested
+                {...rest}
               />
             ))}
             <HeaderItem

@@ -109,11 +109,10 @@ export const subcategory = (theme: Theme): SerializedStyles => css`
   ${category(theme)}
   ${theme.typography.body as any}
   text-transform: none;
+  justify-content: space-between;
 `
 
 export const popover = (theme: Theme): SerializedStyles => css`
-  padding: 8px 0;
-  box-shadow: 4px 4px 80px rgb(55 56 69 / 20%);
   background-color: ${theme.colors['neutral-0']};
   z-index: 10;
   display: flex;
@@ -121,11 +120,17 @@ export const popover = (theme: Theme): SerializedStyles => css`
   gap: 8px;
   border: 2px solid ${theme.colors['neutral-15']};
   border-top-color: ${theme.colors.primary};
-  a {
+  a,
+  button {
     width: 100%;
     padding-left: 20px;
     padding-right: 32px;
   }
+`
+export const popoverNested = (theme: Theme): SerializedStyles => css`
+  ${popover(theme)}
+  background-color: ${theme.colors['neutral-10']};
+  border: none;
 `
 
 export const disclosure = css`
@@ -133,6 +138,13 @@ export const disclosure = css`
   flex-direction: column;
   gap: 16px;
   margin-bottom: 8px;
+`
+
+export const disclosureNested = (theme: Theme): SerializedStyles => css`
+  ${disclosure}
+  background-color: ${theme.colors['neutral-10']};
+  margin: -8px 0;
+  padding: 8px;
 `
 
 export const desktopMenu = css`

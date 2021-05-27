@@ -14,6 +14,36 @@ export function useCategories(): Category[] {
         {
           label: 'Shirts',
           slug: 'shirts',
+          categories: [
+            {
+              label: 'T-shirts',
+              slug: 't-shirts',
+            },
+            {
+              label: 'V necks',
+              slug: 'v-necks',
+            },
+            {
+              label: 'Triblends',
+              slug: 'triblends',
+            },
+            {
+              label: 'Sweatshirts',
+              slug: 'sweatshirts',
+            },
+            {
+              label: 'Performance tees',
+              slug: 'performance-tees',
+            },
+            {
+              label: 'Muscle tanks',
+              slug: 'muscle-tanks',
+            },
+            {
+              label: 'Longsleeves',
+              slug: 'longsleeves',
+            },
+          ],
         },
         {
           label: 'Ponchos',
@@ -22,6 +52,16 @@ export function useCategories(): Category[] {
         {
           label: 'Onesies',
           slug: 'onesies',
+          categories: [
+            {
+              label: 'Muscle tanks',
+              slug: 'muscle-tanks',
+            },
+            {
+              label: 'Longsleeves',
+              slug: 'longsleeves',
+            },
+          ],
         },
       ],
     },
