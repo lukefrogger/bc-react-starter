@@ -1,6 +1,7 @@
 export type Category = {
   label: string
   slug: string
+  color?: string
   categories?: Category[]
 }
 
@@ -80,6 +81,7 @@ export function useCategories(): Category[] {
     {
       label: 'Sale',
       slug: 'sale',
+      color: '#DC004F',
     },
   ]
 }
