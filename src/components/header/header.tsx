@@ -7,13 +7,14 @@ import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog'
 
 import { useCartBadge, useCategories } from '@hooks'
 
+import { HeaderItem } from './header--item'
 import * as Icons from './icons'
 import { Logo } from './logo'
 import * as styles from './styles'
 
 export function Header(): React.ReactElement {
   const dialog = useDialogState({ animated: true })
-  const isMobile = useMediaQuery({ query: '(max-width: 1024px)' })
+  const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
 
   const badge = useCartBadge()
   const categories = useCategories()
@@ -27,13 +28,11 @@ export function Header(): React.ReactElement {
           </DialogDisclosure>
           <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
             {categories.map((category) => (
-              <Link
-                css={styles.category}
-                to={`category/${category.slug}`}
+              <HeaderItem
+                category={category}
+                behaviour="disclosure"
                 onClick={dialog.hide}
-              >
-                {category.label}
-              </Link>
+              />
             ))}
             <Link css={styles.category} to="profile" onClick={dialog.hide}>
               <Icons.User />
@@ -47,9 +46,7 @@ export function Header(): React.ReactElement {
       {!isMobile && (
         <div css={styles.desktopMenu}>
           {categories.map((category) => (
-            <Link css={styles.category} to={`category/${category.slug}`}>
-              {category.label}
-            </Link>
+            <HeaderItem category={category} behaviour="popover" />
           ))}
         </div>
       )}

@@ -1,6 +1,7 @@
-type Category = {
+export type Category = {
   label: string
   slug: string
+  categories?: Category[]
 }
 
 export function useCategories(): Category[] {
@@ -9,6 +10,20 @@ export function useCategories(): Category[] {
     {
       label: 'Clothing',
       slug: 'clothing',
+      categories: [
+        {
+          label: 'Shirts',
+          slug: 'shirts',
+        },
+        {
+          label: 'Ponchos',
+          slug: 'ponchos',
+        },
+        {
+          label: 'Onesies',
+          slug: 'onesies',
+        },
+      ],
     },
     {
       label: 'Shoes',

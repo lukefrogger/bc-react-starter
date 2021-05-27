@@ -66,3 +66,19 @@ export function User(): React.ReactElement {
     </svg>
   )
 }
+
+export function ArrowDown(
+  props: React.SVGProps<SVGSVGElement>
+): React.ReactElement {
+  return (
+    <svg width={12} height={8} viewBox="0 0 12 8" fill="none" {...props}>
+      <path
+        d="M10 2L6 6 2 2"
+        stroke="#8E8E8E"
+        strokeWidth={2}
+        strokeMiterlimit={10}
+        strokeLinecap="square"
+      />
+    </svg>
+  )
+}

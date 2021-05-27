@@ -92,6 +92,47 @@ export const category = (theme: Theme): SerializedStyles => css`
   padding: 8px;
   text-transform: uppercase;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 12px;
+  align-self: center;
+  :hover,
+  &[aria-expanded='true'] {
+    color: ${theme.colors.primary};
+  }
+`
+
+export const subcategory = (theme: Theme): SerializedStyles => css`
+  ${category(theme)}
+  ${theme.typography.body as any}
+  text-transform: none;
+`
+
+export const popover = (theme: Theme): SerializedStyles => css`
+  padding: 8px 0;
+  box-shadow: 4px 4px 80px rgb(55 56 69 / 20%);
+  background-color: ${theme.colors['neutral-0']};
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid ${theme.colors['neutral-15']};
+  border-top-color: ${theme.colors.primary};
+  a {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 32px;
+  }
+`
+
+export const disclosure = css`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 8px;
 `
 
 export const desktopMenu = css`
