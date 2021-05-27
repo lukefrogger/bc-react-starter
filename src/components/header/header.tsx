@@ -33,6 +33,9 @@ export function Header(): React.ReactElement {
                 onClick={dialog.hide}
               />
             ))}
+            <Link css={styles.category} to="/search" onClick={dialog.hide}>
+              <Icons.Search />
+            </Link>
             <Link css={styles.category} to="profile" onClick={dialog.hide}>
               <Icons.User />
             </Link>
@@ -52,6 +55,11 @@ export function Header(): React.ReactElement {
         </div>
       )}
       <div css={styles.section}>
+        {!isMobile && (
+          <Link css={styles.button} to="/search">
+            <Icons.Search />
+          </Link>
+        )}
         <Link css={styles.button} to="/cart">
           <span css={styles.badge}>{badge}</span>
           <Icons.Bag />

@@ -47,6 +47,29 @@ export function Bag(): React.ReactElement {
     </svg>
   )
 }
+
+export function Search(
+  props: React.SVGProps<SVGSVGElement>
+): React.ReactElement {
+  return (
+    <svg width={23} height={23} viewBox="0 0 23 23" fill="none" {...props}>
+      <path
+        d="M21 21l-4-4M9 17A8 8 0 109 1a8 8 0 000 16z"
+        stroke="#191919"
+        strokeWidth={2}
+        strokeMiterlimit={10}
+        strokeLinecap="square"
+      />
+      <path
+        d="M5 9a4 4 0 014-4"
+        stroke="#191919"
+        strokeWidth={2}
+        strokeMiterlimit={10}
+      />
+    </svg>
+  )
+}
+
 export function User(): React.ReactElement {
   return (
     <svg width={24} height={24} viewBox="0 0 24 24" fill="none">
