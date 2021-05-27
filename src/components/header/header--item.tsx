@@ -13,6 +13,15 @@ import { Category } from '@hooks'
 import * as Icons from './icons'
 import * as styles from './styles'
 
+function getArrowOrientation(
+  visible: boolean,
+  opened: Icons.ArrowOrientation,
+  closed: Icons.ArrowOrientation
+): Icons.ArrowOrientation {
+  if (visible) return opened
+  return closed
+}
+
 type Props<S = unknown> = Omit<LinkProps<S>, 'to'> &
   React.RefAttributes<HTMLAnchorElement> & {
     category: Category
@@ -37,7 +46,13 @@ export function HeaderItem(props: Props): React.ReactElement {
             css={nested ? styles.subcategory : styles.category}
           >
             {category.label}
-            <Icons.ArrowDown />
+            <Icons.Arrow
+              orientation={getArrowOrientation(
+                disclosure.visible,
+                'up',
+                'down'
+              )}
+            />
           </Disclosure>
           <DisclosureContent
             {...disclosure}
@@ -72,7 +87,13 @@ export function HeaderItem(props: Props): React.ReactElement {
             css={nested ? styles.subcategory : styles.category}
           >
             {category.label}
-            <Icons.ArrowDown />
+            <Icons.Arrow
+              orientation={getArrowOrientation(
+                popover.visible,
+                nested ? 'left' : 'up',
+                nested ? 'right' : 'down'
+              )}
+            />
           </PopoverDisclosure>
           <Popover
             {...popover}

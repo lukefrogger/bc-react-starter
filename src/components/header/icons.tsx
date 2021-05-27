@@ -67,11 +67,28 @@ export function User(): React.ReactElement {
   )
 }
 
-export function ArrowDown(
-  props: React.SVGProps<SVGSVGElement>
+export type ArrowOrientation = 'down' | 'up' | 'left' | 'right'
+
+export function Arrow(
+  props: React.SVGProps<SVGSVGElement> & {
+    orientation?: ArrowOrientation
+  }
 ): React.ReactElement {
+  const { orientation = 'down', ...rest } = props
   return (
-    <svg width={12} height={8} viewBox="0 0 12 8" fill="none" {...props}>
+    <svg
+      width={12}
+      height={8}
+      viewBox="0 0 12 8"
+      fill="none"
+      css={{
+        ...(orientation === 'up' && { transform: 'rotate(180deg)' }),
+        ...(orientation === 'left' && { transform: 'rotate(90deg)' }),
+        ...(orientation === 'right' && { transform: 'rotate(270deg)' }),
+        transition: '0.4s',
+      }}
+      {...rest}
+    >
       <path
         d="M10 2L6 6 2 2"
         stroke="#8E8E8E"
