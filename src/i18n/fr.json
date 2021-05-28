@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "headline": "Le Headline Oui"
+  },
+
+  "bc": {
+    "btn": {
+      "yes": "oui",
+      "no": "Non,",
+      "delete": "supprimer",
+      "edit": "éditer",
+      "share": "Partager",
+      "remove": "enlever"
+    },
+    "reviews": {
+      "save": "Enregistrer l’examen"
+    },
+    "wishlist": {
+      "name": "Nom de la liste de souhaits",
+      "make_public": "Rendre cette liste de souhaits partageable avec un lien public ?",
+      "save": "Enregistrer wishlist"
+    },
+    "inventory": {
+      "left_in_stock": "laissé en stock"
+    },
+    "order": {
+      "status": "statut",
+      "date_created": "Date créée",
+      "date_updated": "Date mise à jour",
+      "last_update": "Dernière mise à jour",
+      "payment_method": "Méthode de paiement",
+      "items_subtotal": "Articles Subtotal",
+      "store_credit": "Crédit de magasin appliqué",
+      "gift_certificate": "Certificat-cadeau appliqué",
+      "tax": "Impôt estimé à collecter",
+      "total": "total",
+      "subtotal": "sous-total",
+      "order": "commande",
+      "details": "Détails de la commande"
+    },
+    "cart": {
+      "empty": "S’il vous plaît ajouter quelques éléments à votre panier.",
+      "checkout": "caisse"
+    },
+    "search": {
+      "search": "rechercher"
+    },
+    "fields": {
+      "comments": "Commentaires",
+      "subject": "Objet",
+      "rating": "notation",
+      "name": "nom",
+      "email": "adresse courriel"
+    }
+  }
+}
