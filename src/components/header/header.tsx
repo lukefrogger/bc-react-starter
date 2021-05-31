@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { useTheme } from '@emotion/react'
 import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
 import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog'
@@ -12,8 +13,11 @@ import { Logo } from './logo'
 import * as styles from './styles'
 
 export function Header(): React.ReactElement {
+  const theme = useTheme()
   const dialog = useDialogState({ animated: true })
-  const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
+  const isMobile = !useMediaQuery({
+    query: theme.mq[2].substring('@media '.length),
+  })
 
   const badge = useCartBadge()
   const categories = useCategories()
