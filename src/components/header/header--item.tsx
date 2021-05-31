@@ -60,6 +60,7 @@ export function HeaderItem(props: Props): React.ReactElement {
           >
             {category.categories.map((subcategory) => (
               <HeaderItem
+                key={subcategory.slug}
                 category={subcategory}
                 css={styles.subcategory}
                 behaviour={nested ? undefined : 'disclosure'} // Only supports 2 levels of subcategories
@@ -102,6 +103,7 @@ export function HeaderItem(props: Props): React.ReactElement {
           >
             {category.categories.map((subcategory) => (
               <HeaderItem
+                key={subcategory.slug}
                 category={subcategory}
                 css={styles.subcategory}
                 onClick={popover.hide}

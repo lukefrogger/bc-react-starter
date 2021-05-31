@@ -32,6 +32,7 @@ export function Header(): React.ReactElement {
           <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
             {categories.map((category) => (
               <HeaderItem
+                key={category.slug}
                 category={category}
                 behaviour="disclosure"
                 onClick={dialog.hide}
