@@ -5,12 +5,12 @@
 
   "bc": {
     "btn": {
-      "yes": "oui",
+      "yes": "Oui",
       "no": "Non,",
-      "delete": "supprimer",
-      "edit": "éditer",
+      "delete": "Supprimer",
+      "edit": "Éditer",
       "share": "Partager",
-      "remove": "enlever"
+      "remove": "Enlever"
     },
     "reviews": {
       "save": "Enregistrer l’examen"
@@ -24,7 +24,7 @@
       "left_in_stock": "laissé en stock"
     },
     "order": {
-      "status": "statut",
+      "status": "Statut",
       "date_created": "Date créée",
       "date_updated": "Date mise à jour",
       "last_update": "Dernière mise à jour",
@@ -33,24 +33,24 @@
       "store_credit": "Crédit de magasin appliqué",
       "gift_certificate": "Certificat-cadeau appliqué",
       "tax": "Impôt estimé à collecter",
-      "total": "total",
-      "subtotal": "sous-total",
-      "order": "commande",
+      "total": "Total",
+      "subtotal": "Sous-total",
+      "order": "Commande",
       "details": "Détails de la commande"
     },
     "cart": {
       "empty": "S’il vous plaît ajouter quelques éléments à votre panier.",
-      "checkout": "caisse"
+      "checkout": "Caisse"
     },
     "search": {
-      "search": "rechercher"
+      "search": "Rechercher"
     },
     "fields": {
       "comments": "Commentaires",
       "subject": "Objet",
-      "rating": "notation",
-      "name": "nom",
-      "email": "adresse courriel"
+      "rating": "Notation",
+      "name": "Nom",
+      "email": "Adresse courriel"
     }
   }
 }
