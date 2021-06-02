@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "headline": "Headline in the Hero"
+  },
+
+  "bc": {
+    "btn": {
+      "yes": "Yes",
+      "no": "No",
+      "delete": "Delete",
+      "edit": "Edit",
+      "share": "Share",
+      "remove": "Remove"
+    },
+    "reviews": {
+      "save": "Save Review"
+    },
+    "wishlist": {
+      "name": "Wishlist Name",
+      "make_public": "Make this Wish List shareable with a public link?",
+      "save": "Save Wishlist"
+    },
+    "inventory": {
+      "left_in_stock": "left in stock"
+    },
+    "order": {
+      "status": "Status",
+      "date_created": "Date Created",
+      "date_updated": "Date Updated",
+      "last_update": "Last Update",
+      "payment_method": "Payment Method",
+      "items_subtotal": "Items Subtotal",
+      "store_credit": "Store Credit Applied",
+      "gift_certificate": "Gift certificate applied",
+      "tax": "Estimated tax to be collected",
+      "total": "Total",
+      "subtotal": "Subtotal",
+      "order": "Order",
+      "details": "Order Details"
+    },
+    "cart": {
+      "empty": "Please add some items to your cart.",
+      "checkout": "Checkout"
+    },
+    "search": {
+      "search": "Search"
+    },
+    "fields": {
+      "comments": "Comments",
+      "subject": "Subject",
+      "rating": "Rating",
+      "name": "Name",
+      "email": "Email Address"
+    }
+  }
+}
