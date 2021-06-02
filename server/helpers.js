@@ -1,6 +1,11 @@
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
-import fetchProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
+import catalogProductsApi, {
+  handlers as catalogProductsApiHandlers,
+} from '@bigcommerce/storefront-data-hooks/api/catalog/products'
 import csc from 'country-state-city'
+
+import { apiResWrapper } from './utils/api-utils'
+import { getSearchParams } from './utils/get-search-params'
 
 export const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader(
@@ -11,14 +16,19 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
 }
 
 export const getProductHelper = async (req, res) => {
-  const [first, slug, ...rest] = req.url.split('/')
-  const query = { slug }
-  const data = await fetchProduct.default({
-    variables: query,
-  })
+  const params = getSearchParams(req.url)
 
-  res.write(JSON.stringify(data))
-  res.end()
+  return catalogProductsApi({
+    operations: {
+      getProducts: ({ res: apiRes, config }) => {
+        catalogProductsApiHandlers.getProducts({
+          res: apiResWrapper(apiRes),
+          body: params,
+          config,
+        })
+      },
+    },
+  })(req, res)
 }
 
 export const wrapResponse = (res) => {

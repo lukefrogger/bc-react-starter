@@ -10,8 +10,7 @@ import {
   SideMenu,
 } from 'unsafe-bc-react-components'
 
-import productMock from '../../__mocks__/data/product.json'
-import storeMock from '../../__mocks__/data/store_config.json'
+import { useSearch } from '@hooks'
 
 const HERO: HeroProps = {
   headline: {
@@ -55,69 +54,6 @@ const levels: Level[] = [
   },
 ]
 
-const products: ProductCardProps[] = [
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-]
-
 const Container = styled.div`
   max-width: 1208px;
   margin: 0 auto;
@@ -141,6 +77,8 @@ const Grid = styled.div`
 
 export function HomePage(): React.ReactElement {
   const [active, setActive] = React.useState(levels[0].items[0])
+
+  const { data } = useSearch()
 
   return (
     <Container>
@@ -170,9 +108,28 @@ export function HomePage(): React.ReactElement {
           ))}
         </SideMenu>
         <Grid>
-          {products.map((product) => (
-            <ProductCard {...product} />
-          ))}
+          {data?.products
+            .map(
+              (product): ProductCardProps => ({
+                brand: {
+                  name: product.node.brand,
+                },
+                product: {
+                  condition: 'new',
+                  name: product.node.name,
+                  price: product.node.prices.price.value,
+                  sale_price: product.node.prices.salePrice?.value || 0,
+                },
+                currencySettings: {},
+                image: {
+                  meta: product.node.images.edges[0].node.altText,
+                  url_standard: product.node.images.edges[0].node.urlOriginal,
+                },
+              })
+            )
+            .map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
         </Grid>
       </Main>
     </Container>

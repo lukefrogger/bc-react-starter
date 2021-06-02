@@ -37,6 +37,7 @@ app.use('/cart-helper', cartHelper)
 app.use('/countries', countryHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use(
   '/api',
   proxy.createProxyMiddleware({
