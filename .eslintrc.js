@@ -34,6 +34,7 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'react/jsx-key': 1,
     // Too restrictive, writing ugly code to defend against a very unlikely scenario: https://eslint.org/docs/rules/no-prototype-builtins
     'no-prototype-builtins': 'off',
     // https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
