@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import {
   Card,
   Pagination,
@@ -12,8 +12,7 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import { useSearch } from '@hooks'
-import { useCategory } from '@hooks/use-category'
+import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 
 const Container = styled.div`
   max-width: 1208px;
@@ -54,9 +53,9 @@ const Meta = styled.div`
 `
 
 export function CategoryPage(): React.ReactElement {
-  const location = useLocation()
-  const category = useCategory(location.pathname.substring('/category'.length))
-  const { data } = useSearch({
+  const params = useParams<UseCategoryBody>()
+  const { data: category } = useCategory(params)
+  const { data: search } = useSearch({
     categoryId: category?.id,
   })
 
@@ -105,7 +104,7 @@ export function CategoryPage(): React.ReactElement {
         <Content>
           <Meta>
             <Typography variant="body-small">
-              {data?.pagination.total} items in “{category?.label}”
+              {search?.pagination.total} items in “{category?.label}”
             </Typography>
             {
               // TODO: Add sorting logic
@@ -113,8 +112,8 @@ export function CategoryPage(): React.ReactElement {
             }
           </Meta>
           <Grid>
-            {data?.found &&
-              data?.products
+            {search?.found &&
+              search?.products
                 .map(
                   (product): ProductCardProps => ({
                     brand: {
