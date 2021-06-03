@@ -1,12 +1,50 @@
+import axios from 'axios'
+import useSWR, { SWRResponse } from 'swr'
+
+const fetcher = async (): Promise<any> => {
+  const { data } = await axios(
+    `${process.env.REACT_APP_API_ENDPOINT}/categories`
+  )
+  return data
+}
+
 export type Category = {
   label: string
   slug: string
   color?: string
   categories?: Category[]
+  id: number
 }
 
-export function useCategories(): Category[] {
-  // TODO: Get categories from API
+type CategoryData = {
+  name: string
+  path: string
+  entityId: number
+  description: string
+  productCount: number
+  children: CategoryData[]
+}
+
+function mapCategory(category: CategoryData): Category {
+  return {
+    label: category.name,
+    slug: category.path,
+    id: category.entityId,
+    categories:
+      category.children.length === 0
+        ? undefined
+        : category.children.map(mapCategory),
+  }
+}
+
+export function useCategories(): SWRResponse<Category[], Error> {
+  const response = useSWR('categories', fetcher)
+  if (!response?.data) return response
+  return {
+    ...response,
+    data: response.data.site.categoryTree.map(mapCategory),
+  }
+  /*
   return [
     {
       label: 'Clothing',
@@ -83,5 +121,5 @@ export function useCategories(): Category[] {
       slug: 'sale',
       color: '#DC004F',
     },
-  ]
+  ] */
 }

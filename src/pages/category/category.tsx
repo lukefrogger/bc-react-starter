@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useLocation } from 'react-router-dom'
 import {
   Card,
   Pagination,
@@ -11,87 +12,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import productMock from '../../__mocks__/data/product.json'
-import storeMock from '../../__mocks__/data/store_config.json'
-
-type Level = {
-  title: string
-  items: string[]
-}
-
-const levels: Level[] = [
-  {
-    title: 'Subcategories',
-    items: ['Shirts', 'Ponchos', 'Onesies'],
-  },
-  {
-    title: 'Brand',
-    items: ['Adadas', 'Naik', 'Dolce&Banana'],
-  },
-]
-
-const products: ProductCardProps[] = [
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-]
+import { useSearch } from '@hooks'
+import { useCategory } from '@hooks/use-category'
 
 const Container = styled.div`
   max-width: 1208px;
@@ -132,7 +54,11 @@ const Meta = styled.div`
 `
 
 export function CategoryPage(): React.ReactElement {
-  const [active, setActive] = React.useState(levels[0].items[0])
+  const location = useLocation()
+  const category = useCategory(location.pathname.substring('/category'.length))
+  const { data } = useSearch({
+    categoryId: category?.id,
+  })
 
   return (
     <Container>
@@ -146,8 +72,8 @@ export function CategoryPage(): React.ReactElement {
       </Typography>
       <Card
         variant="large"
-        name="Subcategory"
-        imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80"
+        name={category?.label}
+        imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80" // TODO: Replace this image
         css={css`
           background-position: center;
           min-height: 228px;
@@ -162,34 +88,55 @@ export function CategoryPage(): React.ReactElement {
             }
           `}
         >
-          {levels.map((level) => (
-            <SideMenu.Level title={level.title} key={level.title}>
-              {level.items.map((item) => (
-                <SideMenu.Item
-                  key={item}
-                  active={item === active}
-                  onClick={() => setActive(item)}
-                >
-                  {item}
-                </SideMenu.Item>
-              ))}
-            </SideMenu.Level>
-          ))}
+          <SideMenu.Level title="Subcategories">
+            {category?.categories?.map((subcategory) => (
+              <SideMenu.Item key={subcategory.id}>
+                {subcategory.label}
+              </SideMenu.Item>
+            ))}
+          </SideMenu.Level>
+          <SideMenu.Level title="Brand">
+            {
+              // TODO: Get brands
+            }
+          </SideMenu.Level>
         </SideMenu>
+
         <Content>
           <Meta>
             <Typography variant="body-small">
-              42 items in “Subcategory”
+              {data?.pagination.total} items in “{category?.label}”
             </Typography>
             {
               // TODO: Add sorting logic
+              // <Typography variant="body-small">Sort by: Trending</Typography>
             }
-            <Typography variant="body-small">Sort by: Trending</Typography>
           </Meta>
           <Grid>
-            {products.map((product) => (
-              <ProductCard {...product} />
-            ))}
+            {data?.found &&
+              data?.products
+                .map(
+                  (product): ProductCardProps => ({
+                    brand: {
+                      name: product.node.brand,
+                    },
+                    product: {
+                      condition: 'new',
+                      name: product.node.name,
+                      price: product.node.prices.price.value,
+                      sale_price: product.node.prices.salePrice?.value || 0,
+                    },
+                    currencySettings: {},
+                    image: {
+                      meta: product.node.images.edges[0].node.altText,
+                      url_standard:
+                        product.node.images.edges[0].node.urlOriginal,
+                    },
+                  })
+                )
+                .map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
           </Grid>
           <Pagination
             css={css`

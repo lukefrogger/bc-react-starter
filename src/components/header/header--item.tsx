@@ -72,6 +72,7 @@ export function HeaderItem(props: Props): React.ReactElement {
               category={{
                 label: `All ${category.label}`,
                 slug: category.slug,
+                id: category.id,
               }}
               css={styles.subcategory}
               {...rest}
@@ -116,6 +117,7 @@ export function HeaderItem(props: Props): React.ReactElement {
               category={{
                 label: `All ${category.label}`,
                 slug: category.slug,
+                id: category.id,
               }}
               css={styles.subcategory}
               {...rest}
@@ -129,7 +131,7 @@ export function HeaderItem(props: Props): React.ReactElement {
   return (
     <Link
       css={styles.category}
-      to={`/category/${category.slug}`}
+      to={`/category${category.slug}`}
       style={category.color ? { color: category.color } : {}}
       {...props}
     >
