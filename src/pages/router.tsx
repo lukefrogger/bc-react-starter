@@ -6,17 +6,11 @@ import { Banner } from 'unsafe-bc-react-components'
 import { Footer, Header } from '@components'
 import { useBanners } from '@hooks/useBanners'
 import {
-  AddressesPage,
-  AddressPage,
   CartPage,
   CategoryPage,
   HomePage,
-  OrderPage,
-  OrdersPage,
   ProductPage,
-  ProfilePage,
-  WishListPage,
-  WishListsPage,
+  UserPages,
 } from '@pages'
 
 export function Router(): React.ReactElement {
@@ -40,26 +34,9 @@ export function Router(): React.ReactElement {
           <Route path="/cart">
             <CartPage />
           </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route path="/orders">
-            <OrdersPage />
-          </Route>
-          <Route exact path="/order/:slug">
-            <OrderPage />
-          </Route>
-          <Route path="/addresses">
-            <AddressesPage />
-          </Route>
-          <Route exact path="/address/:slug">
-            <AddressPage />
-          </Route>
-          <Route path="/wishlists">
-            <WishListsPage />
-          </Route>
-          <Route exact path="/wishlist/:slug">
-            <WishListPage />
+
+          <Route path="/user">
+            <UserPages />
           </Route>
         </Switch>
         <Footer />

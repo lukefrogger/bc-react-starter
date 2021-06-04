@@ -2,6 +2,12 @@
   "hero": {
     "headline": "Le Headline Oui"
   },
+  "submenu": {
+    "profile": "Profil",
+    "orders": "Historique des commandes",
+    "addresses": "Mes adresses",
+    "wishlists": "Mes listes de souhaits"
+  },
 
   "bc": {
     "btn": {

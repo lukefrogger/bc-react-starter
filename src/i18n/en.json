@@ -2,6 +2,12 @@
   "hero": {
     "headline": "Headline in the Hero"
   },
+  "submenu": {
+    "profile": "Profile",
+    "orders": "Order history",
+    "addresses": "My addresses",
+    "wishlists": "My wish lists"
+  },
 
   "bc": {
     "btn": {
