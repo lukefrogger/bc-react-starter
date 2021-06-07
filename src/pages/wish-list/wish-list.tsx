@@ -1,51 +1,91 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { Hero, Profile, Typography } from 'unsafe-bc-react-components'
+import {
+  Hero,
+  ProductRow,
+  Profile,
+  Typography,
+  WishlistActions,
+  WishlistStatus,
+} from 'unsafe-bc-react-components'
+
+import * as styles from './styles'
+
+const WISHLIST_MOCKED = {
+  is_public: true,
+  customer_id: 1,
+  id: 1,
+  items: [{ id: 1, product_id: 1 }],
+  name: "Paul's Whislist Long Long",
+  token: '22',
+}
 
 export function WishListPage(): React.ReactElement {
-  const { t, i18n } = useTranslation()
-
   return (
-    <div>
-      {['en', 'fr'].map((lng) => (
-        <button
-          type="button"
-          key={lng}
-          onClick={() => i18n.changeLanguage(lng)}
-        >
-          {lng}
-        </button>
-      ))}
+    <div css={styles.container}>
+      <div css={styles.header}>
+        <span>
+          <a css={styles.back}>
+            <svg width={8} height={12} viewBox="0 0 8 12" fill="none">
+              <path
+                d="M6 10L2 6l4-4"
+                stroke="#333"
+                strokeWidth={2}
+                strokeMiterlimit={10}
+                strokeLinecap="square"
+              />
+            </svg>
+            Back to my wish lists
+          </a>
+        </span>
+        <span css={styles.titleWrapper}>
+          <Typography variant="display-large" css={styles.title}>
+            {WISHLIST_MOCKED.name}
+          </Typography>
+        </span>
 
-      <Hero
-        headline={{
-          text: t('hero.headline', 'Headline in the Hero'),
-        }}
-      />
-      <Typography variant="display-large">
-        Translating BC Components:
-      </Typography>
-      <Profile.AddressCard
-        address={{
-          address1: '5th Avenue',
-          address2: '555',
-          address_type: '',
-          city: 'New York City',
-          company: '',
-          country: '',
-          country_code: '',
-          customer_id: 1,
-          first_name: '',
-          id: 2,
-          last_name: '',
-          phone: '',
-          postal_code: '53553',
-          state_or_province: '',
-        }}
-        onEdit={console.log}
-        onDelete={console.log}
-      />
+        {/*           <WishlistStatus
+            wishlist={WISHLIST_MOCKED}
+            onWishlistAction={() => {}}
+          /> */}
+        <WishlistActions
+          wishlist={WISHLIST_MOCKED}
+          onWishlistAction={() => {}}
+          css={styles.actions}
+        />
+      </div>
+      <div css={styles.wrapper}>
+        {[
+          {
+            name: 'Product name',
+            prices: { currencySettings: {}, price: 21, salePrice: 20 },
+            quantity: 1,
+            id: 1,
+            image: 'http://placekitten.com/500/500',
+          },
+          {
+            name: 'Other name',
+            prices: { currencySettings: {}, price: 21, salePrice: 0 },
+            quantity: 1,
+            id: 2,
+            image: 'http://placekitten.com/500/500',
+          },
+        ].map((product) => (
+          <ProductRow
+            key={product.id}
+            name={product.name}
+            prices={product.prices}
+            image={{
+              src: product.image,
+            }}
+            quantity={{
+              quantity: product.quantity,
+            }}
+            editable={false}
+          />
+        ))}
+      </div>
     </div>
   )
 }
