@@ -14,14 +14,19 @@ import {
   WishListsPage,
 } from '@pages'
 
-const submenuLinks = [
+type SubmenuLink = {
+  to: string
+  labelKey: string
+}
+
+const submenuLinks: SubmenuLink[] = [
   { to: '/user/profile', labelKey: 'submenu.profile' },
   { to: '/user/orders', labelKey: 'submenu.orders' },
   { to: '/user/addresses', labelKey: 'submenu.addresses' },
   { to: '/user/wishlists', labelKey: 'submenu.wishlists' },
 ]
 
-export function UserPages(): React.ReactElement {
+export function UserRouter(): React.ReactElement {
   const activeLink = React.useRef(null)
   const location = useLocation()
   const { t } = useTranslation()
