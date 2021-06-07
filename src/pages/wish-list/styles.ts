@@ -10,7 +10,7 @@ export const container = css`
 `
 export const header = (theme: Theme): SerializedStyles => css`
   display: flex;
-  padding: 48px 0;
+  padding: 48px 0 8px;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -37,6 +37,15 @@ export const titleWrapper = css`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+export const statusWrapper = (theme: Theme): SerializedStyles => css`
+  display: flex;
+  padding-bottom: 32px;
+  ${theme.mq[1]} {
+    padding-bottom: 64px;
+    justify-content: center;
+  }
 `
 
 export const actions = css`

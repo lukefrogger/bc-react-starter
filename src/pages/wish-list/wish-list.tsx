@@ -44,14 +44,16 @@ export function WishListPage(): React.ReactElement {
           </Typography>
         </span>
 
-        {/*           <WishlistStatus
-            wishlist={WISHLIST_MOCKED}
-            onWishlistAction={() => {}}
-          /> */}
         <WishlistActions
           wishlist={WISHLIST_MOCKED}
           onWishlistAction={() => {}}
           css={styles.actions}
+        />
+      </div>
+      <div css={styles.statusWrapper}>
+        <WishlistStatus
+          wishlist={WISHLIST_MOCKED}
+          onWishlistAction={() => {}}
         />
       </div>
       <div css={styles.wrapper}>
