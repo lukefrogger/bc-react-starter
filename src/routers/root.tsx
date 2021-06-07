@@ -21,7 +21,16 @@ export function RootRouter(): React.ReactElement {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route exact path="/category/:slug">
+          <Route exact path="/category/:categories">
+            <CategoryPage />
+          </Route>
+          <Route exact path="/category/:categories/:subCategories">
+            <CategoryPage />
+          </Route>
+          <Route
+            exact
+            path="/category/:categories/:subCategories/:subSubCategories"
+          >
             <CategoryPage />
           </Route>
           <Route path="/product/:slug">
