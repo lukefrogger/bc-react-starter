@@ -2,6 +2,7 @@ import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
 } from '@bigcommerce/storefront-data-hooks/api/catalog/products'
+import axios from 'axios'
 import csc from 'country-state-city'
 
 import { apiResWrapper } from './utils/api-utils'
@@ -67,4 +68,39 @@ export const stateHelper = (req, res) => {
   const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }))
   res.write(JSON.stringify(data))
   res.end()
+}
+
+export const categoriesHelper = async (req, res) => {
+  const { data } = await axios(process.env.BIGCOMMERCE_STOREFRONT_API_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${process.env.BIGCOMMERCE_STOREFRONT_API_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify({
+      query: `query CategoryTree3LevelsDeep {
+        site {
+          categoryTree {
+            ...CategoryFields
+            children {
+              ...CategoryFields
+              children {
+                ...CategoryFields
+              }
+            }
+          }
+        }
+      }
+
+      fragment CategoryFields on CategoryTreeItem {
+        name
+        path
+        entityId
+        description
+        productCount
+      }`,
+    }),
+  })
+
+  res.end(JSON.stringify(data.data))
 }

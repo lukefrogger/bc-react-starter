@@ -2,7 +2,6 @@ import fs from 'fs'
 import http from 'http'
 import path from 'path'
 
-import axios from 'axios'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import connect from 'connect'
@@ -12,6 +11,7 @@ import serveStatic from 'serve-static'
 
 import {
   cartHelper,
+  categoriesHelper,
   countryHelper,
   getProductHelper,
   onStoreProxyReq,
@@ -36,40 +36,7 @@ app.use(serveStatic(path.join(dirname, 'public')))
 // respond to all requests
 app.use('/cart-helper', cartHelper)
 app.use('/countries', countryHelper)
-app.use('/categories', async (req, res) => {
-  const { data } = await axios(process.env.BIGCOMMERCE_STOREFRONT_API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.BIGCOMMERCE_STOREFRONT_API_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    data: JSON.stringify({
-      query: `query CategoryTree3LevelsDeep {
-        site {
-          categoryTree {
-            ...CategoryFields
-            children {
-              ...CategoryFields
-              children {
-                ...CategoryFields
-              }
-            }
-          }
-        }
-      }
-
-      fragment CategoryFields on CategoryTreeItem {
-        name
-        path
-        entityId
-        description
-        productCount
-      }`,
-    }),
-  })
-
-  res.end(JSON.stringify(data.data))
-})
+app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
