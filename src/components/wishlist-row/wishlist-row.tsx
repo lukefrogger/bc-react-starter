@@ -59,7 +59,11 @@ export function WishlistActions(
         <Button
           css={styles.action}
           variant="link"
-          onClick={partial(onWishlistAction, 'share', wishlist)}
+          onClick={() =>
+            navigator.clipboard.writeText(
+              `${window.location.origin}/wishlist/${wishlist.id}`
+            )
+          }
         >
           <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
             <path
