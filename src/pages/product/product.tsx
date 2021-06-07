@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   ProductCard,
@@ -12,6 +13,8 @@ import {
   StarRating,
   Typography,
 } from 'unsafe-bc-react-components'
+
+import { Breadcrumbs } from '@components'
 
 import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
@@ -67,6 +70,12 @@ const products: ProductCardProps[] = [
   },
 ]
 
+const breadcrumbs = [
+  { to: '/home', label: 'Home' },
+  { to: '/category', label: 'Category' },
+  { label: productMock.name },
+]
+
 const Container = styled.div`
   --horizontal-spacing: 24px;
   max-width: calc(1208px + (var(--horizontal-spacing) * 2));
@@ -76,7 +85,6 @@ const Container = styled.div`
 
 const Grid = styled.div`
   --horizontal-setback: 104px;
-  padding-top: 32px;
   padding-bottom: 48px;
   @media (min-width: 1024px) {
     padding-left: var(--horizontal-setback);
@@ -189,17 +197,13 @@ const RelatedProducts = styled.div`
 export function ProductPage(): React.ReactElement {
   return (
     <Container>
-      {
-        // TODO: Add Breadcrumbs
-      }
-      <Typography
-        variant="body-small"
-        css={css`
-          padding-top: 32px;
-        `}
-      >
-        Home / Category / Product name
-      </Typography>
+      <Breadcrumbs>
+        {breadcrumbs.map((item) => (
+          <Breadcrumbs.Item key={item.to} to={item.to}>
+            {item.label}
+          </Breadcrumbs.Item>
+        ))}
+      </Breadcrumbs>
       <Grid>
         <Image />
         <Product>
@@ -306,7 +310,7 @@ export function ProductPage(): React.ReactElement {
       </Typography>
       <RelatedProducts>
         {products.map((product) => (
-          <ProductCard {...product} />
+          <ProductCard key={product.id} {...product} />
         ))}
       </RelatedProducts>
     </Container>
