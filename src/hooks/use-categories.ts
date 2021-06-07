@@ -39,10 +39,9 @@ function mapCategory(category: CategoryData): Category {
 
 export function useCategories(): SWRResponse<Category[], Error> {
   const response = useSWR('categories', fetcher)
-  if (!response?.data) return response
   return {
     ...response,
-    data: response.data.site.categoryTree.map(mapCategory),
+    data: response?.data.site.categoryTree.map(mapCategory),
   }
   /*
   return [
