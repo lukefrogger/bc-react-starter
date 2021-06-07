@@ -10,6 +10,7 @@ import * as styles from './styles'
 
 type Wishlist = {
   id: number
+  customer_id: number
   name: string
   is_public: boolean
   items: { id: number; product_id: number }[]

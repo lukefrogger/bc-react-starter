@@ -14,7 +14,6 @@ const WISHLIST_MOCKED = {
   id: 1,
   items: [{ id: 1, product_id: 1 }],
   name: "Paul's Whislist Long Long",
-  token: '22',
 }
 
 export function WishListPage(): React.ReactElement {
