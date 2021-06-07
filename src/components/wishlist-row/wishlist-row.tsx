@@ -32,7 +32,7 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
           {wishlist.name}
         </Link>
         <span css={styles.items}>
-          {wishlist.items.length} {t('items', 'items')}
+          {wishlist.items.length} {t('bc.wish_list.items', 'items')}
         </span>
       </div>
       <div css={styles.columnRight}>
@@ -75,7 +75,7 @@ export function WishlistActions(
               strokeLinejoin="round"
             />
           </svg>
-          {t('copy_link', 'Copy link')}
+          {t('bc.btn.copy_link', 'Copy link')}
         </Button>
       )}
       <Button
@@ -138,7 +138,7 @@ export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
               strokeLinejoin="round"
             />
           </svg>
-          {t('public', 'Public')}
+          {t('bc.wish_list.public', 'Public')}
         </>
       ) : (
         <>
@@ -156,7 +156,7 @@ export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
               strokeLinejoin="round"
             />
           </svg>
-          {t('private', 'Private')}
+          {t('bc.wish_list.private', 'Private')}
         </>
       )}
     </span>

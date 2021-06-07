@@ -10,7 +10,8 @@
       "delete": "Supprimer",
       "edit": "Éditer",
       "share": "Partager",
-      "remove": "Enlever"
+      "remove": "Enlever",
+      "copy_link": "Copier le lien"
     },
     "reviews": {
       "save": "Enregistrer l’examen"
@@ -51,6 +52,14 @@
       "rating": "Notation",
       "name": "Nom",
       "email": "Adresse courriel"
+    },
+    "wish_list": {
+      "title": "Mes listes de souhaits",
+      "new": "Nouvelle liste de souhaits",
+      "public": "Publique",
+      "private": "Privée",
+      "items": "éléments",
+      "back": "Retour à mes listes de souhaits"
     }
   }
 }

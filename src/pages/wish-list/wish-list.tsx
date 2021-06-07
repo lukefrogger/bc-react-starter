@@ -32,7 +32,7 @@ export function WishListPage(): React.ReactElement {
                 strokeLinecap="square"
               />
             </svg>
-            {t('wishlist.back', 'Back to my wish lists')}
+            {t('bc.wishlist.back', 'Back to my wish lists')}
           </Link>
         </span>
         <span css={styles.titleWrapper}>
