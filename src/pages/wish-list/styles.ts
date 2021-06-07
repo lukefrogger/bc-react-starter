@@ -54,10 +54,12 @@ export const actions = css`
 
 export const back = (theme: Theme): SerializedStyles => css`
   ${theme.typography['body-small'] as CSSPrimitive}
+  color: ${theme.colors['neutral-95']};
   svg {
     margin-right: 16px;
   }
   cursor: pointer;
+  text-decoration: none;
   :hover {
     text-decoration: underline;
   }
@@ -67,5 +69,3 @@ export const wrapper = css`
   max-width: 688px;
   margin: 0 auto;
 `
-
-export const badge = (theme: Theme): SerializedStyles => css``

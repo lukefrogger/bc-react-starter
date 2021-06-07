@@ -1,12 +1,10 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import {
-  ProductRow,
-  Typography,
-  WishlistActions,
-  WishlistStatus,
-} from 'unsafe-bc-react-components'
+import { Link } from 'react-router-dom'
+import { ProductRow, Typography } from 'unsafe-bc-react-components'
+
+import { WishlistActions, WishlistStatus } from '@components'
 
 import * as styles from './styles'
 
@@ -25,7 +23,7 @@ export function WishListPage(): React.ReactElement {
     <div css={styles.container}>
       <div css={styles.header}>
         <span>
-          <a css={styles.back}>
+          <Link css={styles.back} to="/wishlists">
             <svg width={8} height={12} viewBox="0 0 8 12" fill="none">
               <path
                 d="M6 10L2 6l4-4"
@@ -36,7 +34,7 @@ export function WishListPage(): React.ReactElement {
               />
             </svg>
             {t('wishlist.back', 'Back to my wish lists')}
-          </a>
+          </Link>
         </span>
         <span css={styles.titleWrapper}>
           <Typography variant="display-large" css={styles.title}>

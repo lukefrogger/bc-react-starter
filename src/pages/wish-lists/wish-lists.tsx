@@ -1,7 +1,9 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { Button, Typography, WishlistRow } from 'unsafe-bc-react-components'
+import { Button, Typography } from 'unsafe-bc-react-components'
+
+import { WishlistRow } from '@components'
 
 import * as styles from './styles'
 
