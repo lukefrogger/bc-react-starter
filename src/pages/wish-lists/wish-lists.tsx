@@ -15,13 +15,13 @@ export function WishListsPage(): React.ReactElement {
         // TODO: Add Tab component
       }
       <Typography variant="display-large" css={styles.title}>
-        {t('wishlist.title', 'My wish lists')}
+        {t('bc.wishlist.title', 'My wish lists')}
       </Typography>
       {
         // TODO: Open modal to create a new wish list
       }
       <Button variant="secondary" css={styles.button}>
-        {t('wishlist.new', 'New wish list')}
+        {t('bc.wishlist.new', 'New wish list')}
       </Button>
       {[
         {
