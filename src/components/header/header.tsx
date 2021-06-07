@@ -20,7 +20,7 @@ export function Header(): React.ReactElement {
   })
 
   const badge = useCartBadge()
-  const categories = useCategories()
+  const { data } = useCategories()
 
   return (
     <div css={styles.container}>
@@ -30,7 +30,7 @@ export function Header(): React.ReactElement {
             {dialog.visible ? <Icons.Close /> : <Icons.Hamburger />}
           </DialogDisclosure>
           <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
-            {categories.map((category) => (
+            {data?.map((category) => (
               <HeaderItem
                 key={category.slug}
                 category={category}
@@ -54,7 +54,7 @@ export function Header(): React.ReactElement {
       </div>
       {!isMobile && (
         <div css={styles.desktopMenu}>
-          {categories.map((category) => (
+          {data?.map((category) => (
             <HeaderItem category={category} behaviour="popover" />
           ))}
         </div>
