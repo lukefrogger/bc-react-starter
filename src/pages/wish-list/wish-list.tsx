@@ -2,9 +2,7 @@ import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
 import {
-  Hero,
   ProductRow,
-  Profile,
   Typography,
   WishlistActions,
   WishlistStatus,
@@ -13,7 +11,7 @@ import {
 import * as styles from './styles'
 
 const WISHLIST_MOCKED = {
-  is_public: true,
+  is_public: false,
   customer_id: 1,
   id: 1,
   items: [{ id: 1, product_id: 1 }],
@@ -22,6 +20,7 @@ const WISHLIST_MOCKED = {
 }
 
 export function WishListPage(): React.ReactElement {
+  const { t } = useTranslation()
   return (
     <div css={styles.container}>
       <div css={styles.header}>
@@ -36,7 +35,7 @@ export function WishListPage(): React.ReactElement {
                 strokeLinecap="square"
               />
             </svg>
-            Back to my wish lists
+            {t('wishlist.back', 'Back to my wish lists')}
           </a>
         </span>
         <span css={styles.titleWrapper}>
