@@ -48,10 +48,6 @@ export const statusWrapper = (theme: Theme): SerializedStyles => css`
   }
 `
 
-export const actions = css`
-  background-color: red;
-`
-
 export const back = (theme: Theme): SerializedStyles => css`
   ${theme.typography['body-small'] as CSSPrimitive}
   color: ${theme.colors['neutral-95']};

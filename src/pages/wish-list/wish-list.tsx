@@ -44,7 +44,6 @@ export function WishListPage(): React.ReactElement {
         <WishlistActions
           wishlist={WISHLIST_MOCKED}
           onWishlistAction={() => {}}
-          css={styles.actions}
         />
       </div>
       <div css={styles.statusWrapper}>
