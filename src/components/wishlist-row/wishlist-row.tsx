@@ -22,7 +22,7 @@ export type WishlistRowProps = RoleProps & {
 }
 
 export function WishlistRow(props: WishlistRowProps): React.ReactElement {
-  const { wishlist, onWishlistAction = () => {}, ...rest } = props
+  const { wishlist, ...rest } = props
   const { t } = useTranslation()
 
   return (
