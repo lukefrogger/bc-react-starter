@@ -28,7 +28,7 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
   return (
     <Role as="div" css={styles.container} {...rest}>
       <div css={styles.columnLeft}>
-        <Link to={`/wishlist/${wishlist.id}`} css={styles.name}>
+        <Link to={`/user/wishlists/${wishlist.id}`} css={styles.name}>
           {wishlist.name}
         </Link>
         <span css={styles.items}>

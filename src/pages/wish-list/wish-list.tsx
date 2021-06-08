@@ -22,7 +22,7 @@ export function WishListPage(): React.ReactElement {
     <div css={styles.container}>
       <div css={styles.header}>
         <span>
-          <Link css={styles.back} to="/wishlists">
+          <Link css={styles.back} to="/user/wishlists">
             <svg width={8} height={12} viewBox="0 0 8 12" fill="none">
               <path
                 d="M6 10L2 6l4-4"
