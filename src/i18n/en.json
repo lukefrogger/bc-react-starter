@@ -58,7 +58,8 @@
       "new": "New wish list",
       "public": "Public",
       "private": "Private",
-      "items": "items",
+      "item": "item",
+      "item_plural": "items",
       "back": "Back to my wish lists"
     }
   }

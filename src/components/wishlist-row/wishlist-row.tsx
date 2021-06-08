@@ -32,7 +32,8 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
           {wishlist.name}
         </Link>
         <span css={styles.items}>
-          {wishlist.items.length} {t('bc.wish_list.items', 'items')}
+          {wishlist.items.length}{' '}
+          {t('bc.wish_list.item', 'item', { count: wishlist.items.length })}
         </span>
       </div>
       <div css={styles.columnRight}>

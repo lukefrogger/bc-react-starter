@@ -58,7 +58,8 @@
       "new": "Nouvelle liste de souhaits",
       "public": "Publique",
       "private": "Privée",
-      "items": "éléments",
+      "item": "élément",
+      "item_plural": "éléments",
       "back": "Retour à mes listes de souhaits"
     }
   }
