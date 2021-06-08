@@ -8,7 +8,7 @@ import { CommerceComponentsProvider, theme } from 'unsafe-bc-react-components'
 
 import './i18n'
 
-import { Router } from './pages/router'
+import { RootRouter } from './routers'
 
 export function App(): React.ReactElement {
   const { t } = useTranslation()
@@ -31,7 +31,7 @@ export function App(): React.ReactElement {
               }
             `}
           />
-          <Router />
+          <RootRouter />
         </CommerceComponentsProvider>
       </ThemeProvider>
     </CommerceProvider>

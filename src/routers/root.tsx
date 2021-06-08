@@ -5,21 +5,11 @@ import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
 import { useBanners } from '@hooks/useBanners'
-import {
-  AddressesPage,
-  AddressPage,
-  CartPage,
-  CategoryPage,
-  HomePage,
-  OrderPage,
-  OrdersPage,
-  ProductPage,
-  ProfilePage,
-  WishListPage,
-  WishListsPage,
-} from '@pages'
+import { CartPage, CategoryPage, HomePage, ProductPage } from '@pages'
 
-export function Router(): React.ReactElement {
+import { UserRouter } from './user'
+
+export function RootRouter(): React.ReactElement {
   const { banner, onBannerClose } = useBanners()
 
   return (
@@ -49,26 +39,9 @@ export function Router(): React.ReactElement {
           <Route path="/cart">
             <CartPage />
           </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route path="/orders">
-            <OrdersPage />
-          </Route>
-          <Route exact path="/order/:slug">
-            <OrderPage />
-          </Route>
-          <Route path="/addresses">
-            <AddressesPage />
-          </Route>
-          <Route exact path="/address/:slug">
-            <AddressPage />
-          </Route>
-          <Route path="/wishlists">
-            <WishListsPage />
-          </Route>
-          <Route exact path="/wishlist/:slug">
-            <WishListPage />
+
+          <Route path="/user">
+            <UserRouter />
           </Route>
         </Switch>
         <Footer />
