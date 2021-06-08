@@ -16,7 +16,8 @@
       "delete": "Delete",
       "edit": "Edit",
       "share": "Share",
-      "remove": "Remove"
+      "remove": "Remove",
+      "copy_link": "Copy Link"
     },
     "reviews": {
       "save": "Save Review"
@@ -57,6 +58,15 @@
       "rating": "Rating",
       "name": "Name",
       "email": "Email Address"
+    },
+    "wish_list": {
+      "title": "My wish lists",
+      "new": "New wish list",
+      "public": "Public",
+      "private": "Private",
+      "item": "item",
+      "item_plural": "items",
+      "back": "Back to my wish lists"
     }
   }
 }
