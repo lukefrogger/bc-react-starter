@@ -1,4 +1,5 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
+import { CSSPrimitive } from 'unsafe-bc-react-components/dist/theme/types'
 
 export const container = (theme: Theme): SerializedStyles => css`
   display: flex;
@@ -30,12 +31,9 @@ export const columnRight = (theme: Theme): SerializedStyles => css`
   flex-wrap: wrap;
 `
 
-export const name = css`
-  font-family: 'Red Hat Display';
-  font-size: 26px;
-  font-style: normal;
-  font-weight: 700;
-  color: #000;
+export const name = (theme: Theme): SerializedStyles => css`
+  ${theme.typography['display-small'] as CSSPrimitive}
+  color: ${theme.colors['neutral-100']};
   text-decoration: none;
   :hover {
     text-decoration: underline;
