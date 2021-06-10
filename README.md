@@ -1,7 +1,7 @@
 # Getting Started with BigCommerce React Starter
 
 This is the BigCommerce React Starter, built with the
-storfront-data-hooks library and the storefront-ui-components library
+storefront-data-hooks library and the storefront-ui-components library
 to put together a starter storefront.
 
 To install dependencies, run:
@@ -34,6 +34,24 @@ and your developer documentation
 - To generate the graphql token: `BIGCOMMERCE_STOREFRONT_API_TOKEN`, set
   all the other environment variables first, and run `yarn regen`.  This
 will generate a graphql token that expires in 24 hrs.
+
+## (Optional) Link dependencies
+
+When developing locally, you might need to update some code in the components library. For this use case, it's best to link the local components library using npm links so you don't need to publish a new version to the npm registry.
+
+You can do this by:
+1. updating package.json to use the linked versions (update paths accordingly):
+```json
+    "unsafe-bc-react-components": "link:../bigcommerce-react-theme-components",
+    "react-dom": "link:../bigcommerce-react-theme-components/node_modules/react-dom",
+    "react": "link:../bigcommerce-react-theme-components/node_modules/react",
+    "@emotion/react": "link:../bigcommerce-react-theme-components/node_modules/@emotion/react",
+```
+2. running `yarn`
+
+Unfortunately, we need to link other libs like React and Emotion too to make sure there aren't conflicts in the versions between this repo and components repo. When reverting back to npm registry versions, please run `yarn install --force` afterward.
+
+Make sure you don't commit the updated package.json.
 
 ## Available Scripts
 
