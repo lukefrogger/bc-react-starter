@@ -5,7 +5,13 @@ import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
 import { useBanners } from '@hooks/useBanners'
-import { CartPage, CategoryPage, HomePage, ProductPage } from '@pages'
+import {
+  CartPage,
+  CategoryPage,
+  HomePage,
+  LoginPage,
+  ProductPage,
+} from '@pages'
 
 import { UserRouter } from './user'
 
@@ -20,6 +26,9 @@ export function RootRouter(): React.ReactElement {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route exact path="/login">
+            <LoginPage />
           </Route>
           <Route exact path="/category/:categories">
             <CategoryPage />
