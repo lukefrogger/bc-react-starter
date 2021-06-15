@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useLogin } from '@bigcommerce/storefront-data-hooks'
+import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
