@@ -1,116 +1,65 @@
 import * as React from 'react'
 
-import { Link, LinkProps } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
+import { useCategories } from '@hooks'
 
 import { Logo } from '../header/logo'
 import { FooterSocial as Social } from './footer--social'
 import * as styles from './styles'
 
-type FooterLink = {
-  label: string
-  key: string
-  to: LinkProps<unknown>['to']
-}
-
-const CATEGORIES_PAGES: FooterLink[] = [
-  {
-    label: 'Clothing',
-    key: 'clothing',
-    to: '/',
-  },
-  {
-    label: 'Shoes',
-    key: 'shoes',
-
-    to: '/',
-  },
-  {
-    label: 'Accessories',
-    key: 'accessories',
-    to: '/',
-  },
-  {
-    label: 'Trending now',
-    key: 'trending',
-    to: '/',
-  },
-]
-
-const LEGAL_PAGES: FooterLink[] = [
-  {
-    label: 'Shipping',
-    key: 'shipping',
-    to: '/',
-  },
-  {
-    label: 'Return',
-    key: 'return',
-    to: '/',
-  },
-  {
-    label: 'Guarantee',
-    key: 'guarantee',
-    to: '/',
-  },
-  {
-    label: 'Privacy policy',
-    key: 'privacy-policy',
-    to: '/',
-  },
-]
-
-const STORE_PAGES: FooterLink[] = [
-  {
-    label: 'About us',
-    key: 'about-us',
-    to: '/',
-  },
-  {
-    label: 'Help',
-    key: 'help',
-    to: '/',
-  },
-  {
-    label: 'Contact us',
-    key: 'contact-us',
-    to: '/',
-  },
-]
-
 const EMAIL = 'info@stellar-shop.io'
 const TELEPHONE = '0-800-42-STELLAR'
 
 export function Footer(): React.ReactElement {
+  const { data: categories } = useCategories()
+  const { t } = useTranslation()
+
   return (
     <div css={styles.container}>
       <Logo width="100%" />
       <div css={styles.wrapper}>
         <div css={styles.group}>
-          {CATEGORIES_PAGES.map((item) => {
+          {categories?.slice(0, 4).map((category) => {
             return (
-              <Link key={item.key} to={item.to} css={styles.link}>
-                {item.label}
+              <Link
+                key={category.slug}
+                to={`/category${category.slug}`}
+                css={styles.link}
+              >
+                {category.label}
               </Link>
             )
           })}
         </div>
+        {
+          // TODO: Get pages from BG API as categories
+        }
         <div css={styles.group}>
-          {LEGAL_PAGES.map((item) => {
-            return (
-              <Link key={item.key} to={item.to} css={styles.link}>
-                {item.label}
-              </Link>
-            )
-          })}
+          <Link to="/legal/shipping" css={styles.link}>
+            {t('footer.shipping', 'Shipping')}
+          </Link>
+          <Link to="/legal/return" css={styles.link}>
+            {t('footer.return', 'Return')}
+          </Link>
+          <Link to="/legal/guarantee" css={styles.link}>
+            {t('footer.guarantee', 'Guarantee')}
+          </Link>
+          <Link to="/legal/privacy-policy" css={styles.link}>
+            {t('footer.privacy_policy', 'Privacy policy')}
+          </Link>
         </div>
         <div css={styles.group}>
-          {STORE_PAGES.map((item) => {
-            return (
-              <Link key={item.key} to={item.to} css={styles.link}>
-                {item.label}
-              </Link>
-            )
-          })}
+          <Link to="/about-us" css={styles.link}>
+            {t('footer.about_us', 'About us')}
+          </Link>
+          <Link to="/help" css={styles.link}>
+            {t('footer.help', 'Help')}
+          </Link>
+          <Link to="contact-us" css={styles.link}>
+            {t('footer.contact_us', 'Contact us')}
+          </Link>
         </div>
         <div css={styles.group}>
           <a
@@ -130,8 +79,8 @@ export function Footer(): React.ReactElement {
         </div>
       </div>
       <div css={styles.rights}>
-        <p>Powered by WordPress</p>
-        <p>© All rights reserved, Modern Tribe</p>
+        <p>{t('footer.powered_by', 'Powered by WordPress')}</p>
+        <p>{t('footer.rights', '© All rights reserved, Modern Tribe')}</p>
       </div>
     </div>
   )
