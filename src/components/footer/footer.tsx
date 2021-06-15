@@ -57,7 +57,7 @@ export function Footer(): React.ReactElement {
           <Link to="/help" css={styles.link}>
             {t('footer.help', 'Help')}
           </Link>
-          <Link to="contact-us" css={styles.link}>
+          <Link to="/contact-us" css={styles.link}>
             {t('footer.contact_us', 'Contact us')}
           </Link>
         </div>
