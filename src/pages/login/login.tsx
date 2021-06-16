@@ -1,10 +1,13 @@
 import * as React from 'react'
 
-import useLogin from '@bigcommerce/storefront-data-hooks/use-login'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
+
+import { useLogin } from '@hooks/use-login'
+
+import * as styles from './styles'
 
 export function LoginPage(): React.ReactElement {
   const { t } = useTranslation()
@@ -24,33 +27,48 @@ export function LoginPage(): React.ReactElement {
   })
 
   return (
-    <div>
-      <Typography>{t('login.title', 'Login')}</Typography>
-      <Typography>
+    <div css={styles.container}>
+      <Typography css={styles.centered} variant="display-large">
+        {t('login.title', 'Login')}
+      </Typography>
+      <Typography css={styles.description} variant="body-small">
         {t('login.create_prompt_question', 'Don’t have an account yet?')}{' '}
-        <Link to="/register">
+        <Link css={styles.link} to="/register">
           {t('login.create_prompt_link', 'Create one')}
         </Link>
       </Typography>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form css={styles.centered} onSubmit={formik.handleSubmit}>
         <Field
+          css={styles.field}
           label={t('login.email', 'Email')}
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
         />
         <Field
+          css={styles.field}
           label={t('login.password', 'Password')}
           name="password"
           type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
+          error={formik.errors.password}
         />
-        <Button variant="primary" type="submit" disabled={formik.isSubmitting}>
+        <Button
+          css={styles.button}
+          variant="secondary"
+          type="submit"
+          disabled={formik.isSubmitting}
+        >
           {t('login.title', 'Login')}
         </Button>
       </form>
+
+      <Link css={styles.forgotLink} to="/forgot-password">
+        {t('login.forgot_password', 'Forgot password')}
+      </Link>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
   cartHelper,
   categoriesHelper,
   countryHelper,
+  getLoginHelper,
   getProductHelper,
   onStoreProxyReq,
   stateHelper,
@@ -39,6 +40,7 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/login', getLoginHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use(
   '/api',
