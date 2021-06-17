@@ -40,7 +40,7 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
-app.use('/api/login', getLoginHelper)
+app.use('/login', getLoginHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use(
   '/api',

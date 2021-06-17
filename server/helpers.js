@@ -37,15 +37,20 @@ export const getProductHelper = async (req, res) => {
 export const getLoginHelper = async (req, res) => {
   const { email, password } = req.body
 
-  return customersApi({
+  customersApi({
     operations: {
-      login: ({ req: apiReq, res: apiRes, config }) => {
-        loginApiHandlers({
-          req: apiReq,
-          res: apiResWrapper(apiRes),
-          body: { email, password },
-          config,
-        })
+      login: async ({ req: apiReq, res: apiRes, config }) => {
+        try {
+          const response = await loginApiHandlers({
+            req: apiReq,
+            res: apiResWrapper(apiRes),
+            body: { email, password },
+            config,
+          })
+          res.end(JSON.stringify(response))
+        } catch (err) {
+          res.end(JSON.stringify(err))
+        }
       },
     },
   })(req, res)

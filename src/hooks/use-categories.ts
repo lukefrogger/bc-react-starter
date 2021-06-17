@@ -31,7 +31,7 @@ function mapCategory(category: CategoryData): Category {
     slug: category.path,
     id: category.entityId,
     categories:
-      category.children.length === 0
+      !category?.children || category.children?.length === 0
         ? undefined
         : category.children.map(mapCategory),
   }
