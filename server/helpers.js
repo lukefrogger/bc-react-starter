@@ -49,6 +49,7 @@ export const getLoginHelper = async (req, res) => {
           })
           res.end(JSON.stringify(response))
         } catch (err) {
+          res.statusCode = 401
           res.end(JSON.stringify(err))
         }
       },

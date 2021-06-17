@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
 import { useLogin } from '@hooks/use-login'
@@ -12,6 +12,8 @@ import * as styles from './styles'
 export function LoginPage(): React.ReactElement {
   const { t } = useTranslation()
   const login = useLogin()
+  const { search } = useLocation()
+  const history = useHistory()
 
   const formik = useFormik({
     initialValues: {
@@ -19,10 +21,16 @@ export function LoginPage(): React.ReactElement {
       password: '',
     },
     onSubmit: async ({ email, password }) => {
-      await login({
-        email,
-        password,
-      })
+      try {
+        await login({
+          email,
+          password,
+        })
+        const params = new URLSearchParams(search)
+        history.push(params.get('forward_url') || '/')
+      } catch (err) {
+        formik.setErrors({ password: 'Invalid credentials' })
+      }
     },
   })
 
@@ -45,6 +53,7 @@ export function LoginPage(): React.ReactElement {
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
+          error={formik.errors.email}
           required
           type="email"
         />
@@ -55,6 +64,7 @@ export function LoginPage(): React.ReactElement {
           type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
+          error={formik.errors.password}
           required
         />
         <Button
