@@ -42,7 +42,7 @@ export function UserRouter(): React.ReactElement {
 
   // User is unauthenticated
   if (!customer) {
-    return <Redirect to="/" />
+    return <Redirect to="/login" />
   }
 
   return (

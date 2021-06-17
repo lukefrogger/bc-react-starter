@@ -45,7 +45,8 @@ export function LoginPage(): React.ReactElement {
           name="email"
           onChange={formik.handleChange}
           value={formik.values.email}
-          error={formik.errors.email}
+          required
+          type="email"
         />
         <Field
           css={styles.field}
@@ -54,7 +55,7 @@ export function LoginPage(): React.ReactElement {
           type="password"
           onChange={formik.handleChange}
           value={formik.values.password}
-          error={formik.errors.password}
+          required
         />
         <Button
           css={styles.button}
