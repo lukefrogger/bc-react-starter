@@ -9,11 +9,11 @@ import { Button } from 'unsafe-bc-react-components'
 import * as styles from './styles'
 
 type Wishlist = {
-  id: number
-  customer_id: number
-  name: string
-  is_public: boolean
-  items: { id: number; product_id: number }[]
+  id?: number
+  customer_id?: number
+  name?: string
+  is_public?: boolean
+  items?: { id?: number; product_id?: number }[]
 }
 
 export type WishlistRowProps = RoleProps & {
@@ -32,8 +32,8 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
           {wishlist.name}
         </Link>
         <span css={styles.items}>
-          {wishlist.items.length}{' '}
-          {t('bc.wish_list.item', 'item', { count: wishlist.items.length })}
+          {wishlist?.items?.length}{' '}
+          {t('bc.wish_list.item', 'item', { count: wishlist?.items?.length })}
         </span>
       </div>
       <div css={styles.columnRight}>

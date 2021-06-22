@@ -14,7 +14,11 @@ export function App(): React.ReactElement {
   const { t } = useTranslation()
 
   return (
-    <CommerceProvider locale="en-US">
+    <CommerceProvider
+      locale="en-US"
+      base={process.env.REACT_APP_API_ENDPOINT}
+      credentials="include"
+    >
       <ThemeProvider theme={theme}>
         <CommerceComponentsProvider t={t}>
           <Global

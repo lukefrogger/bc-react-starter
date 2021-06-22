@@ -13,14 +13,21 @@ import {
   cartHelper,
   categoriesHelper,
   countryHelper,
+  getCustomerHelper,
   getProductHelper,
+  getWishlistsHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
 
 const app = connect()
 
-app.use(cors())
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+)
 
 // gzip/deflate outgoing responses
 app.use(compression())
@@ -39,7 +46,9 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/customers', getCustomerHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
+app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use(
   '/api',
   proxy.createProxyMiddleware({
