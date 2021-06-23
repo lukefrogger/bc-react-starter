@@ -50,12 +50,8 @@ app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/customers', getCustomerHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
-app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
-app.use(
-  '/api/bigcommerce/wishlist/:wishlistId/items/:itemId',
-  getWishlistsItemsHelper
-)
+app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use(
   '/api',
   proxy.createProxyMiddleware({

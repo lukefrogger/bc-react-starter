@@ -25,14 +25,13 @@ export const getWishlistsHelper = async (req, res) => {
   const cookies = parseCookie(req.headers.cookie)
 
   const { wishlistId } = req.params || {}
-  console.log('wishlistId', req)
 
   const customerToken = cookies[config.customerCookie]
   const params = getSearchParams(req.url)
 
-  if (wishlistId) {
+  /*   if (wishlistId) {
     return wishlistApi()
-  }
+  } */
 
   try {
     // Get all wishlists
@@ -55,13 +54,11 @@ export const getWishlistsHelper = async (req, res) => {
       return await handlers.createWishlist({ req, res, config, body })
     }
 
-    /*
-
-    // Remove an item from the wishlist
+    // Remove a wishlist
     if (req.method === 'DELETE') {
-      const body = { ...req.body, customerToken }
-      return await handlers.removeItem({ req, res, config, body })
-    } */
+      const body = { customerToken, wishlistId }
+      return await handlers.deleteWishlist({ req, res, config, body })
+    }
   } catch (error) {
     console.error(error)
 
