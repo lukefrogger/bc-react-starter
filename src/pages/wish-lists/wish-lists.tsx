@@ -1,17 +1,18 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
+import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import { Button, Typography } from 'unsafe-bc-react-components'
 
-import { WishlistRow } from '@components'
-import { useAddWishlist, useWishlists } from '@hooks'
+import { NewWishlistDialog, WishlistRow } from '@components'
+import { useWishlists } from '@hooks'
 
 import * as styles from './styles'
 
 export function WishListsPage(): React.ReactElement {
   const { t } = useTranslation()
   const { data } = useWishlists()
-  const add = useAddWishlist()
+  const dialog = useDialogState()
 
   return (
     <div css={styles.container}>
@@ -21,20 +22,15 @@ export function WishListsPage(): React.ReactElement {
       <Typography variant="display-large" css={styles.title}>
         {t('bc.wishlist.title', 'My wish lists')}
       </Typography>
-      {
-        // TODO: Open modal to create a new wish list
-      }
-      <Button
+      <DialogDisclosure
+        {...dialog}
+        as={Button}
         variant="secondary"
         css={styles.button}
-        onClick={() => {
-          add({
-            productId: 12504,
-          })
-        }}
       >
         {t('bc.wishlist.new', 'New wish list')}
-      </Button>
+      </DialogDisclosure>
+      <NewWishlistDialog {...dialog} />
       {data?.map((wishlist) => {
         return (
           <WishlistRow

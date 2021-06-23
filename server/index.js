@@ -6,6 +6,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import connect from 'connect'
 import cors from 'cors'
+import express from 'express'
 import * as proxy from 'http-proxy-middleware'
 import serveStatic from 'serve-static'
 
@@ -15,12 +16,13 @@ import {
   countryHelper,
   getCustomerHelper,
   getProductHelper,
-  getWishlistsHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
+import { getWishlistsHelper } from './wishlist'
+import { getWishlistsItemsHelper } from './wishlist-items'
 
-const app = connect()
+const app = express()
 
 app.use(
   cors({
@@ -49,6 +51,11 @@ app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/customers', getCustomerHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
+app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
+app.use(
+  '/api/bigcommerce/wishlist/:wishlistId/items/:itemId',
+  getWishlistsItemsHelper
+)
 app.use(
   '/api',
   proxy.createProxyMiddleware({
