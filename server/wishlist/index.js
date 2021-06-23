@@ -59,6 +59,11 @@ export const getWishlistsHelper = async (req, res) => {
       const body = { customerToken, wishlistId }
       return await handlers.deleteWishlist({ req, res, config, body })
     }
+    // Update a wishlist
+    if (req.method === 'PUT') {
+      const body = { ...req.body, customerToken, wishlistId }
+      return await handlers.updateWishlist({ req, res, config, body })
+    }
   } catch (error) {
     console.error(error)
 

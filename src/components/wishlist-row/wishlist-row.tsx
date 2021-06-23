@@ -3,8 +3,11 @@ import React from 'react'
 import partial from 'lodash/partial'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { DialogStateReturn, useDialogState } from 'reakit/Dialog'
 import { Role, RoleProps } from 'reakit/Role'
 import { Button } from 'unsafe-bc-react-components'
+
+import { EditWishlistDialog } from '@components'
 
 import * as styles from './styles'
 
@@ -22,34 +25,45 @@ export type WishlistRowProps = RoleProps & {
 }
 
 export function WishlistRow(props: WishlistRowProps): React.ReactElement {
-  const { wishlist, ...rest } = props
+  const { wishlist, onWishlistAction: defaultOnWishlistAction, ...rest } = props
   const { t } = useTranslation()
+  const dialog = useDialogState()
 
   return (
-    <Role as="div" css={styles.container} {...rest}>
-      <div css={styles.columnLeft}>
-        <Link to={`/user/wishlists/${wishlist.id}`} css={styles.name}>
-          {wishlist.name}
-        </Link>
-        <span css={styles.items}>
-          {wishlist?.items?.length}{' '}
-          {t('bc.wish_list.item', 'item', { count: wishlist?.items?.length })}
-        </span>
-      </div>
-      <div css={styles.columnRight}>
-        <WishlistStatus {...props} />
-        <WishlistActions {...props} />
-      </div>
-    </Role>
+    <>
+      <Role as="div" css={styles.container} {...rest}>
+        <div css={styles.columnLeft}>
+          <Link to={`/user/wishlists/${wishlist.id}`} css={styles.name}>
+            {wishlist.name}
+          </Link>
+          <span css={styles.items}>
+            {wishlist?.items?.length}{' '}
+            {t('bc.wish_list.item', 'item', { count: wishlist?.items?.length })}
+          </span>
+        </div>
+        <div css={styles.columnRight}>
+          <WishlistStatus {...props} />
+          <WishlistActions {...props} dialog={dialog} />
+        </div>
+      </Role>
+      <EditWishlistDialog
+        {...dialog}
+        name={wishlist.name || ''}
+        wishlistId={wishlist.id || 1}
+        makeItPublic={wishlist.is_public || false}
+      />
+    </>
   )
 }
 
-export type WishlistActionsProps = WishlistRowProps
+export type WishlistActionsProps = WishlistRowProps & {
+  dialog?: DialogStateReturn
+}
 
 export function WishlistActions(
   props: WishlistActionsProps
 ): React.ReactElement {
-  const { onWishlistAction, wishlist } = props
+  const { onWishlistAction, wishlist, dialog } = props
   const { t } = useTranslation()
 
   const { is_public: isPublic } = wishlist
@@ -83,11 +97,7 @@ export function WishlistActions(
           {t('bc.btn.copy_link', 'Copy link')}
         </Button>
       )}
-      <Button
-        css={styles.action}
-        variant="link"
-        onClick={partial(onWishlistAction, 'edit', wishlist)}
-      >
+      <Button css={styles.action} variant="link" onClick={dialog?.show}>
         <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
           <path
             d="M13 7L9 3M5.5 14.5l-5 1 1-5 10-10 4 4-10 10z"

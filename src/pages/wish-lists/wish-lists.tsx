@@ -17,9 +17,6 @@ export function WishListsPage(): React.ReactElement {
 
   return (
     <div css={styles.container}>
-      {
-        // TODO: Add Tab component
-      }
       <Typography variant="display-large" css={styles.title}>
         {t('bc.wishlist.title', 'My wish lists')}
       </Typography>
