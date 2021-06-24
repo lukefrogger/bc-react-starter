@@ -36,9 +36,7 @@ export const getProductHelper = async (req, res) => {
 }
 
 export const getCustomerHelper = async (req, res) => {
-  // console.log('params_0', req.headers)
   const params = getSearchParams(req.url)
-  // console.log('params', params)
   const parseCookie = (str) =>
     str
       .split(';')

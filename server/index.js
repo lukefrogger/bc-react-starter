@@ -20,7 +20,6 @@ import {
   stateHelper,
 } from './helpers'
 import { getWishlistsHelper } from './wishlist'
-import { getWishlistsItemsHelper } from './wishlist-items'
 
 const app = express()
 

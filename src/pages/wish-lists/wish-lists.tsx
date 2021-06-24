@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
-import { Button, Typography } from 'unsafe-bc-react-components'
+import { Typography } from 'unsafe-bc-react-components'
 
 import { WishlistDialog, WishlistRow } from '@components'
 import { useCreateWishlist, useDeleteWishlist, useWishlists } from '@hooks'
@@ -21,12 +21,7 @@ export function WishListsPage(): React.ReactElement {
       <Typography variant="display-large" css={styles.title}>
         {t('bc.wishlist.title', 'My wish lists')}
       </Typography>
-      <DialogDisclosure
-        {...dialog}
-        as={Button}
-        variant="secondary"
-        css={styles.button}
-      >
+      <DialogDisclosure {...dialog} css={styles.button}>
         {t('bc.wishlist.new', 'New wish list')}
       </DialogDisclosure>
       <WishlistDialog

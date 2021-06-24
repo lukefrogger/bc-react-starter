@@ -92,6 +92,7 @@ export function WishListPage(): React.ReactElement {
                 src: item.product.images?.edges[0].node.urlOriginal,
                 alt: item.product.images?.edges[0].node.altText,
               },
+              id: String(item.id),
             })
           )
           .map((product) => (
