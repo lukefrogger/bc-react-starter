@@ -27,6 +27,8 @@ export function EditWishlistDialog(
   } = props
   const update = useUpdateWishlist()
 
+  // TODO: Revalidate useWishlist on edit (extract logic from this component)
+
   const formik = useFormik({
     initialValues: {
       name: initialName,

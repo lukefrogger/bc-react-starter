@@ -127,7 +127,7 @@ export function WishlistActions(
   )
 }
 
-export type WishlistStatusProps = WishlistRowProps
+export type WishlistStatusProps = Omit<WishlistRowProps, 'onWishlistAction'>
 
 export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
   const { wishlist } = props

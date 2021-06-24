@@ -27,18 +27,25 @@ export const getWishlistsHelper = async (req, res) => {
   const { wishlistId } = req.params || {}
 
   const customerToken = cookies[config.customerCookie]
-  const params = getSearchParams(req.url)
-
-  /*   if (wishlistId) {
-    return wishlistApi()
-  } */
 
   try {
     // Get all wishlists
     if (req.method === 'GET') {
+      const { products } = req.query || {}
       const body = {
         customerToken,
-        includeProducts: false,
+        includeProducts: products === '1',
+      }
+      if (wishlistId) {
+        return await handlers.getWishlist({
+          req,
+          res,
+          config,
+          body: {
+            ...body,
+            wishlistId,
+          },
+        })
       }
       return await handlers.getAllWishlist({
         req,
@@ -49,7 +56,6 @@ export const getWishlistsHelper = async (req, res) => {
     }
     // Create an empty wishlist
     if (req.method === 'POST') {
-      console.log('body', req.body)
       const body = { ...req.body, customerToken }
       return await handlers.createWishlist({ req, res, config, body })
     }

@@ -1,23 +1,30 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { ProductRow, Typography } from 'unsafe-bc-react-components'
+import { Link, useParams } from 'react-router-dom'
+import { useDialogState } from 'reakit/Dialog'
+import {
+  ProductRow,
+  ProductRowProps,
+  Typography,
+} from 'unsafe-bc-react-components'
 
-import { WishlistActions, WishlistStatus } from '@components'
+import {
+  EditWishlistDialog,
+  WishlistActions,
+  WishlistStatus,
+} from '@components'
+import { useWishlist } from '@hooks'
 
 import * as styles from './styles'
 
-const WISHLIST_MOCKED = {
-  is_public: false,
-  customer_id: 1,
-  id: 1,
-  items: [{ id: 1, product_id: 1 }],
-  name: "Paul's Whislist Long Long",
-}
-
 export function WishListPage(): React.ReactElement {
   const { t } = useTranslation()
+  const { slug } = useParams<{ slug?: string }>()
+  const { data } = useWishlist(Number(slug))
+  const dialog = useDialogState()
+
+  if (!data) return <p>empty</p>
   return (
     <div css={styles.container}>
       <div css={styles.header}>
@@ -37,51 +44,54 @@ export function WishListPage(): React.ReactElement {
         </span>
         <span css={styles.titleWrapper}>
           <Typography variant="display-large" css={styles.title}>
-            {WISHLIST_MOCKED.name}
+            {data.name}
           </Typography>
         </span>
 
         <WishlistActions
-          wishlist={WISHLIST_MOCKED}
+          dialog={dialog}
+          wishlist={data}
           onWishlistAction={() => {}}
+        />
+        <EditWishlistDialog
+          {...dialog}
+          name={data.name || ''}
+          wishlistId={data.id || 1}
+          makeItPublic={data.is_public || false}
         />
       </div>
       <div css={styles.statusWrapper}>
-        <WishlistStatus
-          wishlist={WISHLIST_MOCKED}
-          onWishlistAction={() => {}}
-        />
+        <WishlistStatus wishlist={data} />
       </div>
       <div css={styles.wrapper}>
-        {[
-          {
-            name: 'Product name',
-            prices: { currencySettings: {}, price: 21, salePrice: 20 },
-            quantity: 1,
-            id: 1,
-            image: 'http://placekitten.com/500/500',
-          },
-          {
-            name: 'Other name',
-            prices: { currencySettings: {}, price: 21, salePrice: 0 },
-            quantity: 1,
-            id: 2,
-            image: 'http://placekitten.com/500/500',
-          },
-        ].map((product) => (
-          <ProductRow
-            key={product.id}
-            name={product.name}
-            prices={product.prices}
-            image={{
-              src: product.image,
-            }}
-            quantity={{
-              quantity: product.quantity,
-            }}
-            editable={false}
-          />
-        ))}
+        {data.items
+          ?.map(
+            (item): ProductRowProps => ({
+              prices: {
+                price: item.product.prices.basePrice?.value,
+                salePrice: item.product.prices.salePrice?.value || 0,
+                currencySettings: {},
+              },
+              name: item.product.name,
+              quantity: {
+                quantity: 1,
+              },
+              image: {
+                src: item.product.images?.edges[0].node.urlOriginal,
+                alt: item.product.images?.edges[0].node.altText,
+              },
+            })
+          )
+          .map((product) => (
+            <ProductRow
+              key={product.id}
+              {...product}
+              quantity={{
+                quantity: 1,
+              }}
+              editable={false}
+            />
+          ))}
       </div>
     </div>
   )
