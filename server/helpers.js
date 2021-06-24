@@ -2,14 +2,8 @@ import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
 } from '@bigcommerce/storefront-data-hooks/api/catalog/products'
-import customerApi, {
-  handlers as customerApiHandlers,
-} from '@bigcommerce/storefront-data-hooks/api/customers'
 import axios from 'axios'
 import csc from 'country-state-city'
-
-import { apiResWrapper } from './utils/api-utils'
-import { getSearchParams } from './utils/get-search-params'
 
 export const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader(
@@ -20,65 +14,25 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
 }
 
 export const getProductHelper = async (req, res) => {
-  const params = getSearchParams(req.url)
+  const body = req.query
 
   return catalogProductsApi({
     operations: {
-      getProducts: ({ res: apiRes, config }) => {
+      getProducts: ({ ...handler }) => {
         catalogProductsApiHandlers.getProducts({
-          res: apiResWrapper(apiRes),
-          body: params,
-          config,
+          ...handler,
+          body,
         })
       },
     },
   })(req, res)
-}
-
-export const getCustomerHelper = async (req, res) => {
-  const params = getSearchParams(req.url)
-  const parseCookie = (str) =>
-    str
-      .split(';')
-      .map((v) => v.split('='))
-      .reduce((acc, v) => {
-        acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
-        return acc
-      }, {})
-  return customerApi({
-    operations: {
-      getLoggedInCustomer: ({ res: apiRes, req: apiReq, ...rest }) => {
-        customerApiHandlers.getLoggedInCustomer({
-          res: apiResWrapper(apiRes),
-          body: params,
-          req: {
-            ...apiReq,
-            cookies: parseCookie(apiReq.headers.cookie),
-          },
-          ...rest,
-        })
-      },
-    },
-  })(req, res)
-}
-
-export const wrapResponse = (res) => {
-  res.json = (data) => {
-    res.write(JSON.stringify(data))
-  }
-
-  res.status = (s) => {
-    res.statusCode = s
-    return res
-  }
-  return res
 }
 
 export const cartHelper = async (req, res) => {
   const [first, cartId, ...rest] = req.url.split('/')
   const handler = await cartApi.default()
   req.cookies = { bc_cartId: cartId || null }
-  const cart = await handler(req, wrapResponse(res), cartApi.handlers)
+  const cart = await handler(req, res, cartApi.handlers)
   res.end()
 }
 
