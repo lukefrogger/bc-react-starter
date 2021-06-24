@@ -9,20 +9,17 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import {
-  EditWishlistDialog,
-  WishlistActions,
-  WishlistStatus,
-} from '@components'
-import { useWishlist } from '@hooks'
+import { WishlistActions, WishlistDialog, WishlistStatus } from '@components'
+import { useUpdateWishlist, useWishlist } from '@hooks'
 
 import * as styles from './styles'
 
 export function WishListPage(): React.ReactElement {
   const { t } = useTranslation()
   const { slug } = useParams<{ slug?: string }>()
-  const { data } = useWishlist(Number(slug))
+  const { data, revalidate } = useWishlist(Number(slug))
   const dialog = useDialogState()
+  const updateWishlist = useUpdateWishlist()
 
   if (!data) return <p>empty</p>
   return (
@@ -53,11 +50,26 @@ export function WishListPage(): React.ReactElement {
           wishlist={data}
           onWishlistAction={() => {}}
         />
-        <EditWishlistDialog
+        <WishlistDialog
           {...dialog}
-          name={data.name || ''}
-          wishlistId={data.id || 1}
-          makeItPublic={data.is_public || false}
+          title={t('bc.wish_list.edit', 'Edit wish list')}
+          button={t('bc.wish_list.edit', 'Edit wish list')}
+          initialValues={{
+            name: data.name || '',
+            isPublic: data.is_public || false,
+          }}
+          onSubmit={async ({ isPublic, name }) => {
+            if (!data.id) {
+              throw new Error('Wishlist id not found')
+            }
+            await updateWishlist({
+              isPublic,
+              name,
+              wishlistId: data.id,
+            })
+            await revalidate()
+            dialog.hide()
+          }}
         />
       </div>
       <div css={styles.statusWrapper}>

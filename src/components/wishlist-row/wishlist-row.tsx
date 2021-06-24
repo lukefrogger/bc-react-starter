@@ -7,7 +7,8 @@ import { DialogStateReturn, useDialogState } from 'reakit/Dialog'
 import { Role, RoleProps } from 'reakit/Role'
 import { Button } from 'unsafe-bc-react-components'
 
-import { EditWishlistDialog } from '@components'
+import { WishlistDialog } from '@components'
+import { useUpdateWishlist } from '@hooks'
 
 import * as styles from './styles'
 
@@ -28,6 +29,7 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
   const { wishlist, onWishlistAction: defaultOnWishlistAction, ...rest } = props
   const { t } = useTranslation()
   const dialog = useDialogState()
+  const updateWishlist = useUpdateWishlist()
 
   return (
     <>
@@ -46,11 +48,25 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
           <WishlistActions {...props} dialog={dialog} />
         </div>
       </Role>
-      <EditWishlistDialog
+      <WishlistDialog
         {...dialog}
-        name={wishlist.name || ''}
-        wishlistId={wishlist.id || 1}
-        makeItPublic={wishlist.is_public || false}
+        title={t('bc.wish_list.edit', 'Edit wish list')}
+        button={t('bc.wish_list.edit', 'Edit wish list')}
+        initialValues={{
+          name: wishlist.name || '',
+          isPublic: wishlist.is_public || false,
+        }}
+        onSubmit={async ({ isPublic, name }) => {
+          if (!wishlist.id) {
+            throw new Error('Wishlist id not found')
+          }
+          await updateWishlist({
+            isPublic,
+            name,
+            wishlistId: wishlist.id,
+          })
+          dialog.hide()
+        }}
       />
     </>
   )

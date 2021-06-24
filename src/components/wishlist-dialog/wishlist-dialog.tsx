@@ -1,49 +1,56 @@
 import React from 'react'
 
-import { useFormik } from 'formik'
+import { FormikHelpers, useFormik } from 'formik'
+import { useTranslation } from 'react-i18next'
 import { Button as ReakitButton } from 'reakit/Button'
 import { Checkbox } from 'reakit/Checkbox'
 import { Dialog, DialogBackdrop, DialogStateReturn } from 'reakit/Dialog'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
-import { useUpdateWishlist } from '@hooks'
-
 import * as styles from './styles'
 
-type EditWishlistDialogProps = DialogStateReturn & {
+type Values = {
   name: string
-  makeItPublic: boolean
-  wishlistId: number
+  isPublic: boolean
 }
 
-export function EditWishlistDialog(
-  props: EditWishlistDialogProps
-): React.ReactElement {
+type WishlistDialogProps = DialogStateReturn & {
+  title?: string
+  button?: string
+  initialValues?: Values
+  resetOnSubmit?: boolean
+  onSubmit?: (
+    values: Values,
+    formikHelpers: FormikHelpers<Values>
+  ) => void | Promise<any>
+}
+
+export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
+  const { t } = useTranslation()
+
   const {
-    name: initialName,
-    makeItPublic: initialMakeItPublic,
-    wishlistId,
+    title = t('bc.wishlist.new', 'New wish list'),
+    button = t('bc.wishlist.create', 'Create wish list'),
+    onSubmit = () => {},
+    initialValues,
+    resetOnSubmit = false,
     ...dialog
   } = props
-  const update = useUpdateWishlist()
-
-  // TODO: Revalidate useWishlist on edit (extract logic from this component)
 
   const formik = useFormik({
     initialValues: {
-      name: initialName,
-      makeItPublic: initialMakeItPublic,
+      name: initialValues?.name || '',
+      isPublic: initialValues?.isPublic || false,
     },
-    onSubmit: async ({ name, makeItPublic }) => {
+    onSubmit: async (...input) => {
       try {
-        await update({
-          isPublic: makeItPublic,
-          name,
-          wishlistId,
-        })
-        dialog.hide()
+        await onSubmit(...input)
+        if (resetOnSubmit) {
+          formik.resetForm()
+        }
       } catch (e) {
         formik.setErrors({ name: 'Unexpected error' })
+        formik.setSubmitting(false)
       }
     },
   })
@@ -53,7 +60,7 @@ export function EditWishlistDialog(
       <Dialog {...dialog} aria-label="Welcome" css={styles.dialog}>
         <div css={styles.header}>
           <Typography variant="display" css={styles.title}>
-            Edit wish list
+            {title}
           </Typography>
           <ReakitButton css={styles.close} onClick={dialog.hide}>
             <svg width={26} height={26} viewBox="0 0 26 26" fill="none">
@@ -71,19 +78,25 @@ export function EditWishlistDialog(
           <Field
             name="name"
             required
-            placeholder="Name your wish list"
-            label="Wish list name"
+            placeholder={t(
+              'bc.wish_list.name_placeholder',
+              'Name your wish list'
+            )}
+            label={t('bc.wish_list.name', 'Wish list name')}
             value={formik.values.name}
+            error={formik.errors.name}
             onChange={formik.handleChange}
             css={styles.field}
           />
           <label css={styles.checkbox}>
             <Checkbox
-              name="makeItPublic"
-              checked={formik.values.makeItPublic}
+              name="isPublic"
+              checked={formik.values.isPublic}
               onChange={formik.handleChange}
             />
-            <Typography variant="body-small">Make it public</Typography>
+            <Typography variant="body-small">
+              {t('bc.wish_list.make_it_public', 'Make it public')}
+            </Typography>
           </label>
           <div css={styles.footer}>
             <Button
@@ -91,7 +104,7 @@ export function EditWishlistDialog(
               type="submit"
               disabled={formik.isSubmitting}
             >
-              Edit wish list
+              {button}
             </Button>
           </div>
         </form>

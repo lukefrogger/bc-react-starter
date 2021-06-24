@@ -52,11 +52,11 @@ export const close = (theme: Theme): SerializedStyles => css`
 
 export const field = css`
   max-width: none;
-  margin-bottom: 32px;
 `
 
 export const checkbox = css`
   input {
+    margin-top: 32px;
     margin-right: 8px;
   }
   p {
