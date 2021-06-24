@@ -17,11 +17,15 @@ import * as styles from './styles'
 export function WishListPage(): React.ReactElement {
   const { t } = useTranslation()
   const { slug } = useParams<{ slug?: string }>()
-  const { data, revalidate } = useWishlist(Number(slug))
+  const { data: wishlist, revalidate, error } = useWishlist(Number(slug))
   const dialog = useDialogState()
   const updateWishlist = useUpdateWishlist()
 
-  if (!data) return <p>empty</p>
+  const isLoading = !error && !wishlist
+
+  if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
+  if (!wishlist) return <p>Not found</p>
+  if (error) return <p>Error</p>
   return (
     <div css={styles.container}>
       <div css={styles.header}>
@@ -41,13 +45,13 @@ export function WishListPage(): React.ReactElement {
         </span>
         <span css={styles.titleWrapper}>
           <Typography variant="display-large" css={styles.title}>
-            {data.name}
+            {wishlist.name}
           </Typography>
         </span>
 
         <WishlistActions
           dialog={dialog}
-          wishlist={data}
+          wishlist={wishlist}
           onWishlistAction={() => {}}
         />
         <WishlistDialog
@@ -55,17 +59,17 @@ export function WishListPage(): React.ReactElement {
           title={t('bc.wish_list.edit', 'Edit wish list')}
           button={t('bc.wish_list.edit', 'Edit wish list')}
           initialValues={{
-            name: data.name || '',
-            isPublic: data.is_public || false,
+            name: wishlist.name || '',
+            isPublic: wishlist.is_public || false,
           }}
           onSubmit={async ({ isPublic, name }) => {
-            if (!data.id) {
+            if (!wishlist.id) {
               throw new Error('Wishlist id not found')
             }
             await updateWishlist({
               isPublic,
               name,
-              wishlistId: data.id,
+              wishlistId: wishlist.id,
             })
             await revalidate()
             dialog.hide()
@@ -73,24 +77,24 @@ export function WishListPage(): React.ReactElement {
         />
       </div>
       <div css={styles.statusWrapper}>
-        <WishlistStatus wishlist={data} />
+        <WishlistStatus wishlist={wishlist} />
       </div>
       <div css={styles.wrapper}>
-        {data.items
+        {wishlist.items
           ?.map(
             (item): ProductRowProps => ({
               prices: {
-                price: item.product.prices.basePrice?.value,
-                salePrice: item.product.prices.salePrice?.value || 0,
+                price: item?.product?.prices?.basePrice?.value,
+                salePrice: item?.product?.prices?.salePrice?.value || 0,
                 currencySettings: {},
               },
-              name: item.product.name,
+              name: item?.product?.name || '',
               quantity: {
                 quantity: 1,
               },
               image: {
-                src: item.product.images?.edges[0].node.urlOriginal,
-                alt: item.product.images?.edges[0].node.altText,
+                src: item?.product?.images?.edges?.[0]?.node?.urlOriginal,
+                alt: item?.product?.images?.edges?.[0]?.node?.altText,
               },
               id: String(item.id),
             })

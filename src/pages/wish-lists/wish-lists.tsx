@@ -11,10 +11,11 @@ import * as styles from './styles'
 
 export function WishListsPage(): React.ReactElement {
   const { t } = useTranslation()
-  const { data } = useWishlists()
+  const { data, error } = useWishlists()
   const createWishlist = useCreateWishlist()
   const deleteWishlist = useDeleteWishlist()
   const dialog = useDialogState()
+  const isLoading = !error && !data
 
   return (
     <div css={styles.container}>
@@ -35,19 +36,23 @@ export function WishListsPage(): React.ReactElement {
           dialog.hide()
         }}
       />
-      {data?.map((wishlist) => {
-        return (
-          <WishlistRow
-            key={wishlist.id}
-            wishlist={wishlist}
-            onWishlistAction={(action, { id: wishlistId }) => {
-              if (action === 'delete' && wishlistId) {
-                deleteWishlist({ wishlistId })
-              }
-            }}
-          />
-        )
-      })}
+      {isLoading ? (
+        <p>Loading...</p> // TODO: Add a skeleton loading
+      ) : (
+        data?.map((wishlist) => {
+          return (
+            <WishlistRow
+              key={wishlist.id}
+              wishlist={wishlist}
+              onWishlistAction={(action, { id: wishlistId }) => {
+                if (action === 'delete' && wishlistId) {
+                  deleteWishlist({ wishlistId })
+                }
+              }}
+            />
+          )
+        })
+      )}
     </div>
   )
 }
