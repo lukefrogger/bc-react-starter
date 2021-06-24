@@ -1,10 +1,9 @@
+import { CommerceError } from '@bigcommerce/storefront-data-hooks/commerce/utils/errors'
 import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/types'
 import useData from '@bigcommerce/storefront-data-hooks/commerce/utils/use-data'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { Wishlist } from '@bigcommerce/storefront-data-hooks/wishlist/use-wishlist'
 import { SWRResponse } from 'swr'
-
-import { CommerceError } from '../../../storefront-data-hooks/commerce/utils/errors'
 
 const defaultOpts = {
   url: '/api/bigcommerce/wishlist',
