@@ -5,7 +5,7 @@ export type Fields =
   | 'email'
   | 'phone'
   | 'currPwd'
-  | 'oldPwd'
+  | 'confirmPwd'
   | 'newPwd'
 
 export interface FormField {
@@ -43,12 +43,14 @@ export const contactSection: FormField[] = [
     label: 'Email address',
     required: true,
     inline: true,
+    type: 'email',
   },
   {
     name: 'phone',
     label: 'Phone number',
     required: false,
     inline: true,
+    type: 'tel',
   },
 ]
 
@@ -56,20 +58,20 @@ export const passwordSection: FormField[] = [
   {
     name: 'currPwd',
     label: 'Current password',
-    required: true,
-    type: 'password',
-  },
-  {
-    name: 'oldPwd',
-    label: 'Old password',
-    required: true,
-    inline: true,
+    required: false,
     type: 'password',
   },
   {
     name: 'newPwd',
     label: 'New password',
-    required: true,
+    required: false,
+    inline: true,
+    type: 'password',
+  },
+  {
+    name: 'confirmPwd',
+    label: 'Confirm password',
+    required: false,
     inline: true,
     type: 'password',
   },

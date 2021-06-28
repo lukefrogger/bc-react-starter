@@ -27,10 +27,25 @@ const createValidateFn =
   (values: Values): Values => {
     const errors: Values = {}
 
-    if (values.newPwd && values.oldPwd && values.newPwd === values.oldPwd) {
-      errors.newPwd = t(
-        'errors.same_password',
-        'New password cannot be the same as the old password'
+    if (values.newPwd && !values.confirmPwd) {
+      errors.confirmPwd = t(
+        'errors.confirm_pwd',
+        'Please confirm your new password'
+      )
+    }
+
+    if (
+      values.newPwd &&
+      values.confirmPwd &&
+      values.newPwd !== values.confirmPwd
+    ) {
+      errors.confirmPwd = t('errors.no_match', 'Passwords do not match')
+    }
+
+    if ((values.newPwd || values.confirmPwd) && !values.currPwd) {
+      errors.currPwd = t(
+        'errors.no_curr_pwd',
+        'Please enter your current password'
       )
     }
 
@@ -51,7 +66,7 @@ export function ProfilePage(): React.ReactElement {
       ...pick(customer, ['company', 'email', 'firstName', 'lastName', 'phone']),
       currPwd: '',
       newPwd: '',
-      oldPwd: '',
+      confirmPwd: '',
     },
     onSubmit: async (values) => {
       // TODO: update customer
@@ -73,7 +88,7 @@ export function ProfilePage(): React.ReactElement {
         label={t(`profile.fields.${name}`, label)}
         onChange={formik.handleChange}
         value={formik.values[name]}
-        error={formik.touched[name] ? formik.errors[name] : undefined}
+        error={formik.errors[name]}
         required={required}
         type={type}
       />

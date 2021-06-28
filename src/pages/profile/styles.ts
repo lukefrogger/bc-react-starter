@@ -33,6 +33,7 @@ export const styles = {
       @media (min-width: 960px) {
         width: calc(50% - 80px);
         display: ${variant === 'inline' ? 'inline-block' : 'block'};
+        vertical-align: top;
       }
     `,
   Input: ({ colors }: Theme) => css`
