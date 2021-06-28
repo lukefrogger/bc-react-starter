@@ -117,7 +117,8 @@ export function CategoryPage(): React.ReactElement {
                 .map(
                   (product): ProductCardProps => ({
                     brand: {
-                      name: product.node.brand?.name || '',
+                      name: 'Test',
+                      // name: product.node.brand?.name || '',
                     },
                     product: {
                       condition: 'new',
