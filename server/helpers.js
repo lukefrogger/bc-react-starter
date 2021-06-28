@@ -41,13 +41,12 @@ export const getLoginHelper = async (req, res) => {
     operations: {
       login: async ({ req: apiReq, res: apiRes, config }) => {
         try {
-          const response = await loginApiHandlers({
+          await loginApiHandlers({
             req: apiReq,
             res: apiResWrapper(apiRes),
             body: { email, password },
             config,
           })
-          res.end(JSON.stringify(response))
         } catch (err) {
           res.statusCode = 401
           res.end(JSON.stringify(err))

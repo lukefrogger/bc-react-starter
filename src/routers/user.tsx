@@ -1,10 +1,10 @@
 import * as React from 'react'
 
+import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTranslation } from 'react-i18next'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 
 import { Submenu } from '@components'
-import { useCustomer } from '@hooks/use-customer'
 import {
   AddressesPage,
   AddressPage,

@@ -1,11 +1,11 @@
 import * as React from 'react'
 
+import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
-import { useCustomer } from '@hooks/use-customer'
 import { useLogin } from '@hooks/use-login'
 
 import * as styles from './styles'
