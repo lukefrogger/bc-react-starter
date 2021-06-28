@@ -2,9 +2,10 @@ import * as React from 'react'
 
 import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Link, useHistory, useLocation } from 'react-router-dom'
+import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
+import { useCustomer } from '@hooks/use-customer'
 import { useLogin } from '@hooks/use-login'
 
 import * as styles from './styles'
@@ -12,6 +13,7 @@ import * as styles from './styles'
 export function LoginPage(): React.ReactElement {
   const { t } = useTranslation()
   const login = useLogin()
+  const { data: customer } = useCustomer()
   const { search } = useLocation()
   const history = useHistory()
 
@@ -33,6 +35,11 @@ export function LoginPage(): React.ReactElement {
       }
     },
   })
+
+  // Already authenticated
+  if (customer) {
+    return <Redirect to="/" />
+  }
 
   return (
     <div css={styles.container}>
