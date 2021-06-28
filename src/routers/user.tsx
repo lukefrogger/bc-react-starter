@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTranslation } from 'react-i18next'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 
@@ -29,6 +30,7 @@ const submenuLinks: SubmenuLink[] = [
 export function UserRouter(): React.ReactElement {
   const activeLink = React.useRef(null)
   const location = useLocation()
+  const { data: customer } = useCustomer()
   const { t } = useTranslation()
 
   // Menu is horizontally scrollable on smaller screens
@@ -37,6 +39,11 @@ export function UserRouter(): React.ReactElement {
     if (!activeLink.current) return
     ;(activeLink.current as any)?.scrollIntoView?.()
   }, [])
+
+  // User is unauthenticated
+  if (!customer) {
+    return <Redirect to={`/login?forward_url=${location.pathname}`} />
+  }
 
   return (
     <>

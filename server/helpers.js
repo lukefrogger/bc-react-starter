@@ -2,6 +2,8 @@ import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
 } from '@bigcommerce/storefront-data-hooks/api/catalog/products'
+import loginApiHandlers from '@bigcommerce/storefront-data-hooks/api/customers/handlers/login'
+import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import axios from 'axios'
 import csc from 'country-state-city'
 
@@ -27,6 +29,28 @@ export const getProductHelper = async (req, res) => {
           body: params,
           config,
         })
+      },
+    },
+  })(req, res)
+}
+
+export const getLoginHelper = async (req, res) => {
+  const { email, password } = req.body
+
+  customersApi({
+    operations: {
+      login: async ({ req: apiReq, res: apiRes, config }) => {
+        try {
+          await loginApiHandlers({
+            req: apiReq,
+            res: apiResWrapper(apiRes),
+            body: { email, password },
+            config,
+          })
+        } catch (err) {
+          res.statusCode = 401
+          res.end(JSON.stringify(err))
+        }
       },
     },
   })(req, res)
