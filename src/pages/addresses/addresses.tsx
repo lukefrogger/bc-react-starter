@@ -7,25 +7,43 @@ import { useHistory } from 'react-router-dom'
 import { Button, Profile, Typography } from 'unsafe-bc-react-components'
 import { AddressType } from 'unsafe-bc-react-components/dist/components/core/profile/types'
 
+import * as styles from './styles'
+
 const mock: Address[] = [
   {
-    id: 63,
-    address1: '123 Fake St',
-    address2: '',
+    id: 55,
+    address1: '31',
+    address2: 'Aspin Park Road',
     address_type: 'residential',
-    city: 'Oklahoma',
+    city: 'Knaresborough',
     company: '',
-    country: 'United States',
-    country_code: 'US',
+    country: 'United Kingdom',
+    country_code: 'GB',
     customer_id: 41,
     first_name: 'Nick',
-    last_name: 'Ioa',
-    phone: '555678545',
-    postal_code: '123456',
-    state_or_province: 'Florida',
+    last_name: 'Ioannou',
+    phone: '',
+    postal_code: 'HG5 8HF',
+    state_or_province: 'North Yorkshire',
   },
   {
     id: 81,
+    address1: '31',
+    address2: 'Aspin Park Road',
+    address_type: 'residential',
+    city: 'Knaresborough',
+    company: '',
+    country: 'United Kingdom',
+    country_code: 'GB',
+    customer_id: 41,
+    first_name: 'Nick',
+    last_name: 'Ioannou',
+    phone: '',
+    postal_code: 'HG5 8HF',
+    state_or_province: 'North Yorkshire',
+  },
+  {
+    id: 821,
     address1: '31',
     address2: 'Aspin Park Road',
     address_type: 'residential',
@@ -61,23 +79,25 @@ export function AddressesPage(): React.ReactElement {
   }
 
   return (
-    <div>
-      <Typography variant="display-large">
+    <div css={styles.Container}>
+      <Typography css={styles.Title} variant="display-large">
         {t('addresses.title', 'My addresses')}
       </Typography>
-      <Button onClick={handleAdd} variant="secondary">
+      <Button css={styles.Button} onClick={handleAdd} variant="secondary">
         {t('addresses.add', 'Add new address')}
       </Button>
-      {addresses?.map(
-        (address: Address): React.ReactElement => (
-          <Profile.AddressCard
-            key={address.id}
-            address={address as AddressType}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
-        )
-      )}
+      <div css={styles.Grid}>
+        {addresses?.map(
+          (address: Address): React.ReactElement => (
+            <Profile.AddressCard
+              key={address.id}
+              address={address as AddressType}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          )
+        )}
+      </div>
     </div>
   )
 }
