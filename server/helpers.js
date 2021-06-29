@@ -7,9 +7,6 @@ import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login
 import axios from 'axios'
 import csc from 'country-state-city'
 
-import { apiResWrapper } from './utils/api-utils'
-import { getSearchParams } from './utils/get-search-params'
-
 export const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader(
     'X-Auth-Client',
@@ -19,15 +16,14 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
 }
 
 export const getProductHelper = async (req, res) => {
-  const params = getSearchParams(req.url)
+  const body = req.query
 
   return catalogProductsApi({
     operations: {
-      getProducts: ({ res: apiRes, config }) => {
+      getProducts: ({ ...handler }) => {
         catalogProductsApiHandlers.getProducts({
-          res: apiResWrapper(apiRes),
-          body: params,
-          config,
+          ...handler,
+          body,
         })
       },
     },
@@ -72,7 +68,7 @@ export const cartHelper = async (req, res) => {
   const [first, cartId, ...rest] = req.url.split('/')
   const handler = await cartApi.default()
   req.cookies = { bc_cartId: cartId || null }
-  const cart = await handler(req, wrapResponse(res), cartApi.handlers)
+  const cart = await handler(req, res, cartApi.handlers)
   res.end()
 }
 

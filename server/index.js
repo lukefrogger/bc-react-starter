@@ -2,10 +2,12 @@ import fs from 'fs'
 import http from 'http'
 import path from 'path'
 
+import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import bodyParser from 'body-parser'
 import compression from 'compression'
-import connect from 'connect'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import express from 'express'
 import * as proxy from 'http-proxy-middleware'
 import serveStatic from 'serve-static'
 
@@ -18,10 +20,16 @@ import {
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
+import { getWishlistsHelper } from './wishlist'
 
-const app = connect()
+const app = express()
 
-app.use(cors())
+app.use(
+  cors({
+    credentials: true,
+    origin: 'http://localhost:3000',
+  })
+)
 
 // gzip/deflate outgoing responses
 app.use(compression())
@@ -29,6 +37,7 @@ app.use(compression())
 // parse urlencoded request bodies into req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 const dirname = path.resolve(path.dirname(''))
 app.use(serveStatic(path.join(dirname, 'build')))
@@ -40,8 +49,11 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/customers', customerApi())
 app.use('/login', getLoginHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
+app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
+app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use(
   '/api',
   proxy.createProxyMiddleware({

@@ -8,7 +8,6 @@
     "addresses": "My addresses",
     "wishlists": "My wish lists"
   },
-
   "bc": {
     "btn": {
       "yes": "Yes",
@@ -62,11 +61,17 @@
     "wish_list": {
       "title": "My wish lists",
       "new": "New wish list",
+      "create": "Create wish list",
+      "edit": "Edit wish list",
       "public": "Public",
       "private": "Private",
       "item": "item",
       "item_plural": "items",
-      "back": "Back to my wish lists"
+      "back": "Back to my wish lists",
+      "make_it_public": "Make it public",
+      "name": "Wish list name",
+      "name_placeholder": "Name your wish list"
     }
-  }
+  },
+  "generic_error": "Unexpected error"
 }
