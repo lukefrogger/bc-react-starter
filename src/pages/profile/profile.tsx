@@ -1,6 +1,8 @@
 import * as React from 'react'
 
-import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
+import useCustomer, {
+  Customer,
+} from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useFormik } from 'formik'
 import { pick } from 'lodash'
 import { useTranslation } from 'react-i18next'
@@ -52,6 +54,8 @@ const createValidateFn =
     return errors
   }
 
+const infoFields = ['company', 'email', 'firstName', 'lastName', 'phone']
+
 export function ProfilePage(): React.ReactElement {
   const { t } = useTranslation()
   const { data: customer, mutate } = useCustomer()
@@ -63,14 +67,17 @@ export function ProfilePage(): React.ReactElement {
       lastName: '',
       phone: '',
       // Merging with actual customer data
-      ...pick(customer, ['company', 'email', 'firstName', 'lastName', 'phone']),
+      ...pick(customer, infoFields),
       currPwd: '',
       newPwd: '',
       confirmPwd: '',
     },
-    onSubmit: async (values) => {
-      // TODO: update customer
-      mutate(values as any)
+    onSubmit: async (values: Values) => {
+      const fields = {
+        ...customer,
+        ...pick(values, infoFields),
+      } as Customer
+      return mutate(fields, false)
     },
     validate: createValidateFn(t),
     enableReinitialize: true,
