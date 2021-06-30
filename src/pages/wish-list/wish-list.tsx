@@ -1,23 +1,31 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { ProductRow, Typography } from 'unsafe-bc-react-components'
+import { Link, useParams } from 'react-router-dom'
+import { useDialogState } from 'reakit/Dialog'
+import {
+  ProductRow,
+  ProductRowProps,
+  Typography,
+} from 'unsafe-bc-react-components'
 
-import { WishlistActions, WishlistStatus } from '@components'
+import { WishlistActions, WishlistDialog, WishlistStatus } from '@components'
+import { useUpdateWishlist, useWishlist } from '@hooks'
 
 import * as styles from './styles'
 
-const WISHLIST_MOCKED = {
-  is_public: false,
-  customer_id: 1,
-  id: 1,
-  items: [{ id: 1, product_id: 1 }],
-  name: "Paul's Whislist Long Long",
-}
-
 export function WishListPage(): React.ReactElement {
   const { t } = useTranslation()
+  const { slug } = useParams<{ slug?: string }>()
+  const { data: wishlist, revalidate, error } = useWishlist(Number(slug))
+  const dialog = useDialogState()
+  const updateWishlist = useUpdateWishlist()
+
+  const isLoading = !error && !wishlist
+
+  if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
+  if (!wishlist) return <p>Not found</p>
+  if (error) return <p>Error</p>
   return (
     <div css={styles.container}>
       <div css={styles.header}>
@@ -37,51 +45,70 @@ export function WishListPage(): React.ReactElement {
         </span>
         <span css={styles.titleWrapper}>
           <Typography variant="display-large" css={styles.title}>
-            {WISHLIST_MOCKED.name}
+            {wishlist.name}
           </Typography>
         </span>
 
         <WishlistActions
-          wishlist={WISHLIST_MOCKED}
+          dialog={dialog}
+          wishlist={wishlist}
           onWishlistAction={() => {}}
+        />
+        <WishlistDialog
+          {...dialog}
+          title={t('bc.wish_list.edit', 'Edit wish list')}
+          button={t('bc.wish_list.edit', 'Edit wish list')}
+          initialValues={{
+            name: wishlist.name || '',
+            isPublic: wishlist.is_public || false,
+          }}
+          onSubmit={async ({ isPublic, name }) => {
+            if (!wishlist.id) {
+              throw new Error('Wishlist id not found')
+            }
+            await updateWishlist({
+              isPublic,
+              name,
+              wishlistId: wishlist.id,
+            })
+            await revalidate()
+            dialog.hide()
+          }}
         />
       </div>
       <div css={styles.statusWrapper}>
-        <WishlistStatus
-          wishlist={WISHLIST_MOCKED}
-          onWishlistAction={() => {}}
-        />
+        <WishlistStatus wishlist={wishlist} />
       </div>
       <div css={styles.wrapper}>
-        {[
-          {
-            name: 'Product name',
-            prices: { currencySettings: {}, price: 21, salePrice: 20 },
-            quantity: 1,
-            id: 1,
-            image: 'http://placekitten.com/500/500',
-          },
-          {
-            name: 'Other name',
-            prices: { currencySettings: {}, price: 21, salePrice: 0 },
-            quantity: 1,
-            id: 2,
-            image: 'http://placekitten.com/500/500',
-          },
-        ].map((product) => (
-          <ProductRow
-            key={product.id}
-            name={product.name}
-            prices={product.prices}
-            image={{
-              src: product.image,
-            }}
-            quantity={{
-              quantity: product.quantity,
-            }}
-            editable={false}
-          />
-        ))}
+        {wishlist.items
+          ?.map(
+            (item): ProductRowProps => ({
+              prices: {
+                price: item?.product?.prices?.basePrice?.value,
+                salePrice: item?.product?.prices?.salePrice?.value || 0,
+                currencySettings: {},
+              },
+              name: item?.product?.name || '',
+              quantity: {
+                quantity: 1,
+              },
+              image: {
+                src: item?.product?.images?.edges?.[0]?.node?.urlOriginal,
+                alt: item?.product?.images?.edges?.[0]?.node?.altText,
+              },
+              id: String(item.id),
+            })
+          )
+          .map((product) => (
+            <ProductRow
+              key={product.id}
+              {...product}
+              quantity={{
+                quantity: 1,
+              }}
+              editable={false}
+            />
+          ))}
       </div>
     </div>
   )

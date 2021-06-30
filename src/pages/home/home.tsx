@@ -88,18 +88,19 @@ export function HomePage(): React.ReactElement {
             .map(
               (product): ProductCardProps => ({
                 brand: {
-                  name: product.node.brand,
+                  name: product.node.brand?.name || '',
                 },
                 product: {
                   condition: 'new',
                   name: product.node.name,
-                  price: product.node.prices.price.value,
-                  sale_price: product.node.prices.salePrice?.value || 0,
+                  price: product.node.prices?.price.value,
+                  sale_price: product.node.prices?.salePrice?.value || 0,
                 },
                 currencySettings: {},
                 image: {
-                  meta: product.node.images.edges[0].node.altText,
-                  url_standard: product.node.images.edges[0].node.urlOriginal,
+                  meta: product.node.images.edges?.[0]?.node.altText || '',
+                  url_standard:
+                    product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
               })
             )

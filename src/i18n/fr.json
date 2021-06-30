@@ -72,11 +72,16 @@
     "wish_list": {
       "title": "Mes listes de souhaits",
       "new": "Nouvelle liste de souhaits",
+      "new": "Créer liste de souhaits",
       "public": "Publique",
       "private": "Privée",
       "item": "élément",
       "item_plural": "éléments",
-      "back": "Retour à mes listes de souhaits"
+      "back": "Retour à mes listes de souhaits",
+      "make_it_public": "Rendez-le public",
+      "name": "Nom de la liste de souhaits",
+      "name_placeholder": "Nommez votre liste de souhaits"
     }
-  }
+  },
+  "generic_error": "Erreur inattendue"
 }

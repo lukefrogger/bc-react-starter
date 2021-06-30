@@ -3,17 +3,21 @@ import React from 'react'
 import partial from 'lodash/partial'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { DialogStateReturn, useDialogState } from 'reakit/Dialog'
 import { Role, RoleProps } from 'reakit/Role'
 import { Button } from 'unsafe-bc-react-components'
+
+import { WishlistDialog } from '@components'
+import { useUpdateWishlist } from '@hooks'
 
 import * as styles from './styles'
 
 type Wishlist = {
-  id: number
-  customer_id: number
-  name: string
-  is_public: boolean
-  items: { id: number; product_id: number }[]
+  id?: number
+  customer_id?: number
+  name?: string
+  is_public?: boolean
+  items?: { id?: number; product_id?: number }[]
 }
 
 export type WishlistRowProps = RoleProps & {
@@ -22,34 +26,60 @@ export type WishlistRowProps = RoleProps & {
 }
 
 export function WishlistRow(props: WishlistRowProps): React.ReactElement {
-  const { wishlist, ...rest } = props
+  const { wishlist, onWishlistAction: defaultOnWishlistAction, ...rest } = props
   const { t } = useTranslation()
+  const dialog = useDialogState()
+  const updateWishlist = useUpdateWishlist()
 
   return (
-    <Role as="div" css={styles.container} {...rest}>
-      <div css={styles.columnLeft}>
-        <Link to={`/user/wishlists/${wishlist.id}`} css={styles.name}>
-          {wishlist.name}
-        </Link>
-        <span css={styles.items}>
-          {wishlist.items.length}{' '}
-          {t('bc.wish_list.item', 'item', { count: wishlist.items.length })}
-        </span>
-      </div>
-      <div css={styles.columnRight}>
-        <WishlistStatus {...props} />
-        <WishlistActions {...props} />
-      </div>
-    </Role>
+    <>
+      <Role as="div" css={styles.container} {...rest}>
+        <div css={styles.columnLeft}>
+          <Link to={`/user/wishlists/${wishlist.id}`} css={styles.name}>
+            {wishlist.name}
+          </Link>
+          <span css={styles.items}>
+            {wishlist?.items?.length}{' '}
+            {t('bc.wish_list.item', 'item', { count: wishlist?.items?.length })}
+          </span>
+        </div>
+        <div css={styles.columnRight}>
+          <WishlistStatus {...props} />
+          <WishlistActions {...props} dialog={dialog} />
+        </div>
+      </Role>
+      <WishlistDialog
+        {...dialog}
+        title={t('bc.wish_list.edit', 'Edit wish list')}
+        button={t('bc.wish_list.edit', 'Edit wish list')}
+        initialValues={{
+          name: wishlist.name || '',
+          isPublic: wishlist.is_public || false,
+        }}
+        onSubmit={async ({ isPublic, name }) => {
+          if (!wishlist.id) {
+            throw new Error('Wishlist id not found')
+          }
+          await updateWishlist({
+            isPublic,
+            name,
+            wishlistId: wishlist.id,
+          })
+          dialog.hide()
+        }}
+      />
+    </>
   )
 }
 
-export type WishlistActionsProps = WishlistRowProps
+export type WishlistActionsProps = WishlistRowProps & {
+  dialog?: DialogStateReturn
+}
 
 export function WishlistActions(
   props: WishlistActionsProps
 ): React.ReactElement {
-  const { onWishlistAction, wishlist } = props
+  const { onWishlistAction, wishlist, dialog } = props
   const { t } = useTranslation()
 
   const { is_public: isPublic } = wishlist
@@ -83,11 +113,7 @@ export function WishlistActions(
           {t('bc.btn.copy_link', 'Copy link')}
         </Button>
       )}
-      <Button
-        css={styles.action}
-        variant="link"
-        onClick={partial(onWishlistAction, 'edit', wishlist)}
-      >
+      <Button css={styles.action} variant="link" onClick={dialog?.show}>
         <svg width={16} height={16} viewBox="0 0 16 16" fill="none">
           <path
             d="M13 7L9 3M5.5 14.5l-5 1 1-5 10-10 4 4-10 10z"
@@ -117,7 +143,7 @@ export function WishlistActions(
   )
 }
 
-export type WishlistStatusProps = WishlistRowProps
+export type WishlistStatusProps = Omit<WishlistRowProps, 'onWishlistAction'>
 
 export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
   const { wishlist } = props

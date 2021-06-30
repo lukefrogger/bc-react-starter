@@ -2,11 +2,10 @@ import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
 } from '@bigcommerce/storefront-data-hooks/api/catalog/products'
+import loginApiHandlers from '@bigcommerce/storefront-data-hooks/api/customers/handlers/login'
+import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import axios from 'axios'
 import csc from 'country-state-city'
-
-import { apiResWrapper } from './utils/api-utils'
-import { getSearchParams } from './utils/get-search-params'
 
 export const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader(
@@ -17,16 +16,37 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
 }
 
 export const getProductHelper = async (req, res) => {
-  const params = getSearchParams(req.url)
+  const body = req.query
 
   return catalogProductsApi({
     operations: {
-      getProducts: ({ res: apiRes, config }) => {
+      getProducts: ({ ...handler }) => {
         catalogProductsApiHandlers.getProducts({
-          res: apiResWrapper(apiRes),
-          body: params,
-          config,
+          ...handler,
+          body,
         })
+      },
+    },
+  })(req, res)
+}
+
+export const getLoginHelper = async (req, res) => {
+  const { email, password } = req.body
+
+  customersApi({
+    operations: {
+      login: async ({ req: apiReq, res: apiRes, config }) => {
+        try {
+          await loginApiHandlers({
+            req: apiReq,
+            res: apiResWrapper(apiRes),
+            body: { email, password },
+            config,
+          })
+        } catch (err) {
+          res.statusCode = 401
+          res.end(JSON.stringify(err))
+        }
       },
     },
   })(req, res)
@@ -48,7 +68,7 @@ export const cartHelper = async (req, res) => {
   const [first, cartId, ...rest] = req.url.split('/')
   const handler = await cartApi.default()
   req.cookies = { bc_cartId: cartId || null }
-  const cart = await handler(req, wrapResponse(res), cartApi.handlers)
+  const cart = await handler(req, res, cartApi.handlers)
   res.end()
 }
 
