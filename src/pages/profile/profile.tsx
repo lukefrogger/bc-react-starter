@@ -73,6 +73,7 @@ export function ProfilePage(): React.ReactElement {
       mutate(values as any)
     },
     validate: createValidateFn(t),
+    enableReinitialize: true,
   })
 
   const renderField = ({
