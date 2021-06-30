@@ -13,6 +13,7 @@ import {
   ProductPage,
 } from '@pages'
 
+import { LegalRouter } from './legal'
 import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
@@ -48,7 +49,22 @@ export function RootRouter(): React.ReactElement {
           <Route path="/cart">
             <CartPage />
           </Route>
+          {
+            // TODO: Create this pages
+          }
+          <Route path="/about-us">
+            <h1>About us</h1>
+          </Route>
+          <Route path="/help">
+            <h1>Help</h1>
+          </Route>
+          <Route path="/contact-us">
+            <h1>Contact Us</h1>
+          </Route>
 
+          <Route path="/legal">
+            <LegalRouter />
+          </Route>
           <Route path="/user">
             <UserRouter />
           </Route>

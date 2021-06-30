@@ -8,6 +8,17 @@
     "addresses": "My addresses",
     "wishlists": "My wish lists"
   },
+  "footer": {
+    "shipping": "Shipping",
+    "return": "Return",
+    "guarantee": "Guarantee",
+    "privacy_policy": "Privacy policy",
+    "about_us": "About us",
+    "help": "Help",
+    "contact_us": "Contact us",
+    "powered_by": "Powered by WordPress",
+    "rights": "© All rights reserved, Modern Tribe"
+  },
   "bc": {
     "btn": {
       "yes": "Yes",
