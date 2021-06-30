@@ -15,7 +15,7 @@ import {
   cartHelper,
   categoriesHelper,
   countryHelper,
-  getAddressesHelper,
+  getAddressHelper,
   getLoginHelper,
   getProductHelper,
   onStoreProxyReq,
@@ -52,7 +52,7 @@ app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/customers', customerApi())
 app.use('/login', getLoginHelper)
-app.use('/addresses', getAddressesHelper)
+app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
