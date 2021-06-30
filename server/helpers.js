@@ -1,6 +1,3 @@
-import addressesApi, {
-  handlers as addressesHandlers,
-} from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
@@ -50,20 +47,6 @@ export const getLoginHelper = async (req, res) => {
           res.statusCode = 401
           res.end(JSON.stringify(err))
         }
-      },
-    },
-  })(req, res)
-}
-
-export const getAddressesHelper = async (req, res) => {
-  addressesApi({
-    operations: {
-      getAddresses: async ({ req: apiReq, res: apiRes, config }) => {
-        await addressesHandlers.getAddresses({
-          req: apiReq,
-          res: apiResWrapper(apiRes),
-          config,
-        })
       },
     },
   })(req, res)

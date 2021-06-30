@@ -88,8 +88,7 @@ export function HomePage(): React.ReactElement {
             .map(
               (product): ProductCardProps => ({
                 brand: {
-                  name: 'Test',
-                  // name: product.node.brand?.name || '',
+                  name: product.node.brand?.name || '',
                 },
                 product: {
                   condition: 'new',
