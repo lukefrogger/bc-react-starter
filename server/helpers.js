@@ -1,3 +1,6 @@
+import addressesApi, {
+  handlers as addressesApiHandlers,
+} from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
@@ -15,12 +18,22 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN)
 }
 
+export const getAddressHelper = async (req, res) => {
+  return addressesApi({
+    operations: {
+      getAddresses: (handler) => {
+        addressesApiHandlers.getAddresses(handler)
+      },
+    },
+  })(req, res)
+}
+
 export const getProductHelper = async (req, res) => {
   const body = req.query
 
   return catalogProductsApi({
     operations: {
-      getProducts: ({ ...handler }) => {
+      getProducts: (handler) => {
         catalogProductsApiHandlers.getProducts({
           ...handler,
           body,
@@ -35,33 +48,14 @@ export const getLoginHelper = async (req, res) => {
 
   customersApi({
     operations: {
-      login: async ({ req: apiReq, res: apiRes, config }) => {
-        try {
-          await loginApiHandlers({
-            req: apiReq,
-            res: apiResWrapper(apiRes),
-            body: { email, password },
-            config,
-          })
-        } catch (err) {
-          res.statusCode = 401
-          res.end(JSON.stringify(err))
-        }
+      login: ({ ...handler }) => {
+        loginApiHandlers({
+          ...handler,
+          body: { email, password },
+        })
       },
     },
   })(req, res)
-}
-
-export const wrapResponse = (res) => {
-  res.json = (data) => {
-    res.write(JSON.stringify(data))
-  }
-
-  res.status = (s) => {
-    res.statusCode = s
-    return res
-  }
-  return res
 }
 
 export const cartHelper = async (req, res) => {
