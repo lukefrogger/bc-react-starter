@@ -40,6 +40,7 @@ export function AddressesPage(): React.ReactElement {
         {t('addresses.add', 'Add new address')}
       </Button>
       <div css={styles.Grid}>
+        {!addresses?.length && <div>{t('common.loading', 'Loading...')}</div>}
         {addresses?.map(
           (address: Address): React.ReactElement => (
             <Profile.AddressCard

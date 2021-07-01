@@ -2,20 +2,21 @@ import * as React from 'react'
 
 import { Field as FormikField, Form, Formik, FormikProps } from 'formik'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import { Button, Field, FieldProps } from 'unsafe-bc-react-components'
 
 import * as styles from './styles'
 
 export const ADDRESS_INITIAL_VALUES = {
-  firstName: '',
-  lastName: '',
+  first_name: '',
+  last_name: '',
   company: '',
   phone: '',
   address1: '',
   address2: '',
   city: '',
-  state: '',
-  zip: '',
+  state_or_province: '',
+  postal_code: '',
   country: '',
 }
 
@@ -27,10 +28,12 @@ type AddressFormProps = {
 const renderField = ({
   field,
   form,
+  asType,
+  options,
   ...props
 }: any & FieldProps): React.ReactElement => (
   <div>
-    <Field {...field} {...props} />
+    <Field as={asType} {...field} {...props} />
   </div>
 )
 
@@ -39,6 +42,12 @@ export function AddressForm({
   initialValues = ADDRESS_INITIAL_VALUES,
 }: AddressFormProps): React.ReactElement {
   const { t } = useTranslation()
+  const history = useHistory()
+
+  const handleCancel = (e: React.FormEvent): void => {
+    e.preventDefault()
+    history.goBack()
+  }
 
   return (
     <Formik
@@ -54,13 +63,13 @@ export function AddressForm({
             </h3>
             <div css={styles.FieldGrid}>
               <FormikField
-                name="firstName"
+                name="first_name"
                 label={t(`profile.fields.firstName`, 'First name')}
                 component={renderField}
                 required
               />
               <FormikField
-                name="lastName"
+                name="last_name"
                 label={t(`profile.fields.lastName`, 'Last name')}
                 component={renderField}
                 required
@@ -102,31 +111,60 @@ export function AddressForm({
                 required
               />
               <FormikField
-                name="state"
+                asType="select"
+                name="state_or_province"
                 label={t(`profile.fields.state`, 'State/country')}
                 component={renderField}
                 required
-              />
+              >
+                {/* TODO: fetch countries and states */}
+                <option
+                  value="Michigan"
+                  selected={props.values.state_or_province === 'Michigan'}
+                >
+                  Michigan
+                </option>
+                <option
+                  value="Connecticut"
+                  selected={props.values.state_or_province === 'Connecticut'}
+                >
+                  Connecticut
+                </option>
+              </FormikField>
               <FormikField
-                name="zip"
+                name="postal_code"
                 label={t(`profile.fields.zip`, 'Zip/postcode')}
                 component={renderField}
                 required
               />
               <FormikField
-                as="select"
+                asType="select"
                 name="country"
                 label={t(`profile.fields.country`, 'Country')}
                 component={renderField}
                 required
-              />
+              >
+                <option
+                  value="United States"
+                  selected={props.values.country === 'United States'}
+                >
+                  United States
+                </option>
+                <option
+                  value="Czech Republic"
+                  selected={props.values.country === 'Czech Republic'}
+                >
+                  Czech Republic
+                </option>
+              </FormikField>
             </div>
           </fieldset>
           <div css={styles.ButtonGroup}>
             <Button
               disabled={props.isSubmitting || !props.isValid}
               variant="tertiary"
-              type="submit"
+              type="button"
+              onClick={handleCancel}
             >
               {t('addresses.cancel', 'Cancel')}
             </Button>
