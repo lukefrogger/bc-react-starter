@@ -9,10 +9,14 @@ export const Heading = ({ typography, colors }: Theme): any => css`
 `
 
 export const FieldGrid = css`
+  grid-template-columns: 1fr;
   display: grid;
-  grid-template-columns: 376px 376px;
-  column-gap: 32px;
   row-gap: 40px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 376px 376px;
+    column-gap: 32px;
+  }
 `
 
 export const Fieldset = css`
