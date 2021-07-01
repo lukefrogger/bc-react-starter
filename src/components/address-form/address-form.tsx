@@ -20,9 +20,11 @@ export const ADDRESS_INITIAL_VALUES = {
   country: '',
 }
 
+export type AddressValues = typeof ADDRESS_INITIAL_VALUES
+
 type AddressFormProps = {
-  onSubmit: (values: any) => void
-  initialValues?: typeof ADDRESS_INITIAL_VALUES
+  onSubmit: (values: AddressValues) => Promise<any> | void
+  initialValues?: AddressValues
 }
 
 const renderField = ({
@@ -55,7 +57,7 @@ export function AddressForm({
       onSubmit={onSubmit}
       enableReinitialize
     >
-      {(props: FormikProps<any>) => (
+      {(props: FormikProps<AddressValues>) => (
         <Form>
           <fieldset css={styles.Fieldset}>
             <h3 css={styles.Heading}>

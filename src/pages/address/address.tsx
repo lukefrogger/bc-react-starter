@@ -2,22 +2,29 @@ import * as React from 'react'
 
 import useAddresses from '@bigcommerce/storefront-data-hooks/address/use-addresses'
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
-import { camelCase, snakeCase } from 'lodash'
 import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { Typography } from 'unsafe-bc-react-components'
 
-import { ADDRESS_INITIAL_VALUES, AddressForm } from '@components/address-form'
+import {
+  ADDRESS_INITIAL_VALUES,
+  AddressForm,
+  AddressValues,
+} from '@components/address-form'
 
 import * as styles from './styles'
 
-const transformAddressForForm = (address: Address): any =>
+const transformAddressForForm = (address: Address): AddressValues =>
   Object.fromEntries(
     Object.entries(address).filter(([key]) => key in ADDRESS_INITIAL_VALUES)
-  )
+  ) as AddressValues
 
-const transformAddressForPayload = (values: any, address: Address): any => ({
+const transformAddressForPayload = (
+  values: AddressValues,
+  address: Address
+): Address => ({
   ...values,
+  country_code: address.country_code,
   address_type: address.address_type,
   customer_id: address.customer_id,
   id: address.id,
@@ -25,13 +32,25 @@ const transformAddressForPayload = (values: any, address: Address): any => ({
 
 export function AddressPage(): React.ReactElement {
   const { t } = useTranslation()
-  const { slug }: any = useParams()
+  const { slug }: { slug: string } = useParams()
   const { data, mutate, error } = useAddresses()
 
-  const address = data?.addresses?.find((item: any) => item.id === Number(slug))
+  const address = data?.addresses?.find(
+    (item: Address) => item.id === Number(slug)
+  )
 
-  const handleSubmit = (values: any): Promise<any> => {
-    return mutate(transformAddressForPayload(values, address as any), false)
+  const handleSubmit = (values: AddressValues): Promise<any> => {
+    if (!data?.addresses?.length) return Promise.resolve()
+
+    return mutate(
+      {
+        ...data,
+        addresses: data.addresses.concat(
+          transformAddressForPayload(values, address as Address)
+        ),
+      },
+      false
+    )
   }
 
   if (!address && error) {

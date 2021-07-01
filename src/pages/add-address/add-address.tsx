@@ -1,19 +1,25 @@
 import * as React from 'react'
 
 import useAddresses from '@bigcommerce/storefront-data-hooks/address/use-addresses'
+import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
 import { useTranslation } from 'react-i18next'
 import { Typography } from 'unsafe-bc-react-components'
 
-import { AddressForm } from '@components/address-form'
+import { AddressForm, AddressValues } from '@components/address-form'
 
 import * as styles from './styles'
 
 export function AddAddressPage(): React.ReactElement {
   const { t } = useTranslation()
-  const { mutate } = useAddresses()
+  const { data, mutate } = useAddresses()
 
-  const handleSubmit = (values: any): Promise<any> => {
-    return mutate(values as any, false)
+  const handleSubmit = (values: AddressValues): Promise<any> => {
+    if (data?.addresses)
+      return mutate(
+        { ...data, addresses: data?.addresses.concat(values as Address) },
+        false
+      )
+    return Promise.resolve()
   }
 
   return (
