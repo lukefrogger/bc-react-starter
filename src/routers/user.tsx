@@ -6,6 +6,7 @@ import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 
 import { Submenu } from '@components'
 import {
+  AddAddressPage,
   AddressesPage,
   AddressPage,
   OrderPage,
@@ -30,7 +31,7 @@ const submenuLinks: SubmenuLink[] = [
 export function UserRouter(): React.ReactElement {
   const activeLink = React.useRef(null)
   const location = useLocation()
-  const { data: customer } = useCustomer()
+  const { data: customer, error } = useCustomer()
   const { t } = useTranslation()
 
   // Menu is horizontally scrollable on smaller screens
@@ -41,7 +42,7 @@ export function UserRouter(): React.ReactElement {
   }, [])
 
   // User is unauthenticated
-  if (!customer) {
+  if (error && !customer) {
     return <Redirect to={`/login?forward_url=${location.pathname}`} />
   }
 
@@ -75,6 +76,9 @@ export function UserRouter(): React.ReactElement {
         </Route>
         <Route exact path="/user/addresses">
           <AddressesPage />
+        </Route>
+        <Route exact path="/user/addresses/new">
+          <AddAddressPage />
         </Route>
         <Route exact path="/user/addresses/:slug">
           <AddressPage />

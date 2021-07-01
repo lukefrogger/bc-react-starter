@@ -6,7 +6,7 @@ import { Button, Field, FieldProps } from 'unsafe-bc-react-components'
 
 import * as styles from './styles'
 
-const INITIAL_VALUES = {
+export const ADDRESS_INITIAL_VALUES = {
   firstName: '',
   lastName: '',
   company: '',
@@ -21,7 +21,7 @@ const INITIAL_VALUES = {
 
 type AddressFormProps = {
   onSubmit: (values: any) => void
-  initialValues?: typeof INITIAL_VALUES
+  initialValues?: typeof ADDRESS_INITIAL_VALUES
 }
 
 const renderField = ({
@@ -36,7 +36,7 @@ const renderField = ({
 
 export function AddressForm({
   onSubmit,
-  initialValues = INITIAL_VALUES,
+  initialValues = ADDRESS_INITIAL_VALUES,
 }: AddressFormProps): React.ReactElement {
   const { t } = useTranslation()
 
