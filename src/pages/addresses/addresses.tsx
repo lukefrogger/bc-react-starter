@@ -15,9 +15,9 @@ export function AddressesPage(): React.ReactElement {
   const { data, mutate } = useAddresses()
   const addresses = data?.addresses
 
-  const handleAdd = (): void => history.push('/user/addresses/add')
+  const handleAdd = (): void => history.push('/user/addresses/new')
   const handleEdit = (address: AddressType): void => {
-    if (address?.id) history.push(`/user/addresses/edit/${address?.id}`)
+    if (address?.id) history.push(`/user/addresses/${address?.id}`)
   }
   const handleDelete = (address: AddressType): void => {
     if (!addresses?.length) return
@@ -40,6 +40,7 @@ export function AddressesPage(): React.ReactElement {
         {t('addresses.add', 'Add new address')}
       </Button>
       <div css={styles.Grid}>
+        {!addresses?.length && <div>{t('common.loading', 'Loading...')}</div>}
         {addresses?.map(
           (address: Address): React.ReactElement => (
             <Profile.AddressCard
