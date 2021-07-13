@@ -15,6 +15,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
+import { useAddWishlistItem } from '@hooks'
 
 import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
@@ -195,6 +196,7 @@ const RelatedProducts = styled.div`
 `
 
 export function ProductPage(): React.ReactElement {
+  const addWishlistItem = useAddWishlistItem()
   return (
     <Container>
       <Breadcrumbs>
@@ -225,7 +227,18 @@ export function ProductPage(): React.ReactElement {
               <Typography variant="body-small">2 reviews</Typography>
             </StarRow>
             <div>
-              <Button variant="link">Add to wishlist</Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  // FIXME: Remove this temporal code
+                  addWishlistItem({
+                    wishlistId: 29,
+                    productId: 7402,
+                  })
+                }}
+              >
+                Add to wishlist
+              </Button>
             </div>
           </ProductDescription>
           <ProductOptions>
