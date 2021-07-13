@@ -6,7 +6,7 @@ export const deleteWishlist = async ({ res, config, body }) => {
   const customerId =
     customerToken && (await getCustomerId({ customerToken, config }))
   if (!customerId) {
-    return res.status(400).json({
+    return res.status(401).json({
       data: null,
       errors: [{ message: 'Invalid request' }],
     })
@@ -21,7 +21,7 @@ export const deleteWishlist = async ({ res, config, body }) => {
   )
 
   if (wishlist.customer_id !== customerId) {
-    return res.status(401).json({
+    return res.status(403).json({
       data: null,
     })
   }
