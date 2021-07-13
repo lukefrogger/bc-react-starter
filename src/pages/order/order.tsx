@@ -3,7 +3,12 @@ import * as React from 'react'
 import { Product } from '@bigcommerce/storefront-data-hooks/schema'
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory, useParams } from 'react-router-dom'
-import { Orders, ProductRow, Typography } from 'unsafe-bc-react-components'
+import {
+  Button,
+  Orders,
+  ProductRow,
+  Typography,
+} from 'unsafe-bc-react-components'
 
 import { Arrow } from '@components/header/icons'
 import { useOrder } from '@hooks/order'
@@ -21,6 +26,10 @@ export function OrderPage(): React.ReactElement {
   const handleRedirectToProduct = (product: Product): void => {
     history.push(`/product/${product.id}`)
     window.scrollTo(0, 0)
+  }
+
+  const handleContactSupport = (): void => {
+    window.open('mailto:support@bc.com')
   }
 
   if (!isLoading && !data?.order) {
@@ -62,6 +71,13 @@ export function OrderPage(): React.ReactElement {
                   editable={false}
                 />
               ))}
+              <Button
+                onClick={handleContactSupport}
+                css={styles.Button}
+                variant="tertiary"
+              >
+                {t('order.contact_support', 'Contact support')}
+              </Button>
             </div>
             {data?.order && (
               <Orders.OrderDetail css={styles.Detail} order={data.order} />

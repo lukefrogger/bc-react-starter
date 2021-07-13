@@ -16,6 +16,10 @@ export const Title = css`
   text-align: center;
 `
 
+export const Button = css`
+  margin-top: 40px;
+`
+
 export const Link = ({ typography, colors }: Theme): any => css`
   ${typography['body-small'] as CSSPrimitive}
   color: ${colors['neutral-90']};
