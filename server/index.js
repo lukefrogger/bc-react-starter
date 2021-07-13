@@ -3,6 +3,7 @@ import http from 'http'
 import path from 'path'
 
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
+import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
 import bodyParser from 'body-parser'
 import compression from 'compression'
@@ -17,7 +18,6 @@ import {
   categoriesHelper,
   countryHelper,
   getAddressHelper,
-  getLoginHelper,
   getProductHelper,
   onStoreProxyReq,
   stateHelper,
@@ -51,9 +51,9 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/customers/login', loginApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())
 app.use('/api/bigcommerce/customers', customerApi())
-app.use('/login', getLoginHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
