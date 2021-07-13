@@ -3,6 +3,7 @@ import http from 'http'
 import path from 'path'
 
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
+import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
@@ -50,6 +51,7 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/customers/signup', signupApi())
 app.use('/api/bigcommerce/customers', customerApi())
 app.use('/login', getLoginHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
