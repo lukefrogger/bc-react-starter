@@ -5,18 +5,21 @@ import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { SWRResponse } from 'swr'
 
 import { Order } from '../../../../bigcommerce-react-theme-components/dist/components/core/orders/types'
+import { Product } from '../../../../storefront-data-hooks/schema'
 
 const defaultOpts = {
   url: '/api/bigcommerce/orders',
   method: 'GET',
 }
 
+type UseOrderOutput = { order: Order; products: Product[] } | null
+
 type UseOrderInput = {
   orderId: number
   customerId: number
 }
 
-const fetcher: HookFetcher<Order | null, UseOrderInput> = (
+const fetcher: HookFetcher<UseOrderOutput, UseOrderInput> = (
   options,
   { orderId, customerId },
   fetch
@@ -30,12 +33,14 @@ const fetcher: HookFetcher<Order | null, UseOrderInput> = (
     ...defaultOpts,
     ...options,
     url: `${(options?.base || '') + url.pathname}/${orderId}${url.search}`,
+  }).then((res) => {
+    return res
   })
 }
 
 export const useOrder = (
   orderId: number
-): SWRResponse<Order | null, CommerceError> => {
+): SWRResponse<UseOrderOutput, CommerceError> => {
   const { data: customer } = useCustomer()
   const response = useData(
     {},
