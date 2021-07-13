@@ -1740,10 +1740,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bigcommerce/storefront-data-hooks@^1.2.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.4.0.tgz#03a1d0f73ce77caa4e783909f7bdb5185f087827"
-  integrity sha512-Io22vZZYTXPsTpSHmyprSJVGY7H5kpJZPPaiMwf3yL5F12RpBtgYVP3SWfTDqpzgp/2atkG+35Ig/Vg0XKY8Sw==
+"@bigcommerce/storefront-data-hooks@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.5.1.tgz#d48809cc935b8e605a86ef9d14c91667371662ac"
+  integrity sha512-zVT4S8cRjp7FfSFgGTL6K0Yw1XY43W5NZq12QmBBBvzvT1+EL6kSb8n8BBaP7anyFKq63r+3b0RxJafaWDpUUw==
   dependencies:
     "@vercel/fetch" "6.1.0"
     cookie "0.4.1"

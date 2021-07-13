@@ -26,7 +26,7 @@
     "@types/react": "^17.0.0"
   },
   "dependencies": {
-    "@bigcommerce/storefront-data-hooks": "^1.2.0",
+    "@bigcommerce/storefront-data-hooks": "^1.5.1",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@jingtribe/test-bc-react-components": "^0.0.1",
