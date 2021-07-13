@@ -24,10 +24,8 @@ export async function getAllWishlists({
             config,
           })
           // Put the products in an object that we can use to get them by id
-          const productsById = graphqlData.products.reduce((prods, p) => {
-            // eslint-disable-next-line no-param-reassign
-            prods[p.node.entityId] = p
-            return prods
+          const productsById = graphqlData.products.reduce((acc, product) => {
+            return { ...acc, [product.node.entityId]: product }
           }, {})
           // Populate the wishlist items with the graphql products
           wishlist.items.forEach((item) => {
