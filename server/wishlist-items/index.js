@@ -12,7 +12,7 @@ export const getWishlistsItemsHelper = async (req, res) => {
   try {
     if (req.method === 'POST') {
       const body = { ...req.body, customerToken, wishlistId }
-      // add wishlist item
+      // Add wishlist item
       return await handlers.addWishlistItem({
         req,
         res,
@@ -22,8 +22,13 @@ export const getWishlistsItemsHelper = async (req, res) => {
     }
     if (req.method === 'DELETE') {
       const body = { customerToken, itemId, wishlistId }
-
-      // delete wishlist item
+      // Delete wishlist item
+      return await handlers.deleteWishlistItem({
+        req,
+        res,
+        config,
+        body,
+      })
     }
   } catch (error) {
     console.error(error)

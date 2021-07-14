@@ -15,7 +15,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
-import { useAddWishlistItem } from '@hooks'
+import { useAddWishlistItem, useDeleteWishlistItem } from '@hooks'
 
 import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
@@ -197,6 +197,7 @@ const RelatedProducts = styled.div`
 
 export function ProductPage(): React.ReactElement {
   const addWishlistItem = useAddWishlistItem()
+  const deleteWishlistItem = useDeleteWishlistItem()
   return (
     <Container>
       <Breadcrumbs>
@@ -238,6 +239,18 @@ export function ProductPage(): React.ReactElement {
                 }}
               >
                 Add to wishlist
+              </Button>
+              <Button
+                variant="link"
+                onClick={() => {
+                  // FIXME: Remove this temporal code
+                  deleteWishlistItem({
+                    wishlistId: 29,
+                    itemId: 14,
+                  })
+                }}
+              >
+                Delete from wishlist
               </Button>
             </div>
           </ProductDescription>

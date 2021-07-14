@@ -1,5 +1,6 @@
 export * from './use-add-wishlist-item'
 export * from './use-create-wishlist'
+export * from './use-delete-wishlist-item'
 export * from './use-delete-wishlist'
 export * from './use-update-wishlist'
 export * from './use-wishlist'
