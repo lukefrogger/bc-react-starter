@@ -116,7 +116,7 @@ export function WishlistItemDialog(
 
   return (
     <Dialog {...dialog} title={title}>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} css={styles.list}>
         {wishlists?.map((wishlist) => {
           if (!wishlist.id) return null
           return (
