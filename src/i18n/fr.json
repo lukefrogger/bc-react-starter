@@ -72,7 +72,7 @@
     "wish_list": {
       "title": "Mes listes de souhaits",
       "new": "Nouvelle liste de souhaits",
-      "new": "Créer liste de souhaits",
+      "create": "Créer liste de souhaits",
       "public": "Publique",
       "private": "Privée",
       "item": "élément",
