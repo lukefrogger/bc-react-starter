@@ -11,6 +11,7 @@ import express from 'express'
 import * as proxy from 'http-proxy-middleware'
 import serveStatic from 'serve-static'
 
+import { getWishlistsItemsHelper } from './wishlist/items'
 import {
   cartHelper,
   categoriesHelper,
@@ -22,7 +23,6 @@ import {
   stateHelper,
 } from './helpers'
 import { getWishlistsHelper } from './wishlist'
-import { getWishlistsItemsHelper } from './wishlist-items'
 
 const app = express()
 
