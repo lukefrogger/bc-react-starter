@@ -1,3 +1,4 @@
+import { Orders } from '@bigcommerce/storefront-data-hooks/api/orders'
 import { CommerceError } from '@bigcommerce/storefront-data-hooks/commerce/utils/errors'
 import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/types'
 import useData from '@bigcommerce/storefront-data-hooks/commerce/utils/use-data'
@@ -9,7 +10,7 @@ const defaultOpts = {
   method: 'GET',
 }
 
-type UseOrderOutput = any | null
+type UseOrderOutput = Orders[0] | null
 
 type UseOrderInput = {
   orderId: number

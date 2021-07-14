@@ -1,7 +1,8 @@
 import * as React from 'react'
 
-import { Product } from '@bigcommerce/storefront-data-hooks/schema'
-import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-products'
+import useOrderProducts, {
+  Products,
+} from '@bigcommerce/storefront-data-hooks/use-order-products'
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import {
@@ -28,7 +29,7 @@ export function OrderPage(): React.ReactElement {
   const isLoading = !order && !orderError
   const isProductsLoading = !products && !productsError
 
-  const handleRedirectToProduct = (product: Product): void => {
+  const handleRedirectToProduct = (product: Products[0]): void => {
     history.push(`/product/${product.id}`)
     window.scrollTo(0, 0)
   }
@@ -59,21 +60,20 @@ export function OrderPage(): React.ReactElement {
               <div>Loading...</div>
             ) : (
               products?.map((product) => (
+                // TODO: Order from API missing some data: salePrice, product image
                 <ProductRow
                   key={product.id}
                   image={{
                     src: 'https://cdn11.bigcommerce.com/s-wrur4yohpn/images/stencil/500w/products/77/266/foglinenbeigestripetowel1b.1626110985.jpg',
                   }}
-                  onClick={() => handleRedirectToProduct(product as any)}
+                  onClick={() => handleRedirectToProduct(product)}
                   name={product.name ?? ''}
-                  prices={
-                    {
-                      price: (product as any).total_inc_tax,
-                      salePrice: 0,
-                      currencySettings: { currency: storeMock.currency },
-                    } as any
-                  }
-                  quantity={{ quantity: (product as any).quantity ?? 5 }}
+                  prices={{
+                    price: Number(product.total_inc_tax) ?? 0,
+                    salePrice: 0,
+                    currencySettings: { currency: storeMock.currency },
+                  }}
+                  quantity={{ quantity: product.quantity ?? 5 }}
                   editable={false}
                 />
               ))
@@ -86,11 +86,11 @@ export function OrderPage(): React.ReactElement {
               {t('order.contact_support', 'Contact support')}
             </Button>
           </div>
-          {isLoading ? (
-            'Loading...'
-          ) : (
-            <Orders.OrderDetail css={styles.Detail} order={order as any} />
-          )}
+          {isLoading
+            ? 'Loading...'
+            : order && (
+                <Orders.OrderDetail css={styles.Detail} order={order as any} />
+              )}
         </div>
       </>
     </div>
