@@ -39,7 +39,15 @@ export function OrderPage(): React.ReactElement {
   }
 
   if (!isLoading && !order) {
-    return <span>{t('order.not_found', 'No order found')}</span>
+    return (
+      <div css={styles.Container}>
+        <div css={styles.Header}>
+          <Typography css={styles.Title} variant="display-large">
+            {t('order.not_found', 'No order found')}
+          </Typography>
+        </div>
+      </div>
+    )
   }
 
   return (
