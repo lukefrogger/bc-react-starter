@@ -22,7 +22,8 @@
   "bc": {
     "btn": {
       "yes": "Oui",
-      "no": "Non,",
+      "no": "Non",
+      "add": "Ajouter",
       "delete": "Supprimer",
       "edit": "Éditer",
       "share": "Partager",
@@ -74,6 +75,7 @@
       "new": "Nouvelle liste de souhaits",
       "create": "Créer liste de souhaits",
       "edit": "Modifier la liste de souhaits",
+      "add": "Ajouter à la liste de souhaits",
       "public": "Publique",
       "private": "Privée",
       "item": "élément",
