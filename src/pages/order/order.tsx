@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Product } from '@bigcommerce/storefront-data-hooks/schema'
+import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-products'
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import {
@@ -20,8 +21,12 @@ export function OrderPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
   const { slug }: { slug: string } = useParams()
-  const { data, error } = useOrder(Number(slug))
-  const isLoading = !data?.order && !data?.products && !error
+  const { data: order, error: orderError } = useOrder(Number(slug))
+  const { data: products, error: productsError } = useOrderProducts({
+    orderId: Number(slug),
+  })
+  const isLoading = !order && !orderError
+  const isProductsLoading = !products && !productsError
 
   const handleRedirectToProduct = (product: Product): void => {
     history.push(`/product/${product.id}`)
@@ -32,7 +37,7 @@ export function OrderPage(): React.ReactElement {
     window.open('mailto:support@bc.com')
   }
 
-  if (!isLoading && !data?.order) {
+  if (!isLoading && !order) {
     return <span>{t('order.not_found', 'No order found')}</span>
   }
 
@@ -47,19 +52,20 @@ export function OrderPage(): React.ReactElement {
           {t('order.back_to_list', 'Back to orders')}
         </Link>
       </div>
-      {isLoading && 'Loading...'}
-      {!isLoading && (
-        <>
-          <div css={styles.Grid}>
-            <div css={styles.List}>
-              {data?.products?.map((product) => (
+      <>
+        <div css={styles.Grid}>
+          <div css={styles.List}>
+            {isProductsLoading ? (
+              <div>Loading...</div>
+            ) : (
+              products?.map((product) => (
                 <ProductRow
                   key={product.id}
                   image={{
                     src: 'https://cdn11.bigcommerce.com/s-wrur4yohpn/images/stencil/500w/products/77/266/foglinenbeigestripetowel1b.1626110985.jpg',
                   }}
-                  onClick={() => handleRedirectToProduct(product)}
-                  name={product.name}
+                  onClick={() => handleRedirectToProduct(product as any)}
+                  name={product.name ?? ''}
                   prices={
                     {
                       price: (product as any).total_inc_tax,
@@ -70,21 +76,23 @@ export function OrderPage(): React.ReactElement {
                   quantity={{ quantity: (product as any).quantity ?? 5 }}
                   editable={false}
                 />
-              ))}
-              <Button
-                onClick={handleContactSupport}
-                css={styles.Button}
-                variant="tertiary"
-              >
-                {t('order.contact_support', 'Contact support')}
-              </Button>
-            </div>
-            {data?.order && (
-              <Orders.OrderDetail css={styles.Detail} order={data.order} />
+              ))
             )}
+            <Button
+              onClick={handleContactSupport}
+              css={styles.Button}
+              variant="tertiary"
+            >
+              {t('order.contact_support', 'Contact support')}
+            </Button>
           </div>
-        </>
-      )}
+          {isLoading ? (
+            'Loading...'
+          ) : (
+            <Orders.OrderDetail css={styles.Detail} order={order as any} />
+          )}
+        </div>
+      </>
     </div>
   )
 }

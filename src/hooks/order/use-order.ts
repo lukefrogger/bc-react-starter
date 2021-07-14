@@ -4,15 +4,12 @@ import useData from '@bigcommerce/storefront-data-hooks/commerce/utils/use-data'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { SWRResponse } from 'swr'
 
-import { Order } from '../../../../bigcommerce-react-theme-components/dist/components/core/orders/types'
-import { Product } from '../../../../storefront-data-hooks/schema'
-
 const defaultOpts = {
-  url: '/api/bigcommerce/orders',
+  url: '/api/bigcommerce/order',
   method: 'GET',
 }
 
-type UseOrderOutput = { order: Order; products: Product[] } | null
+type UseOrderOutput = any | null
 
 type UseOrderInput = {
   orderId: number
