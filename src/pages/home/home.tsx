@@ -102,6 +102,7 @@ export function HomePage(): React.ReactElement {
                   url_standard:
                     product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
+                productUrl: `/product/${product.node.entityId}`,
               })
             )
             .map((product) => (

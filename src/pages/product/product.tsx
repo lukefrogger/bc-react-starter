@@ -3,6 +3,7 @@ import * as React from 'react'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { useTranslation } from 'react-i18next'
+import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
   ProductCard,
@@ -14,7 +15,7 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import { Breadcrumbs } from '@components'
+import { Breadcrumbs, WishlistItemDialog } from '@components'
 import { useAddWishlistItem, useDeleteWishlistItem } from '@hooks'
 
 import productMock from '../../__mocks__/data/product.json'
@@ -198,6 +199,7 @@ const RelatedProducts = styled.div`
 export function ProductPage(): React.ReactElement {
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
+  const dialog = useDialogState()
   return (
     <Container>
       <Breadcrumbs>
@@ -228,8 +230,10 @@ export function ProductPage(): React.ReactElement {
               <Typography variant="body-small">2 reviews</Typography>
             </StarRow>
             <div>
-              <Button
-                variant="link"
+              <DialogDisclosure
+                {...dialog}
+                /*                 as={Button}
+                variant="link" */
                 onClick={() => {
                   // FIXME: Remove this temporal code
                   addWishlistItem({
@@ -239,7 +243,7 @@ export function ProductPage(): React.ReactElement {
                 }}
               >
                 Add to wishlist
-              </Button>
+              </DialogDisclosure>
               <Button
                 variant="link"
                 onClick={() => {
@@ -252,6 +256,7 @@ export function ProductPage(): React.ReactElement {
               >
                 Delete from wishlist
               </Button>
+              <WishlistItemDialog {...dialog} productId={7404} />
             </div>
           </ProductDescription>
           <ProductOptions>

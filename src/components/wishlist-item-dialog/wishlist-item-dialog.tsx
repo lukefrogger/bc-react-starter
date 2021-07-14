@@ -2,11 +2,11 @@ import React from 'react'
 
 import { FormikHelpers, useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Button as ReakitButton } from 'reakit/Button'
 import { Checkbox } from 'reakit/Checkbox'
-import { Dialog, DialogBackdrop, DialogStateReturn } from 'reakit/Dialog'
+import { DialogStateReturn } from 'reakit/Dialog'
 import { Button, Typography } from 'unsafe-bc-react-components'
 
+import { Dialog } from '@components'
 import { useAddWishlistItem, useDeleteWishlistItem, useWishlists } from '@hooks'
 
 import * as styles from './styles'
@@ -21,7 +21,7 @@ type WishlistItemDialogProps = DialogStateReturn & {
   button?: string
   initialValues?: Values
   resetOnSubmit?: boolean
-  productId?: number
+  productId: number
   variantId?: number
   onSubmit?: (
     values: Values,
@@ -41,9 +41,7 @@ export function WishlistItemDialog(
   const {
     title = t('bc.wish_list.add', 'New wish list'),
     button = t('bc.btn.add', 'Create wish list'),
-    onSubmit = () => {},
-    // initialValues,
-    productId = 7404,
+    productId,
     variantId,
     ...dialog
   } = props
@@ -117,49 +115,31 @@ export function WishlistItemDialog(
   })
 
   return (
-    <DialogBackdrop {...dialog} css={styles.backdrop}>
-      <Dialog {...dialog} aria-label="Welcome" css={styles.dialog}>
-        <div css={styles.header}>
-          <Typography variant="display" css={styles.title}>
-            {title}
-          </Typography>
-          <ReakitButton css={styles.close} onClick={dialog.hide}>
-            <svg width={26} height={26} viewBox="0 0 26 26" fill="none">
-              <path
-                d="M24 2L2 24M24 24L2 2"
-                stroke="currentColor"
-                strokeWidth={2}
-                strokeMiterlimit={10}
-                strokeLinecap="square"
+    <Dialog {...dialog} title={title}>
+      <form onSubmit={formik.handleSubmit}>
+        {wishlists?.map((wishlist) => {
+          if (!wishlist.id) return null
+          return (
+            <label css={styles.checkbox} key={wishlist.id}>
+              <Checkbox
+                name={String(wishlist.id)}
+                checked={formik.values[wishlist.id]}
+                onChange={formik.handleChange}
               />
-            </svg>
-          </ReakitButton>
+              <Typography variant="body-small">{wishlist.name}</Typography>
+            </label>
+          )
+        })}
+        <div css={styles.footer}>
+          <Button
+            variant="secondary"
+            type="submit"
+            disabled={formik.isSubmitting}
+          >
+            {button}
+          </Button>
         </div>
-        <form onSubmit={formik.handleSubmit}>
-          {wishlists?.map((wishlist) => {
-            if (!wishlist.id) return null
-            return (
-              <label css={styles.checkbox} key={wishlist.id}>
-                <Checkbox
-                  name={String(wishlist.id)}
-                  checked={formik.values[wishlist.id]}
-                  onChange={formik.handleChange}
-                />
-                <Typography variant="body-small">{wishlist.name}</Typography>
-              </label>
-            )
-          })}
-          <div css={styles.footer}>
-            <Button
-              variant="secondary"
-              type="submit"
-              disabled={formik.isSubmitting}
-            >
-              {button}
-            </Button>
-          </div>
-        </form>
-      </Dialog>
-    </DialogBackdrop>
+      </form>
+    </Dialog>
   )
 }
