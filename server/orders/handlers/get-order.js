@@ -13,11 +13,8 @@ export const getOrder = async ({ res, config, body }) => {
       })
     }
 
-    const [{ data: order }, { data: products }] = await Promise.all([
-      config.storeApiFetch(`/v2/orders/${orderId}`),
-      config.storeApiFetch(`/v2/orders/${orderId}/products`),
-    ])
-    return res.status(200).json({ data: { order, products } || null })
+    const { data } = await config.storeApiFetch(`/v2/orders/${orderId}`)
+    return res.status(200).json({ data: data || null })
   } catch (error) {
     const message = 'An unexpected error ocurred'
 
