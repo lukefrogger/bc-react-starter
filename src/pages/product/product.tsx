@@ -14,8 +14,12 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import { Breadcrumbs, WishlistItemDialog } from '@components'
-import { useAddWishlistItem, useDeleteWishlistItem } from '@hooks'
+import {
+  Breadcrumbs,
+  WishlistItemDialog,
+  WishlistItemDialogValues,
+} from '@components'
+import { useAddWishlistItem, useDeleteWishlistItem, useWishlists } from '@hooks'
 
 import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
@@ -79,9 +83,46 @@ const breadcrumbs = [
 ]
 
 export function ProductPage(): React.ReactElement {
+  const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
   const dialog = useDialogState()
+
+  async function onSubmitDialog({
+    additions,
+    deletions,
+  }: WishlistItemDialogValues): Promise<void> {
+    await Promise.all([
+      ...additions.map((addition) =>
+        addWishlistItem({
+          wishlistId: addition.wishlistId,
+          productId: productMock.id,
+          // variantId: productMock.variant_id,
+        })
+      ),
+      ...deletions.map((deletion) => {
+        const itemId = wishlists?.reduce(
+          (acc: number | null | undefined, wishlist) => {
+            if (wishlist.id === deletion.wishlistId) {
+              const itemToDelete = wishlist.items?.find(
+                (item) => item.product_id === productMock.id
+              )
+              return itemToDelete?.id
+            }
+            return acc
+          },
+          null as number | null
+        )
+        if (!itemId) return null
+        return deleteWishlistItem({
+          wishlistId: deletion.wishlistId,
+          itemId,
+        })
+      }),
+    ])
+    dialog.hide()
+  }
+
   return (
     <div css={styles.container}>
       <Breadcrumbs>
@@ -115,7 +156,12 @@ export function ProductPage(): React.ReactElement {
               <DialogDisclosure {...dialog} css={styles.link}>
                 Add to wishlist
               </DialogDisclosure>
-              <WishlistItemDialog {...dialog} productId={productMock.id} />
+              <WishlistItemDialog
+                {...dialog}
+                wishlists={wishlists}
+                productId={productMock.id}
+                onSubmit={onSubmitDialog}
+              />
             </div>
           </div>
           <div css={styles.productOptions}>

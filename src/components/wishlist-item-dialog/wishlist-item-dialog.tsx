@@ -1,41 +1,35 @@
 import React from 'react'
 
-import { FormikHelpers, useFormik } from 'formik'
+import { Wishlist } from '@bigcommerce/storefront-data-hooks/api/wishlist'
+import { useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Checkbox } from 'reakit/Checkbox'
 import { DialogStateReturn } from 'reakit/Dialog'
 import { Button, Typography } from 'unsafe-bc-react-components'
 
 import { Dialog } from '@components'
-import { useAddWishlistItem, useDeleteWishlistItem, useWishlists } from '@hooks'
 
 import * as styles from './styles'
 
-type Values = {
-  name: string
-  isPublic: boolean
+type WishlistValue = { wishlistId: number; value: boolean }
+
+export type WishlistItemDialogValues = {
+  additions: WishlistValue[]
+  deletions: WishlistValue[]
 }
 
 type WishlistItemDialogProps = DialogStateReturn & {
   title?: string
   button?: string
-  initialValues?: Values
-  resetOnSubmit?: boolean
   productId: number
   variantId?: number
-  onSubmit?: (
-    values: Values,
-    formikHelpers: FormikHelpers<Values>
-  ) => void | Promise<any>
+  wishlists?: Wishlist[] | null
+  onSubmit?: (values: WishlistItemDialogValues) => void | Promise<any>
 }
 
 export function WishlistItemDialog(
   props: WishlistItemDialogProps
 ): React.ReactElement {
-  const { data: wishlists } = useWishlists()
-  const addWishlistItem = useAddWishlistItem()
-  const deleteWishlistItem = useDeleteWishlistItem()
-
   const { t } = useTranslation()
 
   const {
@@ -43,11 +37,13 @@ export function WishlistItemDialog(
     button = t('bc.btn.add', 'Create wish list'),
     productId,
     variantId,
+    wishlists = [],
+    onSubmit = () => {},
     ...dialog
   } = props
 
-  const initialValues =
-    wishlists?.reduce((acc: Record<number, boolean>, wishlist) => {
+  const initialValues: Record<number, boolean> =
+    wishlists?.reduce((acc, wishlist) => {
       if (!wishlist.id) return acc
       return {
         ...acc,
@@ -56,7 +52,7 @@ export function WishlistItemDialog(
             item.product_id === productId && item.variant_id === variantId
         ),
       }
-    }, {}) || ({} as Record<number, boolean>)
+    }, {}) || {}
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -64,13 +60,13 @@ export function WishlistItemDialog(
     onSubmit: async (values) => {
       try {
         const differences = Object.entries(values).reduce(
-          (acc, [key, value]) => {
+          (acc: WishlistValue[], [key, value]) => {
             if (initialValues[Number(key)] !== value) {
               acc.push({ wishlistId: Number(key), value })
             }
             return acc
           },
-          [] as { wishlistId: number; value: boolean }[]
+          []
         )
 
         const additions = differences.filter(
@@ -79,37 +75,9 @@ export function WishlistItemDialog(
         const deletions = differences.filter(
           (difference) => difference.value === false
         )
-        await Promise.all([
-          ...additions.map((addition) =>
-            addWishlistItem({
-              wishlistId: addition.wishlistId,
-              productId,
-              variantId,
-            })
-          ),
-          ...deletions.map((deletion) => {
-            const itemId = wishlists?.reduce(
-              (acc: number | null | undefined, wishlist) => {
-                if (wishlist.id === deletion.wishlistId) {
-                  const itemToDelete = wishlist.items?.find(
-                    (item) => item.product_id === productId
-                  )
-                  return itemToDelete?.id
-                }
-                return acc
-              },
-              null as number | null
-            )
-            if (!itemId) return null
-            return deleteWishlistItem({
-              wishlistId: deletion.wishlistId,
-              itemId,
-            })
-          }),
-        ])
-      } finally {
+        await onSubmit({ additions, deletions })
+      } catch (e) {
         formik.setSubmitting(false)
-        dialog.hide()
       }
     },
   })
