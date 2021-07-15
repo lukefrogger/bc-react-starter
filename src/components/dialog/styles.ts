@@ -19,6 +19,7 @@ export const dialog = (theme: Theme): SerializedStyles => css`
   max-width: 792px;
   width: calc(100vw - 32px);
   padding: 16px 20px 20px;
+  overflow-y: scroll;
   ${theme.mq[1]} {
     width: calc(100vw - 56px);
     padding: 48px 56px 56px;
