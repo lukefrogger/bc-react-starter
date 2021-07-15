@@ -29,8 +29,8 @@ export function WishlistDialog(props: Props): React.ReactElement {
   const { t } = useTranslation()
 
   const {
-    title = t('bc.wishlist.new', 'New wish list'),
-    button = t('bc.wishlist.create', 'Create wish list'),
+    title = t('bc.wish_list.new', 'New wish list'),
+    button = t('bc.wish_list.create', 'Create wish list'),
     onSubmit = () => {},
     initialValues,
     resetOnSubmit = false,
