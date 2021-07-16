@@ -18,7 +18,6 @@ export const getOrder = async ({ res, config, body }) => {
   } catch (error) {
     const message = 'An unexpected error ocurred'
 
-    // TODO: remove mock
     return res.status(404).json({ errors: [{ message }] })
   }
 }
