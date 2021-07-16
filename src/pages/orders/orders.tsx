@@ -1,9 +1,15 @@
 import * as React from 'react'
 
+import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-products'
 import useOrders from '@bigcommerce/storefront-data-hooks/use-orders'
 import { useHistory } from 'react-router-dom'
-import { Orders } from 'unsafe-bc-react-components'
+import { Orders, Pagination } from 'unsafe-bc-react-components'
 import { Order } from 'unsafe-bc-react-components/dist/components/core/orders/types'
+
+const OrderRow = (props: any): React.ReactElement => {
+  const { data: products } = useOrderProducts({ orderId: props.order?.id })
+  return <Orders.OrderRow {...props} products={products} styles={{}} />
+}
 
 export function OrdersPage(): React.ReactElement {
   const { data: orders, error } = useOrders()
@@ -25,14 +31,14 @@ export function OrdersPage(): React.ReactElement {
   return (
     <div>
       {orders?.map((order) => (
-        <Orders.OrderRow
+        <OrderRow
           key={order.id}
-          order={order as any}
-          styles={{}}
+          order={order}
           onOrderAction={handleOrderAction}
-          products={{ '1': undefined } as any}
         />
       ))}
+
+      <Pagination />
     </div>
   )
 }
