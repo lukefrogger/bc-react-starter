@@ -42,7 +42,7 @@ export function UserRouter(): React.ReactElement {
   }, [])
 
   // User is unauthenticated
-  if (error && !customer) {
+  if (error || !customer) {
     return <Redirect to={`/login?forward_url=${location.pathname}`} />
   }
 
