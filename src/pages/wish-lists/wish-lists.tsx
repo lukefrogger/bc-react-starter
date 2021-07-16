@@ -20,10 +20,10 @@ export function WishListsPage(): React.ReactElement {
   return (
     <div css={styles.container}>
       <Typography variant="display-large" css={styles.title}>
-        {t('bc.wishlist.title', 'My wish lists')}
+        {t('bc.wish_list.title', 'My wish lists')}
       </Typography>
       <DialogDisclosure {...dialog} css={styles.button}>
-        {t('bc.wishlist.new', 'New wish list')}
+        {t('bc.wish_list.new', 'New wish list')}
       </DialogDisclosure>
       <WishlistDialog
         {...dialog}
