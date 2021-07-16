@@ -61,7 +61,7 @@ app.use('/api/bigcommerce/customers', customerApi())
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use('/api/bigcommerce/orders/products', orderProductsApi())
-app.use('/api/bigcommerce/order/:orderId', getOrdersHelper)
+app.use('/api/bigcommerce/orders/:orderId', getOrdersHelper)
 app.use(
   '/api',
   proxy.createProxyMiddleware({
