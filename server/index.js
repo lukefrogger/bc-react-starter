@@ -5,6 +5,7 @@ import path from 'path'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
+import orderProductsApi from '@bigcommerce/storefront-data-hooks/api/orders/products'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
@@ -59,6 +60,7 @@ app.use('/api/bigcommerce/customers/signup', signupApi())
 app.use('/api/bigcommerce/customers', customerApi())
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
+app.use('/api/bigcommerce/orders/products', orderProductsApi())
 app.use('/api/bigcommerce/order/:orderId', getOrdersHelper)
 app.use(
   '/api',
