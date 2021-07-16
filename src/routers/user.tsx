@@ -42,7 +42,7 @@ export function UserRouter(): React.ReactElement {
   }, [])
 
   // User is unauthenticated
-  if (error && !customer) {
+  if (error || !customer) {
     return <Redirect to={`/login?forward_url=${location.pathname}`} />
   }
 
@@ -85,9 +85,6 @@ export function UserRouter(): React.ReactElement {
         </Route>
         <Route exact path="/user/wishlists">
           <WishListsPage />
-        </Route>
-        <Route exact path="/user/wishlists/:slug">
-          <WishListPage />
         </Route>
         <Redirect from="/user" to="/user/profile" />
       </Switch>
