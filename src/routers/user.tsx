@@ -86,9 +86,6 @@ export function UserRouter(): React.ReactElement {
         <Route exact path="/user/wishlists">
           <WishListsPage />
         </Route>
-        <Route exact path="/user/wishlists/:slug">
-          <WishListPage />
-        </Route>
         <Redirect from="/user" to="/user/profile" />
       </Switch>
     </>
