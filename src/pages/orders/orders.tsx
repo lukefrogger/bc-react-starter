@@ -11,19 +11,7 @@ import * as styles from './styles'
 
 const OrderRow = (props: any): React.ReactElement => {
   const { data: products } = useOrderProducts({ orderId: props.order?.id })
-  return (
-    <Orders.OrderRow
-      {...props}
-      products={[
-        {
-          ...products?.[0],
-          image_url:
-            'https://cdn11.bigcommerce.com/s-wrur4yohpn/images/stencil/500w/products/77/266/foglinenbeigestripetowel1b.1626110985.jpg',
-        },
-      ]}
-      styles={{}}
-    />
-  )
+  return <Orders.OrderRow {...props} products={products} />
 }
 
 export function OrdersPage(): React.ReactElement {
