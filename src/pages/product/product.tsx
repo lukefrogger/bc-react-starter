@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-import { css } from '@emotion/react'
-import { useTranslation } from 'react-i18next'
+// import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
-  ProductCard,
+  // ProductCard,
   ProductPrice,
-  ProductReview,
-  Props as ProductCardProps,
+  // ProductReview,
+  // Props as ProductCardProps,
   QuantitySelector,
   StarRating,
   Typography,
@@ -19,74 +19,30 @@ import {
   WishlistItemDialog,
   WishlistItemDialogValues,
 } from '@components'
-import { useAddWishlistItem, useDeleteWishlistItem, useWishlists } from '@hooks'
+import {
+  useAddWishlistItem,
+  useDeleteWishlistItem,
+  useProduct,
+  useWishlists,
+} from '@hooks'
 
-import productMock from '../../__mocks__/data/product.json'
-import storeMock from '../../__mocks__/data/store_config.json'
 import * as styles from './styles'
-
-const products: ProductCardProps[] = [
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-  {
-    product: productMock,
-    productUrl: 'https://google.es',
-    image: {
-      url_standard: productMock.image_src,
-      meta: productMock.image_alt,
-    },
-    brand: {
-      name: productMock.brand,
-    },
-    currencySettings: { currency: storeMock.currency },
-  },
-]
-
-const breadcrumbs = [
-  { to: '/home', label: 'Home' },
-  { to: '/category', label: 'Category' },
-  { label: productMock.name },
-]
 
 export function ProductPage(): React.ReactElement {
   const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
   const dialog = useDialogState()
+  const params = useParams<any>()
+  const { data: product } = useProduct(params.slug)
+
+  const breadcrumbs = [
+    { to: '/home', label: 'Home' },
+    { to: '/category', label: 'Category' },
+    { label: product?.name },
+  ]
+
+  if (!product) return <p>Loading</p>
 
   async function onSubmitDialog({
     additions,
@@ -96,8 +52,8 @@ export function ProductPage(): React.ReactElement {
       ...additions.map((addition) =>
         addWishlistItem({
           wishlistId: addition.wishlistId,
-          productId: productMock.id,
-          // variantId: productMock.variant_id,
+          productId: product?.entityId || 0, // TODO: Solve this
+          variantId: product?.variants?.edges?.[0]?.node?.entityId || 0, // FIXME: It's not the first variant
         })
       ),
       ...deletions.map((deletion) => {
@@ -105,7 +61,7 @@ export function ProductPage(): React.ReactElement {
           (acc: number | null | undefined, wishlist) => {
             if (wishlist.id === deletion.wishlistId) {
               const itemToDelete = wishlist.items?.find(
-                (item) => item.product_id === productMock.id
+                (item) => item.product_id === product?.entityId
               )
               return itemToDelete?.id
             }
@@ -137,13 +93,13 @@ export function ProductPage(): React.ReactElement {
         <div css={styles.product}>
           <div css={styles.productDescription}>
             <Typography variant="overline">
-              {productMock.brand.toUpperCase()}
+              {product.brand?.name.toUpperCase()}
             </Typography>
-            <Typography variant="display">{productMock.name}</Typography>
+            <Typography variant="display">{product.name}</Typography>
             <ProductPrice price={21} salePrice={20} currencySettings={{}} />
             <Typography
               variant="body-small"
-              dangerouslySetInnerHTML={{ __html: productMock.description }}
+              dangerouslySetInnerHTML={{ __html: product.description }}
             />
             <div css={styles.starRow}>
               <StarRating
@@ -159,7 +115,7 @@ export function ProductPage(): React.ReactElement {
               <WishlistItemDialog
                 {...dialog}
                 wishlists={wishlists}
-                productId={productMock.id}
+                productId={product.entityId}
                 onSubmit={onSubmitDialog}
               />
             </div>
@@ -190,16 +146,16 @@ export function ProductPage(): React.ReactElement {
         <div css={styles.productDetailRow}>
           <Typography variant="display-small">Product Description</Typography>
           <Typography
-            dangerouslySetInnerHTML={{ __html: productMock.description }}
+            dangerouslySetInnerHTML={{ __html: product.description }}
           />
         </div>
         <div css={styles.productDetailRow}>
           <Typography variant="display-small">Specifications</Typography>
           <Typography
-            dangerouslySetInnerHTML={{ __html: productMock.description }}
+            dangerouslySetInnerHTML={{ __html: product.description }}
           />
         </div>
-        <div css={styles.productDetailRow}>
+        {/*         <div css={styles.productDetailRow}>
           <Typography variant="display-small">Reviews</Typography>
           <div css={styles.reviewList}>
             <ProductReview
@@ -233,9 +189,9 @@ export function ProductPage(): React.ReactElement {
               style={{ marginTop: 0 }}
             />
           </div>
-        </div>
+        </div> */}
       </div>
-      <Typography
+      {/*       <Typography
         variant="display"
         css={css`
           text-align: center;
@@ -245,10 +201,10 @@ export function ProductPage(): React.ReactElement {
         You might also enjoy
       </Typography>
       <div css={styles.relatedProducts}>
-        {products.map((product) => (
-          <ProductCard key={product.id} {...product} />
+        {products.map((relatedProduct) => (
+          <ProductCard key={relatedProduct.id} {...relatedProduct} />
         ))}
-      </div>
+      </div> */}
     </div>
   )
 }

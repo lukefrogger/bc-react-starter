@@ -20,6 +20,7 @@ import {
   countryHelper,
   getAddressHelper,
   getProductHelper,
+  getProductSingleHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
@@ -53,6 +54,7 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/customers/login', loginApi())

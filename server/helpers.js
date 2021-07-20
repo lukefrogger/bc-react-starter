@@ -7,6 +7,7 @@ import catalogProductsApi, {
 } from '@bigcommerce/storefront-data-hooks/api/catalog/products'
 import loginApiHandlers from '@bigcommerce/storefront-data-hooks/api/customers/handlers/login'
 import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
+import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 import axios from 'axios'
 import csc from 'country-state-city'
 
@@ -41,6 +42,15 @@ export const getProductHelper = async (req, res) => {
       },
     },
   })(req, res)
+}
+
+export const getProductSingleHelper = async (req, res) => {
+  const { productSlug: slug } = req.params || {}
+
+  const { product } = await getProduct({
+    variables: { slug },
+  })
+  return res.json(product)
 }
 
 export const cartHelper = async (req, res) => {

@@ -131,6 +131,7 @@ export function CategoryPage(): React.ReactElement {
                       url_standard:
                         product.node.images.edges?.[0]?.node.urlOriginal || '',
                     },
+                    productUrl: `/product${product.node.path}`,
                   })
                 )
                 .map((product) => (
