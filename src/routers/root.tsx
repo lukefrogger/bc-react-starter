@@ -1,9 +1,11 @@
 import * as React from 'react'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { useDialogState } from 'reakit/Dialog'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
+import { Modal } from '@components/modal'
 import { useBanners } from '@hooks/useBanners'
 import {
   CartPage,
@@ -20,6 +22,8 @@ import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
   const { banner, onBannerClose } = useBanners()
+  const quickViewModal = useDialogState()
+  const showQuickView = (productId: number): void => quickViewModal.toggle()
 
   return (
     <BrowserRouter>
@@ -28,7 +32,7 @@ export function RootRouter(): React.ReactElement {
         <Header />
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            <HomePage onQuickViewClick={showQuickView} />
           </Route>
           <Route exact path="/login">
             <LoginPage />
@@ -78,6 +82,9 @@ export function RootRouter(): React.ReactElement {
           </Route>
         </Switch>
         <Footer />
+        <Modal {...quickViewModal}>
+          <ProductPage isLimited />
+        </Modal>
       </div>
     </BrowserRouter>
   )
