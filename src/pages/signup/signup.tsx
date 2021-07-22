@@ -15,7 +15,7 @@ const createGetFieldProps =
     name: field,
     onChange: formik.handleChange,
     onBlur: formik.handleBlur,
-    error: formik.touched[field] && formik.errors[field],
+    error: formik.touched[field] ? formik.errors[field] : undefined,
     value: formik.values[field],
   })
 

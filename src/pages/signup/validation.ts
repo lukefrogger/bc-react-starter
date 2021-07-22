@@ -1,17 +1,23 @@
 import { TranslationFn } from 'unsafe-bc-react-components'
 
 export type SignupValues = {
-  firstName?: string
-  lastName?: string
-  email?: string
-  password?: string
-  confirmPassword?: string
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+  confirmPassword: string
 }
 
 export const createValidateFn =
   (t: TranslationFn) =>
   (values: SignupValues): SignupValues => {
-    const errors: SignupValues = {}
+    const errors: SignupValues = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    }
 
     if (!values.firstName) {
       errors.firstName = t('errors.first_name', 'First name is required')
