@@ -59,7 +59,7 @@ const Grid = styled.div`
   }
 `
 
-export function HomePage(): React.ReactElement {
+export function HomePage({ onQuickViewClick }: any): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
 
@@ -88,7 +88,8 @@ export function HomePage(): React.ReactElement {
             .map(
               (product): ProductCardProps => ({
                 brand: {
-                  name: product.node.brand?.name || '',
+                  name: 'test',
+                  // name: product.node.brand?.name || '',
                 },
                 product: {
                   condition: 'new',
@@ -103,6 +104,17 @@ export function HomePage(): React.ReactElement {
                     product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
                 productUrl: `/product${product.node.path}`,
+                buttons: [
+                  {
+                    onClick: console.log,
+                    children: 'Add to cart',
+                  },
+                  {
+                    onClick: () => onQuickViewClick(product.id),
+                    children: 'Quickview',
+                    variant: 'tertiary',
+                  },
+                ],
               })
             )
             .map((product) => (
