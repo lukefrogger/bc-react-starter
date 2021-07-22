@@ -2,21 +2,22 @@ import * as React from 'react'
 
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import useSignup from '@bigcommerce/storefront-data-hooks/use-signup'
-import { useFormik } from 'formik'
+import { FormikProps, useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
 import * as styles from './styles'
-import { createValidateFn } from './validation'
+import { createValidateFn, SignupValues } from './validation'
 
-const createGetFieldProps = (formik: any) => (field: string) => ({
-  name: field,
-  onChange: formik.handleChange,
-  onBlur: formik.handleBlur,
-  error: formik.touched[field] && formik.errors[field],
-  value: formik.values[field],
-})
+const createGetFieldProps =
+  (formik: FormikProps<SignupValues>) => (field: keyof SignupValues) => ({
+    name: field,
+    onChange: formik.handleChange,
+    onBlur: formik.handleBlur,
+    error: formik.touched[field] && formik.errors[field],
+    value: formik.values[field],
+  })
 
 export function SignupPage(): React.ReactElement {
   const { t } = useTranslation()
