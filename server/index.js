@@ -22,6 +22,7 @@ import {
   countryHelper,
   getAddressHelper,
   getProductHelper,
+  getProductSingleHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
@@ -55,16 +56,17 @@ app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
 app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
+app.use('/api/bigcommerce/customers/login', loginApi())
+app.use('/api/bigcommerce/customers/signup', signupApi())
+app.use('/api/bigcommerce/customers', customerApi())
 app.use(
   '/api/bigcommerce/wishlist/:wishlistId/items/:itemId',
   getWishlistsItemsHelper
 )
 app.use('/api/bigcommerce/wishlist/:wishlistId/items', getWishlistsItemsHelper)
-app.use('/api/bigcommerce/customers/login', loginApi())
-app.use('/api/bigcommerce/customers/signup', signupApi())
-app.use('/api/bigcommerce/customers', customerApi())
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use('/api/bigcommerce/orders/products', orderProductsApi())
