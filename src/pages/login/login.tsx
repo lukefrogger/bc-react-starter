@@ -48,7 +48,7 @@ export function LoginPage(): React.ReactElement {
       </Typography>
       <Typography css={styles.description} variant="body-small">
         {t('login.create_prompt_question', 'Don’t have an account yet?')}{' '}
-        <Link css={styles.link} to="/register">
+        <Link css={styles.link} to="/signup">
           {t('login.create_prompt_link', 'Create one')}
         </Link>
       </Typography>

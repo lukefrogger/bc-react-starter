@@ -11,6 +11,7 @@ import {
   HomePage,
   LoginPage,
   ProductPage,
+  SignupPage,
   WishListPage,
 } from '@pages'
 
@@ -31,6 +32,9 @@ export function RootRouter(): React.ReactElement {
           </Route>
           <Route exact path="/login">
             <LoginPage />
+          </Route>
+          <Route exact path="/signup">
+            <SignupPage />
           </Route>
           <Route exact path="/category/:categories">
             <CategoryPage />

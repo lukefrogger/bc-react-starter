@@ -12,8 +12,9 @@ import * as styles from './styles'
 export function AddressesPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
-  const { data, mutate } = useAddresses()
+  const { data, error, mutate } = useAddresses()
   const addresses = data?.addresses
+  const isLoading = !data && !error
 
   const handleAdd = (): void => history.push('/user/addresses/new')
   const handleEdit = (address: AddressType): void => {
@@ -40,7 +41,7 @@ export function AddressesPage(): React.ReactElement {
         {t('addresses.add', 'Add new address')}
       </Button>
       <div css={styles.Grid}>
-        {!addresses?.length && <div>{t('common.loading', 'Loading...')}</div>}
+        {isLoading && <div>{t('common.loading', 'Loading...')}</div>}
         {addresses?.map(
           (address: Address): React.ReactElement => (
             <Profile.AddressCard
