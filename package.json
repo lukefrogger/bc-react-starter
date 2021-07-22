@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "node -r esm -r dotenv/config server & node scripts/start.js",
+    "dev": "node scripts/start.js",
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
     "start": "node -r esm -r dotenv/config server",
