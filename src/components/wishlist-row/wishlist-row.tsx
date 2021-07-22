@@ -92,7 +92,7 @@ export function WishlistActions(
           variant="link"
           onClick={() =>
             navigator.clipboard.writeText(
-              `${window.location.origin}/wishlist/${wishlist.id}`
+              `${window.location.origin}/user/wishlists/${wishlist.id}`
             )
           }
         >
