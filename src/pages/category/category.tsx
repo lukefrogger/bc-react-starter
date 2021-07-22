@@ -52,7 +52,7 @@ const Meta = styled.div`
   justify-content: space-between;
 `
 
-export function CategoryPage(): React.ReactElement {
+export function CategoryPage({ onQuickViewClick }: any): React.ReactElement {
   const params = useParams<UseCategoryBody>()
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
@@ -132,6 +132,17 @@ export function CategoryPage(): React.ReactElement {
                         product.node.images.edges?.[0]?.node.urlOriginal || '',
                     },
                     productUrl: `/product${product.node.path}`,
+                    buttons: [
+                      {
+                        onClick: console.log,
+                        children: 'Add to cart',
+                      },
+                      {
+                        onClick: () => onQuickViewClick(product.node.path),
+                        children: 'Quickview',
+                        variant: 'tertiary',
+                      },
+                    ],
                   })
                 )
                 .map((product) => (

@@ -56,16 +56,16 @@ export function RootRouter(): React.ReactElement {
             <SignupPage />
           </Route>
           <Route exact path="/category/:categories">
-            <CategoryPage />
+            <CategoryPage onQuickViewClick={showQuickView} />
           </Route>
           <Route exact path="/category/:categories/:subCategories">
-            <CategoryPage />
+            <CategoryPage onQuickViewClick={showQuickView} />
           </Route>
           <Route
             exact
             path="/category/:categories/:subCategories/:subSubCategories"
           >
-            <CategoryPage />
+            <CategoryPage onQuickViewClick={showQuickView} />
           </Route>
           <Route path="/product/:slug">
             {({ match }) => match && <ProductPage slug={match?.params.slug} />}
