@@ -6,16 +6,21 @@ export const getWishlist = async ({ res, config, body }) => {
 
   const customerId =
     customerToken && (await getCustomerId({ customerToken, config }))
-  if (!customerId) {
-    return res.status(400).json({
-      data: null,
-      errors: [{ message: 'Invalid request' }],
-    })
-  }
 
   const { data: wishlist } = await config.storeApiFetch(
     `/v3/wishlists/${wishlistId}`
   )
+
+  const isGuest = customerId !== wishlist.customer_id
+
+  if (!wishlist.is_public && isGuest) {
+    return res.status(403).json({ data: null })
+  }
+
+  if (!wishlist) {
+    return res.status(404).json({ data: null })
+  }
+
   if (includeProducts && wishlist && wishlist.items.length) {
     const entityIds =
       wishlist.items &&
@@ -42,5 +47,5 @@ export const getWishlist = async ({ res, config, body }) => {
     }
   }
 
-  return res.status(200).json({ data: wishlist || null })
+  return res.status(200).json({ data: { ...wishlist, is_guest: isGuest } })
 }
