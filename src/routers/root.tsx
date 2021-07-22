@@ -11,6 +11,8 @@ import {
   HomePage,
   LoginPage,
   ProductPage,
+  SignupPage,
+  WishListPage,
 } from '@pages'
 
 import { LegalRouter } from './legal'
@@ -30,6 +32,9 @@ export function RootRouter(): React.ReactElement {
           </Route>
           <Route exact path="/login">
             <LoginPage />
+          </Route>
+          <Route exact path="/signup">
+            <SignupPage />
           </Route>
           <Route exact path="/category/:categories">
             <CategoryPage />
@@ -64,6 +69,9 @@ export function RootRouter(): React.ReactElement {
 
           <Route path="/legal">
             <LegalRouter />
+          </Route>
+          <Route exact path="/user/wishlists/:slug">
+            <WishListPage />
           </Route>
           <Route path="/user">
             <UserRouter />

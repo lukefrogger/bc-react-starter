@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useDialogState } from 'reakit/Dialog'
 import {
+  ProductCard,
   ProductRow,
   ProductRowProps,
   Typography,
 } from 'unsafe-bc-react-components'
+import { ProductCardProps } from 'unsafe-bc-react-components/dist/components/ui'
 
 import { WishlistActions, WishlistDialog, WishlistStatus } from '@components'
 import { useUpdateWishlist, useWishlist } from '@hooks'
@@ -26,6 +28,49 @@ export function WishListPage(): React.ReactElement {
   if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
   if (!wishlist) return <p>Not found</p>
   if (error) return <p>Error</p>
+
+  const { is_guest: isGuest } = wishlist
+  if (isGuest) {
+    return (
+      <div css={styles.container}>
+        <div css={styles.header}>
+          <span css={styles.titleWrapper}>
+            <Typography variant="display-large" css={styles.title}>
+              {wishlist.name}
+            </Typography>
+          </span>
+        </div>
+        <div css={styles.wrapperGuest}>
+          {wishlist.items
+            ?.map(
+              (product): ProductCardProps => ({
+                brand: {
+                  name: product.product?.brand?.name || '',
+                },
+                product: {
+                  condition: 'new',
+                  name: product.product?.name || '',
+                  price: product.product?.prices?.price.value,
+                  sale_price: product.product?.prices?.salePrice?.value || 0,
+                },
+                currencySettings: {},
+                image: {
+                  meta:
+                    product.product?.images?.edges?.[0]?.node?.altText || '',
+                  url_standard:
+                    product.product?.images?.edges?.[0]?.node.urlOriginal || '',
+                },
+                productUrl: `/product/${product.id}`,
+              })
+            )
+            .map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div css={styles.container}>
       <div css={styles.header}>

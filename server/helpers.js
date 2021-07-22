@@ -43,21 +43,6 @@ export const getProductHelper = async (req, res) => {
   })(req, res)
 }
 
-export const getLoginHelper = async (req, res) => {
-  const { email, password } = req.body
-
-  customersApi({
-    operations: {
-      login: ({ ...handler }) => {
-        loginApiHandlers({
-          ...handler,
-          body: { email, password },
-        })
-      },
-    },
-  })(req, res)
-}
-
 export const cartHelper = async (req, res) => {
   const [first, cartId, ...rest] = req.url.split('/')
   const handler = await cartApi.default()

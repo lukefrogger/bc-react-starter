@@ -2,11 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["@emotion/react/types/css-prop"],
+    "jsxImportSource": "@emotion/react",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -32,10 +30,8 @@
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@utils": ["src/utils"],
-      "@utils/*": ["src/utils/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
