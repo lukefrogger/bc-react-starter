@@ -5,6 +5,8 @@ import path from 'path'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
+import ordersApi from '@bigcommerce/storefront-data-hooks/api/orders'
+import orderProductsApi from '@bigcommerce/storefront-data-hooks/api/orders/products'
 import bodyParser from 'body-parser'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
@@ -67,7 +69,9 @@ app.use(
 app.use('/api/bigcommerce/wishlist/:wishlistId/items', getWishlistsItemsHelper)
 app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
 app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
-app.use('/api/bigcommerce/order/:orderId', getOrdersHelper)
+app.use('/api/bigcommerce/orders/products', orderProductsApi())
+app.use('/api/bigcommerce/orders/:orderId', getOrdersHelper)
+app.use('/api/bigcommerce/orders', ordersApi())
 app.use(
   '/api',
   proxy.createProxyMiddleware({

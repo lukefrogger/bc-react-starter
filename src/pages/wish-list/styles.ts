@@ -72,7 +72,7 @@ export const wrapperGuest = css`
   margin-top: 64px;
   margin-bottom: 64px;
   display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

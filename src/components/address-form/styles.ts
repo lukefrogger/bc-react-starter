@@ -13,8 +13,8 @@ export const FieldGrid = css`
   display: grid;
   row-gap: 40px;
 
-  @media (min-width: 768px) {
-    grid-template-columns: 376px 376px;
+  @media (min-width: 452px) {
+    grid-template-columns: minmax(210px, 376px) minmax(210px, 376px);
     column-gap: 32px;
   }
 `

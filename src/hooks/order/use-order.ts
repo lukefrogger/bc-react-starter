@@ -6,7 +6,7 @@ import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { SWRResponse } from 'swr'
 
 const defaultOpts = {
-  url: '/api/bigcommerce/order',
+  url: '/api/bigcommerce/orders',
   method: 'GET',
 }
 
