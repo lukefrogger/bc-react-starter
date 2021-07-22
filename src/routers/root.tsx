@@ -20,10 +20,25 @@ import {
 import { LegalRouter } from './legal'
 import { UserRouter } from './user'
 
+const useQuickView = (): any => {
+  const quickViewModal = useDialogState()
+  const [openedId, setOpenedId] = React.useState<string>()
+
+  const showQuickView = (slug: string): void => {
+    setOpenedId(slug.replaceAll('/', ''))
+    quickViewModal.toggle()
+  }
+
+  return {
+    showQuickView,
+    quickViewModal,
+    slug: openedId,
+  }
+}
+
 export function RootRouter(): React.ReactElement {
   const { banner, onBannerClose } = useBanners()
-  const quickViewModal = useDialogState()
-  const showQuickView = (productId: number): void => quickViewModal.toggle()
+  const { showQuickView, quickViewModal, slug } = useQuickView()
 
   return (
     <BrowserRouter>
@@ -53,7 +68,7 @@ export function RootRouter(): React.ReactElement {
             <CategoryPage />
           </Route>
           <Route path="/product/:slug">
-            <ProductPage />
+            {({ match }) => match && <ProductPage slug={match?.params.slug} />}
           </Route>
           <Route path="/cart">
             <CartPage />
@@ -83,7 +98,7 @@ export function RootRouter(): React.ReactElement {
         </Switch>
         <Footer />
         <Modal {...quickViewModal}>
-          <ProductPage isLimited />
+          <ProductPage slug={slug} isLimited />
         </Modal>
       </div>
     </BrowserRouter>

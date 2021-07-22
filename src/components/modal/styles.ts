@@ -6,11 +6,17 @@ export const Modal = css`
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  max-width: 1128px;
-  padding: 64px 0;
+  min-height: 40vh;
+  max-width: 95vw;
+  width: 100%;
+  padding: 64px 16px;
   z-index: 10;
   max-height: 90vh;
   overflow-y: auto;
+
+  @media (min-width: 1200px) {
+    max-width: 1128px;
+  }
 `
 
 export const Backdrop = css`

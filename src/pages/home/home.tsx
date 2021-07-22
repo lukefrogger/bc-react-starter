@@ -88,8 +88,7 @@ export function HomePage({ onQuickViewClick }: any): React.ReactElement {
             .map(
               (product): ProductCardProps => ({
                 brand: {
-                  name: 'test',
-                  // name: product.node.brand?.name || '',
+                  name: product.node.brand?.name || '',
                 },
                 product: {
                   condition: 'new',
@@ -110,7 +109,7 @@ export function HomePage({ onQuickViewClick }: any): React.ReactElement {
                     children: 'Add to cart',
                   },
                   {
-                    onClick: () => onQuickViewClick(product.id),
+                    onClick: () => onQuickViewClick(product.node.path),
                     children: 'Quickview',
                     variant: 'tertiary',
                   },
