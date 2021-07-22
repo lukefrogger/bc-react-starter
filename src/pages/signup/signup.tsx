@@ -10,6 +10,14 @@ import { Button, Field, Typography } from 'unsafe-bc-react-components'
 import * as styles from './styles'
 import { createValidateFn } from './validation'
 
+const createGetFieldProps = (formik: any) => (field: string) => ({
+  name: field,
+  onChange: formik.handleChange,
+  onBlur: formik.handleBlur,
+  error: formik.touched[field] && formik.errors[field],
+  value: formik.values[field],
+})
+
 export function SignupPage(): React.ReactElement {
   const { t } = useTranslation()
   const signup = useSignup()
@@ -39,6 +47,7 @@ export function SignupPage(): React.ReactElement {
       }
     },
   })
+  const getFieldProps = createGetFieldProps(formik)
 
   // Already authenticated
   if (customer) {
@@ -66,18 +75,12 @@ export function SignupPage(): React.ReactElement {
             <Field
               css={styles.Field}
               label={t('signup.first_name', 'First name')}
-              name="firstName"
-              onChange={formik.handleChange}
-              value={formik.values.firstName}
-              error={formik.errors.firstName}
+              {...getFieldProps('firstName')}
             />
             <Field
               css={styles.Field}
               label={t('signup.last_name', 'Last name')}
-              name="lastName"
-              onChange={formik.handleChange}
-              value={formik.values.lastName}
-              error={formik.errors.lastName}
+              {...getFieldProps('lastName')}
             />
           </div>
         </fieldset>
@@ -90,11 +93,8 @@ export function SignupPage(): React.ReactElement {
             <Field
               css={styles.Field}
               label={t('signup.email', 'Email address')}
-              name="email"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-              error={formik.errors.email}
               type="email"
+              {...getFieldProps('email')}
             />
           </div>
         </fieldset>
@@ -105,20 +105,14 @@ export function SignupPage(): React.ReactElement {
             <Field
               css={styles.Field}
               label={t('signup.password', 'Password')}
-              name="password"
               type="password"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-              error={formik.errors.password}
+              {...getFieldProps('password')}
             />
             <Field
               css={styles.Field}
               label={t('signup.password_confirm', 'Confirm password')}
-              name="confirmPassword"
               type="password"
-              onChange={formik.handleChange}
-              value={formik.values.confirmPassword}
-              error={formik.errors.confirmPassword}
+              {...getFieldProps('confirmPassword')}
             />
           </div>
         </fieldset>
