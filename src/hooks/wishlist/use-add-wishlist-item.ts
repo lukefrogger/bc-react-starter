@@ -1,14 +1,10 @@
 import { useCallback } from 'react'
 
-import type {
-  AddItemBody,
-  ItemBody,
-} from '@bigcommerce/storefront-data-hooks//api/wishlist'
+import type { ItemBody } from '@bigcommerce/storefront-data-hooks/api/wishlist'
 import { CommerceError } from '@bigcommerce/storefront-data-hooks/commerce/utils/errors'
 import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/types'
 import useAction from '@bigcommerce/storefront-data-hooks/commerce/utils/use-action'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
-import { Wishlist } from '@bigcommerce/storefront-data-hooks/wishlist/use-wishlist'
 
 import { useWishlists } from './use-wishlists'
 
@@ -17,11 +13,13 @@ const defaultOpts = {
   method: 'POST',
 }
 
-export type AddItemInput = ItemBody
+export type AddItemInput = ItemBody & {
+  wishlistId: number
+}
 
-export const fetcher: HookFetcher<Wishlist, AddItemBody> = (
+const fetcher: HookFetcher<null, AddItemInput> = (
   options,
-  { item },
+  { productId, variantId, wishlistId },
   fetch
 ) => {
   // TODO: add validations before doing the fetch
@@ -30,14 +28,14 @@ export const fetcher: HookFetcher<Wishlist, AddItemBody> = (
   return fetch({
     ...defaultOpts,
     ...options,
-    url: (options?.base || '') + url.pathname + url.search,
-    body: { item },
+    url: `${(options?.base || '') + url.pathname}/${wishlistId}/items`,
+    body: { item: { productId, variantId } },
   })
 }
 
-export const useAddWishlist = (): ((
+export const useAddWishlistItem = (): ((
   input: AddItemInput
-) => Promise<Wishlist>) => {
+) => Promise<null>) => {
   const { data: customer } = useCustomer()
   const { revalidate } = useWishlists()
   const fn = useAction(defaultOpts, fetcher)
@@ -51,7 +49,7 @@ export const useAddWishlist = (): ((
         })
       }
 
-      const data = await fn({ item: input })
+      const data = await fn(input)
       await revalidate()
       return data
     },

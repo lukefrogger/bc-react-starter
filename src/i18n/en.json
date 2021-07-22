@@ -23,6 +23,7 @@
     "btn": {
       "yes": "Yes",
       "no": "No",
+      "add": "Add",
       "delete": "Delete",
       "edit": "Edit",
       "share": "Share",
@@ -74,6 +75,7 @@
       "new": "New wish list",
       "create": "Create wish list",
       "edit": "Edit wish list",
+      "add": "Add to wish list",
       "public": "Public",
       "private": "Private",
       "item": "item",

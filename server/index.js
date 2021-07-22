@@ -15,6 +15,7 @@ import express from 'express'
 import * as proxy from 'http-proxy-middleware'
 import serveStatic from 'serve-static'
 
+import { getWishlistsItemsHelper } from './wishlist/items'
 import {
   cartHelper,
   categoriesHelper,
@@ -56,6 +57,11 @@ app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
+app.use(
+  '/api/bigcommerce/wishlist/:wishlistId/items/:itemId',
+  getWishlistsItemsHelper
+)
+app.use('/api/bigcommerce/wishlist/:wishlistId/items', getWishlistsItemsHelper)
 app.use('/api/bigcommerce/customers/login', loginApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())
 app.use('/api/bigcommerce/customers', customerApi())
