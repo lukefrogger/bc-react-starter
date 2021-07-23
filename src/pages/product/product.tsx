@@ -27,13 +27,15 @@ import {
 
 import * as styles from './styles'
 
+type ProductPageProps = {
+  slug: string
+  isLimited?: boolean
+}
+
 export function ProductPage({
   slug,
   isLimited,
-}: {
-  slug: string
-  isLimited?: boolean
-}): React.ReactElement {
+}: ProductPageProps): React.ReactElement {
   const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
