@@ -11,6 +11,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { useCategories, useSearch } from '@hooks'
+import { QuickViewShowFn } from '@hooks/use-quick-view'
 
 const HERO: HeroProps = {
   headline: {
@@ -59,7 +60,13 @@ const Grid = styled.div`
   }
 `
 
-export function HomePage({ onQuickViewClick }: any): React.ReactElement {
+type HomePageProps = {
+  onQuickViewClick: QuickViewShowFn
+}
+
+export function HomePage({
+  onQuickViewClick,
+}: HomePageProps): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
 
@@ -110,7 +117,7 @@ export function HomePage({ onQuickViewClick }: any): React.ReactElement {
                   },
                   {
                     onClick: () => onQuickViewClick(product.node.path),
-                    children: 'Quickview',
+                    children: 'Quick view',
                     variant: 'tertiary',
                   },
                 ],

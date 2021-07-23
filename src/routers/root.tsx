@@ -1,11 +1,11 @@
 import * as React from 'react'
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { useDialogState } from 'reakit/Dialog'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
 import { Modal } from '@components/modal'
+import { useQuickView } from '@hooks/use-quick-view'
 import { useBanners } from '@hooks/useBanners'
 import {
   CartPage,
@@ -20,25 +20,9 @@ import {
 import { LegalRouter } from './legal'
 import { UserRouter } from './user'
 
-const useQuickView = (): any => {
-  const quickViewModal = useDialogState()
-  const [openedId, setOpenedId] = React.useState<string>()
-
-  const showQuickView = (slug: string): void => {
-    setOpenedId(slug.replaceAll('/', ''))
-    quickViewModal.toggle()
-  }
-
-  return {
-    showQuickView,
-    quickViewModal,
-    slug: openedId,
-  }
-}
-
 export function RootRouter(): React.ReactElement {
   const { banner, onBannerClose } = useBanners()
-  const { showQuickView, quickViewModal, slug } = useQuickView()
+  const quickView = useQuickView()
 
   return (
     <BrowserRouter>
@@ -47,7 +31,7 @@ export function RootRouter(): React.ReactElement {
         <Header />
         <Switch>
           <Route exact path="/">
-            <HomePage onQuickViewClick={showQuickView} />
+            <HomePage onQuickViewClick={quickView.onShow} />
           </Route>
           <Route exact path="/login">
             <LoginPage />
@@ -56,16 +40,16 @@ export function RootRouter(): React.ReactElement {
             <SignupPage />
           </Route>
           <Route exact path="/category/:categories">
-            <CategoryPage onQuickViewClick={showQuickView} />
+            <CategoryPage onQuickViewClick={quickView.onShow} />
           </Route>
           <Route exact path="/category/:categories/:subCategories">
-            <CategoryPage onQuickViewClick={showQuickView} />
+            <CategoryPage onQuickViewClick={quickView.onShow} />
           </Route>
           <Route
             exact
             path="/category/:categories/:subCategories/:subSubCategories"
           >
-            <CategoryPage onQuickViewClick={showQuickView} />
+            <CategoryPage onQuickViewClick={quickView.onShow} />
           </Route>
           <Route path="/product/:slug">
             {({ match }) => match && <ProductPage slug={match?.params.slug} />}
@@ -97,8 +81,8 @@ export function RootRouter(): React.ReactElement {
           </Route>
         </Switch>
         <Footer />
-        <Modal {...quickViewModal}>
-          <ProductPage slug={slug} isLimited />
+        <Modal {...quickView.modal}>
+          {quickView?.slug && <ProductPage slug={quickView.slug} isLimited />}
         </Modal>
       </div>
     </BrowserRouter>

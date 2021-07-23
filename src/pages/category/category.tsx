@@ -13,6 +13,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
+import { QuickViewShowFn } from '@hooks/use-quick-view'
 
 const Container = styled.div`
   max-width: 1208px;
@@ -52,7 +53,13 @@ const Meta = styled.div`
   justify-content: space-between;
 `
 
-export function CategoryPage({ onQuickViewClick }: any): React.ReactElement {
+type CategoryPageProps = {
+  onQuickViewClick: QuickViewShowFn
+}
+
+export function CategoryPage({
+  onQuickViewClick,
+}: CategoryPageProps): React.ReactElement {
   const params = useParams<UseCategoryBody>()
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
@@ -139,7 +146,7 @@ export function CategoryPage({ onQuickViewClick }: any): React.ReactElement {
                       },
                       {
                         onClick: () => onQuickViewClick(product.node.path),
-                        children: 'Quickview',
+                        children: 'Quick view',
                         variant: 'tertiary',
                       },
                     ],

@@ -1,12 +1,15 @@
 import * as React from 'react'
 
-import { Dialog, DialogBackdrop } from 'reakit/Dialog'
+import { Dialog, DialogBackdrop, DialogProps } from 'reakit/Dialog'
 
 import { Close } from '@components/header/icons'
 
 import * as styles from './styles'
 
-export function Modal({ children, ...modalProps }: any): React.ReactElement {
+export function Modal({
+  children,
+  ...modalProps
+}: DialogProps): React.ReactElement {
   return (
     <DialogBackdrop {...modalProps} css={styles.Backdrop}>
       <Dialog {...modalProps} css={styles.Modal}>
