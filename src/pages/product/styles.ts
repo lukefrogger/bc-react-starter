@@ -8,31 +8,31 @@ export const container = css`
   padding: 0 var(--horizontal-spacing);
 `
 
-export const grid = css`
+export const grid = (isLimited?: boolean): ReturnType<typeof css> => css`
   --horizontal-setback: 104px;
-  padding-bottom: 48px;
+  padding-bottom: ${isLimited ? 0 : 48}px;
   @media (min-width: 1024px) {
     padding-left: var(--horizontal-setback);
     display: flex;
     column-gap: 40px;
     > * {
-      min-width: 480px;
+      min-width: ${isLimited ? 368 : 480}px;
     }
   }
 `
 
-export const image = css`
+export const image = (isLimited?: boolean): ReturnType<typeof css> => css`
   background-color: gainsboro;
   height: 340px;
   width: 100%;
   position: relative;
-  @media (min-width: 1024px) {
-    height: 584px;
-    width: 584px;
-  }
+
   margin-bottom: 20px;
   @media (min-width: 1024px) {
     margin-bottom: inherit;
+    height: ${isLimited ? 368 : 584}px;
+    width: ${isLimited ? 368 : 584}px;
+
     ::before {
       position: absolute;
       width: 84px;

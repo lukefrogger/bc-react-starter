@@ -13,14 +13,20 @@ import * as styles from './styles'
 type DialogProps = DialogStateReturn & {
   title?: string
   children?: React.ReactNode
+  className?: string
 }
 
 export function Dialog(props: DialogProps): React.ReactElement {
-  const { title, children, ...dialog } = props
+  const { title, children, className, ...dialog } = props
 
   return (
     <DialogBackdrop {...dialog} css={styles.backdrop}>
-      <ReakitDialog {...dialog} aria-label="Welcome" css={styles.dialog}>
+      <ReakitDialog
+        {...dialog}
+        aria-label="Welcome"
+        className={className}
+        css={styles.dialog}
+      >
         <div css={styles.header}>
           <Typography variant="display" css={styles.title}>
             {title}

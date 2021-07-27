@@ -49,7 +49,7 @@ export function RootRouter(): React.ReactElement {
             <CategoryPage />
           </Route>
           <Route path="/product/:slug">
-            <ProductPage />
+            {({ match }) => match && <ProductPage slug={match?.params.slug} />}
           </Route>
           <Route path="/cart">
             <CartPage />

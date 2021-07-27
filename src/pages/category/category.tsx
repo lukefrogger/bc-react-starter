@@ -13,6 +13,8 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
+import { useQuickView } from '@hooks/use-quick-view'
+import { ProductModal } from '@pages/product-modal'
 
 const Container = styled.div`
   max-width: 1208px;
@@ -54,6 +56,7 @@ const Meta = styled.div`
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
+  const quickView = useQuickView()
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
     categoryId: category?.id,
@@ -132,6 +135,17 @@ export function CategoryPage(): React.ReactElement {
                         product.node.images.edges?.[0]?.node.urlOriginal || '',
                     },
                     productUrl: `/product${product.node.path}`,
+                    buttons: [
+                      {
+                        onClick: console.log,
+                        children: 'Add to cart',
+                      },
+                      {
+                        onClick: () => quickView.onShow(product.node.path),
+                        children: 'Quick view',
+                        variant: 'tertiary',
+                      },
+                    ],
                   })
                 )
                 .map((product) => (
@@ -145,6 +159,8 @@ export function CategoryPage(): React.ReactElement {
           />
         </Content>
       </Main>
+
+      <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </Container>
   )
 }

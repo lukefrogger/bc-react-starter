@@ -11,6 +11,8 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { useCategories, useSearch } from '@hooks'
+import { useQuickView } from '@hooks/use-quick-view'
+import { ProductModal } from '@pages/product-modal'
 
 const HERO: HeroProps = {
   headline: {
@@ -62,6 +64,7 @@ const Grid = styled.div`
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
+  const quickView = useQuickView()
 
   return (
     <Container>
@@ -103,6 +106,17 @@ export function HomePage(): React.ReactElement {
                     product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
                 productUrl: `/product${product.node.path}`,
+                buttons: [
+                  {
+                    onClick: console.log,
+                    children: 'Add to cart',
+                  },
+                  {
+                    onClick: () => quickView.onShow(product.node.path),
+                    children: 'Quick view',
+                    variant: 'tertiary',
+                  },
+                ],
               })
             )
             .map((product) => (
@@ -110,6 +124,8 @@ export function HomePage(): React.ReactElement {
             ))}
         </Grid>
       </Main>
+
+      <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </Container>
   )
 }

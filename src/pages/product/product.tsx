@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 // import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
@@ -28,13 +27,20 @@ import {
 
 import * as styles from './styles'
 
-export function ProductPage(): React.ReactElement {
+type ProductPageProps = {
+  slug: string
+  isLimited?: boolean
+}
+
+export function ProductPage({
+  slug,
+  isLimited,
+}: ProductPageProps): React.ReactElement {
   const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
   const dialog = useDialogState()
-  const params = useParams<any>()
-  const { data: product } = useProduct(params.slug)
+  const { data: product } = useProduct(slug)
 
   const breadcrumbs = [
     { to: '/home', label: 'Home' },
@@ -78,18 +84,26 @@ export function ProductPage(): React.ReactElement {
     ])
     dialog.hide()
   }
+  const description = (
+    <Typography
+      variant="body-small"
+      dangerouslySetInnerHTML={{ __html: product.description }}
+    />
+  )
 
   return (
     <div css={styles.container}>
-      <Breadcrumbs>
-        {breadcrumbs.map((item) => (
-          <Breadcrumbs.Item key={item.to} to={item.to}>
-            {item.label}
-          </Breadcrumbs.Item>
-        ))}
-      </Breadcrumbs>
-      <div css={styles.grid}>
-        <div css={styles.image} />
+      {!isLimited && (
+        <Breadcrumbs>
+          {breadcrumbs.map((item) => (
+            <Breadcrumbs.Item key={item.to} to={item.to}>
+              {item.label}
+            </Breadcrumbs.Item>
+          ))}
+        </Breadcrumbs>
+      )}
+      <div css={styles.grid(isLimited)}>
+        <div css={styles.image(isLimited)} />
         <div css={styles.product}>
           <div css={styles.productDescription}>
             <Typography variant="overline">
@@ -97,10 +111,7 @@ export function ProductPage(): React.ReactElement {
             </Typography>
             <Typography variant="display">{product.name}</Typography>
             <ProductPrice price={21} salePrice={20} currencySettings={{}} />
-            <Typography
-              variant="body-small"
-              dangerouslySetInnerHTML={{ __html: product.description }}
-            />
+            {!isLimited && description}
             <div css={styles.starRow}>
               <StarRating
                 rating={4}
@@ -139,23 +150,25 @@ export function ProductPage(): React.ReactElement {
                 <Button>Add to Cart</Button>
               </div>
             </div>
+            {isLimited && description}
           </div>
         </div>
       </div>
-      <div css={styles.productDetail}>
-        <div css={styles.productDetailRow}>
-          <Typography variant="display-small">Product Description</Typography>
-          <Typography
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-        </div>
-        <div css={styles.productDetailRow}>
-          <Typography variant="display-small">Specifications</Typography>
-          <Typography
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-        </div>
-        {/*         <div css={styles.productDetailRow}>
+      {!isLimited && (
+        <div css={styles.productDetail}>
+          <div css={styles.productDetailRow}>
+            <Typography variant="display-small">Product Description</Typography>
+            <Typography
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            />
+          </div>
+          <div css={styles.productDetailRow}>
+            <Typography variant="display-small">Specifications</Typography>
+            <Typography
+              dangerouslySetInnerHTML={{ __html: product.description }}
+            />
+          </div>
+          {/*         <div css={styles.productDetailRow}>
           <Typography variant="display-small">Reviews</Typography>
           <div css={styles.reviewList}>
             <ProductReview
@@ -190,7 +203,8 @@ export function ProductPage(): React.ReactElement {
             />
           </div>
         </div> */}
-      </div>
+        </div>
+      )}
       {/*       <Typography
         variant="display"
         css={css`
