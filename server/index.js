@@ -4,6 +4,7 @@ import path from 'path'
 
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
+import logoutApi from '@bigcommerce/storefront-data-hooks/api/customers/logout'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
 import ordersApi from '@bigcommerce/storefront-data-hooks/api/orders'
 import orderProductsApi from '@bigcommerce/storefront-data-hooks/api/orders/products'
@@ -60,6 +61,7 @@ app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/customers/login', loginApi())
+app.use('/api/bigcommerce/customers/logout', logoutApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())
 app.use('/api/bigcommerce/customers', customerApi())
 app.use(
