@@ -4,8 +4,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
-import { Modal } from '@components/modal'
-import { useQuickView } from '@hooks/use-quick-view'
 import { useBanners } from '@hooks/useBanners'
 import {
   CartPage,
@@ -22,7 +20,6 @@ import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
   const { banner, onBannerClose } = useBanners()
-  const quickView = useQuickView()
 
   return (
     <BrowserRouter>
@@ -31,7 +28,7 @@ export function RootRouter(): React.ReactElement {
         <Header />
         <Switch>
           <Route exact path="/">
-            <HomePage onQuickViewClick={quickView.onShow} />
+            <HomePage />
           </Route>
           <Route exact path="/login">
             <LoginPage />
@@ -40,16 +37,16 @@ export function RootRouter(): React.ReactElement {
             <SignupPage />
           </Route>
           <Route exact path="/category/:categories">
-            <CategoryPage onQuickViewClick={quickView.onShow} />
+            <CategoryPage />
           </Route>
           <Route exact path="/category/:categories/:subCategories">
-            <CategoryPage onQuickViewClick={quickView.onShow} />
+            <CategoryPage />
           </Route>
           <Route
             exact
             path="/category/:categories/:subCategories/:subSubCategories"
           >
-            <CategoryPage onQuickViewClick={quickView.onShow} />
+            <CategoryPage />
           </Route>
           <Route path="/product/:slug">
             {({ match }) => match && <ProductPage slug={match?.params.slug} />}
@@ -81,9 +78,6 @@ export function RootRouter(): React.ReactElement {
           </Route>
         </Switch>
         <Footer />
-        <Modal {...quickView.modal}>
-          {quickView?.slug && <ProductPage slug={quickView.slug} isLimited />}
-        </Modal>
       </div>
     </BrowserRouter>
   )

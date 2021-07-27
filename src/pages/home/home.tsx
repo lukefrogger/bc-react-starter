@@ -11,7 +11,8 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { useCategories, useSearch } from '@hooks'
-import { QuickViewShowFn } from '@hooks/use-quick-view'
+import { useQuickView } from '@hooks/use-quick-view'
+import { ProductModal } from '@pages/product-modal'
 
 const HERO: HeroProps = {
   headline: {
@@ -60,15 +61,10 @@ const Grid = styled.div`
   }
 `
 
-type HomePageProps = {
-  onQuickViewClick: QuickViewShowFn
-}
-
-export function HomePage({
-  onQuickViewClick,
-}: HomePageProps): React.ReactElement {
+export function HomePage(): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
+  const quickView = useQuickView()
 
   return (
     <Container>
@@ -116,7 +112,7 @@ export function HomePage({
                     children: 'Add to cart',
                   },
                   {
-                    onClick: () => onQuickViewClick(product.node.path),
+                    onClick: () => quickView.onShow(product.node.path),
                     children: 'Quick view',
                     variant: 'tertiary',
                   },
@@ -128,6 +124,8 @@ export function HomePage({
             ))}
         </Grid>
       </Main>
+
+      <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </Container>
   )
 }

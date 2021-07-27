@@ -1,13 +1,13 @@
 import { useState } from 'react'
 
-import { DialogState, useDialogState } from 'reakit/Dialog'
+import { DialogStateReturn, useDialogState } from 'reakit/Dialog'
 
 export type QuickViewShowFn = (slug: string) => void
 
 type UseQuickView = {
   onShow: QuickViewShowFn
   slug?: string
-  modal: DialogState
+  modal: DialogStateReturn
 }
 
 export const useQuickView = (): UseQuickView => {
