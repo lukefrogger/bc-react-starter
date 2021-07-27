@@ -60,7 +60,6 @@ export function CategoryPage(): React.ReactElement {
   })
   const subcategories = category?.categories ?? []
   const brands = [] // TODO: Get brands
-  const fullWidth = true
 
   return (
     <Container>
