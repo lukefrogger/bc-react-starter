@@ -73,17 +73,17 @@ export const UserMenuMobile = ({
   onDialogHide: () => void
 }): React.ReactElement => {
   const { t } = useTranslation()
-  const [isMobileUserOpen, setMobileUserOpen] = React.useState(false)
+  const [isCollapsed, setCollapsed] = React.useState(true)
 
   return (
     <>
       {isLoggedIn ? (
         <Clickable
-          onClick={() => setMobileUserOpen(!isMobileUserOpen)}
+          onClick={() => setCollapsed(!isCollapsed)}
           css={styles.category}
         >
           <Icons.User />
-          <Icons.Arrow orientation={isMobileUserOpen ? 'up' : 'down'} />
+          <Icons.Arrow orientation={isCollapsed ? 'down' : 'up'} />
         </Clickable>
       ) : (
         <Link css={styles.category} to="/login" onClick={onDialogHide}>
@@ -91,7 +91,7 @@ export const UserMenuMobile = ({
         </Link>
       )}
 
-      {isMobileUserOpen && isLoggedIn && (
+      {!isCollapsed && isLoggedIn && (
         <>
           {submenuLinks.map((link) => (
             <Link key={link.labelKey} to={link.to} css={styles.userMenuItem}>
