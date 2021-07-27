@@ -19,6 +19,11 @@ export const UserMenuDesktop = ({
   const { t } = useTranslation()
   const userMenu = useMenuState()
 
+  const handleLogout = (): void => {
+    userMenu.hide()
+    onLogout()
+  }
+
   return (
     <>
       {isLoggedIn ? (
@@ -53,7 +58,7 @@ export const UserMenuDesktop = ({
           {...userMenu}
           as={Link}
           to="/"
-          onClick={onLogout}
+          onClick={handleLogout}
           css={styles.userMenuItem}
         >
           {t('btn.logout', 'Logout')}
