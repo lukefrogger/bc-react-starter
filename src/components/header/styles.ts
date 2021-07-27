@@ -157,37 +157,3 @@ export const desktopMenu = css`
   display: flex;
   gap: 16px;
 `
-
-export const userButton = css`
-  ${button};
-  width: 53px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-`
-
-export const userMenu = (theme: Theme): SerializedStyles => css`
-  padding: 2px 24px;
-  background: ${theme.colors['neutral-0']};
-  border: 2px solid ${theme.colors['neutral-15']};
-  margin-top: 25px;
-`
-
-export const userMenuItem = (theme: Theme): SerializedStyles => css`
-  display: block;
-  background: none;
-  border: none;
-  font-size: 19px;
-  text-decoration: none;
-  color: ${theme.colors['neutral-95']};
-  margin: 16px 0;
-  text-align: center;
-
-  &:hover {
-    color: ${theme.colors.primary};
-  }
-
-  ${theme.mq[2]} {
-    text-align: left;
-  }
-`
