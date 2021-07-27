@@ -25,6 +25,7 @@ BC_STARTER_SERVER_PORT=3030
 REACT_APP_API_ENDPOINT=http://localhost:3030/api
 REACT_APP_CART_ENDPOINT=http://localhost:3030/cart
 ```
+Copy the `.env.example` file and rename it `.env`. Update this file with relevent keys.
 
 A few notes:
 - `BIGCOMMERCE_STORE_API_TOKEN`, `BIGCOMMERCE_STORE_API_CLIENT_ID`, `BIGCOMMERCE_STORE_HASH`, `BIGCOMMERCE_STORE_API_URL`,
@@ -57,7 +58,7 @@ Make sure you don't commit the updated package.json.
 
 In the project directory, you can run:
 
-### `yarn dev``
+### `yarn dev`
 
 Runs the node server and the development server.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
