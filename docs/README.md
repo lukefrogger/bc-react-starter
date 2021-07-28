@@ -15,6 +15,7 @@ To get started using this theme with this theme, [follow the instructions here.]
 - How to change the CTA banner
 - How to change the Cart Page
 - How to change the Product Page
+- [How to add a new page](add-a-new-page.md)
 - Where to find
 -- Addresses
 -- Breadcrumbs
