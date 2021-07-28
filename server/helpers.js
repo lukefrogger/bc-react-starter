@@ -62,7 +62,7 @@ export const cartHelper = async (req, res) => {
 }
 
 export const countryHelper = (req, res) => {
-  const data = csc.default.getAllCountries().map((country) => {
+  const data = csc.getAllCountries().map((country) => {
     const { name, isoCode } = country
     return { name, sortname: name, id: isoCode }
   })
@@ -71,8 +71,8 @@ export const countryHelper = (req, res) => {
 }
 
 export const stateHelper = (req, res) => {
-  const [host, code] = req.url.split('/')
-  const states = csc.default.getStatesOfCountry(code)
+  const { code } = req.params
+  const states = csc.getStatesOfCountry(code)
 
   const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }))
   res.write(JSON.stringify(data))

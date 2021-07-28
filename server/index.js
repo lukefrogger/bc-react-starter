@@ -52,10 +52,10 @@ app.use(serveStatic(path.join(dirname, 'public')))
 
 // respond to all requests
 app.use('/cart-helper', cartHelper)
-app.use('/countries', countryHelper)
 app.use('/categories', categoriesHelper)
-app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
+app.use('/api/countries/:code/states', stateHelper)
+app.use('/api/countries', countryHelper)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
 app.use('/api/bigcommerce/catalog/products', getProductHelper)

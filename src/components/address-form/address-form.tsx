@@ -5,6 +5,9 @@ import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { Button, Field, FieldProps } from 'unsafe-bc-react-components'
 
+import { useCountries } from '@hooks/use-countries'
+import { useStates } from '@hooks/use-states'
+
 import * as styles from './styles'
 
 export const ADDRESS_INITIAL_VALUES = {
@@ -39,17 +42,32 @@ const renderField = ({
   </div>
 )
 
+const getCountryCodeByName = (countries: any, name: string): string =>
+  countries?.data?.find((country: any) => country.name === name)?.id
+
 export function AddressForm({
   onSubmit,
   initialValues = ADDRESS_INITIAL_VALUES,
 }: AddressFormProps): React.ReactElement {
   const { t } = useTranslation()
+  const [countryCode, setCountryCode] = React.useState<string>()
   const history = useHistory()
-
+  const { data: countries } = useCountries()
+  const { data: states } = useStates(
+    countryCode || getCountryCodeByName(countries, initialValues.country)
+  )
   const handleCancel = (e: React.FormEvent): void => {
     e.preventDefault()
     history.goBack()
   }
+
+  const handleCountryChange =
+    (props: FormikProps<AddressValues>) =>
+    (e: any): void => {
+      props.handleChange(e)
+      const code = getCountryCodeByName(countries, e.target.value)
+      setCountryCode(code)
+    }
 
   return (
     <Formik
@@ -114,24 +132,17 @@ export function AddressForm({
               />
               <FormikField
                 asType="select"
-                name="state_or_province"
-                label={t(`profile.fields.state`, 'State/country')}
+                name="country"
+                label={t(`profile.fields.country`, 'Country')}
                 component={renderField}
+                onChange={handleCountryChange(props)}
                 required
               >
-                {/* TODO: fetch countries and states */}
-                <option
-                  value="Michigan"
-                  selected={props.values.state_or_province === 'Michigan'}
-                >
-                  Michigan
-                </option>
-                <option
-                  value="Connecticut"
-                  selected={props.values.state_or_province === 'Connecticut'}
-                >
-                  Connecticut
-                </option>
+                {countries?.data?.map((country: any) => (
+                  <option key={country.id} value={country.name}>
+                    {country.name}
+                  </option>
+                ))}
               </FormikField>
               <FormikField
                 name="postal_code"
@@ -141,23 +152,16 @@ export function AddressForm({
               />
               <FormikField
                 asType="select"
-                name="country"
-                label={t(`profile.fields.country`, 'Country')}
+                name="state_or_province"
+                label={t(`profile.fields.state`, 'State/country')}
                 component={renderField}
                 required
               >
-                <option
-                  value="United States"
-                  selected={props.values.country === 'United States'}
-                >
-                  United States
-                </option>
-                <option
-                  value="Czech Republic"
-                  selected={props.values.country === 'Czech Republic'}
-                >
-                  Czech Republic
-                </option>
+                {states?.data?.map((state: any) => (
+                  <option key={state.id} value={state.name}>
+                    {state.name}
+                  </option>
+                ))}
               </FormikField>
             </div>
           </fieldset>
