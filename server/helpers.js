@@ -1,6 +1,3 @@
-import addressesApi, {
-  handlers as addressesApiHandlers,
-} from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
@@ -17,16 +14,6 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
     process.env.BIGCOMMERCE_STORE_API_CLIENT_ID
   )
   proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN)
-}
-
-export const getAddressHelper = async (req, res) => {
-  return addressesApi({
-    operations: {
-      getAddresses: (handler) => {
-        addressesApiHandlers.getAddresses(handler)
-      },
-    },
-  })(req, res)
 }
 
 export const getProductHelper = async (req, res) => {

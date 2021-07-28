@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Field as FormikField, Form, Formik, FormikProps } from 'formik'
+import { Form, Formik, FormikProps, useField } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { Button, Field, FieldProps } from 'unsafe-bc-react-components'
@@ -21,6 +21,7 @@ export const ADDRESS_INITIAL_VALUES = {
   state_or_province: '',
   postal_code: '',
   country: '',
+  country_code: '',
 }
 
 export type AddressValues = typeof ADDRESS_INITIAL_VALUES
@@ -30,20 +31,29 @@ type AddressFormProps = {
   initialValues?: AddressValues
 }
 
-const renderField = ({
-  field,
-  form,
+const FormikField = ({
   asType,
-  options,
   ...props
-}: any & FieldProps): React.ReactElement => (
-  <div>
-    <Field as={asType} {...field} {...props} />
-  </div>
-)
+}: any & FieldProps): React.ReactElement => {
+  const [field, meta] = useField(props)
+
+  return (
+    <div>
+      <Field
+        as={asType}
+        error={meta?.touched && meta?.error}
+        {...field}
+        {...props}
+      />
+    </div>
+  )
+}
 
 const getCountryCodeByName = (countries: any, name: string): string =>
   countries?.find((country: any) => country.name === name)?.id
+
+const required = (value: string): string | undefined =>
+  !value?.trim() ? 'This field is required' : undefined
 
 export function AddressForm({
   onSubmit,
@@ -64,6 +74,7 @@ export function AddressForm({
   const handleCountryChange =
     (props: FormikProps<AddressValues>) =>
     (e: any): void => {
+      props.setValues({ ...props.values, state_or_province: '' })
       props.handleChange(e)
       const code = getCountryCodeByName(countries, e.target.value)
       setCountryCode(code)
@@ -72,7 +83,9 @@ export function AddressForm({
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) =>
+        onSubmit({ ...values, country_code: countryCode ?? '' })
+      }
       enableReinitialize
     >
       {(props: FormikProps<AddressValues>) => (
@@ -85,25 +98,21 @@ export function AddressForm({
               <FormikField
                 name="first_name"
                 label={t(`profile.fields.firstName`, 'First name')}
-                component={renderField}
-                required
+                validate={required}
               />
               <FormikField
                 name="last_name"
                 label={t(`profile.fields.lastName`, 'Last name')}
-                component={renderField}
-                required
+                validate={required}
               />
               <FormikField
                 name="company"
                 label={t(`profile.fields.company`, 'Company')}
-                component={renderField}
               />
               <FormikField
                 name="phone"
                 label={t(`profile.fields.phone`, 'Phone')}
-                component={renderField}
-                required
+                validate={required}
               />
             </div>
           </fieldset>
@@ -116,28 +125,25 @@ export function AddressForm({
               <FormikField
                 name="address1"
                 label={t(`profile.fields.address1`, 'Address line 1')}
-                component={renderField}
-                required
+                validate={required}
               />
               <FormikField
                 name="address2"
                 label={t(`profile.fields.address2`, 'Address line 2')}
-                component={renderField}
               />
               <FormikField
                 name="city"
                 label={t(`profile.fields.city`, 'City/suburb')}
-                component={renderField}
-                required
+                validate={required}
               />
               <FormikField
                 asType="select"
                 name="country"
                 label={t(`profile.fields.country`, 'Country')}
-                component={renderField}
                 onChange={handleCountryChange(props)}
-                required
+                validate={required}
               >
+                <option selected>Select a country</option>
                 {countries?.map((country: any) => (
                   <option key={country.id} value={country.name}>
                     {country.name}
@@ -147,16 +153,16 @@ export function AddressForm({
               <FormikField
                 name="postal_code"
                 label={t(`profile.fields.zip`, 'Zip/postcode')}
-                component={renderField}
-                required
+                validate={required}
               />
               <FormikField
                 asType="select"
                 name="state_or_province"
                 label={t(`profile.fields.state`, 'State/country')}
-                component={renderField}
-                required={states?.length ? 1 : 0}
+                validate={states?.length ? required : null}
               >
+                <option selected>Select a state / country</option>
+
                 {states?.map((state: any) => (
                   <option key={state.id} value={state.name}>
                     {state.name}

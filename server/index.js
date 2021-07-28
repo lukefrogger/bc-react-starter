@@ -2,6 +2,7 @@ import fs from 'fs'
 import http from 'http'
 import path from 'path'
 
+import addressesApi from '@bigcommerce/storefront-data-hooks/api/address'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
@@ -20,7 +21,6 @@ import {
   cartHelper,
   categoriesHelper,
   countryHelper,
-  getAddressHelper,
   getProductHelper,
   getProductSingleHelper,
   onStoreProxyReq,
@@ -57,7 +57,7 @@ app.use('/product', getProductHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
-app.use('/api/bigcommerce/address', getAddressHelper)
+app.use('/api/bigcommerce/address', addressesApi())
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/customers/login', loginApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())

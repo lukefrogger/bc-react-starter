@@ -6,7 +6,7 @@ export function useStates(countryCode?: string): SWRResponse<any, Error> {
     `${process.env.REACT_APP_API_ENDPOINT}/api/countries/${countryCode}/states`,
     async (url): Promise<any> => {
       if (!countryCode) {
-        return {} as SWRResponse<any, Error>
+        return []
       }
 
       const { data } = await axios(url)
