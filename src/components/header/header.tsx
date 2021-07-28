@@ -30,7 +30,7 @@ export function Header(): React.ReactElement {
             {dialog.visible ? <Icons.Close /> : <Icons.Hamburger />}
           </DialogDisclosure>
           <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
-            {data?.map((category) => (
+            {data?.slice(0, 5).map((category) => (
               <HeaderItem
                 key={category.slug}
                 category={category}
@@ -38,6 +38,9 @@ export function Header(): React.ReactElement {
                 onClick={dialog.hide}
               />
             ))}
+            <Link css={styles.category} to="/search" onClick={dialog.hide}>
+              More Categories
+            </Link>
             <Link css={styles.category} to="/search" onClick={dialog.hide}>
               <Icons.Search />
             </Link>
@@ -58,9 +61,12 @@ export function Header(): React.ReactElement {
       </div>
       {!isMobile && (
         <div css={styles.desktopMenu}>
-          {data?.map((category) => (
+          {data?.slice(0, 5).map((category) => (
             <HeaderItem category={category} behaviour="popover" />
           ))}
+          <Link css={styles.category} to="/allcategories" onClick={dialog.hide}>
+            More Categories
+          </Link>
         </div>
       )}
       <div css={styles.section}>
