@@ -61,6 +61,8 @@ That's it! Now we need to get the router working.
 
 Go to `src/routers/root.tsx` and open this file.
 
+**NOTE** if you need to create a page that requires authentication to view, then please open: `src/routers/user.tsx` instead.
+
 The pages are imported at the top of the file. We need to add MyPage to the list of pages to be imported. Make sure the list remains in alphabetical order.
 
 ```js
