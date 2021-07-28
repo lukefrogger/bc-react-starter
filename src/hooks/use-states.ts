@@ -4,12 +4,13 @@ import useSWR, { SWRResponse } from 'swr'
 export function useStates(countryCode?: string): SWRResponse<any, Error> {
   return useSWR(
     `${process.env.REACT_APP_API_ENDPOINT}/api/countries/${countryCode}/states`,
-    (url): any => {
+    async (url): Promise<any> => {
       if (!countryCode) {
         return {} as SWRResponse<any, Error>
       }
 
-      return axios(url)
+      const { data } = await axios(url)
+      return data
     }
   )
 }

@@ -43,7 +43,7 @@ const renderField = ({
 )
 
 const getCountryCodeByName = (countries: any, name: string): string =>
-  countries?.data?.find((country: any) => country.name === name)?.id
+  countries?.find((country: any) => country.name === name)?.id
 
 export function AddressForm({
   onSubmit,
@@ -138,7 +138,7 @@ export function AddressForm({
                 onChange={handleCountryChange(props)}
                 required
               >
-                {countries?.data?.map((country: any) => (
+                {countries?.map((country: any) => (
                   <option key={country.id} value={country.name}>
                     {country.name}
                   </option>
@@ -155,9 +155,9 @@ export function AddressForm({
                 name="state_or_province"
                 label={t(`profile.fields.state`, 'State/country')}
                 component={renderField}
-                required
+                required={states?.length ? 1 : 0}
               >
-                {states?.data?.map((state: any) => (
+                {states?.map((state: any) => (
                   <option key={state.id} value={state.name}>
                     {state.name}
                   </option>

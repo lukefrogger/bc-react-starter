@@ -66,8 +66,7 @@ export const countryHelper = (req, res) => {
     const { name, isoCode } = country
     return { name, sortname: name, id: isoCode }
   })
-  res.write(JSON.stringify(data))
-  res.end()
+  res.json(data)
 }
 
 export const stateHelper = (req, res) => {
@@ -75,8 +74,7 @@ export const stateHelper = (req, res) => {
   const states = csc.getStatesOfCountry(code)
 
   const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }))
-  res.write(JSON.stringify(data))
-  res.end()
+  res.json(data)
 }
 
 export const categoriesHelper = async (req, res) => {
