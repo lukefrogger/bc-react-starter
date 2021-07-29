@@ -1,5 +1,8 @@
 import * as React from 'react'
 
+import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
+import useRemoveItem from '@bigcommerce/storefront-data-hooks/cart/use-remove-item'
+import useUpdateItem from '@bigcommerce/storefront-data-hooks/cart/use-update-item'
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import {
@@ -75,7 +78,50 @@ const PRODUCT: ProductRowProps = {
 
 const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
 
+type CartItemProps = ProductRowProps & {
+  product_id: number
+  variant_id?: number
+}
+function CartItem(product: CartItemProps): React.ReactElement {
+  const updateItem = useUpdateItem({
+    product_id: product.product_id,
+    variant_id: product.variant_id || 0,
+    id: product.id || '',
+    quantity: product.quantity.quantity || 1,
+  })
+
+  const removeItem = useRemoveItem()
+
+  return (
+    <ProductRow
+      {...product}
+      quantity={{
+        ...product.quantity,
+        onChangeQuantity: (newQuantity) => {
+          if (newQuantity < 1) {
+            removeItem({
+              id: product.id || '',
+            })
+          } else {
+            updateItem({
+              quantity: newQuantity,
+            })
+          }
+        },
+      }}
+      onDelete={() =>
+        removeItem({
+          id: product.id || '',
+        })
+      }
+    />
+  )
+}
+
 export function CartPage(): React.ReactElement {
+  const { data: cart, isEmpty } = useCart()
+  console.log('cart', cart)
+
   return (
     <Container>
       {
@@ -100,8 +146,23 @@ export function CartPage(): React.ReactElement {
       </Typography>
       <Grid>
         <ProductList>
-          {PRODUCTS.map((product) => (
-            <ProductRow {...product} />
+          {cart?.line_items?.physical_items.map((product) => (
+            <CartItem
+              {...product}
+              key={product.id}
+              image={{
+                src: product.image_url,
+              }}
+              name={product.name ?? ''}
+              prices={{
+                price: product.list_price || 0,
+                salePrice: product.sale_price || 0,
+                currencySettings: { currency: storeMock.currency },
+              }}
+              quantity={{
+                defaultQuantity: product.quantity ?? 0,
+              }}
+            />
           ))}
         </ProductList>
         <div>
@@ -110,24 +171,24 @@ export function CartPage(): React.ReactElement {
               {
                 label: 'Subtotal',
                 price: {
-                  price: 80,
+                  price: cart?.cart_amount || 0,
                   salePrice: 0,
                   currencySettings: {},
                 },
               },
-              {
-                label: 'Taxes',
+              /*               {
+                label: 'Taxes', // TODO: Show "Calculated at checkout"
                 price: {
                   price: 11,
                   salePrice: 0,
                   currencySettings: {},
                 },
-              },
+              }, */
             ]}
             total={{
               label: 'Total',
               price: {
-                price: 91,
+                price: cart?.cart_amount || 0,
                 salePrice: 0,
                 currencySettings: {},
               },

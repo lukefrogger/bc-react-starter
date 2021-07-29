@@ -2,6 +2,7 @@ import fs from 'fs'
 import http from 'http'
 import path from 'path'
 
+import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import signupApi from '@bigcommerce/storefront-data-hooks/api/customers/signup'
@@ -58,6 +59,7 @@ app.use('/country/', stateHelper)
 app.use('/product', getProductHelper)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/address', getAddressHelper)
+app.use('/api/bigcommerce/cart', cartApi())
 app.use('/api/bigcommerce/catalog/products', getProductHelper)
 app.use('/api/bigcommerce/customers/login', loginApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())
