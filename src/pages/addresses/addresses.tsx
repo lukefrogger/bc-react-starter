@@ -13,7 +13,7 @@ import * as styles from './styles'
 export function AddressesPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
-  const { data, error } = useAddresses()
+  const { data, error, revalidate } = useAddresses()
   const removeAddress = useRemoveAddress()
   const addresses = data?.addresses
   const isLoading = !data && !error
@@ -22,8 +22,9 @@ export function AddressesPage(): React.ReactElement {
   const handleEdit = (address: AddressType): void => {
     if (address?.id) history.push(`/user/addresses/${address?.id}`)
   }
-  const handleDelete = (address: AddressType): void => {
-    removeAddress(address)
+  const handleDelete = async (address: AddressType): Promise<void> => {
+    await removeAddress({ id: address.id })
+    revalidate()
   }
 
   return (

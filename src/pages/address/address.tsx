@@ -42,10 +42,10 @@ export function AddressPage(): React.ReactElement {
     (item: Address) => item.id === Number(slug)
   )
 
-  const handleSubmit = async (values: AddressValues): Promise<any> => {
+  const handleSubmit = async (values: AddressValues): Promise<void> => {
     if (!data?.addresses?.length) return Promise.resolve()
     await updateAddress(transformAddressForPayload(values, address as Address))
-    return history.push('/user/adresses')
+    return history.push('/user/addresses')
   }
 
   if (!address && error) {
