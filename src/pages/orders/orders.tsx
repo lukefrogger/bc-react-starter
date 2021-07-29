@@ -28,6 +28,9 @@ export function OrdersPage(): React.ReactElement {
       default:
     }
   }
+  const orderHistory = Array.isArray(orders) ? orders : [] // works for logged out users
+
+  if (isLoading) return <p>Loading...</p>
 
   return (
     <div css={styles.Container}>
@@ -35,17 +38,17 @@ export function OrdersPage(): React.ReactElement {
         {t('orders.title', 'Order history')}
       </Typography>
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        orders?.map((order) => (
-          <OrderRow
-            key={order.id}
-            order={order}
-            onOrderAction={handleOrderAction}
-          />
-        ))
+      {Array.isArray(orderHistory) && orderHistory.length === 0 && (
+        <p css={styles.NoOrders}>{t('orders.none', 'No previous orders')}</p>
       )}
+
+      {orders?.map((order) => (
+        <OrderRow
+          key={order.id}
+          order={order}
+          onOrderAction={handleOrderAction}
+        />
+      ))}
 
       <div css={styles.Pagination}>
         <Pagination />

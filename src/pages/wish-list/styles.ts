@@ -80,3 +80,6 @@ export const wrapperGuest = css`
     max-height: none !important;
   }
 `
+export const wishlistEmpty = css`
+  text-align: center;
+`

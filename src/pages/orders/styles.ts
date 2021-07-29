@@ -14,3 +14,7 @@ export const Title = css`
 export const Pagination = css`
   margin: 80px 0 60px;
 `
+
+export const NoOrders = css`
+  text-align: center;
+`
