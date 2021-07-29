@@ -18,7 +18,8 @@ export function OrdersPage(): React.ReactElement {
   const { data: orders, error } = useOrders()
   const { t } = useTranslation()
   const history = useHistory()
-  const isLoading = !orders && !error
+  const isLoading = typeof orders === 'undefined' && !error
+  const orderHistory = Array.isArray(orders) ? orders : []
 
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
@@ -28,9 +29,8 @@ export function OrdersPage(): React.ReactElement {
       default:
     }
   }
-  const orderHistory = Array.isArray(orders) ? orders : [] // works for logged out users
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <p css={styles.Loading}>Loading...</p>
 
   return (
     <div css={styles.Container}>
@@ -39,7 +39,7 @@ export function OrdersPage(): React.ReactElement {
       </Typography>
 
       {Array.isArray(orderHistory) && orderHistory.length === 0 && (
-        <p css={styles.NoOrders}>{t('orders.none', 'No previous orders')}</p>
+        <p css={styles.NoOrders}>{t('orders.none', 'No orders')}</p>
       )}
 
       {orders?.map((order) => (

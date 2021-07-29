@@ -18,3 +18,8 @@ export const Pagination = css`
 export const NoOrders = css`
   text-align: center;
 `
+
+export const Loading = css`
+  text-align: center;
+  margin: 10px;
+`
