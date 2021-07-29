@@ -70,7 +70,7 @@ export function Header(): React.ReactElement {
           </Link>
         )}
         <Link css={styles.button} to="/cart">
-          <span css={styles.badge}>{badge}</span>
+          {badge && <span css={styles.badge}>{badge}</span>}
           <Icons.Bag />
         </Link>
         {!isMobile && (
