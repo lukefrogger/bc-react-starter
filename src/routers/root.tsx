@@ -37,7 +37,7 @@ export function RootRouter(): React.ReactElement {
           <Route exact path="/signup">
             <SignupPage />
           </Route>
-          <Route exact path="/allcategories">
+          <Route exact path="/categories/all">
             <AllCategories />
           </Route>
           <Route exact path="/category/:categories">
