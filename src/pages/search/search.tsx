@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { Form, Formik, FormikProps } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
-import { Clickable, Tab, TabList, TabPanel, useTabState } from 'reakit'
+// import { Link } from 'react-router-dom'
+import { Clickable /* Tab, TabList, TabPanel, useTabState */ } from 'reakit'
 import {
   Field,
   Pagination,
@@ -32,10 +32,18 @@ type SearchValues = typeof INITIAL_VALUES
 
 export function SearchPage(): React.ReactElement {
   const { t } = useTranslation()
-  const tab = useTabState({ selectedId: 'products' })
-  const [search, setSearch] = React.useState<string>()
-  const { data, error } = useSearch({ search })
+  // const tab = useTabState({ selectedId: 'products' })
+  const [search, setSearch] = React.useState<{ search: string; page: number }>({
+    search: '',
+    page: 1,
+  })
+  const { data, error } = useSearch(search)
   const isLoading = !data && !error
+
+  const onPageChange: any = (_: unknown, page: number): void =>
+    setSearch({ ...search, page })
+  const onSubmit = (values: SearchValues): void =>
+    setSearch({ search: values.search, page: 1 })
 
   return (
     <div css={styles.Container}>
@@ -43,10 +51,7 @@ export function SearchPage(): React.ReactElement {
         {t('search.title', 'Search')}
       </Typography>
 
-      <Formik
-        initialValues={{ search: '' }}
-        onSubmit={(values: SearchValues) => setSearch(values.search)}
-      >
+      <Formik initialValues={{ search: '' }} onSubmit={onSubmit}>
         {(props: FormikProps<SearchValues>) => (
           <Form onSubmit={props.handleSubmit} css={styles.SearchBox}>
             <Field
@@ -61,7 +66,7 @@ export function SearchPage(): React.ReactElement {
           </Form>
         )}
       </Formik>
-
+      {/* DATA ONLY AVAILABLE FOR PRODUCTS NOW
       <TabList css={styles.Tabs} {...tab}>
         <Tab {...tab} css={styles.Tab} id="products">
           Products {data?.products?.length && `(${data?.products?.length})`}
@@ -78,11 +83,12 @@ export function SearchPage(): React.ReactElement {
         <Tab {...tab} css={styles.Tab}>
           Pages (21)
         </Tab>
-      </TabList>
+      </TabList> */}
 
       {isLoading && 'Loading...'}
 
-      <TabPanel {...tab} css={styles.ProductGrid}>
+      {/* <TabPanel {...tab} css={styles.ProductGrid}> */}
+      <div css={styles.ProductGrid}>
         {data?.products
           .map(
             (product): ProductCardProps => ({
@@ -107,8 +113,9 @@ export function SearchPage(): React.ReactElement {
           .map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
-      </TabPanel>
-      <TabPanel {...tab}>
+      </div>
+      {/* </TabPanel> */}
+      {/* <TabPanel {...tab}>
         {mockPosts.map(
           (post: typeof mockPosts[0]): React.ReactElement => (
             <article css={styles.Article} key={post.id}>
@@ -130,10 +137,10 @@ export function SearchPage(): React.ReactElement {
         )}
       </TabPanel>
       <TabPanel {...tab}>Galleries</TabPanel>
-      <TabPanel {...tab}>Pages</TabPanel>
+      <TabPanel {...tab}>Pages</TabPanel> */}
 
       <div css={styles.Pagination}>
-        <Pagination {...data?.pagination} />
+        <Pagination {...data?.pagination} onChange={onPageChange} />
       </div>
     </div>
   )
