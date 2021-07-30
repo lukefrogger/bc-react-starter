@@ -11,6 +11,7 @@ import {
   HomePage,
   LoginPage,
   ProductPage,
+  SearchPage,
   SignupPage,
   WishListPage,
 } from '@pages'
@@ -29,6 +30,9 @@ export function RootRouter(): React.ReactElement {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/search">
+            <SearchPage />
           </Route>
           <Route exact path="/login">
             <LoginPage />
