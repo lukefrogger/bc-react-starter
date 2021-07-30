@@ -6,6 +6,7 @@ To get started using this theme with this theme, [follow the instructions here.]
 
 - How to change the Logo
 - How to change Component Styles
+- How to use Translation Strings
 - How to set default images for products/categories
 - How to change the Menu
 - How to change the Breadcrumbs
