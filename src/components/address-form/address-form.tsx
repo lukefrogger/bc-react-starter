@@ -112,7 +112,6 @@ export function AddressForm({
               <FormikField
                 name="phone"
                 label={t(`profile.fields.phone`, 'Phone')}
-                validate={required}
               />
             </div>
           </fieldset>
