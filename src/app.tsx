@@ -4,11 +4,14 @@ import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 import { css, Global, ThemeProvider } from '@emotion/react'
 import emotionReset from 'emotion-reset'
 import { useTranslation } from 'react-i18next'
+import { ToastContainer } from 'react-toastify'
 import { CommerceComponentsProvider, theme } from 'unsafe-bc-react-components'
 
 import './i18n'
 
 import { RootRouter } from './routers'
+
+import 'react-toastify/dist/ReactToastify.min.css'
 
 export function App(): React.ReactElement {
   const { t } = useTranslation()
@@ -36,6 +39,7 @@ export function App(): React.ReactElement {
             `}
           />
           <RootRouter />
+          <ToastContainer />
         </CommerceComponentsProvider>
       </ThemeProvider>
     </CommerceProvider>

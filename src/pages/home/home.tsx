@@ -2,17 +2,13 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import {
-  Hero,
-  HeroProps,
-  ProductCard,
-  Props as ProductCardProps,
-  SideMenu,
-} from 'unsafe-bc-react-components'
+import { Hero, HeroProps, SideMenu } from 'unsafe-bc-react-components'
 
+import {
+  ProductCardWithButtons,
+  ProductCardWithButtonsProps,
+} from '@components'
 import { useCategories, useSearch } from '@hooks'
-import { useQuickView } from '@hooks/use-quick-view'
-import { ProductModal } from '@pages/product-modal'
 
 const HERO: HeroProps = {
   headline: {
@@ -64,7 +60,6 @@ const Grid = styled.div`
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
-  const quickView = useQuickView()
 
   return (
     <Container>
@@ -89,7 +84,7 @@ export function HomePage(): React.ReactElement {
         <Grid>
           {data?.products
             .map(
-              (product): ProductCardProps => ({
+              (product): ProductCardWithButtonsProps => ({
                 brand: {
                   name: product.node.brand?.name || '',
                 },
@@ -105,27 +100,17 @@ export function HomePage(): React.ReactElement {
                   url_standard:
                     product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
-                productUrl: `/product${product.node.path}`,
-                buttons: [
-                  {
-                    onClick: console.log,
-                    children: 'Add to cart',
-                  },
-                  {
-                    onClick: () => quickView.onShow(product.node.path),
-                    children: 'Quick view',
-                    variant: 'tertiary',
-                  },
-                ],
+                productUrl: `/product${product.node.path}`, // TODO: Integrate with react-router
+                productId: product.node.entityId,
+                variantId: product.node.variants?.edges[0].node.entityId, // TODO: Handle variant
+                path: product.node.path,
               })
             )
             .map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCardWithButtons key={product.id} {...product} />
             ))}
         </Grid>
       </Main>
-
-      <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </Container>
   )
 }

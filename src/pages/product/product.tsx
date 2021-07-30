@@ -1,6 +1,8 @@
 import * as React from 'react'
 
+import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
 // import { useTranslation } from 'react-i18next'
+import { toast } from 'react-toastify'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
@@ -41,6 +43,9 @@ export function ProductPage({
   const deleteWishlistItem = useDeleteWishlistItem()
   const dialog = useDialogState()
   const { data: product } = useProduct(slug)
+  const addItem = useAddItem()
+  const [quantity, setQuantity] = React.useState(1)
+  const [isAdding, setIsAdding] = React.useState(false)
 
   const breadcrumbs = [
     { to: '/home', label: 'Home' },
@@ -83,6 +88,23 @@ export function ProductPage({
       }),
     ])
     dialog.hide()
+  }
+
+  const addToCart = async (): Promise<void> => {
+    setIsAdding(true)
+    try {
+      await addItem({
+        productId: product.entityId,
+        variantId: product.variants?.edges[0].node.entityId, // TODO: Handle variant
+        quantity,
+        // TODO: Handle options
+      })
+      toast.success('Added to the cart')
+    } catch (e) {
+      toast.error('Error adding to the cart')
+    } finally {
+      setIsAdding(false)
+    }
   }
   const description = (
     <Typography
@@ -146,8 +168,13 @@ export function ProductPage({
             <div>
               <Typography variant="display-xx-small">QUANTITY</Typography>
               <div css={styles.row}>
-                <QuantitySelector defaultQuantity={1} />
-                <Button>Add to Cart</Button>
+                <QuantitySelector
+                  defaultQuantity={quantity}
+                  onChangeQuantity={setQuantity}
+                />
+                <Button onClick={addToCart} disabled={isAdding}>
+                  Add to Cart
+                </Button>
               </div>
             </div>
             {isLimited && description}

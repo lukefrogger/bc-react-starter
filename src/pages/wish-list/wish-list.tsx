@@ -11,7 +11,13 @@ import {
 } from 'unsafe-bc-react-components'
 import { ProductCardProps } from 'unsafe-bc-react-components/dist/components/ui'
 
-import { WishlistActions, WishlistDialog, WishlistStatus } from '@components'
+import {
+  ProductCardWithButtons,
+  ProductCardWithButtonsProps,
+  WishlistActions,
+  WishlistDialog,
+  WishlistStatus,
+} from '@components'
 import { useUpdateWishlist, useWishlist } from '@hooks'
 
 import * as styles from './styles'
@@ -43,7 +49,7 @@ export function WishListPage(): React.ReactElement {
         <div css={styles.wrapperGuest}>
           {wishlist.items
             ?.map(
-              (product): ProductCardProps => ({
+              (product): ProductCardWithButtonsProps => ({
                 brand: {
                   name: product.product?.brand?.name || '',
                 },
@@ -61,10 +67,13 @@ export function WishListPage(): React.ReactElement {
                     product.product?.images?.edges?.[0]?.node.urlOriginal || '',
                 },
                 productUrl: `/product/${product.id}`,
+                productId: product.product.entityId,
+                variantId: product.product.variants?.edges[0].node.entityId, // TODO: Handle variant
+                path: product.product.path,
               })
             )
             .map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCardWithButtons key={product.id} {...product} />
             ))}
         </div>
       </div>
