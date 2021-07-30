@@ -36,6 +36,15 @@ export function App(): React.ReactElement {
               body {
                 ${theme?.typography?.body as any}
               }
+              .Toastify__toast-container {
+                ${theme?.typography?.body as any}
+              }
+              .Toastify__toast--success {
+                background-color: ${theme?.colors?.success as any};
+              }
+              .Toastify__toast--error {
+                background-color: ${theme?.colors?.danger as any};
+              }
             `}
           />
           <RootRouter />

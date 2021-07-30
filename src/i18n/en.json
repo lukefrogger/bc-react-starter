@@ -2,6 +2,10 @@
   "hero": {
     "headline": "Headline in the Hero"
   },
+  "breadcrumbs": {
+    "home": "Home",
+    "category": "Category"
+  },
   "submenu": {
     "profile": "Profile",
     "orders": "Order history",
@@ -58,7 +62,16 @@
     },
     "cart": {
       "empty": "Please add some items to your cart.",
-      "checkout": "Checkout"
+      "checkout": "Checkout",
+      "added": "Product added to your cart",
+      "error_adding": "Error adding to cart",
+      "add_to_cart": "Add to Cart"
+    },
+    "product": {
+      "color": "COLOR",
+      "quantity": "QUANTITY",
+      "description": "Product Description",
+      "specifications": "Specifications"
     },
     "search": {
       "search": "Search"

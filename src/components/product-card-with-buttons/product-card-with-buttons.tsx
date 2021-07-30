@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import {
   ProductCard,
@@ -20,9 +21,12 @@ export function ProductCardWithButtons(
   props: ProductCardWithButtonsProps
 ): React.ReactElement {
   const { productId, variantId, path, ...rest } = props
+
+  const { t } = useTranslation()
   const quickView = useQuickView()
   const addItem = useAddItem()
   const [isAdding, setIsAdding] = React.useState(false)
+
   const addToCart = async (): Promise<void> => {
     setIsAdding(true)
     try {
@@ -30,9 +34,13 @@ export function ProductCardWithButtons(
         productId,
         variantId, // TODO: Handle variant
       })
-      toast.success('Added to the cart')
+      toast.success(t('bc.cart.added', 'Added to cart'), {
+        position: 'bottom-right',
+      })
     } catch (e) {
-      toast.error('Error adding to the cart')
+      toast.error(t('bc.cart.error_adding', 'Error adding to cart'), {
+        position: 'bottom-right',
+      })
     } finally {
       setIsAdding(false)
     }

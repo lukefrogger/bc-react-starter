@@ -1,17 +1,15 @@
 import * as React from 'react'
 
 import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
-  // ProductCard,
   ProductPrice,
   // ProductReview,
-  // Props as ProductCardProps,
   QuantitySelector,
-  StarRating,
+  // StarRating,
   Typography,
 } from 'unsafe-bc-react-components'
 
@@ -38,6 +36,8 @@ export function ProductPage({
   slug,
   isLimited,
 }: ProductPageProps): React.ReactElement {
+  const { t } = useTranslation()
+
   const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
@@ -48,8 +48,8 @@ export function ProductPage({
   const [isAdding, setIsAdding] = React.useState(false)
 
   const breadcrumbs = [
-    { to: '/home', label: 'Home' },
-    { to: '/category', label: 'Category' },
+    { to: '/home', label: t('breadcrumbs.home', 'Home') },
+    { to: '/category', label: t('breadcrumbs.category', 'Category') }, // FIXME: Link to the product category
     { label: product?.name },
   ]
 
@@ -99,9 +99,13 @@ export function ProductPage({
         quantity,
         // TODO: Handle options
       })
-      toast.success('Added to the cart')
+      toast.success(t('bc.cart.added', 'Added to cart'), {
+        position: 'bottom-right',
+      })
     } catch (e) {
-      toast.error('Error adding to the cart')
+      toast.error(t('bc.cart.error_adding', 'Error adding to cart'), {
+        position: 'bottom-right',
+      })
     } finally {
       setIsAdding(false)
     }
@@ -134,13 +138,13 @@ export function ProductPage({
             <Typography variant="display">{product.name}</Typography>
             <ProductPrice price={21} salePrice={20} currencySettings={{}} />
             {!isLimited && description}
-            <div css={styles.starRow}>
+            {/*             <div css={styles.starRow}>
               <StarRating
                 rating={4}
                 style={{ marginTop: 0, marginBottom: 0 }}
               />
               <Typography variant="body-small">2 reviews</Typography>
-            </div>
+            </div> */}
             <div>
               <DialogDisclosure {...dialog} css={styles.link}>
                 Add to wishlist
@@ -155,7 +159,9 @@ export function ProductPage({
           </div>
           <div css={styles.productOptions}>
             <div>
-              <Typography variant="display-xx-small">COLOR</Typography>
+              <Typography variant="display-xx-small">
+                {t('bc.product.color', 'COLOR')}
+              </Typography>
               <div css={styles.row}>
                 {
                   // TODO: Add selected state
@@ -166,14 +172,16 @@ export function ProductPage({
               </div>
             </div>
             <div>
-              <Typography variant="display-xx-small">QUANTITY</Typography>
+              <Typography variant="display-xx-small">
+                {t('bc.product.quantity', 'QUANTITY')}
+              </Typography>
               <div css={styles.row}>
                 <QuantitySelector
                   defaultQuantity={quantity}
                   onChangeQuantity={setQuantity}
                 />
                 <Button onClick={addToCart} disabled={isAdding}>
-                  Add to Cart
+                  {t('bc.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
             </div>
@@ -184,15 +192,19 @@ export function ProductPage({
       {!isLimited && (
         <div css={styles.productDetail}>
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Product Description</Typography>
+            <Typography variant="display-small">
+              {t('bc.product.description', 'Description')}
+            </Typography>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </div>
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Specifications</Typography>
+            <Typography variant="display-small">
+              {t('bc.product.specifications', 'Specifications')}
+            </Typography>
             <Typography
-              dangerouslySetInnerHTML={{ __html: product.description }}
+              dangerouslySetInnerHTML={{ __html: product.description }} // TODO: Change to specifications
             />
           </div>
           {/*         <div css={styles.productDetailRow}>

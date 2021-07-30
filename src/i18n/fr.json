@@ -2,6 +2,10 @@
   "hero": {
     "headline": "Le Headline Oui"
   },
+  "breadcrumbs": {
+    "home": "Home",
+    "category": "Catégorie"
+  },
   "submenu": {
     "profile": "Profil",
     "orders": "Historique des commandes",
@@ -58,7 +62,16 @@
     },
     "cart": {
       "empty": "S’il vous plaît ajouter quelques éléments à votre panier.",
-      "checkout": "Caisse"
+      "checkout": "Caisse",
+      "added": "Produit ajouté à votre panier",
+      "error_adding": "Erreur lors de l'ajout au panier",
+      "add_to_cart": "Ajouter au panier"
+    },
+    "product": {
+      "color": "COULEUR",
+      "quantity": "QUANTITÉ",
+      "description": "Description du produit",
+      "specifications": "Caractéristiques"
     },
     "search": {
       "search": "Rechercher"
