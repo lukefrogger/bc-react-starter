@@ -10,14 +10,8 @@ export type SignupValues = {
 
 export const createValidateFn =
   (t: TranslationFn) =>
-  (values: SignupValues): SignupValues => {
-    const errors: SignupValues = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    }
+  (values: SignupValues): Partial<SignupValues> => {
+    const errors: Partial<SignupValues> = {}
 
     if (!values.firstName) {
       errors.firstName = t('errors.first_name', 'First name is required')
