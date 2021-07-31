@@ -8,7 +8,7 @@ export const container = css`
   align-items: center;
   z-index: 20;
   > * {
-    :first-child {
+    :first-of-type {
       margin-left: -8px;
       margin-right: 8px;
       flex: 1;

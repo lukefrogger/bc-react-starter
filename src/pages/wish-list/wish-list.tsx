@@ -4,12 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useDialogState } from 'reakit/Dialog'
 import {
-  ProductCard,
   ProductRow,
   ProductRowProps,
   Typography,
 } from 'unsafe-bc-react-components'
-import { ProductCardProps } from 'unsafe-bc-react-components/dist/components/ui'
 
 import {
   ProductCardWithButtons,
@@ -73,7 +71,7 @@ export function WishListPage(): React.ReactElement {
               })
             )
             .map((product) => (
-              <ProductCardWithButtons key={product.id} {...product} />
+              <ProductCardWithButtons key={product.productId} {...product} />
             ))}
         </div>
       </div>

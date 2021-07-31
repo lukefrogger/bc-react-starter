@@ -141,7 +141,10 @@ export function CategoryPage(): React.ReactElement {
                   })
                 )
                 .map((product) => (
-                  <ProductCardWithButtons key={product.id} {...product} />
+                  <ProductCardWithButtons
+                    key={product.productId}
+                    {...product}
+                  />
                 ))}
           </Grid>
           <Pagination

@@ -59,7 +59,11 @@ export function Header(): React.ReactElement {
       {!isMobile && (
         <div css={styles.desktopMenu}>
           {data?.map((category) => (
-            <HeaderItem category={category} behaviour="popover" />
+            <HeaderItem
+              category={category}
+              behaviour="popover"
+              key={category.id}
+            />
           ))}
         </div>
       )}

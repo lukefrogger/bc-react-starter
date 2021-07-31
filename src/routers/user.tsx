@@ -12,7 +12,6 @@ import {
   OrderPage,
   OrdersPage,
   ProfilePage,
-  WishListPage,
   WishListsPage,
 } from '@pages'
 

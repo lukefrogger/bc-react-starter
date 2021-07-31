@@ -13,7 +13,6 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
 
 const Container = styled.div`
@@ -59,25 +58,6 @@ const Feature = styled.div`
   gap: 16px;
 `
 
-const PRODUCT: ProductRowProps = {
-  name: productMock.name,
-  variant: 'Blue',
-  quantity: {
-    defaultQuantity: 1,
-  },
-  prices: {
-    currencySettings: { currency: storeMock.currency },
-    price: 23,
-    salePrice: 0,
-  },
-  image: {
-    src: productMock.image_src,
-    alt: productMock.image_alt,
-  },
-}
-
-const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
-
 type CartItemProps = ProductRowProps & {
   product_id: number
   variant_id?: number
@@ -119,8 +99,7 @@ function CartItem(product: CartItemProps): React.ReactElement {
 }
 
 export function CartPage(): React.ReactElement {
-  const { data: cart, isEmpty } = useCart()
-  console.log('cart', cart)
+  const { data: cart } = useCart()
 
   return (
     <Container>

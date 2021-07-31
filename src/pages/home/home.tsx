@@ -107,7 +107,7 @@ export function HomePage(): React.ReactElement {
               })
             )
             .map((product) => (
-              <ProductCardWithButtons key={product.id} {...product} />
+              <ProductCardWithButtons {...product} key={product.productId} />
             ))}
         </Grid>
       </Main>
