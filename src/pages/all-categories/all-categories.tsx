@@ -35,6 +35,7 @@ const Main = styled.div`
 
 export function AllCategories(): React.ReactElement {
   const { data } = useCategories()
+  console.log(data)
 
   return (
     <Container>
@@ -50,10 +51,11 @@ export function AllCategories(): React.ReactElement {
       <Main>
         {data?.map((category) => (
           <Card
-            variant="medium"
+            variant="mediumCard"
             name={category.label}
             imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80" // TODO: Replace this image
             css={styles.Card}
+            url={`/category${category.slug}`}
           />
         ))}
       </Main>
