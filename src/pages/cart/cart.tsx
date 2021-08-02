@@ -1,62 +1,15 @@
 import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
-import useRemoveItem from '@bigcommerce/storefront-data-hooks/cart/use-remove-item'
-import useUpdateItem from '@bigcommerce/storefront-data-hooks/cart/use-update-item'
 import { css } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
-import {
-  Button,
-  Pricing,
-  ProductRow,
-  ProductRowProps,
-  Typography,
-} from 'unsafe-bc-react-components'
+import { Button, Pricing, Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
 
 import storeMock from '../../__mocks__/data/store_config.json'
+import { CartItem } from './cart__item'
 import * as styles from './styles'
-
-type CartItemProps = ProductRowProps & {
-  product_id: number
-  variant_id?: number
-}
-function CartItem(product: CartItemProps): React.ReactElement {
-  const updateItem = useUpdateItem({
-    product_id: product.product_id,
-    variant_id: product.variant_id || 0,
-    id: product.id || '',
-    quantity: product.quantity.quantity || 1,
-  })
-
-  const removeItem = useRemoveItem()
-
-  return (
-    <ProductRow
-      {...product}
-      quantity={{
-        ...product.quantity,
-        onChangeQuantity: (newQuantity) => {
-          if (newQuantity < 1) {
-            removeItem({
-              id: product.id || '',
-            })
-          } else {
-            updateItem({
-              quantity: newQuantity,
-            })
-          }
-        },
-      }}
-      onDelete={() =>
-        removeItem({
-          id: product.id || '',
-        })
-      }
-    />
-  )
-}
 
 export function CartPage(): React.ReactElement {
   const { data: cart } = useCart()
