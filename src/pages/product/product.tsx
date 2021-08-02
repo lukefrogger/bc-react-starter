@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
-import { getCurrentVariant, getProductOptions } from '@utils'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
@@ -25,6 +24,7 @@ import {
   useProduct,
   useWishlists,
 } from '@hooks'
+import { getCurrentVariant, getProductOptions } from '@utils'
 
 import * as styles from './styles'
 
