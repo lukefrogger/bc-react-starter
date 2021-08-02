@@ -4,6 +4,7 @@
   },
   "breadcrumbs": {
     "home": "Home",
+    "cart": "Cart",
     "category": "Category"
   },
   "submenu": {
@@ -22,6 +23,12 @@
     "contact_us": "Contact us",
     "powered_by": "Powered by WordPress",
     "rights": "© All rights reserved, Modern Tribe"
+  },
+  "features": {
+    "secure": "100% Secure",
+    "fast": "Fast shipping",
+    "easy": "Easy returns",
+    "safe": "Safely packaged"
   },
   "bc": {
     "btn": {
@@ -65,7 +72,11 @@
       "checkout": "Checkout",
       "added": "Product added to your cart",
       "error_adding": "Error adding to cart",
-      "add_to_cart": "Add to Cart"
+      "add_to_cart": "Add to Cart",
+      "your_order": "Your order",
+      "subtotal": "Subtotal",
+      "total": "Total",
+      "proceed": "Proceed to checkout"
     },
     "product": {
       "color": "COLOR",

@@ -53,7 +53,7 @@ export function ProductPage({
   const variant = getCurrentVariant(product, choices)
 
   const breadcrumbs = [
-    { to: '/home', label: t('breadcrumbs.home', 'Home') },
+    { to: '/', label: t('breadcrumbs.home', 'Home') },
     { to: '/category', label: t('breadcrumbs.category', 'Category') }, // FIXME: Link to the product category
     { label: product?.name },
   ]

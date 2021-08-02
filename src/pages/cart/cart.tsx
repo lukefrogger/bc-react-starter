@@ -4,6 +4,7 @@ import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import useRemoveItem from '@bigcommerce/storefront-data-hooks/cart/use-remove-item'
 import useUpdateItem from '@bigcommerce/storefront-data-hooks/cart/use-update-item'
 import { css } from '@emotion/react'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   Pricing,
@@ -11,6 +12,8 @@ import {
   ProductRowProps,
   Typography,
 } from 'unsafe-bc-react-components'
+
+import { Breadcrumbs } from '@components'
 
 import storeMock from '../../__mocks__/data/store_config.json'
 import * as styles from './styles'
@@ -57,28 +60,25 @@ function CartItem(product: CartItemProps): React.ReactElement {
 
 export function CartPage(): React.ReactElement {
   const { data: cart } = useCart()
+  const { t } = useTranslation()
 
   return (
     <div css={styles.Container}>
-      {
-        // TODO: Add Breadcrumbs
-      }
-      <Typography
-        variant="body-small"
-        css={css`
-          padding-top: 32px;
-        `}
-      >
-        Home / Cart
-      </Typography>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">
+          {t('breadcrumbs.home', 'Home')}
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item>{t('breadcrumbs.cart', 'Cart')}</Breadcrumbs.Item>
+      </Breadcrumbs>
       <Typography
         as="h1"
         variant="display-xx-small"
         css={css`
-          padding: 32px 0 24px;
+          padding: 0 0 24px;
+          text-transform: uppercase;
         `}
       >
-        YOUR ORDER
+        {t('bc.cart.your_order', 'Your order')}
       </Typography>
       <div css={styles.Grid}>
         <div css={styles.ProductList}>
@@ -106,7 +106,7 @@ export function CartPage(): React.ReactElement {
           <Pricing
             items={[
               {
-                label: 'Subtotal',
+                label: t('bc.cart.subtotal', 'Subtotal'),
                 price: {
                   price: cart?.cart_amount || 0,
                   salePrice: 0,
@@ -123,7 +123,7 @@ export function CartPage(): React.ReactElement {
               }, */
             ]}
             total={{
-              label: 'Total',
+              label: t('bc.cart.total', 'Total'),
               price: {
                 price: cart?.cart_amount || 0,
                 salePrice: 0,
@@ -132,7 +132,7 @@ export function CartPage(): React.ReactElement {
             }}
           />
           <Button style={{ width: '100%', marginTop: 48 }}>
-            Proceed to checkout
+            {t('bc.cart.proceed', 'Proceed')}
           </Button>
         </div>
       </div>
@@ -155,7 +155,7 @@ export function CartPage(): React.ReactElement {
             />
           </svg>
           <Typography as="span" variant="overline">
-            100% secure
+            {t('features.secure', 'Secure')}
           </Typography>
         </div>
         <div css={styles.Feature}>
@@ -175,7 +175,7 @@ export function CartPage(): React.ReactElement {
             />
           </svg>
           <Typography as="span" variant="overline">
-            Fast shipping
+            {t('features.fast', 'Fast')}
           </Typography>
         </div>
         <div css={styles.Feature}>
@@ -195,7 +195,7 @@ export function CartPage(): React.ReactElement {
             />
           </svg>
           <Typography as="span" variant="overline">
-            Easy returns
+            {t('features.easy', 'Easy')}
           </Typography>
         </div>
         <div css={styles.Feature}>
@@ -222,7 +222,7 @@ export function CartPage(): React.ReactElement {
             />
           </svg>
           <Typography as="span" variant="overline">
-            Safely packaged
+            {t('features.safe', 'Safe')}
           </Typography>
         </div>
       </div>
