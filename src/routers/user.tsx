@@ -20,7 +20,7 @@ type SubmenuLink = {
   labelKey: string
 }
 
-const submenuLinks: SubmenuLink[] = [
+export const submenuLinks: SubmenuLink[] = [
   { to: '/user/profile', labelKey: 'submenu.profile' },
   { to: '/user/orders', labelKey: 'submenu.orders' },
   { to: '/user/addresses', labelKey: 'submenu.addresses' },

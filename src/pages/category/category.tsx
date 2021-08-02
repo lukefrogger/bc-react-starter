@@ -61,6 +61,8 @@ export function CategoryPage(): React.ReactElement {
   const { data: search } = useSearch({
     categoryId: category?.id,
   })
+  const subcategories = category?.categories ?? []
+  const brands = [] // TODO: Get brands
 
   return (
     <Container>
@@ -82,27 +84,33 @@ export function CategoryPage(): React.ReactElement {
         `}
       />
       <Main>
-        <SideMenu
-          css={css`
-            min-width: 240px;
-            @media (max-width: 1023px) {
-              display: none;
-            }
-          `}
-        >
-          <SideMenu.Level title="Subcategories">
-            {category?.categories?.map((subcategory) => (
-              <SideMenu.Item key={subcategory.id}>
-                {subcategory.label}
-              </SideMenu.Item>
-            ))}
-          </SideMenu.Level>
-          <SideMenu.Level title="Brand">
-            {
-              // TODO: Get brands
-            }
-          </SideMenu.Level>
-        </SideMenu>
+        {subcategories.length > 0 || brands.length > 0 ? (
+          <SideMenu
+            css={css`
+              min-width: 240px;
+              @media (max-width: 1023px) {
+                display: none;
+              }
+            `}
+          >
+            {subcategories.length > 0 && (
+              <SideMenu.Level title="Subcategories">
+                {subcategories.map((subcategory) => (
+                  <SideMenu.Item key={subcategory.id}>
+                    {subcategory.label}
+                  </SideMenu.Item>
+                ))}
+              </SideMenu.Level>
+            )}
+            {brands.length > 0 && (
+              <SideMenu.Level title="Brand">
+                {
+                  // TODO: Get brands
+                }
+              </SideMenu.Level>
+            )}
+          </SideMenu>
+        ) : null}
 
         <Content>
           <Meta>

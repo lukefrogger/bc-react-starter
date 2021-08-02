@@ -1,9 +1,10 @@
 import * as React from 'react'
 
 import useAddresses from '@bigcommerce/storefront-data-hooks/address/use-addresses'
+import useUpdateAddress from '@bigcommerce/storefront-data-hooks/address/use-update-address'
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
 import { useTranslation } from 'react-i18next'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { Typography } from 'unsafe-bc-react-components'
 
 import {
@@ -33,24 +34,18 @@ const transformAddressForPayload = (
 export function AddressPage(): React.ReactElement {
   const { t } = useTranslation()
   const { slug }: { slug: string } = useParams()
-  const { data, mutate, error } = useAddresses()
+  const { data, error } = useAddresses()
+  const updateAddress = useUpdateAddress()
+  const history = useHistory()
 
   const address = data?.addresses?.find(
     (item: Address) => item.id === Number(slug)
   )
 
-  const handleSubmit = (values: AddressValues): Promise<any> => {
+  const handleSubmit = async (values: AddressValues): Promise<void> => {
     if (!data?.addresses?.length) return Promise.resolve()
-
-    return mutate(
-      {
-        ...data,
-        addresses: data.addresses.concat(
-          transformAddressForPayload(values, address as Address)
-        ),
-      },
-      false
-    )
+    await updateAddress(transformAddressForPayload(values, address as Address))
+    return history.push('/user/addresses')
   }
 
   if (!address && error) {

@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import useAddresses from '@bigcommerce/storefront-data-hooks/address/use-addresses'
+import useRemoveAddress from '@bigcommerce/storefront-data-hooks/address/use-remove-address'
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -12,7 +13,8 @@ import * as styles from './styles'
 export function AddressesPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
-  const { data, error, mutate } = useAddresses()
+  const { data, error, revalidate } = useAddresses()
+  const removeAddress = useRemoveAddress()
   const addresses = data?.addresses
   const isLoading = !data && !error
 
@@ -20,16 +22,9 @@ export function AddressesPage(): React.ReactElement {
   const handleEdit = (address: AddressType): void => {
     if (address?.id) history.push(`/user/addresses/${address?.id}`)
   }
-  const handleDelete = (address: AddressType): void => {
-    if (!addresses?.length) return
-
-    mutate(
-      {
-        pagination: data?.pagination as any,
-        addresses: addresses.filter((item) => item?.id !== address?.id),
-      },
-      false
-    )
+  const handleDelete = async (address: AddressType): Promise<void> => {
+    await removeAddress({ id: address.id })
+    revalidate()
   }
 
   return (
