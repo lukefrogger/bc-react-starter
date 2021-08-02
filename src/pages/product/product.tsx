@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
+import { getCurrentVariant, getProductOptions } from '@utils'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'react-toastify'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
@@ -46,6 +47,10 @@ export function ProductPage({
   const addItem = useAddItem()
   const [quantity, setQuantity] = React.useState(1)
   const [isAdding, setIsAdding] = React.useState(false)
+
+  const options = getProductOptions(product)
+  const [choices, setChoices] = React.useState<any>({})
+  const variant = getCurrentVariant(product, choices)
 
   const breadcrumbs = [
     { to: '/home', label: t('breadcrumbs.home', 'Home') },
@@ -95,9 +100,8 @@ export function ProductPage({
     try {
       await addItem({
         productId: product.entityId,
-        variantId: product.variants?.edges[0].node.entityId, // TODO: Handle variant
+        variantId: variant?.node.entityId,
         quantity,
-        // TODO: Handle options
       })
       toast.success(t('bc.cart.added', 'Added to cart'), {
         position: 'bottom-right',
@@ -136,7 +140,11 @@ export function ProductPage({
               {product.brand?.name.toUpperCase()}
             </Typography>
             <Typography variant="display">{product.name}</Typography>
-            <ProductPrice price={21} salePrice={20} currencySettings={{}} />
+            <ProductPrice
+              price={product.prices.basePrice.value}
+              salePrice={product.prices.salePrice?.value || 0}
+              currencySettings={{}}
+            />
             {!isLimited && description}
             {/*             <div css={styles.starRow}>
               <StarRating
@@ -158,19 +166,35 @@ export function ProductPage({
             </div>
           </div>
           <div css={styles.productOptions}>
-            <div>
-              <Typography variant="display-xx-small">
-                {t('bc.product.color', 'COLOR')}
-              </Typography>
-              <div css={styles.row}>
-                {
-                  // TODO: Add selected state
-                }
-                <Button variant="selector">Red</Button>
-                <Button variant="selector">Holo</Button>
-                <Button variant="selector">Rainbow</Button>
+            {options?.map((opt: any) => (
+              <div key={opt.displayName}>
+                <Typography variant="display-xx-small">
+                  {opt.displayName.toUpperCase()}
+                </Typography>
+                <div css={styles.row}>
+                  {
+                    // TODO: Add selected state
+                  }
+                  {opt.values.map((v: any, i: number) => {
+                    const active = (choices as any)[opt.displayName]
+                    return (
+                      <Button
+                        variant={v.label === active ? 'secondary' : 'tertiary'}
+                        key={v.label}
+                        onClick={() => {
+                          setChoices({
+                            ...choices,
+                            [opt.displayName]: v.label,
+                          })
+                        }}
+                      >
+                        {v.label}
+                      </Button>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
+            ))}
             <div>
               <Typography variant="display-xx-small">
                 {t('bc.product.quantity', 'QUANTITY')}
