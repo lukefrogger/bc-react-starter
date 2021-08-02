@@ -7,6 +7,11 @@ export const Container = css`
   padding: 0 var(--horizontal-spacing);
 `
 
+export const Title = css`
+  padding: 0 0 24px;
+  text-transform: uppercase;
+`
+
 export const Grid = css`
   @media (min-width: 1024px) {
     display: flex;

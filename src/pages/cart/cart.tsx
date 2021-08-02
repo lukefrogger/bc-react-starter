@@ -23,14 +23,7 @@ export function CartPage(): React.ReactElement {
         </Breadcrumbs.Item>
         <Breadcrumbs.Item>{t('breadcrumbs.cart', 'Cart')}</Breadcrumbs.Item>
       </Breadcrumbs>
-      <Typography
-        as="h1"
-        variant="display-xx-small"
-        css={css`
-          padding: 0 0 24px;
-          text-transform: uppercase;
-        `}
-      >
+      <Typography as="h1" variant="display-xx-small" css={styles.Title}>
         {t('bc.cart.your_order', 'Your order')}
       </Typography>
       <div css={styles.Grid}>
