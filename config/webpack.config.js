@@ -338,6 +338,7 @@ module.exports = function (webpackEnv) {
         '@components': path.resolve(__dirname, '../src/components/'),
         '@config': path.resolve(__dirname, '../src/config/'),
         '@hooks': path.resolve(__dirname, '../src/hooks/'),
+        '@icons': path.resolve(__dirname, '../src/icons/'),
         '@pages': path.resolve(__dirname, '../src/pages/'),
         '@utils': path.resolve(__dirname, '../src/utils/'),
       },
