@@ -54,7 +54,7 @@ export function WishListPage(): React.ReactElement {
                 product: {
                   condition: 'new',
                   name: product.product?.name || '',
-                  price: product.product?.prices?.price.value,
+                  price: product.product?.prices?.basePrice.value,
                   sale_price: product.product?.prices?.salePrice?.value || 0,
                 },
                 currencySettings: {},

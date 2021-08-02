@@ -125,7 +125,7 @@ export function CategoryPage(): React.ReactElement {
                     product: {
                       condition: 'new',
                       name: product.node.name,
-                      price: product.node.prices?.price.value,
+                      price: product.node.prices?.basePrice.value,
                       sale_price: product.node.prices?.salePrice?.value || 0,
                     },
                     currencySettings: {},

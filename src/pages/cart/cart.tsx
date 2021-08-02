@@ -93,7 +93,7 @@ export function CartPage(): React.ReactElement {
               name={product.name ?? ''}
               prices={{
                 price: product.list_price || 0,
-                salePrice: product.sale_price || 0,
+                salePrice: 0,
                 currencySettings: { currency: storeMock.currency },
               }}
               quantity={{
