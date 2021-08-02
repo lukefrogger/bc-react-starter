@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
-import { css } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import { Button, Pricing, Typography } from 'unsafe-bc-react-components'
 
