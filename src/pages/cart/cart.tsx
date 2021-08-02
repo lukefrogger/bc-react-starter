@@ -8,7 +8,6 @@ import { Button, Pricing, Typography } from 'unsafe-bc-react-components'
 import { Breadcrumbs } from '@components'
 import { PackageIcon, ReturnsIcon, SecureIcon, ShippingIcon } from '@icons'
 
-import storeMock from '../../__mocks__/data/store_config.json'
 import { CartItem } from './cart__item'
 import * as styles from './styles'
 
@@ -48,7 +47,7 @@ export function CartPage(): React.ReactElement {
               prices={{
                 price: product.list_price || 0,
                 salePrice: 0,
-                currencySettings: { currency: storeMock.currency },
+                currencySettings: { currency: cart.currency.code },
               }}
               quantity={{
                 defaultQuantity: product.quantity ?? 0,

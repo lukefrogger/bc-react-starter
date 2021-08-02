@@ -15,7 +15,6 @@ import {
 import { Arrow } from '@components/header/icons'
 import { useOrder } from '@hooks/order'
 
-import storeMock from '../../__mocks__/data/store_config.json'
 import * as styles from './styles'
 
 export function OrderPage(): React.ReactElement {
@@ -79,7 +78,7 @@ export function OrderPage(): React.ReactElement {
                   prices={{
                     price: Number(product.total_inc_tax) ?? 0,
                     salePrice: 0,
-                    currencySettings: { currency: storeMock.currency },
+                    currencySettings: { currency: order?.currency_code },
                   }}
                   quantity={{ quantity: product.quantity ?? 5 }}
                   editable={false}
