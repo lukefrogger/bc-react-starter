@@ -4,7 +4,6 @@ import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import useRemoveItem from '@bigcommerce/storefront-data-hooks/cart/use-remove-item'
 import useUpdateItem from '@bigcommerce/storefront-data-hooks/cart/use-update-item'
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import {
   Button,
   Pricing,
@@ -14,49 +13,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import storeMock from '../../__mocks__/data/store_config.json'
-
-const Container = styled.div`
-  --horizontal-spacing: 24px;
-  max-width: calc(1208px + (var(--horizontal-spacing) * 2));
-  margin: 0 auto;
-  padding: 0 var(--horizontal-spacing);
-`
-
-const Grid = styled.div`
-  @media (min-width: 1024px) {
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 10%;
-    > * {
-      min-width: 320px;
-    }
-  }
-`
-
-const ProductList = styled.div`
-  margin-bottom: 48px;
-  flex: 1;
-  @media (min-width: 1024px) {
-    margin-bottom: inherit;
-  }
-`
-
-const Features = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
-  grid-gap: 2rem;
-  align-items: center;
-  padding: 48px 0;
-  @media (min-width: 768px) {
-    padding: 80px 0;
-  }
-`
-
-const Feature = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 16px;
-`
+import * as styles from './styles'
 
 type CartItemProps = ProductRowProps & {
   product_id: number
@@ -102,7 +59,7 @@ export function CartPage(): React.ReactElement {
   const { data: cart } = useCart()
 
   return (
-    <Container>
+    <div css={styles.Container}>
       {
         // TODO: Add Breadcrumbs
       }
@@ -123,8 +80,8 @@ export function CartPage(): React.ReactElement {
       >
         YOUR ORDER
       </Typography>
-      <Grid>
-        <ProductList>
+      <div css={styles.Grid}>
+        <div css={styles.ProductList}>
           {cart?.line_items?.physical_items.map((product) => (
             <CartItem
               {...product}
@@ -143,7 +100,7 @@ export function CartPage(): React.ReactElement {
               }}
             />
           ))}
-        </ProductList>
+        </div>
         <div>
           <Pricing
             items={[
@@ -177,9 +134,9 @@ export function CartPage(): React.ReactElement {
             Proceed to checkout
           </Button>
         </div>
-      </Grid>
-      <Features>
-        <Feature>
+      </div>
+      <div css={styles.Features}>
+        <div css={styles.Feature}>
           <svg width={38} height={45} viewBox="0 0 38 45" fill="none">
             <path
               d="M27 22H11v10h16V22zM15 22v-6a4.012 4.012 0 014-4v0a4.012 4.012 0 014 4v6"
@@ -199,8 +156,8 @@ export function CartPage(): React.ReactElement {
           <Typography as="span" variant="overline">
             100% secure
           </Typography>
-        </Feature>
-        <Feature>
+        </div>
+        <div css={styles.Feature}>
           <svg width={47} height={35} viewBox="0 0 47 35" fill="none">
             <path
               d="M37.5 27.5h8v-12l-6-2-4-12h-18v26h8"
@@ -219,8 +176,8 @@ export function CartPage(): React.ReactElement {
           <Typography as="span" variant="overline">
             Fast shipping
           </Typography>
-        </Feature>
-        <Feature>
+        </div>
+        <div css={styles.Feature}>
           <svg width={40} height={38} viewBox="0 0 40 38" fill="none">
             <path
               d="M37.815 25.982H13.49A12.49 12.49 0 0113.49 1h12.49"
@@ -239,8 +196,8 @@ export function CartPage(): React.ReactElement {
           <Typography as="span" variant="overline">
             Easy returns
           </Typography>
-        </Feature>
-        <Feature>
+        </div>
+        <div css={styles.Feature}>
           <svg width={37} height={37} viewBox="0 0 37 37" fill="none">
             <path
               d="M1 8.954h35"
@@ -266,8 +223,8 @@ export function CartPage(): React.ReactElement {
           <Typography as="span" variant="overline">
             Safely packaged
           </Typography>
-        </Feature>
-      </Features>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
