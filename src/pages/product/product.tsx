@@ -69,7 +69,7 @@ export function ProductPage({
         addWishlistItem({
           wishlistId: addition.wishlistId,
           productId: product?.entityId || 0, // TODO: Solve this
-          variantId: product?.variants?.edges?.[0]?.node?.entityId || 0, // FIXME: It's not the first variant
+          variantId: variant?.node.entityId,
         })
       ),
       ...deletions.map((deletion) => {
@@ -173,7 +173,7 @@ export function ProductPage({
                 </Typography>
                 <div css={styles.row}>
                   {
-                    // TODO: Add selected state
+                    // TODO: Improve legibility
                   }
                   {opt.values.map((v: any, i: number) => {
                     const active = (choices as any)[opt.displayName]

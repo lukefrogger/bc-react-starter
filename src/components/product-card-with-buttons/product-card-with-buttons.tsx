@@ -32,7 +32,7 @@ export function ProductCardWithButtons(
     try {
       await addItem({
         productId,
-        variantId, // TODO: Handle variant
+        variantId,
       })
       toast.success(t('bc.cart.added', 'Added to cart'), {
         position: 'bottom-right',
