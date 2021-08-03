@@ -141,9 +141,11 @@ export function ProductPage({
             </Typography>
             <Typography variant="display">{product.name}</Typography>
             <ProductPrice
-              price={product.prices.basePrice.value}
-              salePrice={product.prices.salePrice?.value || 0}
-              currencySettings={{}}
+              price={variant.node.prices.basePrice.value}
+              salePrice={variant.node.prices.salePrice?.value || 0}
+              currencySettings={{
+                currency: variant.node.prices.basePrice.code,
+              }}
             />
             {!isLimited && description}
             {/*             <div css={styles.starRow}>
