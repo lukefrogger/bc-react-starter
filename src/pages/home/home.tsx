@@ -91,7 +91,7 @@ export function HomePage(): React.ReactElement {
                 product: {
                   condition: 'new',
                   name: product.node.name,
-                  price: product.node.prices?.basePrice.value,
+                  price: product.node.prices?.basePrice?.value,
                   sale_price: product.node.prices?.salePrice?.value || 0,
                 },
                 currencySettings: {},
@@ -102,7 +102,7 @@ export function HomePage(): React.ReactElement {
                 },
                 productUrl: `/product${product.node.path}`, // TODO: Integrate with react-router
                 productId: product.node.entityId,
-                variantId: product.node.variants?.edges[0].node.entityId, // TODO: Handle variant
+                variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
                 path: product.node.path,
               })
             )
