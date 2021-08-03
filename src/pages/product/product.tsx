@@ -1,8 +1,6 @@
 import * as React from 'react'
 
-import useAddItem from '@bigcommerce/storefront-data-hooks/cart/use-add-item'
 import { useTranslation } from 'react-i18next'
-import { toast } from 'react-toastify'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
@@ -19,6 +17,7 @@ import {
   WishlistItemDialogValues,
 } from '@components'
 import {
+  useAddCartItem,
   useAddWishlistItem,
   useDeleteWishlistItem,
   useProduct,
@@ -44,13 +43,18 @@ export function ProductPage({
   const deleteWishlistItem = useDeleteWishlistItem()
   const dialog = useDialogState()
   const { data: product } = useProduct(slug)
-  const addItem = useAddItem()
+
   const [quantity, setQuantity] = React.useState(1)
-  const [isAdding, setIsAdding] = React.useState(false)
 
   const options = getProductOptions(product)
   const [choices, setChoices] = React.useState<any>({})
   const variant = getCurrentVariant(product, choices)
+
+  const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
+    productId: product?.entityId,
+    variantId: variant?.node.entityId,
+    quantity,
+  })
 
   const breadcrumbs = [
     { to: '/', label: t('breadcrumbs.home', 'Home') },
@@ -95,25 +99,6 @@ export function ProductPage({
     dialog.hide()
   }
 
-  const addToCart = async (): Promise<void> => {
-    setIsAdding(true)
-    try {
-      await addItem({
-        productId: product.entityId,
-        variantId: variant?.node.entityId,
-        quantity,
-      })
-      toast.success(t('bc.cart.added', 'Added to cart'), {
-        position: 'bottom-right',
-      })
-    } catch (e) {
-      toast.error(t('bc.cart.error_adding', 'Error adding to cart'), {
-        position: 'bottom-right',
-      })
-    } finally {
-      setIsAdding(false)
-    }
-  }
   const description = (
     <Typography
       variant="body-small"
@@ -206,7 +191,7 @@ export function ProductPage({
                   defaultQuantity={quantity}
                   onChangeQuantity={setQuantity}
                 />
-                <Button onClick={addToCart} disabled={isAdding}>
+                <Button onClick={addCartItem} disabled={isAdding}>
                   {t('bc.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
