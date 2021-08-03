@@ -44,12 +44,6 @@ export function ProductPage({
     variantId: variant?.node.entityId,
   })
 
-  const breadcrumbs = [
-    { to: '/', label: t('breadcrumbs.home', 'Home') },
-    { to: '/category', label: t('breadcrumbs.category', 'Category') }, // FIXME: Link to the product category
-    { label: product?.name },
-  ]
-
   if (!product) return <p>Loading</p>
 
   const description = (
@@ -63,11 +57,11 @@ export function ProductPage({
     <div css={styles.container}>
       {!isLimited && (
         <Breadcrumbs>
-          {breadcrumbs.map((item) => (
-            <Breadcrumbs.Item key={item.to} to={item.to}>
-              {item.label}
-            </Breadcrumbs.Item>
-          ))}
+          <Breadcrumbs.Item to="/">
+            {t('breadcrumbs.home', 'Home')}
+          </Breadcrumbs.Item>
+          {/* TODO: Add Category to Breadcrumbs */}
+          <Breadcrumbs.Item>{product?.name}</Breadcrumbs.Item>
         </Breadcrumbs>
       )}
       <div css={styles.grid(isLimited)}>
