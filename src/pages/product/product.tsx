@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
-import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
+import { DialogDisclosure } from 'reakit/Dialog'
 import {
   Button,
   ProductPrice,
@@ -11,18 +11,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import {
-  Breadcrumbs,
-  WishlistItemDialog,
-  WishlistItemDialogValues,
-} from '@components'
-import {
-  useAddCartItem,
-  useAddWishlistItem,
-  useDeleteWishlistItem,
-  useProduct,
-  useWishlists,
-} from '@hooks'
+import { Breadcrumbs, WishlistItemDialog } from '@components'
+import { useAddCartItem, useProduct, useWishlistDialog } from '@hooks'
 import { getCurrentVariant, getProductOptions } from '@utils'
 
 import * as styles from './styles'
@@ -38,13 +28,7 @@ export function ProductPage({
 }: ProductPageProps): React.ReactElement {
   const { t } = useTranslation()
 
-  const { data: wishlists } = useWishlists()
-  const addWishlistItem = useAddWishlistItem()
-  const deleteWishlistItem = useDeleteWishlistItem()
-  const dialog = useDialogState()
   const { data: product } = useProduct(slug)
-
-  const [quantity, setQuantity] = React.useState(1)
 
   const options = getProductOptions(product)
   const [choices, setChoices] = React.useState<any>({})
@@ -53,7 +37,11 @@ export function ProductPage({
   const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
-    quantity,
+  })
+
+  const wishlistDialog = useWishlistDialog({
+    productId: product?.entityId,
+    variantId: variant?.node.entityId,
   })
 
   const breadcrumbs = [
@@ -63,41 +51,6 @@ export function ProductPage({
   ]
 
   if (!product) return <p>Loading</p>
-
-  async function onSubmitDialog({
-    additions,
-    deletions,
-  }: WishlistItemDialogValues): Promise<void> {
-    await Promise.all([
-      ...additions.map((addition) =>
-        addWishlistItem({
-          wishlistId: addition.wishlistId,
-          productId: product?.entityId || 0, // TODO: Solve this
-          variantId: variant?.node.entityId,
-        })
-      ),
-      ...deletions.map((deletion) => {
-        const itemId = wishlists?.reduce(
-          (acc: number | null | undefined, wishlist) => {
-            if (wishlist.id === deletion.wishlistId) {
-              const itemToDelete = wishlist.items?.find(
-                (item) => item.product_id === product?.entityId
-              )
-              return itemToDelete?.id
-            }
-            return acc
-          },
-          null as number | null
-        )
-        if (!itemId) return null
-        return deleteWishlistItem({
-          wishlistId: deletion.wishlistId,
-          itemId,
-        })
-      }),
-    ])
-    dialog.hide()
-  }
 
   const description = (
     <Typography
@@ -141,15 +94,10 @@ export function ProductPage({
               <Typography variant="body-small">2 reviews</Typography>
             </div> */}
             <div>
-              <DialogDisclosure {...dialog} css={styles.link}>
+              <DialogDisclosure {...wishlistDialog} css={styles.link}>
                 Add to wishlist
               </DialogDisclosure>
-              <WishlistItemDialog
-                {...dialog}
-                wishlists={wishlists}
-                productId={product.entityId}
-                onSubmit={onSubmitDialog}
-              />
+              <WishlistItemDialog {...wishlistDialog} />
             </div>
           </div>
           <div css={styles.productOptions}>
