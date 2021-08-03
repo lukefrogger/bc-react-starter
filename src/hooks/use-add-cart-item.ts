@@ -12,7 +12,7 @@ type UseAddCartItem = {
   quantity: number
 }
 
-export function useAddCartItem(item?: ItemBody): UseAddCartItem {
+export function useAddCartItem(item?: Partial<ItemBody>): UseAddCartItem {
   const [quantity, setQuantity] = React.useState(1)
   const addItem = useAddItem()
   const { t } = useTranslation()
@@ -22,8 +22,9 @@ export function useAddCartItem(item?: ItemBody): UseAddCartItem {
   const addCartItem = async (): Promise<void> => {
     setIsAdding(true)
     try {
-      if (!item) throw new Error('Item is required')
-      await addItem({ quantity, ...item })
+      if (!item || item.productId === undefined)
+        throw new Error('Item is required')
+      await addItem({ quantity, ...item, productId: item.productId })
       toast.success(t('bc.cart.added', 'Added to cart'), {
         position: 'bottom-right',
       })

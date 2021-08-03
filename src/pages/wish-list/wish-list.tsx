@@ -54,7 +54,7 @@ export function WishListPage(): React.ReactElement {
                 product: {
                   condition: 'new',
                   name: product.product?.name || '',
-                  price: product.product?.prices?.basePrice.value,
+                  price: product.product?.prices?.basePrice?.value,
                   sale_price: product.product?.prices?.salePrice?.value || 0,
                 },
                 currencySettings: {},
@@ -65,9 +65,10 @@ export function WishListPage(): React.ReactElement {
                     product.product?.images?.edges?.[0]?.node.urlOriginal || '',
                 },
                 productUrl: `/product/${product.id}`,
-                productId: product.product.entityId,
-                variantId: product.product.variants?.edges[0].node.entityId, // TODO: Handle variant
-                path: product.product.path,
+                productId: product.product?.entityId || 0, // TODO: Fix this
+                variantId:
+                  product.product?.variants?.edges?.[0]?.node?.entityId,
+                path: product.product?.path || '', // TODO: Fix this,
               })
             )
             .map((product) => (

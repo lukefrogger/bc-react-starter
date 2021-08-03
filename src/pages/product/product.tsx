@@ -12,8 +12,12 @@ import {
 } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs, WishlistItemDialog } from '@components'
-import { useAddCartItem, useProduct, useWishlistDialog } from '@hooks'
-import { getCurrentVariant, getProductOptions } from '@utils'
+import {
+  useAddCartItem,
+  useProduct,
+  useProductOptions,
+  useWishlistDialog,
+} from '@hooks'
 
 import * as styles from './styles'
 
@@ -30,9 +34,7 @@ export function ProductPage({
 
   const { data: product } = useProduct(slug)
 
-  const options = getProductOptions(product)
-  const [choices, setChoices] = React.useState<any>({})
-  const variant = getCurrentVariant(product, choices)
+  const { options, choices, setChoices, variant } = useProductOptions(product)
 
   const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
     productId: product?.entityId,
@@ -95,29 +97,28 @@ export function ProductPage({
             </div>
           </div>
           <div css={styles.productOptions}>
-            {options?.map((opt: any) => (
-              <div key={opt.displayName}>
+            {options?.map((option) => (
+              <div key={option.displayName}>
                 <Typography variant="display-xx-small">
-                  {opt.displayName.toUpperCase()}
+                  {option.displayName.toUpperCase()}
                 </Typography>
                 <div css={styles.row}>
-                  {
-                    // TODO: Improve legibility
-                  }
-                  {opt.values.map((v: any, i: number) => {
-                    const active = (choices as any)[opt.displayName]
+                  {option.values.map((value) => {
+                    const active = choices[option.displayName]
                     return (
                       <Button
-                        variant={v.label === active ? 'secondary' : 'tertiary'}
-                        key={v.label}
+                        variant={
+                          value.label === active ? 'secondary' : 'tertiary'
+                        }
+                        key={value.label}
                         onClick={() => {
                           setChoices({
                             ...choices,
-                            [opt.displayName]: v.label,
+                            [option.displayName]: value.label,
                           })
                         }}
                       >
-                        {v.label}
+                        {value.label}
                       </Button>
                     )
                   })}

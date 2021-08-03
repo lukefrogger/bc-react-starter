@@ -9,7 +9,7 @@ import {
 } from '@hooks'
 
 export const useWishlistDialog = (
-  item: Omit<AddItemInput, 'wishlistId'>
+  item: Omit<Partial<AddItemInput>, 'wishlistId'>
 ): WishlistItemDialogProps => {
   const dialog = useDialogState()
 
@@ -22,12 +22,15 @@ export const useWishlistDialog = (
     deletions,
   }: WishlistItemDialogValues): Promise<void> {
     await Promise.all([
-      ...additions.map((addition) =>
-        addWishlistItem({
+      ...additions.map((addition) => {
+        if (!item || item.productId === undefined)
+          throw new Error('Item is required')
+        return addWishlistItem({
           ...item,
+          productId: item.productId,
           wishlistId: addition.wishlistId,
         })
-      ),
+      }),
       ...deletions.map((deletion) => {
         const itemId = wishlists?.reduce(
           (acc: number | null | undefined, wishlist) => {

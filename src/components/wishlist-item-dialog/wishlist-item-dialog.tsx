@@ -21,7 +21,7 @@ export type WishlistItemDialogValues = {
 export type WishlistItemDialogProps = DialogStateReturn & {
   title?: string
   button?: string
-  productId: number
+  productId?: number
   variantId?: number
   wishlists?: Wishlist[] | null
   onSubmitDialog?: (values: WishlistItemDialogValues) => void | Promise<any>
@@ -53,7 +53,6 @@ export function WishlistItemDialog(
         ),
       }
     }, {}) || {}
-  console.log('initial', initialValues, wishlists, productId, variantId)
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
@@ -81,6 +80,8 @@ export function WishlistItemDialog(
       }
     },
   })
+
+  if (!productId) throw new Error('productId is required')
 
   return (
     <Dialog {...dialog} title={title}>
