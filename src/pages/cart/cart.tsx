@@ -58,14 +58,10 @@ export function CartPage(): React.ReactElement {
                   currencySettings: {},
                 },
               },
-              /*               {
-                label: 'Taxes', // TODO: Show "Calculated at checkout"
-                price: {
-                  price: 11,
-                  salePrice: 0,
-                  currencySettings: {},
-                },
-              }, */
+              {
+                label: t('bc.cart.taxes', 'Taxes'),
+                value: t('bc.cart.calculated_at', 'Calculated at checkout'),
+              },
             ]}
             total={{
               label: t('bc.cart.total', 'Total'),

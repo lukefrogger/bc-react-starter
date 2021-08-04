@@ -76,7 +76,9 @@
       "your_order": "Your order",
       "subtotal": "Subtotal",
       "total": "Total",
-      "proceed": "Proceed to checkout"
+      "proceed": "Proceed to checkout",
+      "taxes": "Taxes",
+      "calculated_at": "Calculated at checkout"
     },
     "product": {
       "color": "COLOR",

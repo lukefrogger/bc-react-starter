@@ -76,7 +76,9 @@
       "your_order": "Votre commande",
       "subtotal": "Sous-total",
       "total": "Total",
-      "proceed": "Procéder à la caisse"
+      "proceed": "Procéder à la caisse",
+      "taxes": "Impôts",
+      "calculated_at": "Calculé à la caisse"
     },
     "product": {
       "color": "COULEUR",
