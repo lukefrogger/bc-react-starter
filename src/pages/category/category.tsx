@@ -73,7 +73,6 @@ export function CategoryPage(): React.ReactElement {
         variant="large"
         name={category?.label}
         imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80" // TODO: Replace this image
-        url={undefined}
         css={css`
           background-position: center;
           min-height: 228px;
