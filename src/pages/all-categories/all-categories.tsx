@@ -4,14 +4,14 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Card, Typography } from 'unsafe-bc-react-components'
 
-import { CategoryCard } from '@components'
+import { Breadcrumbs, CategoryCard } from '@components'
 import { useCategories } from '@hooks'
 
 import * as styles from './styles'
 
 export function AllCategories(): React.ReactElement {
   const { data } = useCategories()
-  console.log(data)
+  const breadcrumbs = [{ to: '/', label: 'Home' }, { label: 'All Categories' }]
 
   return (
     <div css={styles.Container}>
@@ -21,7 +21,13 @@ export function AllCategories(): React.ReactElement {
           padding: 32px 0;
         `}
       >
-        Home / All Categories
+        <Breadcrumbs>
+          {breadcrumbs.map((breadcrumb) => (
+            <Breadcrumbs.Item to={breadcrumb.to} key={breadcrumb.to}>
+              {breadcrumb.label}
+            </Breadcrumbs.Item>
+          ))}
+        </Breadcrumbs>
       </Typography>
       <Typography variant="display">All Categories</Typography>
       <div css={styles.Main}>
