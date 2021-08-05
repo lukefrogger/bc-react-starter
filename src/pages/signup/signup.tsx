@@ -5,8 +5,9 @@ import useSignup from '@bigcommerce/storefront-data-hooks/use-signup'
 import { FormikProps, useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect, useHistory } from 'react-router-dom'
-import { Button, Field, Typography } from 'unsafe-bc-react-components'
+import { Button, Typography } from 'unsafe-bc-react-components'
 
+import { SignupField as Field } from './signup__field'
 import * as styles from './styles'
 import { createValidateFn, SignupValues } from './validation'
 
@@ -29,18 +30,21 @@ export function SignupPage(): React.ReactElement {
     initialValues: {
       firstName: '',
       lastName: '',
+      company: '',
       email: '',
+      phone: '',
       password: '',
       confirmPassword: '',
     },
     validate: createValidateFn(t),
-    onSubmit: async ({ firstName, lastName, email, password }) => {
+    onSubmit: async ({ firstName, lastName, email, password, ...rest }) => {
       try {
         await signup({
           firstName,
           lastName,
           email,
           password,
+          ...rest,
         })
         history.push('/user/profile')
       } catch (err) {
@@ -84,6 +88,14 @@ export function SignupPage(): React.ReactElement {
               {...getFieldProps('lastName')}
             />
           </div>
+          <div css={styles.FieldGrid}>
+            <Field
+              optional
+              css={styles.Field}
+              label={t('signup.company_name', 'Company name')}
+              {...getFieldProps('company')}
+            />
+          </div>
         </fieldset>
 
         <fieldset css={styles.Fieldset}>
@@ -96,6 +108,13 @@ export function SignupPage(): React.ReactElement {
               label={t('signup.email', 'Email address')}
               type="email"
               {...getFieldProps('email')}
+            />
+            <Field
+              css={styles.Field}
+              label={t('signup.phone', 'Phone number')}
+              optional
+              type="tel"
+              {...getFieldProps('phone')}
             />
           </div>
         </fieldset>
