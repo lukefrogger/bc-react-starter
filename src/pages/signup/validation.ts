@@ -3,7 +3,9 @@ import { TranslationFn } from 'unsafe-bc-react-components'
 export type SignupValues = {
   firstName: string
   lastName: string
+  company: string
   email: string
+  phone: string
   password: string
   confirmPassword: string
 }
