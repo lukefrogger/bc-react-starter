@@ -6,6 +6,7 @@ import { Banner } from 'unsafe-bc-react-components'
 import { Footer, Header } from '@components'
 import { useBanners } from '@hooks/useBanners'
 import {
+  AllCategories,
   CartPage,
   CategoryPage,
   HomePage,
@@ -39,6 +40,9 @@ export function RootRouter(): React.ReactElement {
           </Route>
           <Route exact path="/signup">
             <SignupPage />
+          </Route>
+          <Route exact path="/categories/all">
+            <AllCategories />
           </Route>
           <Route exact path="/category/:categories">
             <CategoryPage />
