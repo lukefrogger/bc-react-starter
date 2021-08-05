@@ -22,6 +22,11 @@ export const Field = css`
   margin-bottom: 32px;
 `
 
+export const Optional = ({ typography, colors }: Theme): any => css`
+  ${typography['body-small'] as CSSPrimitive}
+  color: ${colors['neutral-55']};
+`
+
 export const Description = css`
   margin: 40px 0 64px;
   text-align: center;
@@ -41,7 +46,6 @@ export const Heading = ({ typography, colors }: Theme): any => css`
 export const FieldGrid = css`
   grid-template-columns: 1fr;
   display: grid;
-  row-gap: 40px;
 
   @media (min-width: 452px) {
     grid-template-columns: minmax(210px, 376px) minmax(210px, 376px);
