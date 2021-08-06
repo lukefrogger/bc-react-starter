@@ -1319,10 +1319,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bigcommerce/storefront-data-hooks@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.5.2.tgz#69a8e3983c947698d3043ab8623241eb7e50d5f6"
-  integrity sha512-ISA7wdrMQku/u9xMv2L8wHC0l2sjdOrA8+C2w+ZnFIvS9AEeL+YN8z7obH+FgeSHlkcKL9UBCp1WU8cAHW24DQ==
+"@bigcommerce/storefront-data-hooks@^1.5.5-beta.0":
+  version "1.5.5-beta.0"
+  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.5.5-beta.0.tgz#c4abffd267bfe621a36f172462db55b049f1a8ac"
+  integrity sha512-DmGNQczisl4Bs6uLTYJnp1xrhJufLOZ1z7YTdX2K0gL2xgxhDOJSvoiXuMwqaUQdf8y8vQGXNVC18BzpOdQCaA==
   dependencies:
     "@vercel/fetch" "6.1.0"
     cookie "0.4.1"
@@ -15916,10 +15916,10 @@ unquote@^1.1.0, unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
-unsafe-bc-react-components@^0.0.2-beta.4:
-  version "0.0.2-beta.4"
-  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2-beta.4.tgz#5b9cd39aa59bb230759943466418635dc7522185"
-  integrity sha512-y6L8pKqkCTgZHu9iLkfKtM/1PTVgXj1MMr57C61zXyONbWp27nC5YXZndU173P0DNRCBtRaV0iNVeTeQ9CDyJg==
+unsafe-bc-react-components@^0.0.2-beta.5:
+  version "0.0.2-beta.5"
+  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2-beta.5.tgz#04ab4a2322a46199db2f5fab4787ef907e1ba0a8"
+  integrity sha512-Gjcagar4loVsCogmKGaMiaxgFukHBOC3n4RdYq2haeIVfu1YfDN7aBcKh+LEUCkokcfthzWFAvM8VVwTvVNXZg==
   dependencies:
     "@storybook/addon-actions" "^6.2.7"
     "@storybook/react" "^6.2.7"
