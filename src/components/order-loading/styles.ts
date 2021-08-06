@@ -1,32 +1,19 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
+import { getBaseStyle } from '@utils/get-base-style'
 
 export const OrderRow = (theme: Theme): SerializedStyles => css`
-  ${theme.components.OrderRow.OrderRow as any};
-  display: grid;
-  column-gap: 48px;
-  row-gap: 24px;
-  border-bottom: 2px solid ${theme.colors['neutral-15']};
-  padding: 56px 0;
-
-  &:first-of-type {
-    border-top: 2px solid ${theme.colors['neutral-15']};
-  }
-  ${theme.mq[1]} {
-    grid-template-columns: 250px auto 272px;
-  }
+  ${getBaseStyle(theme.components.OrderRow.OrderRow, theme)}
 `
 export const Header = (theme: Theme): SerializedStyles => css`
-  ${theme.components.OrderRow.Header as any};
+  ${getBaseStyle(theme.components.OrderRow.Header, theme)}
 `
 
 export const Products = (theme: Theme): SerializedStyles => css`
-  ${theme.components.OrderRow.Products as any};
+  ${getBaseStyle(theme.components.OrderRow.Products, theme)}
 `
 
 export const InfoRow = (theme: Theme): SerializedStyles => css`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  ${getBaseStyle(theme.components.OrderRow.InfoRow, theme)}
 `
 
 export const OrderNumber = (theme: Theme): SerializedStyles => css`
@@ -42,6 +29,7 @@ export const OrderNumber = (theme: Theme): SerializedStyles => css`
   border-radius: 14px;
   margin-bottom: 16px;
 `
+
 export const OrderStatus = (theme: Theme): SerializedStyles => css`
   width: 100%;
   max-width: 228px;
@@ -83,6 +71,7 @@ export const ProductImage = (theme: Theme): SerializedStyles => css`
     ${theme.colors['neutral-10']} 344.3%
   );
 `
+
 export const ProductWrapper = css`
   flex: 1;
 `

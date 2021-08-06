@@ -1,11 +1,8 @@
 import * as React from 'react'
 
-import { useOrderRowStyle } from 'unsafe-bc-react-components/dist/theme/order-row'
-
 import * as styles from './styles'
 
 export function OrderLoading(): React.ReactElement {
-  const style = useOrderRowStyle()
   const productArray = [1, 2]
   return (
     <div css={styles.OrderRow}>

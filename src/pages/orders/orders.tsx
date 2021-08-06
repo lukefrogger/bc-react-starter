@@ -21,6 +21,7 @@ export function OrdersPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
   const isLoading = typeof orders === 'undefined' && !error
+  // const isLoading = true
   const orderHistory = Array.isArray(orders) ? orders : []
   const LoadingArray = [1, 2, 3]
 
