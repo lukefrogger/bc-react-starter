@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom'
 import { Orders, Pagination, Typography } from 'unsafe-bc-react-components'
 import { Order } from 'unsafe-bc-react-components/dist/components/core/orders/types'
 
+import { OrderLoading } from '@components'
+
 import * as styles from './styles'
 
 const OrderRow = (props: any): React.ReactElement => {
@@ -18,7 +20,10 @@ export function OrdersPage(): React.ReactElement {
   const { data: orders, error } = useOrders()
   const { t } = useTranslation()
   const history = useHistory()
-  const isLoading = !orders && !error
+  const isLoading = typeof orders === 'undefined' && !error
+  // const isLoading = true
+  const orderHistory = Array.isArray(orders) ? orders : []
+  const LoadingArray = [1, 2, 3]
 
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
@@ -29,23 +34,35 @@ export function OrdersPage(): React.ReactElement {
     }
   }
 
+  if (isLoading)
+    return (
+      <div css={styles.Container}>
+        <Typography css={styles.Title} variant="display-large">
+          {t('orders.title', 'Order history')}
+        </Typography>
+        {LoadingArray?.map((loading) => (
+          <OrderLoading key={loading} />
+        ))}
+      </div>
+    )
+
   return (
     <div css={styles.Container}>
       <Typography css={styles.Title} variant="display-large">
         {t('orders.title', 'Order history')}
       </Typography>
 
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        orders?.map((order) => (
-          <OrderRow
-            key={order.id}
-            order={order}
-            onOrderAction={handleOrderAction}
-          />
-        ))
+      {Array.isArray(orderHistory) && orderHistory.length === 0 && (
+        <p css={styles.NoOrders}>{t('orders.none', 'No orders')}</p>
       )}
+
+      {orders?.map((order) => (
+        <OrderRow
+          key={order.id}
+          order={order}
+          onOrderAction={handleOrderAction}
+        />
+      ))}
 
       <div css={styles.Pagination}>
         <Pagination />
