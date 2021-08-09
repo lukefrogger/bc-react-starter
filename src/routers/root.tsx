@@ -6,11 +6,13 @@ import { Banner } from 'unsafe-bc-react-components'
 import { Footer, Header } from '@components'
 import { useBanners } from '@hooks/useBanners'
 import {
+  AllCategories,
   CartPage,
   CategoryPage,
   HomePage,
   LoginPage,
   ProductPage,
+  SearchPage,
   SignupPage,
   WishListPage,
 } from '@pages'
@@ -30,11 +32,17 @@ export function RootRouter(): React.ReactElement {
           <Route exact path="/">
             <HomePage />
           </Route>
+          <Route path="/search">
+            <SearchPage />
+          </Route>
           <Route exact path="/login">
             <LoginPage />
           </Route>
           <Route exact path="/signup">
             <SignupPage />
+          </Route>
+          <Route exact path="/categories/all">
+            <AllCategories />
           </Route>
           <Route exact path="/category/:categories">
             <CategoryPage />

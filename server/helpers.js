@@ -1,6 +1,3 @@
-import addressesApi, {
-  handlers as addressesApiHandlers,
-} from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
 import catalogProductsApi, {
   handlers as catalogProductsApiHandlers,
@@ -17,16 +14,6 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
     process.env.BIGCOMMERCE_STORE_API_CLIENT_ID
   )
   proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN)
-}
-
-export const getAddressHelper = async (req, res) => {
-  return addressesApi({
-    operations: {
-      getAddresses: (handler) => {
-        addressesApiHandlers.getAddresses(handler)
-      },
-    },
-  })(req, res)
 }
 
 export const getProductHelper = async (req, res) => {
@@ -62,21 +49,19 @@ export const cartHelper = async (req, res) => {
 }
 
 export const countryHelper = (req, res) => {
-  const data = csc.default.getAllCountries().map((country) => {
+  const data = csc.getAllCountries().map((country) => {
     const { name, isoCode } = country
     return { name, sortname: name, id: isoCode }
   })
-  res.write(JSON.stringify(data))
-  res.end()
+  res.json(data)
 }
 
 export const stateHelper = (req, res) => {
-  const [host, code] = req.url.split('/')
-  const states = csc.default.getStatesOfCountry(code)
+  const { code } = req.params
+  const states = csc.getStatesOfCountry(code)
 
   const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }))
-  res.write(JSON.stringify(data))
-  res.end()
+  res.json(data)
 }
 
 export const categoriesHelper = async (req, res) => {
