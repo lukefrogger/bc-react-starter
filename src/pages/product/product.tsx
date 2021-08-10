@@ -42,11 +42,7 @@ export function ProductPage({
   const dialog = useDialogState()
   const { data: product } = useProduct(slug)
 
-  const breadcrumbs = [
-    { to: '/home', label: 'Home' },
-    { to: '/category', label: 'Category' },
-    { label: product?.name },
-  ]
+  const breadcrumbs = [{ to: '/home', label: 'Home' }, { label: product?.name }]
 
   if (!product) return <p>Loading</p>
 
