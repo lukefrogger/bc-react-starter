@@ -40,7 +40,7 @@ export function App(): React.ReactElement {
                 ${theme?.typography?.body as any}
               }
               .Toastify__toast--success {
-                background-color: ${theme?.colors?.success as any};
+                background-color: ${theme?.colors?.['neutral-55'] as any};
               }
               .Toastify__toast--error {
                 background-color: ${theme?.colors?.danger as any};
