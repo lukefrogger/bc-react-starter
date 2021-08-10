@@ -10,6 +10,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { Breadcrumbs } from '@components'
+
 import productMock from '../../__mocks__/data/product.json'
 import storeMock from '../../__mocks__/data/store_config.json'
 
@@ -74,21 +76,18 @@ const PRODUCT: ProductRowProps = {
 }
 
 const PRODUCTS: ProductRowProps[] = [PRODUCT, PRODUCT, PRODUCT]
+const breadcrumbs = [{ to: '/', label: 'Home' }, { label: 'Cart' }]
 
 export function CartPage(): React.ReactElement {
   return (
     <Container>
-      {
-        // TODO: Add Breadcrumbs
-      }
-      <Typography
-        variant="body-small"
-        css={css`
-          padding-top: 32px;
-        `}
-      >
-        Home / Cart
-      </Typography>
+      <Breadcrumbs>
+        {breadcrumbs.map((breadcrumb) => (
+          <Breadcrumbs.Item to={breadcrumb.to} key={breadcrumb.to}>
+            {breadcrumb.label}
+          </Breadcrumbs.Item>
+        ))}
+      </Breadcrumbs>
       <Typography
         as="h1"
         variant="display-xx-small"

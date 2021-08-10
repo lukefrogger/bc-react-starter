@@ -12,6 +12,7 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { Breadcrumbs } from '@components'
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 import { useQuickView } from '@hooks/use-quick-view'
 import { ProductModal } from '@pages/product-modal'
@@ -63,17 +64,30 @@ export function CategoryPage(): React.ReactElement {
   })
   const subcategories = category?.categories ?? []
   const brands = [] // TODO: Get brands
+  const parent = category?.slug.slice(1, -1).split('/')
+  let baseUrl = '/category/'
+
+  const titleCase = (text: string): string => {
+    const str = text.replace(/-/g, ' ')
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    })
+  }
 
   return (
     <Container>
-      <Typography
-        variant="body-small"
-        css={css`
-          padding: 32px 0;
-        `}
-      >
-        Home / Category / Subcategory
-      </Typography>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Home</Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/categories/all">All Categories</Breadcrumbs.Item>
+        {parent?.map((item) => {
+          baseUrl += `${item}/`
+          return (
+            <Breadcrumbs.Item key={item} to={baseUrl}>
+              {titleCase(item)}
+            </Breadcrumbs.Item>
+          )
+        })}
+      </Breadcrumbs>
       <Card
         variant="large"
         name={category?.label}
