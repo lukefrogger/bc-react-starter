@@ -1,4 +1,5 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
+
 import { getBaseStyle } from '@utils/get-base-style'
 
 export const container = css`
@@ -84,7 +85,7 @@ export const productDetail = css`
     padding-left: var(--horizontal-setback);
   }
   > * {
-    :not(:first-child) {
+    :not(:first-of-type) {
       border-top: 2px solid #eaeaea;
     }
   }
@@ -107,7 +108,7 @@ export const productDetailRow = css`
 export const reviewList = css`
   > * {
     padding-bottom: 20px;
-    :not(:first-child) {
+    :not(:first-of-type) {
       padding-top: 20px;
       border-top: 2px solid #eaeaea;
     }

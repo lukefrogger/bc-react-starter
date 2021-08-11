@@ -2,6 +2,11 @@
   "hero": {
     "headline": "Le Headline Oui"
   },
+  "breadcrumbs": {
+    "home": "Home",
+    "cart": "Panier",
+    "category": "Catégorie"
+  },
   "submenu": {
     "profile": "Profil",
     "orders": "Historique des commandes",
@@ -18,6 +23,12 @@
     "contact_us": "Contactez-nous",
     "powered_by": "Powered by WordPress",
     "rights": "© Tous droits réservés, Modern Tribe"
+  },
+  "features": {
+    "secure": "100% Sécurisé",
+    "fast": "Expédition rapide",
+    "easy": "Retours faciles",
+    "safe": "Emballé en toute sécurité"
   },
   "bc": {
     "btn": {
@@ -58,7 +69,22 @@
     },
     "cart": {
       "empty": "S’il vous plaît ajouter quelques éléments à votre panier.",
-      "checkout": "Caisse"
+      "checkout": "Caisse",
+      "added": "Produit ajouté à votre panier",
+      "error_adding": "Erreur lors de l'ajout au panier",
+      "add_to_cart": "Ajouter au panier",
+      "your_order": "Votre commande",
+      "subtotal": "Sous-total",
+      "total": "Total",
+      "proceed": "Procéder à la caisse",
+      "taxes": "Impôts",
+      "calculated_at": "Calculé à la caisse"
+    },
+    "product": {
+      "color": "COULEUR",
+      "quantity": "QUANTITÉ",
+      "description": "Description du produit",
+      "specifications": "Caractéristiques"
     },
     "search": {
       "search": "Rechercher"

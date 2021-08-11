@@ -1,28 +1,22 @@
 import * as React from 'react'
 
-// import { useTranslation } from 'react-i18next'
-import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
+import { useTranslation } from 'react-i18next'
+import { DialogDisclosure } from 'reakit/Dialog'
 import {
   Button,
-  // ProductCard,
   ProductPrice,
   // ProductReview,
-  // Props as ProductCardProps,
   QuantitySelector,
-  StarRating,
+  // StarRating,
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { Breadcrumbs, WishlistItemDialog } from '@components'
 import {
-  Breadcrumbs,
-  WishlistItemDialog,
-  WishlistItemDialogValues,
-} from '@components'
-import {
-  useAddWishlistItem,
-  useDeleteWishlistItem,
+  useAddCartItem,
   useProduct,
-  useWishlists,
+  useProductOptions,
+  useWishlistDialog,
 } from '@hooks'
 
 import * as styles from './styles'
@@ -36,54 +30,24 @@ export function ProductPage({
   slug,
   isLimited,
 }: ProductPageProps): React.ReactElement {
-  const { data: wishlists } = useWishlists()
-  const addWishlistItem = useAddWishlistItem()
-  const deleteWishlistItem = useDeleteWishlistItem()
-  const dialog = useDialogState()
+  const { t } = useTranslation()
+
   const { data: product } = useProduct(slug)
 
-  const breadcrumbs = [
-    { to: '/home', label: 'Home' },
-    { to: '/category', label: 'Category' },
-    { label: product?.name },
-  ]
+  const { options, choices, setChoices, variant } = useProductOptions(product)
+
+  const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
+    productId: product?.entityId,
+    variantId: variant?.node.entityId,
+  })
+
+  const wishlistDialog = useWishlistDialog({
+    productId: product?.entityId,
+    variantId: variant?.node.entityId,
+  })
 
   if (!product) return <p>Loading</p>
 
-  async function onSubmitDialog({
-    additions,
-    deletions,
-  }: WishlistItemDialogValues): Promise<void> {
-    await Promise.all([
-      ...additions.map((addition) =>
-        addWishlistItem({
-          wishlistId: addition.wishlistId,
-          productId: product?.entityId || 0, // TODO: Solve this
-          variantId: product?.variants?.edges?.[0]?.node?.entityId || 0, // FIXME: It's not the first variant
-        })
-      ),
-      ...deletions.map((deletion) => {
-        const itemId = wishlists?.reduce(
-          (acc: number | null | undefined, wishlist) => {
-            if (wishlist.id === deletion.wishlistId) {
-              const itemToDelete = wishlist.items?.find(
-                (item) => item.product_id === product?.entityId
-              )
-              return itemToDelete?.id
-            }
-            return acc
-          },
-          null as number | null
-        )
-        if (!itemId) return null
-        return deleteWishlistItem({
-          wishlistId: deletion.wishlistId,
-          itemId,
-        })
-      }),
-    ])
-    dialog.hide()
-  }
   const description = (
     <Typography
       variant="body-small"
@@ -95,11 +59,11 @@ export function ProductPage({
     <div css={styles.container}>
       {!isLimited && (
         <Breadcrumbs>
-          {breadcrumbs.map((item) => (
-            <Breadcrumbs.Item key={item.to} to={item.to}>
-              {item.label}
-            </Breadcrumbs.Item>
-          ))}
+          <Breadcrumbs.Item to="/">
+            {t('breadcrumbs.home', 'Home')}
+          </Breadcrumbs.Item>
+          {/* TODO: Add Category to Breadcrumbs */}
+          <Breadcrumbs.Item>{product?.name}</Breadcrumbs.Item>
         </Breadcrumbs>
       )}
       <div css={styles.grid(isLimited)}>
@@ -110,44 +74,69 @@ export function ProductPage({
               {product.brand?.name.toUpperCase()}
             </Typography>
             <Typography variant="display">{product.name}</Typography>
-            <ProductPrice price={21} salePrice={20} currencySettings={{}} />
+            <ProductPrice
+              price={variant.node.prices.basePrice.value}
+              salePrice={variant.node.prices.salePrice?.value || 0}
+              currencySettings={{
+                currency: variant.node.prices.basePrice.code,
+              }}
+            />
             {!isLimited && description}
-            <div css={styles.starRow}>
+            {/*             <div css={styles.starRow}>
               <StarRating
                 rating={4}
                 style={{ marginTop: 0, marginBottom: 0 }}
               />
               <Typography variant="body-small">2 reviews</Typography>
-            </div>
+            </div> */}
             <div>
-              <DialogDisclosure {...dialog} css={styles.link}>
+              <DialogDisclosure {...wishlistDialog} css={styles.link}>
                 Add to wishlist
               </DialogDisclosure>
-              <WishlistItemDialog
-                {...dialog}
-                wishlists={wishlists}
-                productId={product.entityId}
-                onSubmit={onSubmitDialog}
-              />
+              <WishlistItemDialog {...wishlistDialog} />
             </div>
           </div>
           <div css={styles.productOptions}>
-            <div>
-              <Typography variant="display-xx-small">COLOR</Typography>
-              <div css={styles.row}>
-                {
-                  // TODO: Add selected state
-                }
-                <Button variant="selector">Red</Button>
-                <Button variant="selector">Holo</Button>
-                <Button variant="selector">Rainbow</Button>
+            {options?.map((option) => (
+              <div key={option.displayName}>
+                <Typography variant="display-xx-small">
+                  {option.displayName.toUpperCase()}
+                </Typography>
+                <div css={styles.row}>
+                  {option.values.map((value) => {
+                    const active = choices[option.displayName]
+                    return (
+                      <Button
+                        variant={
+                          value.label === active ? 'secondary' : 'tertiary'
+                        }
+                        key={value.label}
+                        onClick={() => {
+                          setChoices({
+                            ...choices,
+                            [option.displayName]: value.label,
+                          })
+                        }}
+                      >
+                        {value.label}
+                      </Button>
+                    )
+                  })}
+                </div>
               </div>
-            </div>
+            ))}
             <div>
-              <Typography variant="display-xx-small">QUANTITY</Typography>
+              <Typography variant="display-xx-small">
+                {t('bc.product.quantity', 'QUANTITY')}
+              </Typography>
               <div css={styles.row}>
-                <QuantitySelector defaultQuantity={1} />
-                <Button>Add to Cart</Button>
+                <QuantitySelector
+                  defaultQuantity={quantity}
+                  onChangeQuantity={setQuantity}
+                />
+                <Button onClick={addCartItem} disabled={isAdding}>
+                  {t('bc.cart.add_to_cart', 'Add to Cart')}
+                </Button>
               </div>
             </div>
             {isLimited && description}
@@ -157,15 +146,19 @@ export function ProductPage({
       {!isLimited && (
         <div css={styles.productDetail}>
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Product Description</Typography>
+            <Typography variant="display-small">
+              {t('bc.product.description', 'Description')}
+            </Typography>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </div>
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Specifications</Typography>
+            <Typography variant="display-small">
+              {t('bc.product.specifications', 'Specifications')}
+            </Typography>
             <Typography
-              dangerouslySetInnerHTML={{ __html: product.description }}
+              dangerouslySetInnerHTML={{ __html: product.description }} // TODO: Change to specifications
             />
           </div>
           {/*         <div css={styles.productDetailRow}>

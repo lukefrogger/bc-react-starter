@@ -6,15 +6,15 @@ import { useParams } from 'react-router-dom'
 import {
   Card,
   Pagination,
-  ProductCard,
-  Props as ProductCardProps,
   SideMenu,
   Typography,
 } from 'unsafe-bc-react-components'
 
+import {
+  ProductCardWithButtons,
+  ProductCardWithButtonsProps,
+} from '@components'
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
-import { useQuickView } from '@hooks/use-quick-view'
-import { ProductModal } from '@pages/product-modal'
 
 const Container = styled.div`
   max-width: 1208px;
@@ -56,7 +56,7 @@ const Meta = styled.div`
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
-  const quickView = useQuickView()
+
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
     categoryId: category?.id,
@@ -126,14 +126,14 @@ export function CategoryPage(): React.ReactElement {
             {search?.found &&
               search?.products
                 .map(
-                  (product): ProductCardProps => ({
+                  (product): ProductCardWithButtonsProps => ({
                     brand: {
                       name: product.node.brand?.name || '',
                     },
                     product: {
                       condition: 'new',
                       name: product.node.name,
-                      price: product.node.prices?.price.value,
+                      price: product.node.prices?.basePrice?.value,
                       sale_price: product.node.prices?.salePrice?.value || 0,
                     },
                     currencySettings: {},
@@ -143,21 +143,16 @@ export function CategoryPage(): React.ReactElement {
                         product.node.images.edges?.[0]?.node.urlOriginal || '',
                     },
                     productUrl: `/product${product.node.path}`,
-                    buttons: [
-                      {
-                        onClick: console.log,
-                        children: 'Add to cart',
-                      },
-                      {
-                        onClick: () => quickView.onShow(product.node.path),
-                        children: 'Quick view',
-                        variant: 'tertiary',
-                      },
-                    ],
+                    productId: product.node.entityId,
+                    variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
+                    path: product.node.path,
                   })
                 )
                 .map((product) => (
-                  <ProductCard key={product.id} {...product} />
+                  <ProductCardWithButtons
+                    key={product.productId}
+                    {...product}
+                  />
                 ))}
           </Grid>
           <Pagination
@@ -167,8 +162,6 @@ export function CategoryPage(): React.ReactElement {
           />
         </Content>
       </Main>
-
-      <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </Container>
   )
 }

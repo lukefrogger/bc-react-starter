@@ -72,7 +72,11 @@ export function Header(): React.ReactElement {
       {!isMobile && (
         <div css={styles.desktopMenu}>
           {dataSliced?.map((category) => (
-            <HeaderItem category={category} behaviour="popover" />
+            <HeaderItem
+              category={category}
+              behaviour="popover"
+              key={category.id}
+            />
           ))}
           <Link
             css={styles.category}
@@ -90,7 +94,7 @@ export function Header(): React.ReactElement {
           </Link>
         )}
         <Link css={styles.button} to="/cart">
-          <span css={styles.badge}>{badge}</span>
+          {badge && <span css={styles.badge}>{badge}</span>}
           <Icons.Bag />
         </Link>
         {!isMobile && (
