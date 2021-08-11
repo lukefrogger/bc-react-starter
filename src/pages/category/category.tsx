@@ -16,43 +16,7 @@ import {
 } from '@components'
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 
-const Container = styled.div`
-  max-width: 1208px;
-  margin: 0 auto;
-`
-const Main = styled.div`
-  display: flex;
-  flex: 1;
-  padding: 48px 0;
-`
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  justify-items: center;
-  @media (min-width: 720px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-  img {
-    max-height: none !important;
-  }
-`
-
-const Content = styled.div`
-  width: 100%;
-  @media (min-width: 1024px) {
-    margin-right: -24px;
-  }
-`
-
-const Meta = styled.div`
-  padding: 0 24px 12px;
-  display: flex;
-  justify-content: space-between;
-`
+import * as styles from './styles'
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
@@ -66,7 +30,7 @@ export function CategoryPage(): React.ReactElement {
   const brands = [] // TODO: Get brands
 
   return (
-    <Container>
+    <div css={styles.Container}>
       <Typography
         variant="body-small"
         css={css`
@@ -88,7 +52,7 @@ export function CategoryPage(): React.ReactElement {
       ) : (
         <Typography variant="display-x-large">{category?.label}</Typography>
       )}
-      <Main>
+      <div css={styles.Main}>
         {subcategories.length > 0 || brands.length > 0 ? (
           <SideMenu
             css={css`
@@ -122,8 +86,8 @@ export function CategoryPage(): React.ReactElement {
           </SideMenu>
         ) : null}
 
-        <Content>
-          <Meta>
+        <div css={styles.Content}>
+          <div css={styles.Meta}>
             <Typography variant="body-small">
               {search?.pagination.total} items in “{category?.label}”
             </Typography>
@@ -131,8 +95,8 @@ export function CategoryPage(): React.ReactElement {
               // TODO: Add sorting logic
               // <Typography variant="body-small">Sort by: Trending</Typography>
             }
-          </Meta>
-          <Grid>
+          </div>
+          <div css={styles.Grid}>
             {search?.found &&
               search?.products
                 .map(
@@ -164,14 +128,14 @@ export function CategoryPage(): React.ReactElement {
                     {...product}
                   />
                 ))}
-          </Grid>
+          </div>
           <Pagination
             css={css`
               padding: 56px 0 120px;
             `}
           />
-        </Content>
-      </Main>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
