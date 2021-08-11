@@ -29,6 +29,14 @@ export function WishListPage(): React.ReactElement {
 
   const isLoading = !error && !wishlist
 
+  const WishlistEmpty = (): React.ReactElement => {
+    return (
+      <p css={styles.wishlistEmpty}>
+        {t('bc.wish_list.empty', 'This whishlist is empty')}
+      </p>
+    )
+  }
+
   if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
   if (!wishlist) return <p>Not found</p>
   if (error) return <p>Error</p>
@@ -45,6 +53,9 @@ export function WishListPage(): React.ReactElement {
           </span>
         </div>
         <div css={styles.wrapperGuest}>
+          {Array.isArray(wishlist?.items) && wishlist?.items?.length === 0 && (
+            <WishlistEmpty />
+          )}
           {wishlist.items
             ?.map(
               (product): ProductCardWithButtonsProps => ({
@@ -132,6 +143,9 @@ export function WishListPage(): React.ReactElement {
         <WishlistStatus wishlist={wishlist} />
       </div>
       <div css={styles.wrapper}>
+        {Array.isArray(wishlist?.items) && wishlist?.items?.length === 0 && (
+          <WishlistEmpty />
+        )}
         {wishlist.items
           ?.map(
             (item): ProductRowProps => ({
