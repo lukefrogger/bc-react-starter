@@ -4,6 +4,7 @@ import path from 'path'
 
 import addressesApi from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
+import checkoutApi from '@bigcommerce/storefront-data-hooks/api/checkout'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import logoutApi from '@bigcommerce/storefront-data-hooks/api/customers/logout'
@@ -55,6 +56,7 @@ app.use(serveStatic(path.join(dirname, 'public')))
 // respond to all requests
 app.use('/cart-helper', cartHelper)
 app.use('/categories', categoriesHelper)
+app.use('/checkout', checkoutApi())
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)

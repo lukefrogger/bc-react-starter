@@ -1,4 +1,6 @@
-import { css } from '@emotion/react'
+import { css, SerializedStyles, Theme } from '@emotion/react'
+
+import { getBaseStyle } from '@utils/get-base-style'
 
 export const Container = css`
   --horizontal-spacing: 24px;
@@ -29,6 +31,13 @@ export const ProductList = css`
   @media (min-width: 1024px) {
     margin-bottom: inherit;
   }
+`
+
+export const Checkout = (theme: Theme): SerializedStyles => css`
+  ${getBaseStyle(theme.components.Button.variants?.primary, theme)}
+  margin-top: 48px;
+  display: block;
+  text-decoration: none;
 `
 
 export const Features = css`

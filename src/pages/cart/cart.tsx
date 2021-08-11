@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import { Button, Pricing, Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
@@ -13,6 +14,12 @@ import * as styles from './styles'
 export function CartPage(): React.ReactElement {
   const { data: cart } = useCart()
   const { t } = useTranslation()
+  const history = useHistory()
+
+  function openCheckout(): void {
+    history.push(`/checkout`)
+    window.scrollTo(0, 0)
+  }
 
   return (
     <div css={styles.Container}>
@@ -72,9 +79,9 @@ export function CartPage(): React.ReactElement {
               },
             }}
           />
-          <Button style={{ width: '100%', marginTop: 48 }}>
+          <a css={styles.Checkout} href="/checkout">
             {t('bc.cart.proceed', 'Proceed')}
-          </Button>
+          </a>
         </div>
       </div>
       <div css={styles.Features}>
