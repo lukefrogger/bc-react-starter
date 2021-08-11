@@ -5,7 +5,7 @@
   "scripts": {
     "build": "node scripts/build.js",
     "dev": "concurrently yarn:dev:*",
-    "dev:server": "node -r esm -r dotenv/config server",
+    "dev:server": "nodemon -r esm -r dotenv/config server",
     "dev:app": "node scripts/start.js",
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
@@ -28,7 +28,7 @@
     "@types/react": "^17.0.0"
   },
   "dependencies": {
-    "@bigcommerce/storefront-data-hooks": "^1.5.5-beta.0",
+    "@bigcommerce/storefront-data-hooks": "^1.5.5-beta.1",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@jingtribe/test-bc-react-components": "^0.0.1",
@@ -117,6 +117,7 @@
     "jest-watch-typeahead": "0.6.1",
     "mini-css-extract-plugin": "^1.6.0",
     "moment": "^2.29.1",
+    "nodemon": "^2.0.12",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.2.1",
