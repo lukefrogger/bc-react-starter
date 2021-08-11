@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "node -r esm -r dotenv/config server & node scripts/start.js",
+    "dev": "concurrently yarn:dev:*",
+    "dev:server": "node -r esm -r dotenv/config server",
+    "dev:app": "node scripts/start.js",
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
     "start": "node -r esm -r dotenv/config server",
@@ -83,6 +85,7 @@
     "babel-preset-react-app": "^10.0.0",
     "bfj": "^7.0.2",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "concurrently": "^6.2.1",
     "css-loader": "4.3.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "5.1.0",
