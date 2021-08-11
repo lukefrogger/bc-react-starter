@@ -75,7 +75,6 @@ export function WishListPage(): React.ReactElement {
                   url_standard:
                     product.product?.images?.edges?.[0]?.node.urlOriginal || '',
                 },
-                productUrl: `/product/${product.id}`,
                 productId: product.product?.entityId || 0, // TODO: Fix this
                 variantId:
                   product.product?.variants?.edges?.[0]?.node?.entityId,

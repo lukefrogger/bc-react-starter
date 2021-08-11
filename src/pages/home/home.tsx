@@ -100,7 +100,6 @@ export function HomePage(): React.ReactElement {
                   url_standard:
                     product.node.images.edges?.[0]?.node.urlOriginal || '',
                 },
-                productUrl: `/product${product.node.path}`, // TODO: Integrate with react-router
                 productId: product.node.entityId,
                 variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
                 path: product.node.path,

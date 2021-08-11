@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { Link } from 'react-router-dom'
 import {
   ProductCard,
   Props as ProductCardProps,
@@ -28,23 +29,25 @@ export function ProductCardWithButtons(
 
   return (
     <>
-      <ProductCard
-        {...rest}
-        buttons={[
-          {
-            onClick: addCartItem,
-            disabled: isAdding,
-            children: 'Add to Cart',
-            id: 'add-to-cart',
-          },
-          {
-            onClick: () => quickView.onShow(path),
-            children: 'Quick view',
-            variant: 'tertiary',
-            id: 'quick-view',
-          },
-        ]}
-      />
+      <Link to={`/product${path}`} onClick={() => window.scrollTo(0, 0)}>
+        <ProductCard
+          {...rest}
+          buttons={[
+            {
+              onClick: addCartItem,
+              disabled: isAdding,
+              children: 'Add to Cart',
+              id: 'add-to-cart',
+            },
+            {
+              onClick: () => quickView.onShow(path),
+              children: 'Quick view',
+              variant: 'tertiary',
+              id: 'quick-view',
+            },
+          ]}
+        />
+      </Link>
       <ProductModal modal={quickView.modal} slug={quickView.slug} />
     </>
   )

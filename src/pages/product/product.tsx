@@ -1,6 +1,9 @@
 import * as React from 'react'
 
+import { useTheme } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
+import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
+import { useMediaQuery } from 'react-responsive'
 import { DialogDisclosure } from 'reakit/Dialog'
 import {
   Button,
@@ -21,6 +24,8 @@ import {
 
 import * as styles from './styles'
 
+import 'react-image-gallery/styles/css/image-gallery.css'
+
 type ProductPageProps = {
   slug: string
   isLimited?: boolean
@@ -35,7 +40,11 @@ export function ProductPage({
   const { data: product } = useProduct(slug)
 
   const { options, choices, setChoices, variant } = useProductOptions(product)
+  const theme = useTheme()
 
+  const isMobile = !useMediaQuery({
+    query: theme.mq[2].substring('@media '.length),
+  })
   const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
@@ -55,6 +64,21 @@ export function ProductPage({
     />
   )
 
+  const images = product.images?.edges?.reduce<ReactImageGalleryItem[]>(
+    (acc, edge) => {
+      const { urlOriginal } = edge?.node || {}
+      if (!urlOriginal) return acc
+      return [
+        ...acc,
+        {
+          original: urlOriginal,
+          thumbnail: urlOriginal,
+        },
+      ]
+    },
+    []
+  )
+
   return (
     <div css={styles.container}>
       {!isLimited && (
@@ -67,12 +91,29 @@ export function ProductPage({
         </Breadcrumbs>
       )}
       <div css={styles.grid(isLimited)}>
-        <div css={styles.image(isLimited)} />
+        <div css={styles.gallery}>
+          <ImageGallery
+            items={images || []}
+            showPlayButton={false}
+            {...(isLimited || isMobile
+              ? {
+                  showNav: !isMobile,
+                  showThumbnails: false,
+                  showBullets: true,
+                }
+              : {
+                  thumbnailPosition: 'left',
+                  showNav: false,
+                })}
+          />
+        </div>
         <div css={styles.product}>
           <div css={styles.productDescription}>
-            <Typography variant="overline">
-              {product.brand?.name.toUpperCase()}
-            </Typography>
+            {product.brand && (
+              <Typography variant="overline">
+                {product.brand.name.toUpperCase()}
+              </Typography>
+            )}
             <Typography variant="display">{product.name}</Typography>
             <ProductPrice
               price={variant.node.prices.basePrice.value}
@@ -153,14 +194,14 @@ export function ProductPage({
               dangerouslySetInnerHTML={{ __html: product.description }}
             />
           </div>
-          <div css={styles.productDetailRow}>
+          {/*           <div css={styles.productDetailRow}>
             <Typography variant="display-small">
               {t('bc.product.specifications', 'Specifications')}
             </Typography>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }} // TODO: Change to specifications
             />
-          </div>
+          </div> */}
           {/*         <div css={styles.productDetailRow}>
           <Typography variant="display-small">Reviews</Typography>
           <div css={styles.reviewList}>
