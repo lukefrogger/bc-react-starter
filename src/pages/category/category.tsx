@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import {
   Card,
   Pagination,
@@ -56,6 +56,7 @@ const Meta = styled.div`
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
+  const history = useHistory()
 
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
@@ -74,15 +75,19 @@ export function CategoryPage(): React.ReactElement {
       >
         Home / Category / Subcategory
       </Typography>
-      <Card
-        variant="large"
-        name={category?.label}
-        imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80" // TODO: Replace this image
-        css={css`
-          background-position: center;
-          min-height: 228px;
-        `}
-      />
+      {category?.image?.urlOriginal ? (
+        <Card
+          variant="large"
+          name={category?.label}
+          imageUrl={category?.image?.urlOriginal}
+          css={css`
+            background-position: center;
+            min-height: 228px;
+          `}
+        />
+      ) : (
+        <Typography variant="display-x-large">{category?.label}</Typography>
+      )}
       <Main>
         {subcategories.length > 0 || brands.length > 0 ? (
           <SideMenu
@@ -96,7 +101,12 @@ export function CategoryPage(): React.ReactElement {
             {subcategories.length > 0 && (
               <SideMenu.Level title="Subcategories">
                 {subcategories.map((subcategory) => (
-                  <SideMenu.Item key={subcategory.id}>
+                  <SideMenu.Item
+                    key={subcategory.id}
+                    onClick={() => {
+                      history.push(`/category${subcategory.slug}`)
+                    }}
+                  >
                     {subcategory.label}
                   </SideMenu.Item>
                 ))}

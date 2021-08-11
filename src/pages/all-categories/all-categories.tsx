@@ -36,6 +36,7 @@ export function AllCategories(): React.ReactElement {
             key={category.id}
             label={category.label}
             to={`/category${category.slug}`}
+            image={category.image?.urlOriginal}
           />
         ))}
       </div>
