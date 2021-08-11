@@ -18,13 +18,13 @@ export type WishlistItemDialogValues = {
   deletions: WishlistValue[]
 }
 
-type WishlistItemDialogProps = DialogStateReturn & {
+export type WishlistItemDialogProps = DialogStateReturn & {
   title?: string
   button?: string
-  productId: number
+  productId?: number
   variantId?: number
   wishlists?: Wishlist[] | null
-  onSubmit?: (values: WishlistItemDialogValues) => void | Promise<any>
+  onSubmitDialog?: (values: WishlistItemDialogValues) => void | Promise<any>
 }
 
 export function WishlistItemDialog(
@@ -38,7 +38,7 @@ export function WishlistItemDialog(
     productId,
     variantId,
     wishlists = [],
-    onSubmit = () => {},
+    onSubmitDialog = () => {},
     ...dialog
   } = props
 
@@ -53,7 +53,6 @@ export function WishlistItemDialog(
         ),
       }
     }, {}) || {}
-
   const formik = useFormik({
     enableReinitialize: true,
     initialValues,
@@ -75,12 +74,14 @@ export function WishlistItemDialog(
         const deletions = differences.filter(
           (difference) => difference.value === false
         )
-        await onSubmit({ additions, deletions })
+        await onSubmitDialog({ additions, deletions })
       } catch (e) {
         formik.setSubmitting(false)
       }
     },
   })
+
+  if (!productId) throw new Error('productId is required')
 
   return (
     <Dialog {...dialog} title={title}>

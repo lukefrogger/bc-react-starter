@@ -4,14 +4,18 @@ import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useDialogState } from 'reakit/Dialog'
 import {
-  ProductCard,
   ProductRow,
   ProductRowProps,
   Typography,
 } from 'unsafe-bc-react-components'
-import { ProductCardProps } from 'unsafe-bc-react-components/dist/components/ui'
 
-import { WishlistActions, WishlistDialog, WishlistStatus } from '@components'
+import {
+  ProductCardWithButtons,
+  ProductCardWithButtonsProps,
+  WishlistActions,
+  WishlistDialog,
+  WishlistStatus,
+} from '@components'
 import { useUpdateWishlist, useWishlist } from '@hooks'
 
 import * as styles from './styles'
@@ -54,14 +58,14 @@ export function WishListPage(): React.ReactElement {
           )}
           {wishlist.items
             ?.map(
-              (product): ProductCardProps => ({
+              (product): ProductCardWithButtonsProps => ({
                 brand: {
                   name: product.product?.brand?.name || '',
                 },
                 product: {
                   condition: 'new',
                   name: product.product?.name || '',
-                  price: product.product?.prices?.price.value,
+                  price: product.product?.prices?.basePrice?.value,
                   sale_price: product.product?.prices?.salePrice?.value || 0,
                 },
                 currencySettings: {},
@@ -71,11 +75,14 @@ export function WishListPage(): React.ReactElement {
                   url_standard:
                     product.product?.images?.edges?.[0]?.node.urlOriginal || '',
                 },
-                productUrl: `/product/${product.id}`,
+                productId: product.product?.entityId || 0, // TODO: Fix this
+                variantId:
+                  product.product?.variants?.edges?.[0]?.node?.entityId,
+                path: product.product?.path || '', // TODO: Fix this,
               })
             )
             .map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCardWithButtons key={product.productId} {...product} />
             ))}
         </div>
       </div>

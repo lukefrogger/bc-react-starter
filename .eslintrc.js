@@ -78,7 +78,7 @@ module.exports = {
           // Packages.
           ["^@?\\w"],
           // Internal packages.
-          ["^(@api|@components|@config|@hooks|@pages|@utile)(/.*|$)"], // Match this with ts paths
+          ["^(@api|@components|@config|@hooks|@icons|@pages|@utils)(/.*|$)"], // Match this with ts paths
           // Side effect imports.
           ["^\\u0000"],
           // Other relative imports. Put same-folder imports and `.` last.

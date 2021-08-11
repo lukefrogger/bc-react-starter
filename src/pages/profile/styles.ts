@@ -1,4 +1,4 @@
-import { css, Theme } from '@emotion/react'
+import { css, SerializedStyles, Theme } from '@emotion/react'
 import { CSSPrimitive } from 'unsafe-bc-react-components/dist/theme/types'
 
 export const styles = {
@@ -12,7 +12,7 @@ export const styles = {
     flex-direction: column;
     align-items: center;
   `,
-  Heading: ({ typography, colors }: Theme) => css`
+  Heading: ({ typography, colors }: Theme): SerializedStyles => css`
     ${typography.overline as CSSPrimitive}
     color: ${colors['neutral-55']};
     margin-bottom: 24px;
@@ -26,7 +26,7 @@ export const styles = {
     margin-right: -20px;
     max-width: 800px;
   `,
-  Field: (variant: string) => () =>
+  Field: (variant: string) => (): SerializedStyles =>
     css`
       margin: 0 20px 32px;
 
@@ -36,7 +36,7 @@ export const styles = {
         vertical-align: top;
       }
     `,
-  Input: ({ colors }: Theme) => css`
+  Input: ({ colors }: Theme): SerializedStyles => css`
     background: ${colors['neutral-0']};
     border: 2px solid ${colors['neutral-15']};
     box-sizing: border-box;
@@ -44,13 +44,13 @@ export const styles = {
     width: 100%;
     padding: 8px 20px;
   `,
-  Label: ({ typography }: Theme) => css`
+  Label: ({ typography }: Theme): SerializedStyles => css`
     ${typography['body-small'] as CSSPrimitive};
     display: block;
     font-weight: bold;
     margin-bottom: 8px;
   `,
-  LabelOptional: ({ typography, colors }: Theme) => css`
+  LabelOptional: ({ typography, colors }: Theme): SerializedStyles => css`
     ${typography['body-small'] as CSSPrimitive};
     color: ${colors['neutral-55']};
   `,

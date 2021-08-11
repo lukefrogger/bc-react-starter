@@ -27,6 +27,8 @@
       "@config/*": ["src/config/*"],
       "@hooks": ["src/hooks"],
       "@hooks/*": ["src/hooks/*"],
+      "@icons": ["src/icons"],
+      "@icons/*": ["src/icons/*"],
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@utils": ["src/utils"],

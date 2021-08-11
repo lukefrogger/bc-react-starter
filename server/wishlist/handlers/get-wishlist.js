@@ -27,7 +27,7 @@ export const getWishlist = async ({ res, config, body }) => {
       wishlist.items.map((item) => item && item.product_id).filter((id) => !!id)
     if (entityIds && entityIds.length) {
       const graphqlData = await getAllProducts({
-        variables: { first: 100, entityIds },
+        variables: { first: 50, entityIds },
         config,
       })
       // Put the products in an object that we can use to get them by id

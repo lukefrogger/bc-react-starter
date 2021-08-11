@@ -10,7 +10,6 @@ const modalStyles = css`
   min-height: 40vh;
   max-width: 95vw;
   width: 100%;
-  padding: 64px 16px;
   max-height: 90vh;
   overflow-y: auto;
 

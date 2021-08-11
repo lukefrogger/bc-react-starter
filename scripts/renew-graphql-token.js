@@ -3,7 +3,7 @@ import fs from 'fs'
 import axios from 'axios'
 
 const [host] = process.env.REACT_APP_API_ENDPOINT.split('/api')
-const expiresAt = parseInt(Date.now() / 1000 + 3600 * 24, 10)
+const expiresAt = parseInt(Date.now() / 1000 + 3600 * 24 * 365, 10)
 
 const { BIGCOMMERCE_STORE_HASH, BIGCOMMERCE_STORE_API_TOKEN } = process.env
 

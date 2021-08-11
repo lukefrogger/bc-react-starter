@@ -133,7 +133,7 @@ export function HeaderItem(props: Props): React.ReactElement {
       css={styles.category}
       to={`/category${category.slug}`}
       style={category.color ? { color: category.color } : {}}
-      {...props}
+      {...rest}
     >
       {category.label}
     </Link>
