@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "dev": "node -r esm -r dotenv/config server & node scripts/start.js",
+    "dev": "npm-run-all --parallel dev:*",
+    "dev:server": "node -r esm -r dotenv/config server",
+    "dev:app": "node scripts/start.js",
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
     "start": "node -r esm -r dotenv/config server",
@@ -112,6 +114,7 @@
     "jest-watch-typeahead": "0.6.1",
     "mini-css-extract-plugin": "^1.6.0",
     "moment": "^2.29.1",
+    "npm-run-all": "^4.1.5",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
     "postcss-flexbugs-fixes": "4.2.1",
