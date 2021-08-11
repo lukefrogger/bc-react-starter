@@ -10,38 +10,43 @@ export const container = css`
 `
 
 export const grid = (isLimited?: boolean): ReturnType<typeof css> => css`
-  --horizontal-setback: 104px;
   padding-bottom: ${isLimited ? 0 : 48}px;
+  display: grid;
+  grid-gap: 40px;
+  align-items: flex-start;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   @media (min-width: 1024px) {
-    padding-left: var(--horizontal-setback);
-    display: flex;
-    column-gap: 40px;
-    > * {
-      min-width: ${isLimited ? 368 : 480}px;
-    }
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 `
 
-export const image = (isLimited?: boolean): ReturnType<typeof css> => css`
-  background-color: gainsboro;
-  height: 340px;
-  width: 100%;
-  position: relative;
-
-  margin-bottom: 20px;
+export const gallery = (theme: Theme): SerializedStyles => css`
+  grid-column: span 1 / span 1;
   @media (min-width: 1024px) {
-    margin-bottom: inherit;
-    height: ${isLimited ? 368 : 584}px;
-    width: ${isLimited ? 368 : 584}px;
-
-    ::before {
-      position: absolute;
-      width: 84px;
-      height: 84px;
-      background-color: gainsboro;
-      content: '';
-      left: -104px;
+    grid-column: span 7 / span 7;
+  }
+  .image-gallery-thumbnails-wrapper.left {
+    margin: 0;
+    margin-right: 24px;
+    width: 80px;
+    .image-gallery-thumbnail {
+      width: 80px;
+      &.active,
+      &:hover {
+        border-width: 3px;
+        border-color: ${theme.colors['primary-60']};
+      }
+      + .image-gallery-thumbnail {
+        margin-top: 12px;
+      }
     }
+  }
+  .image-gallery-icon:hover {
+    color: ${theme.colors.primary};
+  }
+  .image-gallery-bullets .image-gallery-bullet:hover {
+    border-color: ${theme.colors['neutral-40']};
+    background: ${theme.colors['neutral-40']};
   }
 `
 
@@ -49,6 +54,9 @@ export const product = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  @media (min-width: 1024px) {
+    grid-column: span 5 / span 5;
+  }
 `
 
 export const productDescription = css`
@@ -77,6 +85,7 @@ export const row = css`
   display: flex;
   gap: 12px;
   padding-top: 16px;
+  flex-wrap: wrap;
 `
 
 export const productDetail = css`
