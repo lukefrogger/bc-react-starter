@@ -11,13 +11,16 @@ import {
 } from 'unsafe-bc-react-components'
 
 import {
+  Breadcrumbs,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
 } from '@components'
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 
 const Container = styled.div`
-  max-width: 1208px;
+  --horizontal-spacing: 24px;
+  max-width: calc(1208px + (var(--horizontal-spacing) * 2));
+  padding: 0 var(--horizontal-spacing);
   margin: 0 auto;
 `
 const Main = styled.div`
@@ -49,7 +52,7 @@ const Content = styled.div`
 `
 
 const Meta = styled.div`
-  padding: 0 24px 12px;
+  padding-bottom: 12px;
   display: flex;
   justify-content: space-between;
 `
@@ -63,17 +66,30 @@ export function CategoryPage(): React.ReactElement {
   })
   const subcategories = category?.categories ?? []
   const brands = [] // TODO: Get brands
+  const parent = category?.slug.slice(1, -1).split('/')
+  let baseUrl = '/category/'
+
+  const titleCase = (text: string): string => {
+    const str = text.replace(/-/g, ' ')
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    })
+  }
 
   return (
     <Container>
-      <Typography
-        variant="body-small"
-        css={css`
-          padding: 32px 0;
-        `}
-      >
-        Home / Category / Subcategory
-      </Typography>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">Home</Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/categories/all">All Categories</Breadcrumbs.Item>
+        {parent?.map((item) => {
+          baseUrl += `${item}/`
+          return (
+            <Breadcrumbs.Item key={item} to={baseUrl}>
+              {titleCase(item)}
+            </Breadcrumbs.Item>
+          )
+        })}
+      </Breadcrumbs>
       <Card
         variant="large"
         name={category?.label}
@@ -81,6 +97,8 @@ export function CategoryPage(): React.ReactElement {
         css={css`
           background-position: center;
           min-height: 228px;
+          margin-left: calc(var(--horizontal-spacing) * -1);
+          margin-right: calc(var(--horizontal-spacing) * -1);
         `}
       />
       <Main>

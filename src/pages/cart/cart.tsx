@@ -21,13 +21,16 @@ export function CartPage(): React.ReactElement {
     window.scrollTo(0, 0)
   }
 
+  const breadcrumbs = [{ to: '/', label: 'Home' }, { label: 'Cart' }]
+
   return (
     <div css={styles.Container}>
       <Breadcrumbs>
-        <Breadcrumbs.Item to="/">
-          {t('breadcrumbs.home', 'Home')}
-        </Breadcrumbs.Item>
-        <Breadcrumbs.Item>{t('breadcrumbs.cart', 'Cart')}</Breadcrumbs.Item>
+        {breadcrumbs.map((breadcrumb) => (
+          <Breadcrumbs.Item to={breadcrumb.to} key={breadcrumb.to}>
+            {breadcrumb.label}
+          </Breadcrumbs.Item>
+        ))}
       </Breadcrumbs>
       <Typography as="h1" variant="display-xx-small" css={styles.Title}>
         {t('bc.cart.your_order', 'Your order')}
