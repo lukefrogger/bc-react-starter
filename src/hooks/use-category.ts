@@ -23,8 +23,10 @@ export function useCategory(
   ): Category | undefined {
     if (acc) return acc
     if (category.path === slug) return category
-    /*     if (category.children)
-      return category.children.reduce(reduceCategory, undefined) */
+    if (category.children)
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      return category.children.reduce(reduceCategory, undefined)
     return undefined
   }
 
