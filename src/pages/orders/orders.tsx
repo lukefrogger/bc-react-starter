@@ -23,6 +23,8 @@ export function OrdersPage(): React.ReactElement {
   const isLoading = typeof orders === 'undefined' && !error
   const orderHistory = Array.isArray(orders) ? orders : []
 
+  console.log('orders', orders)
+
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
       case 'details':
@@ -61,10 +63,14 @@ export function OrdersPage(): React.ReactElement {
           onOrderAction={handleOrderAction}
         />
       ))}
+      {/*
+        TODO: Show Pagination
+        Note: right now isn't possible because we're using API Orders V2,
+        which does not return pagination meta data.
 
       <div css={styles.Pagination}>
         <Pagination />
-      </div>
+      </div> */}
     </div>
   )
 }
