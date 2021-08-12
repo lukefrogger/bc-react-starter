@@ -1,8 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import { Card, Typography } from 'unsafe-bc-react-components'
+import { Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs, CategoryCard } from '@components'
 import { useCategories } from '@hooks'
