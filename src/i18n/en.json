@@ -87,7 +87,10 @@
       "specifications": "Specifications"
     },
     "search": {
-      "search": "Search"
+      "search": "Search",
+      "result": "{{count}} result",
+      "result_plural": "{{count}} results",
+      "for": " for '{{search}}'"
     },
     "fields": {
       "comments": "Comments",

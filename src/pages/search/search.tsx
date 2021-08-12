@@ -4,14 +4,12 @@ import { Form, Formik, FormikProps } from 'formik'
 import { useTranslation } from 'react-i18next'
 // import { Link } from 'react-router-dom'
 import { Clickable /* Tab, TabList, TabPanel, useTabState */ } from 'reakit'
-import {
-  Field,
-  Pagination,
-  ProductCard,
-  Props as ProductCardProps,
-  Typography,
-} from 'unsafe-bc-react-components'
+import { Field, Pagination, Typography } from 'unsafe-bc-react-components'
 
+import {
+  ProductCardWithButtons,
+  ProductCardWithButtonsProps,
+} from '@components'
 import { Search } from '@components/header/icons'
 import { useSearch } from '@hooks'
 
@@ -40,8 +38,10 @@ export function SearchPage(): React.ReactElement {
   const { data, error } = useSearch(search)
   const isLoading = !data && !error
 
-  const onPageChange: any = (_: unknown, page: number): void =>
+  function onPageChange(event: React.ChangeEvent<unknown>, page: number): void {
+    window.scrollTo(0, 0)
     setSearch({ ...search, page })
+  }
   const onSubmit = (values: SearchValues): void =>
     setSearch({ search: values.search, page: 1 })
 
@@ -88,17 +88,28 @@ export function SearchPage(): React.ReactElement {
       {isLoading && 'Loading...'}
 
       {/* <TabPanel {...tab} css={styles.ProductGrid}> */}
+      {data?.pagination && (
+        <Typography variant="body-small" css={styles.Results}>
+          {t('bc.search.result', '{{count}} results for', {
+            count: data.pagination.total,
+          })}
+          {search.search &&
+            t('bc.search.for', {
+              search: search.search,
+            })}
+        </Typography>
+      )}
       <div css={styles.ProductGrid}>
         {data?.products
           .map(
-            (product): ProductCardProps => ({
+            (product): ProductCardWithButtonsProps => ({
               brand: {
                 name: product.node.brand?.name || '',
               },
               product: {
                 condition: 'new',
                 name: product.node.name,
-                price: product.node.prices?.price.value,
+                price: product.node.prices?.basePrice?.value,
                 sale_price: product.node.prices?.salePrice?.value || 0,
               },
               currencySettings: {},
@@ -107,11 +118,13 @@ export function SearchPage(): React.ReactElement {
                 url_standard:
                   product.node.images.edges?.[0]?.node.urlOriginal || '',
               },
-              productUrl: `/product${product.node.path}`,
+              productId: product.node.entityId,
+              variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
+              path: product.node.path,
             })
           )
           .map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <ProductCardWithButtons key={product.id} {...product} />
           ))}
       </div>
       {/* </TabPanel> */}
@@ -138,10 +151,15 @@ export function SearchPage(): React.ReactElement {
       </TabPanel>
       <TabPanel {...tab}>Galleries</TabPanel>
       <TabPanel {...tab}>Pages</TabPanel> */}
-
-      <div css={styles.Pagination}>
-        <Pagination {...data?.pagination} onChange={onPageChange} />
-      </div>
+      {data?.pagination && (
+        <div css={styles.Pagination}>
+          <Pagination
+            page={data.pagination.pages.current}
+            count={data.pagination.total_pages}
+            onChange={onPageChange}
+          />
+        </div>
+      )}
     </div>
   )
 }
