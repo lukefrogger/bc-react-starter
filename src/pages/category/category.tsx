@@ -1,8 +1,8 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
-import { useParams } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useHistory, useParams } from 'react-router-dom'
 import {
   Card,
   Pagination,
@@ -17,48 +17,12 @@ import {
 } from '@components'
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 
-const Container = styled.div`
-  --horizontal-spacing: 24px;
-  max-width: calc(1208px + (var(--horizontal-spacing) * 2));
-  padding: 0 var(--horizontal-spacing);
-  margin: 0 auto;
-`
-const Main = styled.div`
-  display: flex;
-  flex: 1;
-  padding: 48px 0;
-`
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  justify-items: center;
-  @media (min-width: 720px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-  img {
-    max-height: none !important;
-  }
-`
-
-const Content = styled.div`
-  width: 100%;
-  @media (min-width: 1024px) {
-    margin-right: -24px;
-  }
-`
-
-const Meta = styled.div`
-  padding-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
-`
+import * as styles from './styles'
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
+  const history = useHistory()
+  const { t } = useTranslation()
 
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
@@ -77,10 +41,14 @@ export function CategoryPage(): React.ReactElement {
   }
 
   return (
-    <Container>
+    <div css={styles.Container}>
       <Breadcrumbs>
-        <Breadcrumbs.Item to="/">Home</Breadcrumbs.Item>
-        <Breadcrumbs.Item to="/categories/all">All Categories</Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/">
+          {t('breadcrumbs.home', 'Home')}
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/categories/all">
+          {t('breadcrumbs.all_categories', 'All Categories')}
+        </Breadcrumbs.Item>
         {parent?.map((item) => {
           baseUrl += `${item}/`
           return (
@@ -90,18 +58,17 @@ export function CategoryPage(): React.ReactElement {
           )
         })}
       </Breadcrumbs>
-      <Card
-        variant="large"
-        name={category?.label}
-        imageUrl="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80" // TODO: Replace this image
-        css={css`
-          background-position: center;
-          min-height: 228px;
-          margin-left: calc(var(--horizontal-spacing) * -1);
-          margin-right: calc(var(--horizontal-spacing) * -1);
-        `}
-      />
-      <Main>
+      {category?.image?.urlOriginal ? (
+        <Card
+          variant="large"
+          name={category?.label}
+          imageUrl={category?.image?.urlOriginal}
+          css={styles.Card}
+        />
+      ) : (
+        <Typography variant="display-x-large">{category?.label}</Typography>
+      )}
+      <div css={styles.Main}>
         {subcategories.length > 0 || brands.length > 0 ? (
           <SideMenu
             css={css`
@@ -114,7 +81,12 @@ export function CategoryPage(): React.ReactElement {
             {subcategories.length > 0 && (
               <SideMenu.Level title="Subcategories">
                 {subcategories.map((subcategory) => (
-                  <SideMenu.Item key={subcategory.id}>
+                  <SideMenu.Item
+                    key={subcategory.id}
+                    onClick={() => {
+                      history.push(`/category${subcategory.slug}`)
+                    }}
+                  >
                     {subcategory.label}
                   </SideMenu.Item>
                 ))}
@@ -130,8 +102,8 @@ export function CategoryPage(): React.ReactElement {
           </SideMenu>
         ) : null}
 
-        <Content>
-          <Meta>
+        <div css={styles.Content}>
+          <div css={styles.Meta}>
             <Typography variant="body-small">
               {search?.pagination.total} items in “{category?.label}”
             </Typography>
@@ -139,8 +111,8 @@ export function CategoryPage(): React.ReactElement {
               // TODO: Add sorting logic
               // <Typography variant="body-small">Sort by: Trending</Typography>
             }
-          </Meta>
-          <Grid>
+          </div>
+          <div css={styles.Grid}>
             {search?.found &&
               search?.products
                 .map(
@@ -171,14 +143,14 @@ export function CategoryPage(): React.ReactElement {
                     {...product}
                   />
                 ))}
-          </Grid>
+          </div>
           <Pagination
             css={css`
               padding: 56px 0 120px;
             `}
           />
-        </Content>
-      </Main>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }

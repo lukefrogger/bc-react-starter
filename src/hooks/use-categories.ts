@@ -14,6 +14,11 @@ export type Category = {
   color?: string
   categories?: Category[]
   id: number
+  image?: {
+    urlOriginal?: string
+    altText?: string
+    isDefault?: boolean
+  }
 }
 
 type CategoryData = {
@@ -22,6 +27,11 @@ type CategoryData = {
   entityId: number
   description: string
   productCount: number
+  image?: {
+    urlOriginal?: string
+    altText?: string
+    isDefault?: boolean
+  }
   children: CategoryData[]
 }
 
@@ -30,6 +40,7 @@ function mapCategory(category: CategoryData): Category {
     label: category.name,
     slug: category.path,
     id: category.entityId,
+    image: category.image,
     categories:
       !category?.children || category.children?.length === 0
         ? undefined
