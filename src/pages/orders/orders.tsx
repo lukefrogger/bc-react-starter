@@ -4,7 +4,7 @@ import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-produ
 import useOrders from '@bigcommerce/storefront-data-hooks/use-orders'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import { Orders, Pagination, Typography } from 'unsafe-bc-react-components'
+import { Orders, Typography } from 'unsafe-bc-react-components'
 import { Order } from 'unsafe-bc-react-components/dist/components/core/orders/types'
 
 import { OrderLoading } from '@components'
@@ -22,8 +22,6 @@ export function OrdersPage(): React.ReactElement {
   const history = useHistory()
   const isLoading = typeof orders === 'undefined' && !error
   const orderHistory = Array.isArray(orders) ? orders : []
-
-  console.log('orders', orders)
 
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
