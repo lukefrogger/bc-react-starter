@@ -15,7 +15,6 @@ const TELEPHONE = '0-800-42-STELLAR'
 export function Footer(): React.ReactElement {
   const { data: categories } = useCategories()
   const { t } = useTranslation()
-
   return (
     <div css={styles.container}>
       <Logo width="100%" />
@@ -24,11 +23,11 @@ export function Footer(): React.ReactElement {
           {categories?.slice(0, 4).map((category) => {
             return (
               <Link
-                key={category.slug}
-                to={`/category${category.slug}`}
+                key={category.path}
+                to={`/category${category.path}`}
                 css={styles.link}
               >
-                {category.label}
+                {category.name}
               </Link>
             )
           })}

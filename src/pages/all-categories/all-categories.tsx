@@ -32,9 +32,9 @@ export function AllCategories(): React.ReactElement {
       <div css={styles.Main}>
         {data?.map((category) => (
           <CategoryCard
-            key={category.id}
-            label={category.label}
-            to={`/category${category.slug}`}
+            key={category.entityId}
+            label={category.name}
+            to={`/category${category.path}`}
             image={category.image?.urlOriginal}
           />
         ))}

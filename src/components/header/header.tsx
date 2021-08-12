@@ -40,7 +40,7 @@ export function Header(): React.ReactElement {
           <Dialog {...dialog} css={styles.mobileMenu} aria-label="Welcome">
             {dataSliced?.map((category) => (
               <HeaderItem
-                key={category.slug}
+                key={category.entityId}
                 category={category}
                 behaviour="disclosure"
                 onClick={dialog.hide}
@@ -75,7 +75,7 @@ export function Header(): React.ReactElement {
             <HeaderItem
               category={category}
               behaviour="popover"
-              key={category.id}
+              key={category.entityId}
             />
           ))}
           <Link
