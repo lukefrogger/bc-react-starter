@@ -11,7 +11,7 @@ export type UseCategoryBody = {
 export function useCategory(
   params: UseCategoryBody
 ): Omit<SWRResponse<Category, Error>, 'mutate' | 'revalidate'> {
-  const { data, mutate, revalidate, ...categories } = useCategories()
+  const { data, ...categories } = useCategories()
 
   const slug = `/${params.categories}/${
     params.subCategories ? `${params.subCategories}/` : ''
@@ -22,9 +22,9 @@ export function useCategory(
     category: Category
   ): Category | undefined {
     if (acc) return acc
-    if (category.slug === slug) return category
-    if (category.categories)
-      return category.categories.reduce(reduceCategory, undefined)
+    if (category.path === slug) return category
+    /*     if (category.children)
+      return category.children.reduce(reduceCategory, undefined) */
     return undefined
   }
 

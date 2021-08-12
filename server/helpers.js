@@ -5,6 +5,7 @@ import catalogProductsApi, {
 import loginApiHandlers from '@bigcommerce/storefront-data-hooks/api/customers/handlers/login'
 import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
+import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
 import axios from 'axios'
 import csc from 'country-state-city'
 
@@ -64,42 +65,7 @@ export const stateHelper = (req, res) => {
   res.json(data)
 }
 
-export const categoriesHelper = async (req, res) => {
-  const { data } = await axios(process.env.BIGCOMMERCE_STOREFRONT_API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${process.env.BIGCOMMERCE_STOREFRONT_API_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    data: JSON.stringify({
-      query: `query CategoryTree3LevelsDeep {
-        site {
-          categoryTree {
-            ...CategoryFields
-            children {
-              ...CategoryFields
-              children {
-                ...CategoryFields
-              }
-            }
-          }
-        }
-      }
-
-      fragment CategoryFields on CategoryTreeItem {
-        name
-        path
-        entityId
-        description
-        productCount
-        image {
-          urlOriginal
-          altText
-          isDefault
-        }
-      }`,
-    }),
-  })
-
-  res.end(JSON.stringify(data.data))
+export const getSiteInfoHelper = async (req, res) => {
+  const data = await getSiteInfo()
+  res.end(JSON.stringify(data))
 }
