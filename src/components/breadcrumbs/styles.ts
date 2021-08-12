@@ -1,11 +1,7 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
 
 export const container = css`
-  padding: 32px;
-
-  @media screen and (min-width: 1240px) {
-    padding: 32px 0;
-  }
+  padding: 32px 0;
 `
 
 export const link = (theme: Theme): SerializedStyles => css`

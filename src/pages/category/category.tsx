@@ -18,7 +18,9 @@ import {
 import { useCategory, UseCategoryBody, useSearch } from '@hooks'
 
 const Container = styled.div`
-  max-width: 1208px;
+  --horizontal-spacing: 24px;
+  max-width: calc(1208px + (var(--horizontal-spacing) * 2));
+  padding: 0 var(--horizontal-spacing);
   margin: 0 auto;
 `
 const Main = styled.div`
@@ -50,7 +52,7 @@ const Content = styled.div`
 `
 
 const Meta = styled.div`
-  padding: 0 24px 12px;
+  padding-bottom: 12px;
   display: flex;
   justify-content: space-between;
 `
@@ -95,6 +97,8 @@ export function CategoryPage(): React.ReactElement {
         css={css`
           background-position: center;
           min-height: 228px;
+          margin-left: calc(var(--horizontal-spacing) * -1);
+          margin-right: calc(var(--horizontal-spacing) * -1);
         `}
       />
       <Main>
