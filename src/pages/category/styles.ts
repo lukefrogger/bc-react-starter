@@ -1,9 +1,17 @@
-import { css, SerializedStyles, Theme } from '@emotion/react'
-import { CSSPrimitive } from 'unsafe-bc-react-components/dist/theme/types'
+import { css } from '@emotion/react'
 
 export const Container = css`
-  max-width: 1208px;
+  --horizontal-spacing: 24px;
+  max-width: calc(1208px + (var(--horizontal-spacing) * 2));
+  padding: 0 var(--horizontal-spacing);
   margin: 0 auto;
+`
+
+export const Card = css`
+  background-position: center;
+  min-height: 228px;
+  margin-left: calc(var(--horizontal-spacing) * -1);
+  margin-right: calc(var(--horizontal-spacing) * -1);
 `
 export const Main = css`
   display: flex;
@@ -34,7 +42,7 @@ export const Content = css`
 `
 
 export const Meta = css`
-  padding: 0 24px 12px;
+  padding-bottom: 12px;
   display: flex;
   justify-content: space-between;
 `

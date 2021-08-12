@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
+import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import {
   Card,
@@ -11,6 +11,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import {
+  Breadcrumbs,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
 } from '@components'
@@ -21,6 +22,7 @@ import * as styles from './styles'
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
   const history = useHistory()
+  const { t } = useTranslation()
 
   const { data: category } = useCategory(params)
   const { data: search } = useSearch({
@@ -28,26 +30,40 @@ export function CategoryPage(): React.ReactElement {
   })
   const subcategories = category?.categories ?? []
   const brands = [] // TODO: Get brands
+  const parent = category?.slug.slice(1, -1).split('/')
+  let baseUrl = '/category/'
+
+  const titleCase = (text: string): string => {
+    const str = text.replace(/-/g, ' ')
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    })
+  }
 
   return (
     <div css={styles.Container}>
-      <Typography
-        variant="body-small"
-        css={css`
-          padding: 32px 0;
-        `}
-      >
-        Home / Category / Subcategory
-      </Typography>
+      <Breadcrumbs>
+        <Breadcrumbs.Item to="/">
+          {t('breadcrumbs.home', 'Home')}
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/categories/all">
+          {t('breadcrumbs.all_categories', 'All Categories')}
+        </Breadcrumbs.Item>
+        {parent?.map((item) => {
+          baseUrl += `${item}/`
+          return (
+            <Breadcrumbs.Item key={item} to={baseUrl}>
+              {titleCase(item)}
+            </Breadcrumbs.Item>
+          )
+        })}
+      </Breadcrumbs>
       {category?.image?.urlOriginal ? (
         <Card
           variant="large"
           name={category?.label}
           imageUrl={category?.image?.urlOriginal}
-          css={css`
-            background-position: center;
-            min-height: 228px;
-          `}
+          css={styles.Card}
         />
       ) : (
         <Typography variant="display-x-large">{category?.label}</Typography>
