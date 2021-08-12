@@ -1794,28 +1794,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@jingtribe/test-bc-react-components@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@jingtribe/test-bc-react-components/-/test-bc-react-components-0.0.1.tgz#478770c6229bd08a15d2d5ed358e76640bd5ba0e"
-  integrity sha512-7x0mTLqGcpaeyu/CPLSk+9dV/z+dCqXXWSaCwOpgMT9+V0C3jbGLint6b/r/T3kUCfTBZNg5LCQdpycxdYMQLg==
-  dependencies:
-    "@storybook/addon-actions" "^6.0.21"
-    "@storybook/react" "^6.0.21"
-    "@types/react-flatpickr" "^3.8.1"
-    classnames "^2.2.6"
-    country-state-city "^1.0.5"
-    date-fns "^2.16.1"
-    enzyme "^3.11.0"
-    enzyme-adapter-react-16 "^1.15.2"
-    flatpickr "^4.6.9"
-    i "^0.3.6"
-    js-cookie "^2.2.1"
-    lodash "^4.17.15"
-    npm "^6.14.7"
-    react-docgen-typescript "^1.21.0"
-    react-docgen-typescript-loader "^3.7.2"
-    react-flatpickr "^3.10.0"
-
 "@mdx-js/mdx@^1.6.22":
   version "1.6.22"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.6.22.tgz#8a723157bf90e78f17dc0f27995398e6c731f1ba"
@@ -1962,7 +1940,7 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@storybook/addon-actions@^6.0.21", "@storybook/addon-actions@^6.2.7":
+"@storybook/addon-actions@^6.2.7":
   version "6.3.6"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-6.3.6.tgz#691d61d6aca9c4b3edba50c531cbe4d4139ed451"
   integrity sha512-1MBqCbFiupGEDyIXqFkzF4iR8AduuB7qSNduqtsFauvIkrG5bnlbg5JC7WjnixkCaaWlufgbpasEHioXO9EXGw==
@@ -2411,7 +2389,7 @@
     react-docgen-typescript "^2.0.0"
     tslib "^2.0.0"
 
-"@storybook/react@^6.0.21", "@storybook/react@^6.2.7":
+"@storybook/react@^6.2.7":
   version "6.3.6"
   resolved "https://registry.yarnpkg.com/@storybook/react/-/react-6.3.6.tgz#593bc0743ad22ed5e6e072e6157c20c704864fc3"
   integrity sha512-2c30XTe7WzKnvgHBGOp1dzBVlhcbc3oEX0SIeVE9ZYkLvRPF+J1jG948a26iqOCOgRAW13Bele37mG1gbl4tiw==
@@ -5558,11 +5536,6 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
-
-country-state-city@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/country-state-city/-/country-state-city-1.0.5.tgz#7ea4c71e06c669d53e9897470e6bd565c9cb6136"
-  integrity sha512-2mBXgYCwWNeQLhtESLufNK3mwK8dYdzniywma1+00RmUB1FeQqJCU6Ehufz60E5iD/uM1bnt+V9K6fZbkQAhew==
 
 country-state-city@^2.1.0:
   version "2.2.0"
@@ -16243,10 +16216,10 @@ unquote@^1.1.0, unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
-unsafe-bc-react-components@^0.0.2-beta.5:
-  version "0.0.2-beta.5"
-  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2-beta.5.tgz#04ab4a2322a46199db2f5fab4787ef907e1ba0a8"
-  integrity sha512-Gjcagar4loVsCogmKGaMiaxgFukHBOC3n4RdYq2haeIVfu1YfDN7aBcKh+LEUCkokcfthzWFAvM8VVwTvVNXZg==
+unsafe-bc-react-components@^0.0.2-beta.6:
+  version "0.0.2-beta.6"
+  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2-beta.6.tgz#869462c051546db779b0f1eadea5605aad884f17"
+  integrity sha512-iT7trMUxn09ghSKOEEFXmebmhx0dUSWD7Sd+h7aOG6MJnWCel1b9x91ShIQVWmX3WCjh/niXqz2fVlUI0sxC4g==
   dependencies:
     "@storybook/addon-actions" "^6.2.7"
     "@storybook/react" "^6.2.7"
