@@ -21,9 +21,7 @@ export function OrdersPage(): React.ReactElement {
   const { t } = useTranslation()
   const history = useHistory()
   const isLoading = typeof orders === 'undefined' && !error
-  // const isLoading = true
   const orderHistory = Array.isArray(orders) ? orders : []
-  const LoadingArray = [1, 2, 3]
 
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
@@ -40,7 +38,7 @@ export function OrdersPage(): React.ReactElement {
         <Typography css={styles.Title} variant="display-large">
           {t('orders.title', 'Order history')}
         </Typography>
-        {LoadingArray?.map((loading) => (
+        {[...Array(3)].map((loading) => (
           <OrderLoading key={loading} />
         ))}
       </div>
