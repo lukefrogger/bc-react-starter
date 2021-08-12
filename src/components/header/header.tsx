@@ -51,7 +51,7 @@ export function Header(): React.ReactElement {
               to="/categories/all"
               onClick={dialog.hide}
             >
-              More Categories
+              {t('header.more_categories', 'More categories')}
             </Link>
             <Link css={styles.category} to="/search" onClick={dialog.hide}>
               <Icons.Search />
@@ -83,7 +83,7 @@ export function Header(): React.ReactElement {
             to="/categories/all"
             onClick={dialog.hide}
           >
-            More Categories
+            {t('header.more_categories', 'More categories')}
           </Link>
         </div>
       )}
