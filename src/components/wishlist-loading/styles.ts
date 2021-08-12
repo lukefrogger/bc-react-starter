@@ -1,7 +1,5 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
 
-import { getBaseStyle } from '@utils/get-base-style'
-
 export const wishlistName = (theme: Theme): SerializedStyles => css`
   width: 80%;
   max-width: 168px;
