@@ -2,8 +2,7 @@ import * as React from 'react'
 
 import { Form, Formik, FormikProps } from 'formik'
 import { useTranslation } from 'react-i18next'
-// import { Link } from 'react-router-dom'
-import { Clickable /* Tab, TabList, TabPanel, useTabState */ } from 'reakit'
+import { Clickable } from 'reakit'
 import { Field, Pagination, Typography } from 'unsafe-bc-react-components'
 
 import {
@@ -15,22 +14,12 @@ import { useSearch } from '@hooks'
 
 import * as styles from './styles'
 
-const mockPosts = Array(5).fill({
-  id: 5,
-  title: 'It was impossible for Arthur to know',
-  description:
-    'The recalculations showed absolutely clearly and unambiguously that he was going to have a very bad month indeed, starting with today. It was impossible for Arthur to know this, but he just went ahead and knew it anyway.',
-  imageUrl:
-    'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
-})
-
 const INITIAL_VALUES = { search: '' }
 
 type SearchValues = typeof INITIAL_VALUES
 
 export function SearchPage(): React.ReactElement {
   const { t } = useTranslation()
-  // const tab = useTabState({ selectedId: 'products' })
   const [search, setSearch] = React.useState<{ search: string; page: number }>({
     search: '',
     page: 1,
@@ -66,28 +55,9 @@ export function SearchPage(): React.ReactElement {
           </Form>
         )}
       </Formik>
-      {/* DATA ONLY AVAILABLE FOR PRODUCTS NOW
-      <TabList css={styles.Tabs} {...tab}>
-        <Tab {...tab} css={styles.Tab} id="products">
-          Products {data?.products?.length && `(${data?.products?.length})`}
-        </Tab>
-        <Tab {...tab} css={styles.Tab}>
-          Blog posts (21)
-        </Tab>
-        <Tab {...tab} css={styles.Tab}>
-          Events (21)
-        </Tab>
-        <Tab {...tab} css={styles.Tab}>
-          Galleries (21)
-        </Tab>
-        <Tab {...tab} css={styles.Tab}>
-          Pages (21)
-        </Tab>
-      </TabList> */}
 
       {isLoading && 'Loading...'}
 
-      {/* <TabPanel {...tab} css={styles.ProductGrid}> */}
       {data?.pagination && (
         <Typography variant="body-small" css={styles.Results}>
           {t('bc.search.result', '{{count}} results for', {
@@ -127,30 +97,6 @@ export function SearchPage(): React.ReactElement {
             <ProductCardWithButtons key={product.id} {...product} />
           ))}
       </div>
-      {/* </TabPanel> */}
-      {/* <TabPanel {...tab}>
-        {mockPosts.map(
-          (post: typeof mockPosts[0]): React.ReactElement => (
-            <article css={styles.Article} key={post.id}>
-              <div className="title-box">
-                <div className="pill">Blog</div>
-                <Typography variant="display-small" className="title">
-                  {post.title}
-                </Typography>
-                <Link className="link" to={`/blog/${post.id}`}>
-                  More
-                </Link>
-              </div>
-              <Typography className="description">
-                {post.description}
-              </Typography>
-              <img className="image" src={post.imageUrl} alt={post.title} />
-            </article>
-          )
-        )}
-      </TabPanel>
-      <TabPanel {...tab}>Galleries</TabPanel>
-      <TabPanel {...tab}>Pages</TabPanel> */}
       {data?.pagination && (
         <div css={styles.Pagination}>
           <Pagination
