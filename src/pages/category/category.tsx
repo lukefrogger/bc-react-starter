@@ -27,10 +27,10 @@ export function CategoryPage(): React.ReactElement {
   const { data: category } = useCategory(params)
   const [page, setPage] = React.useState<number>(1)
   const { data: search } = useSearch({
-    categoryId: category?.id,
+    categoryId: category?.entityId,
     page,
   })
-  const subcategories = category?.categories ?? []
+  const subcategories = category?.children ?? []
   const brands = [] // TODO: Get brands
 
   const titleCase = (text: string): string => {
@@ -77,12 +77,12 @@ export function CategoryPage(): React.ReactElement {
       {category?.image?.urlOriginal ? (
         <Card
           variant="large"
-          name={category?.label}
+          name={category?.name}
           imageUrl={category?.image?.urlOriginal}
           css={styles.Card}
         />
       ) : (
-        <Typography variant="display-x-large">{category?.label}</Typography>
+        <Typography variant="display-x-large">{category?.name}</Typography>
       )}
       <div css={styles.Main}>
         {subcategories.length > 0 || brands.length > 0 ? (
@@ -98,12 +98,12 @@ export function CategoryPage(): React.ReactElement {
               <SideMenu.Level title="Subcategories">
                 {subcategories.map((subcategory) => (
                   <SideMenu.Item
-                    key={subcategory.id}
+                    key={subcategory.entityId}
                     onClick={() => {
-                      history.push(`/category${subcategory.slug}`)
+                      history.push(`/category${subcategory.path}`)
                     }}
                   >
-                    {subcategory.label}
+                    {subcategory.name}
                   </SideMenu.Item>
                 ))}
               </SideMenu.Level>
@@ -124,7 +124,7 @@ export function CategoryPage(): React.ReactElement {
               <Typography variant="body-small">
                 {t('category_item_in', "{{count}} items in '{{category}}'", {
                   count: search.pagination.total,
-                  category: category?.label,
+                  category: category?.name,
                 })}
               </Typography>
             )}

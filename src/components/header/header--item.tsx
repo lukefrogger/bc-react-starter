@@ -8,8 +8,6 @@ import {
 } from 'reakit/Disclosure'
 import { Popover, PopoverDisclosure, usePopoverState } from 'reakit/Popover'
 
-import { Category } from '@hooks'
-
 import * as Icons from './icons'
 import * as styles from './styles'
 
@@ -24,12 +22,17 @@ function getArrowOrientation(
 
 type Props<S = unknown> = Omit<LinkProps<S>, 'to'> &
   React.RefAttributes<HTMLAnchorElement> & {
-    category: Category
+    category: {
+      name: string
+      path: string
+      children?: Props['category'][]
+      entityId: number
+    }
     behaviour?: 'disclosure' | 'popover'
     nested?: boolean
   }
 
-export function HeaderItem(props: Props): React.ReactElement {
+export function HeaderItem(props: Props): React.ReactElement | null {
   const { category, behaviour, nested = false, ...rest } = props
   const popover = usePopoverState({
     placement: nested ? 'right-start' : 'bottom',
@@ -37,7 +40,7 @@ export function HeaderItem(props: Props): React.ReactElement {
   })
   const disclosure = useDisclosureState()
 
-  if (category.categories) {
+  if (category.children && category.children.length > 0) {
     if (behaviour === 'disclosure') {
       return (
         <>
@@ -45,7 +48,7 @@ export function HeaderItem(props: Props): React.ReactElement {
             {...disclosure}
             css={nested ? styles.subcategory : styles.category}
           >
-            {category.label}
+            {category.name}
             <Icons.Arrow
               orientation={getArrowOrientation(
                 disclosure.visible,
@@ -58,9 +61,9 @@ export function HeaderItem(props: Props): React.ReactElement {
             {...disclosure}
             css={nested ? styles.disclosureNested : styles.disclosure}
           >
-            {category.categories.map((subcategory) => (
+            {category.children.map((subcategory) => (
               <HeaderItem
-                key={subcategory.slug}
+                key={subcategory.entityId}
                 category={subcategory}
                 css={styles.subcategory}
                 behaviour={nested ? undefined : 'disclosure'} // Only supports 2 levels of subcategories
@@ -70,9 +73,9 @@ export function HeaderItem(props: Props): React.ReactElement {
             ))}
             <HeaderItem
               category={{
-                label: `All ${category.label}`,
-                slug: category.slug,
-                id: category.id,
+                name: `All ${category.name}`,
+                path: category.path,
+                entityId: category.entityId,
               }}
               css={styles.subcategory}
               {...rest}
@@ -88,7 +91,7 @@ export function HeaderItem(props: Props): React.ReactElement {
             {...popover}
             css={nested ? styles.subcategory : styles.category}
           >
-            {category.label}
+            {category.name}
             <Icons.Arrow
               orientation={getArrowOrientation(
                 popover.visible,
@@ -102,9 +105,9 @@ export function HeaderItem(props: Props): React.ReactElement {
             aria-label="Welcome"
             css={nested ? styles.popoverNested : styles.popover}
           >
-            {category.categories.map((subcategory) => (
+            {category.children.map((subcategory) => (
               <HeaderItem
-                key={subcategory.slug}
+                key={subcategory.entityId}
                 category={subcategory}
                 css={styles.subcategory}
                 onClick={popover.hide}
@@ -115,9 +118,9 @@ export function HeaderItem(props: Props): React.ReactElement {
             ))}
             <HeaderItem
               category={{
-                label: `All ${category.label}`,
-                slug: category.slug,
-                id: category.id,
+                name: `All ${category.name}`,
+                path: category.path,
+                entityId: category.entityId,
               }}
               css={styles.subcategory}
               {...rest}
@@ -129,13 +132,8 @@ export function HeaderItem(props: Props): React.ReactElement {
   }
 
   return (
-    <Link
-      css={styles.category}
-      to={`/category${category.slug}`}
-      style={category.color ? { color: category.color } : {}}
-      {...rest}
-    >
-      {category.label}
+    <Link css={styles.category} to={`/category${category.path}`} {...rest}>
+      {category.name}
     </Link>
   )
 }

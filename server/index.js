@@ -22,10 +22,10 @@ import serveStatic from 'serve-static'
 import { getWishlistsItemsHelper } from './wishlist/items'
 import {
   cartHelper,
-  categoriesHelper,
   countryHelper,
   getProductHelper,
   getProductSingleHelper,
+  getSiteInfoHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
@@ -55,8 +55,8 @@ app.use(serveStatic(path.join(dirname, 'public')))
 
 // respond to all requests
 app.use('/cart-helper', cartHelper)
-app.use('/categories', categoriesHelper)
 app.use('/checkout', checkoutApi())
+app.use('/api/site-info', getSiteInfoHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)

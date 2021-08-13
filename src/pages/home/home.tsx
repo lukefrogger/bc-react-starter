@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
+import { useHistory } from 'react-router-dom'
 import { Hero, HeroProps, SideMenu } from 'unsafe-bc-react-components'
 
 import {
@@ -36,7 +37,7 @@ const HERO: HeroProps = {
   ],
 }
 
-// FIXME: Move to style.ts
+// TODO: Refactor to css in styles.ts
 const Container = styled.div`
   max-width: 1208px;
   margin: 0 auto;
@@ -61,6 +62,7 @@ const Grid = styled.div`
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
+  const history = useHistory()
 
   return (
     <Container>
@@ -77,8 +79,14 @@ export function HomePage(): React.ReactElement {
         >
           <SideMenu.Level title="Categories">
             {categories?.map((category) => (
-              // TODO: Navigate to category
-              <SideMenu.Item key={category.id}>{category.label}</SideMenu.Item>
+              <SideMenu.Item
+                key={category.entityId}
+                onClick={() => {
+                  history.push(`/category${category.path}`)
+                }}
+              >
+                {category.name}
+              </SideMenu.Item>
             ))}
           </SideMenu.Level>
         </SideMenu>
