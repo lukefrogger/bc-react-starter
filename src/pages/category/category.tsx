@@ -32,8 +32,6 @@ export function CategoryPage(): React.ReactElement {
   })
   const subcategories = category?.children ?? []
   const brands = [] // TODO: Get brands
-  const parent = category?.path.slice(1, -1).split('/')
-  let baseUrl = '/category/'
 
   const titleCase = (text: string): string => {
     const str = text.replace(/-/g, ' ')
@@ -56,14 +54,25 @@ export function CategoryPage(): React.ReactElement {
         <Breadcrumbs.Item to="/categories/all">
           {t('breadcrumbs.all_categories', 'All Categories')}
         </Breadcrumbs.Item>
-        {parent?.map((item) => {
-          baseUrl += `${item}/`
-          return (
-            <Breadcrumbs.Item key={item} to={baseUrl}>
-              {titleCase(item)}
-            </Breadcrumbs.Item>
-          )
-        })}
+        {params.categories && (
+          <Breadcrumbs.Item to={`/category/${params.categories}`}>
+            {t(titleCase(params.categories))}
+          </Breadcrumbs.Item>
+        )}
+        {params.subCategories && (
+          <Breadcrumbs.Item
+            to={`/category/${params.categories}/${params.subCategories}`}
+          >
+            {t(titleCase(params.subCategories))}
+          </Breadcrumbs.Item>
+        )}
+        {params.subSubCategories && (
+          <Breadcrumbs.Item
+            to={`/category/${params.categories}/${params.subCategories}/${params.subSubCategories}`}
+          >
+            {t(titleCase(params.subSubCategories))}
+          </Breadcrumbs.Item>
+        )}
       </Breadcrumbs>
       {category?.image?.urlOriginal ? (
         <Card
