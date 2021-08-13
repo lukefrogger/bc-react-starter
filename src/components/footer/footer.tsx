@@ -61,6 +61,9 @@ export function Footer(): React.ReactElement {
             {t('footer.contact_us', 'Contact us')}
           </Link>
         </div>
+        {
+          // TODO: Move to config
+        }
         <div css={styles.group}>
           <a
             css={styles.link}

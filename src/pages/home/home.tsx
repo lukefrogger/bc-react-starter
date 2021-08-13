@@ -36,6 +36,7 @@ const HERO: HeroProps = {
   ],
 }
 
+// FIXME: Move to style.ts
 const Container = styled.div`
   max-width: 1208px;
   margin: 0 auto;
