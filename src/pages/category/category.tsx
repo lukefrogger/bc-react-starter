@@ -79,8 +79,12 @@ export function CategoryPage(): React.ReactElement {
   return (
     <Container>
       <Breadcrumbs>
-        <Breadcrumbs.Item to="/">Home</Breadcrumbs.Item>
-        <Breadcrumbs.Item to="/categories/all">All Categories</Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/">
+          {t('breadcrumbs.home', 'Home')}
+        </Breadcrumbs.Item>
+        <Breadcrumbs.Item to="/categories/all">
+          {t('breadcrumbs.all_categories', 'All Categories')}
+        </Breadcrumbs.Item>
         {params.categories && (
           <Breadcrumbs.Item to={`/category/${params.categories}`}>
             {t(titleCase(params.categories))}
