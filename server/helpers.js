@@ -92,6 +92,11 @@ export const categoriesHelper = async (req, res) => {
         entityId
         description
         productCount
+        image {
+          urlOriginal
+          altText
+          isDefault
+        }
       }`,
     }),
   })
