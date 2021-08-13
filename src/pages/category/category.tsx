@@ -25,8 +25,10 @@ export function CategoryPage(): React.ReactElement {
   const { t } = useTranslation()
 
   const { data: category } = useCategory(params)
+  const [page, setPage] = React.useState<number>(1)
   const { data: search } = useSearch({
     categoryId: category?.id,
+    page,
   })
   const subcategories = category?.categories ?? []
   const brands = [] // TODO: Get brands
@@ -36,6 +38,11 @@ export function CategoryPage(): React.ReactElement {
     return str.replace(/\w\S*/g, function (txt) {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
     })
+  }
+
+  function onChangePage(_: unknown, newPage: number): void {
+    window.scrollTo(0, 0)
+    setPage(newPage)
   }
 
   return (
@@ -113,9 +120,14 @@ export function CategoryPage(): React.ReactElement {
 
         <div css={styles.Content}>
           <div css={styles.Meta}>
-            <Typography variant="body-small">
-              {search?.pagination.total} items in “{category?.label}”
-            </Typography>
+            {search?.pagination && (
+              <Typography variant="body-small">
+                {t('category_item_in', "{{count}} items in '{{category}}'", {
+                  count: search.pagination.total,
+                  category: category?.label,
+                })}
+              </Typography>
+            )}
             {
               // TODO: Add sorting logic
               // <Typography variant="body-small">Sort by: Trending</Typography>
@@ -141,7 +153,6 @@ export function CategoryPage(): React.ReactElement {
                       url_standard:
                         product.node.images.edges?.[0]?.node.urlOriginal || '',
                     },
-                    productUrl: `/product${product.node.path}`,
                     productId: product.node.entityId,
                     variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
                     path: product.node.path,
@@ -154,11 +165,15 @@ export function CategoryPage(): React.ReactElement {
                   />
                 ))}
           </div>
-          <Pagination
-            css={css`
-              padding: 56px 0 120px;
-            `}
-          />
+          {search?.pagination && (
+            <div css={styles.Pagination}>
+              <Pagination
+                page={search.pagination.pages.current}
+                count={search.pagination.total_pages}
+                onChange={onChangePage}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

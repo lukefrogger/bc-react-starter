@@ -29,7 +29,7 @@ export function ProductCardWithButtons(
 
   return (
     <>
-      <Link to={`/product${path}`} onClick={() => window.scrollTo(0, 0)}>
+      <Link to={`/product${path}`}>
         <ProductCard
           {...rest}
           buttons={[

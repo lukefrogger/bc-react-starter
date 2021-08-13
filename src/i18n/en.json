@@ -30,6 +30,10 @@
     "easy": "Easy returns",
     "safe": "Safely packaged"
   },
+  "category": {
+    "item_in": "{{count}} item in '{{category}}'",
+    "item_in_plural": "{{count}} items in '{{category}}'"
+  },
   "bc": {
     "btn": {
       "yes": "Yes",
@@ -87,7 +91,10 @@
       "specifications": "Specifications"
     },
     "search": {
-      "search": "Search"
+      "search": "Search",
+      "result": "{{count}} result",
+      "result_plural": "{{count}} results",
+      "for": " for '{{search}}'"
     },
     "fields": {
       "comments": "Comments",

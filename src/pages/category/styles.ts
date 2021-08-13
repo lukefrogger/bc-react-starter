@@ -41,6 +41,10 @@ export const Content = css`
   }
 `
 
+export const Pagination = css`
+  padding: 56px 0 72px;
+`
+
 export const Meta = css`
   padding-bottom: 12px;
   display: flex;
