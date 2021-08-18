@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { useHistory } from 'react-router-dom'
 import { Hero, HeroProps, SideMenu } from 'unsafe-bc-react-components'
 
@@ -10,6 +9,8 @@ import {
   ProductCardWithButtonsProps,
 } from '@components'
 import { useCategories, useSearch } from '@hooks'
+
+import * as styles from './styles'
 
 const HERO: HeroProps = {
   headline: {
@@ -38,26 +39,6 @@ const HERO: HeroProps = {
 }
 
 // TODO: Refactor to css in styles.ts
-const Container = styled.div`
-  max-width: 1208px;
-  margin: 0 auto;
-`
-const Main = styled.div`
-  display: flex;
-  flex: 1;
-  padding: 48px 0;
-`
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(2, minmax(0, 1fr));
-  }
-  img {
-    max-height: none !important;
-  }
-`
 
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()
@@ -65,9 +46,9 @@ export function HomePage(): React.ReactElement {
   const history = useHistory()
 
   return (
-    <Container>
+    <div css={styles.container}>
       <Hero {...HERO} />
-      <Main>
+      <div css={styles.main}>
         <SideMenu
           css={css`
             padding-top: 20px;
@@ -90,7 +71,7 @@ export function HomePage(): React.ReactElement {
             ))}
           </SideMenu.Level>
         </SideMenu>
-        <Grid>
+        <div css={styles.grid}>
           {data?.products
             .map(
               (product): ProductCardWithButtonsProps => ({
@@ -117,8 +98,8 @@ export function HomePage(): React.ReactElement {
             .map((product) => (
               <ProductCardWithButtons {...product} key={product.productId} />
             ))}
-        </Grid>
-      </Main>
-    </Container>
+        </div>
+      </div>
+    </div>
   )
 }
