@@ -16216,10 +16216,10 @@ unquote@^1.1.0, unquote@~1.1.1:
   resolved "https://registry.yarnpkg.com/unquote/-/unquote-1.1.1.tgz#8fded7324ec6e88a0ff8b905e7c098cdc086d544"
   integrity sha1-j97XMk7G6IoP+LkF58CYzcCG1UQ=
 
-unsafe-bc-react-components@^0.0.2-beta.8:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2.tgz#e5ce2f7b2ed52dbb56b806683684e6084bbf60fc"
-  integrity sha512-hkNmkT/TsIczQXjTjfGHMKrjlIoBzt3APVsk72KKGx1Gzdk9alV7uk1fNMjGkpAsbFP3LEh3URtGkbIiV+uc9Q==
+unsafe-bc-react-components@0.0.2-beta.8:
+  version "0.0.2-beta.8"
+  resolved "https://registry.yarnpkg.com/unsafe-bc-react-components/-/unsafe-bc-react-components-0.0.2-beta.8.tgz#4497cf7b0a136255f5b63285efd268090e3e6d70"
+  integrity sha512-9gX+asmqE2P/B5SsodxsLrkneqIc7CgGUI64hjtLwuetgWwVpynrnSIEL9jq87R/DIR7ry2SSXmtm9eUU0m1wQ==
   dependencies:
     "@storybook/addon-actions" "^6.2.7"
     "@storybook/react" "^6.2.7"
