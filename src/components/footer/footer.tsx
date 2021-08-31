@@ -81,7 +81,7 @@ export function Footer(): React.ReactElement {
         </div>
       </div>
       <div css={styles.rights}>
-        <p>{t('footer.powered_by', 'Powered by WordPress')}</p>
+        <p>{t('footer.powered_by', 'Powered by Bigcommerce')}</p>
         <p>{t('footer.rights', '© All rights reserved, Modern Tribe')}</p>
       </div>
     </div>

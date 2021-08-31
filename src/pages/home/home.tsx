@@ -2,7 +2,12 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import { useHistory } from 'react-router-dom'
-import { Hero, HeroProps, SideMenu } from 'unsafe-bc-react-components'
+import {
+  Hero,
+  HeroArray,
+  HeroProps,
+  SideMenu,
+} from 'unsafe-bc-react-components'
 
 import {
   ProductCardWithButtons,
@@ -12,33 +17,57 @@ import { useCategories, useSearch } from '@hooks'
 
 import * as styles from './styles'
 
-const HERO: HeroProps = {
-  headline: {
-    text: 'Headline in the Hero',
-  },
-  description: {
-    text: 'Very short description here now',
-  },
-  button: {
-    text: 'Main CTA',
-  },
-  images: [
-    {
+const SLIDES: HeroProps[] = [
+  {
+    headline: {
+      text: 'Woman in red',
+    },
+    description: {
+      text: 'Wow your friends with this classic Heinz Hoodie',
+    },
+    button: {
+      text: 'Get the look',
+    },
+    image: {
       src: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
       alt: 'Woman Red',
     },
-    {
+  },
+  {
+    headline: {
+      text: 'Woman with orange background',
+    },
+    description: {
+      text: 'Seriously stylish handbags',
+    },
+    button: {
+      text: 'Grab them here',
+    },
+    image: {
       src: 'https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
       alt: 'Woman Orange',
     },
-    {
+  },
+  {
+    headline: {
+      text: 'Man with white background',
+    },
+    description: {
+      text: 'New Mens T-shirts now in stock',
+    },
+    button: {
+      text: 'Take a look',
+    },
+    image: {
       src: 'https://images.unsplash.com/photo-1515600051222-a3c338ff16f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
       alt: 'Man White',
     },
-  ],
-}
+  },
+]
 
-// TODO: Refactor to css in styles.ts
+const HERO: HeroArray = {
+  slides: SLIDES,
+}
 
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()

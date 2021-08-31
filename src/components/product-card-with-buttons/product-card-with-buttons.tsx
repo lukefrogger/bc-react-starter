@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { css } from '@emotion/react'
 import { Link } from 'react-router-dom'
 import {
   ProductCard,
@@ -29,7 +30,12 @@ export function ProductCardWithButtons(
 
   return (
     <>
-      <Link to={`/product${path}`}>
+      <Link
+        to={`/product${path}`}
+        css={css`
+          text-decoration: none;
+        `}
+      >
         <ProductCard
           {...rest}
           buttons={[
