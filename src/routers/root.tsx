@@ -18,6 +18,7 @@ import {
 } from '@pages'
 
 import { LegalRouter } from './legal'
+import { ScrollToTop } from './scroll-top'
 import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
@@ -25,6 +26,7 @@ export function RootRouter(): React.ReactElement {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div>
         {banner && <Banner onClose={onBannerClose}>{banner?.content}</Banner>}
         <Header />
