@@ -1,12 +1,15 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
 
-export const container = css`
+export const container = (theme: Theme): SerializedStyles => css`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 24px 32px;
+  padding: 18px 32px;
   align-items: center;
   z-index: 20;
+  ${theme.mq[2]} {
+    padding: 24px 32px;
+  }
   > * {
     :first-of-type {
       margin-left: -8px;
