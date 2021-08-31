@@ -16,12 +16,18 @@ const OrderRow = (props: any): React.ReactElement => {
   return <Orders.OrderRow {...props} products={products} />
 }
 
+const SortOrders: [] = (a: Order, b: Order) => {
+  return b.id - a.id
+}
+
 export function OrdersPage(): React.ReactElement {
   const { data: orders, error } = useOrders()
   const { t } = useTranslation()
   const history = useHistory()
   const isLoading = typeof orders === 'undefined' && !error
   const orderHistory = Array.isArray(orders) ? orders : []
+
+  orders?.sort(SortOrders)
 
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
