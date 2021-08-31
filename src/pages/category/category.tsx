@@ -35,9 +35,10 @@ export function CategoryPage(): React.ReactElement {
 
   const titleCase = (text: string): string => {
     const str = text.replace(/-/g, ' ')
-    return str.replace(/\w\S*/g, function (txt) {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-    })
+    return str.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    )
   }
 
   function onChangePage(_: unknown, newPage: number): void {

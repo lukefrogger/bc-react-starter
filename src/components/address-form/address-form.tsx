@@ -107,7 +107,7 @@ export function AddressForm({
               />
               <FormikField
                 name="company"
-                label={t(`profile.fields.company`, 'Company')}
+                label={t(`profile.fields.company`, 'Company Name (optional)')}
               />
               <FormikField
                 name="phone"
@@ -128,7 +128,10 @@ export function AddressForm({
               />
               <FormikField
                 name="address2"
-                label={t(`profile.fields.address2`, 'Address line 2')}
+                label={t(
+                  `profile.fields.address2`,
+                  'Address line 2 (optional)'
+                )}
               />
               <FormikField
                 name="city"
@@ -157,7 +160,7 @@ export function AddressForm({
               <FormikField
                 asType="select"
                 name="state_or_province"
-                label={t(`profile.fields.state`, 'State/country')}
+                label={t(`profile.fields.state`, 'State/province')}
                 validate={states?.length ? required : null}
               >
                 <option selected>Select a state / country</option>

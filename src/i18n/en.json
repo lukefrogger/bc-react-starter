@@ -8,7 +8,7 @@
     "category": "Category"
   },
   "submenu": {
-    "profile": "Profile",
+    "profile": "Account Profile",
     "orders": "Order history",
     "addresses": "My addresses",
     "wishlists": "My wish lists"
@@ -21,7 +21,7 @@
     "about_us": "About us",
     "help": "Help",
     "contact_us": "Contact us",
-    "powered_by": "Powered by WordPress",
+    "powered_by": "Powered by BigCommerce",
     "rights": "© All rights reserved, Modern Tribe"
   },
   "features": {
