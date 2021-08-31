@@ -70,6 +70,7 @@ export const social = (theme: Theme): SerializedStyles => css`
 `
 
 export const rights = (theme: Theme): SerializedStyles => css`
+  ${theme.typography['body-small'] as CSSPrimitive}
   display: flex;
   padding-top: 48px;
   gap: 16px;
@@ -82,5 +83,13 @@ export const rights = (theme: Theme): SerializedStyles => css`
   ${theme.mq[1]} {
     padding-top: 72px;
     justify-content: space-between;
+  }
+`
+
+export const icons = (theme: Theme): SerializedStyles => css`
+  fill: ${theme.colors['neutral-95']};
+
+  &:hover {
+    fill: ${theme.colors.primary};
   }
 `

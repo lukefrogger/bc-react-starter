@@ -81,9 +81,11 @@ const Main = styled.div`
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));
+  row-gap: 20px;
   @media (min-width: 1024px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: repeat(2, minmax(0, 1fr));
+    row-gap: 28px;
   }
   img {
     max-height: none !important;
