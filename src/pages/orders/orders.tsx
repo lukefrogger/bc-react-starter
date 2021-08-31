@@ -16,7 +16,7 @@ const OrderRow = (props: any): React.ReactElement => {
   return <Orders.OrderRow {...props} products={products} />
 }
 
-const SortOrders: [] = (a: Order, b: Order) => {
+const SortOrders = (a: any, b: any): number => {
   return b.id - a.id
 }
 
