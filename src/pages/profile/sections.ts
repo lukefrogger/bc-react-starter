@@ -25,15 +25,15 @@ export const generalSection: FormField[] = [
     inline: true,
   },
   {
-    name: 'company',
-    label: 'Company name',
-    required: false,
-    inline: true,
-  },
-  {
     name: 'lastName',
     label: 'Last name',
     required: true,
+    inline: true,
+  },
+  {
+    name: 'company',
+    label: 'Company name',
+    required: false,
   },
 ]
 
