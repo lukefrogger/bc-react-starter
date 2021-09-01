@@ -7,8 +7,7 @@ export const wishlistName = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 100.4%,
-    ${theme.colors['neutral-10']} 135.12%
+    ${theme.colors['neutral-30']} 65%
   );
   border-radius: 14px;
 `
@@ -20,8 +19,7 @@ export const wishlistItem = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 74.42%,
-    ${theme.colors['neutral-10']} 100%
+    ${theme.colors['neutral-30']} 74.42%
   );
   border-radius: 14px;
 `
@@ -31,10 +29,9 @@ export const wishlistType = (theme: Theme): SerializedStyles => css`
   max-width: 48px;
   height: 18px;
   background: linear-gradient(
-    -90deg,
+    90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 180.64%,
-    ${theme.colors['neutral-10']} 243.62%
+    ${theme.colors['neutral-30']} 86%
   );
   border-radius: 14px;
 `
@@ -52,8 +49,7 @@ export const wishlistAction = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 100.4%,
-    ${theme.colors['neutral-10']} 135.12%
+    ${theme.colors['neutral-30']} 100%
   );
   border-radius: 14px;
 `

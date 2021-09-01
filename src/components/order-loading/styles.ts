@@ -24,8 +24,7 @@ export const OrderNumber = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 100.4%,
-    ${theme.colors['neutral-10']} 135.12%
+    ${theme.colors['neutral-30']} 100.4%
   );
   border-radius: 14px;
   margin-bottom: 16px;
@@ -37,9 +36,8 @@ export const OrderStatus = (theme: Theme): SerializedStyles => css`
   height: 28px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 74.42%,
-    ${theme.colors['neutral-10']} 100%
+    ${theme.colors['neutral-10']} 12%,
+    ${theme.colors['neutral-30']} 78%
   );
   border-radius: 14px;
   margin-bottom: 23px;
@@ -52,8 +50,7 @@ export const OrderDetails = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 180.64%,
-    ${theme.colors['neutral-10']} 243.62%
+    ${theme.colors['neutral-30']} 90%
   );
   border-radius: 14px;
 `
@@ -68,8 +65,7 @@ export const ProductImage = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 255.11%,
-    ${theme.colors['neutral-10']} 344.3%
+    ${theme.colors['neutral-30']} 80%
   );
 `
 
@@ -83,9 +79,8 @@ export const ProductName = (theme: Theme): SerializedStyles => css`
   height: 16px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} -61.98%,
-    ${theme.colors['neutral-40']} 57.82%,
-    ${theme.colors['neutral-10']} 100%
+    ${theme.colors['neutral-10']} 10.98%,
+    ${theme.colors['neutral-30']} 57.82%
   );
   border-radius: 14px;
   display: block;
@@ -98,9 +93,8 @@ export const ProductDesc = (theme: Theme): SerializedStyles => css`
   height: 16px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} -120.69%,
-    ${theme.colors['neutral-40']} 111.39%,
-    ${theme.colors['neutral-10']} 193.1%
+    ${theme.colors['neutral-10']} 1.79%,
+    ${theme.colors['neutral-30']} 98%
   );
   border-radius: 14px;
   display: block;
@@ -112,9 +106,8 @@ export const Ordered = (theme: Theme): SerializedStyles => css`
   height: 16px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 333.89%,
-    ${theme.colors['neutral-10']} 450.83%
+    ${theme.colors['neutral-10']} 5%,
+    ${theme.colors['neutral-30']} 86%
   );
   border-radius: 14px;
   display: block;
@@ -127,8 +120,7 @@ export const OrderedTotal = (theme: Theme): SerializedStyles => css`
   background: linear-gradient(
     90deg,
     ${theme.colors['neutral-10']} 1.79%,
-    ${theme.colors['neutral-40']} 215.58%,
-    ${theme.colors['neutral-10']} 290.86%
+    ${theme.colors['neutral-30']} 80%
   );
   border-radius: 14px;
   display: block;
@@ -140,9 +132,8 @@ export const OrderedDate = (theme: Theme): SerializedStyles => css`
   height: 16px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} -155.24%,
-    ${theme.colors['neutral-40']} 33.53%,
-    ${theme.colors['neutral-10']} 100%
+    ${theme.colors['neutral-10']} 3%,
+    ${theme.colors['neutral-30']} 86%
   );
   border-radius: 14px;
   display: block;
@@ -154,9 +145,8 @@ export const OrderedPrice = (theme: Theme): SerializedStyles => css`
   height: 16px;
   background: linear-gradient(
     90deg,
-    ${theme.colors['neutral-10']} -156.67%,
-    ${theme.colors['neutral-40']} 33.16%,
-    ${theme.colors['neutral-10']} 100%
+    ${theme.colors['neutral-10']} 7%,
+    ${theme.colors['neutral-30']} 96%
   );
   border-radius: 14px;
   display: block;
