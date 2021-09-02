@@ -17,7 +17,7 @@ export const useWishlistDialog = (
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
 
-  async function onSubmitDialog({
+  async function onSubmitAdd({
     additions,
     deletions,
   }: WishlistItemDialogValues): Promise<void> {
@@ -57,6 +57,6 @@ export const useWishlistDialog = (
     ...dialog,
     ...item,
     wishlists,
-    onSubmitDialog,
+    onSubmitAdd,
   }
 }

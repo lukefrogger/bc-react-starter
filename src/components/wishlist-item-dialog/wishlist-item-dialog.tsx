@@ -38,7 +38,7 @@ export function WishlistItemDialog(
     productId,
     variantId,
     wishlists = [],
-    onSubmitDialog = () => {},
+    onSubmitAdd = () => {},
     ...dialog
   } = props
 
@@ -74,7 +74,7 @@ export function WishlistItemDialog(
         const deletions = differences.filter(
           (difference) => difference.value === false
         )
-        await onSubmitDialog({ additions, deletions })
+        await onSubmitAdd({ additions, deletions })
       } catch (e) {
         formik.setSubmitting(false)
       }
