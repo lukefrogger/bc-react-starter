@@ -13,7 +13,7 @@ export function CartItem(product: CartItemProps): React.ReactElement {
     product_id: product.product_id,
     variant_id: product.variant_id || 0,
     id: product.id || '',
-    quantity: product.quantity.quantity || 1,
+    quantity: product.quantity?.quantity || 1,
   })
 
   const removeItem = useRemoveItem()
