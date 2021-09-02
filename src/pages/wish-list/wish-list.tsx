@@ -16,7 +16,7 @@ import {
   WishlistDialog,
   WishlistStatus,
 } from '@components'
-import { useUpdateWishlist, useWishlist } from '@hooks'
+import { useDeleteWishlistItem, useUpdateWishlist, useWishlist } from '@hooks'
 
 import * as styles from './styles'
 
@@ -26,6 +26,7 @@ export function WishListPage(): React.ReactElement {
   const { data: wishlist, revalidate, error } = useWishlist(Number(slug))
   const dialog = useDialogState()
   const updateWishlist = useUpdateWishlist()
+  const deleteWishlistItem = useDeleteWishlistItem()
 
   const isLoading = !error && !wishlist
 
@@ -148,6 +149,8 @@ export function WishListPage(): React.ReactElement {
         )}
         {wishlist.items
           ?.map(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             (item): ProductRowProps => ({
               prices: {
                 price: item?.product?.prices?.basePrice?.value,
@@ -155,25 +158,28 @@ export function WishListPage(): React.ReactElement {
                 currencySettings: {},
               },
               name: item?.product?.name || '',
-              quantity: {
-                quantity: 1,
-              },
               image: {
                 src: item?.product?.images?.edges?.[0]?.node?.urlOriginal,
                 alt: item?.product?.images?.edges?.[0]?.node?.altText,
               },
               id: String(item.id),
+              onDelete: async () => {
+                if (!wishlist.id) {
+                  throw new Error('Wishlist id not found')
+                }
+                if (!item.id) {
+                  throw new Error('Item id not found')
+                }
+                await deleteWishlistItem({
+                  wishlistId: wishlist.id,
+                  itemId: item.id,
+                })
+                await revalidate()
+              },
             })
           )
           .map((product) => (
-            <ProductRow
-              key={product.id}
-              {...product}
-              quantity={{
-                quantity: 1,
-              }}
-              editable={false}
-            />
+            <ProductRow key={product.id} {...product} />
           ))}
       </div>
     </div>
