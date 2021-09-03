@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 
+import type { ItemBody } from '@bigcommerce/storefront-data-hooks/api/wishlist'
 import { CommerceError } from '@bigcommerce/storefront-data-hooks/commerce/utils/errors'
 import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/types'
 import useAction from '@bigcommerce/storefront-data-hooks/commerce/utils/use-action'
@@ -16,11 +17,12 @@ const defaultOpts = {
 type CreateWishlistInput = {
   name: string
   isPublic: boolean
+  item?: ItemBody
 }
 
 const fetcher: HookFetcher<Wishlist, CreateWishlistInput> = (
   options,
-  { isPublic, name },
+  { isPublic, name, item },
   fetch
 ) => {
   // TODO: add validations before doing the fetch
@@ -30,7 +32,7 @@ const fetcher: HookFetcher<Wishlist, CreateWishlistInput> = (
     ...defaultOpts,
     ...options,
     url: (options?.base || '') + url.pathname + url.search,
-    body: { isPublic, name },
+    body: { isPublic, name, item },
   })
 }
 
