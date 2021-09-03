@@ -97,8 +97,11 @@ export function WishlistItemDialog(
       <WishlistDialog
         {...dialog}
         title={title}
-        button="Create and add item"
-        description="Oh-oh, seems like you have no wishlists yet. Create one below:"
+        button={t('bc.wish_list.create_add', 'Create and add item')}
+        description={t(
+          'bc.wish_list.no_wishlists',
+          'Oh-oh, seems like you have no wishlists yet. Create one below:'
+        )}
         resetOnSubmit
         onSubmit={async (values) => {
           await oSubmitCreateAndAdd(values)
