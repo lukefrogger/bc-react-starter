@@ -36,7 +36,7 @@ export const getWishlistsHelper = async (req, res) => {
         body,
       })
     }
-    // Create an empty wishlist
+    // Create a wishlist
     if (req.method === 'POST') {
       const body = { ...req.body, customerToken }
       return await handlers.createWishlist({ req, res, config, body })
