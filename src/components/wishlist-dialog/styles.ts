@@ -1,7 +1,14 @@
 import { css } from '@emotion/react'
 
-export const field = css`
-  max-width: none;
+export const form = css`
+  padding-top: 24px;
+  * {
+    max-width: none;
+  }
+`
+
+export const description = css`
+  padding-bottom: 8px;
 `
 
 export const checkbox = css`
