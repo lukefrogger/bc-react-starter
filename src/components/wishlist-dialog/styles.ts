@@ -2,7 +2,7 @@ import { css } from '@emotion/react'
 
 export const form = css`
   padding-top: 24px;
-  * {
+  * input {
     max-width: none;
   }
 `
