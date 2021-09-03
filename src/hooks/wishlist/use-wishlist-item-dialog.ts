@@ -1,14 +1,19 @@
 import { useDialogState } from 'reakit/Dialog'
 
-import { WishlistItemDialogProps, WishlistItemDialogValues } from '@components'
+import {
+  WishlistDialogValues,
+  WishlistItemDialogProps,
+  WishlistItemDialogValues,
+} from '@components'
 import {
   AddItemInput,
   useAddWishlistItem,
+  useCreateWishlist,
   useDeleteWishlistItem,
   useWishlists,
 } from '@hooks'
 
-export const useWishlistDialog = (
+export const useWishlistItemDialog = (
   item: Omit<Partial<AddItemInput>, 'wishlistId'>
 ): WishlistItemDialogProps => {
   const dialog = useDialogState()
@@ -16,6 +21,7 @@ export const useWishlistDialog = (
   const { data: wishlists } = useWishlists()
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
+  const createWishlist = useCreateWishlist()
 
   async function onSubmitAdd({
     additions,
@@ -53,10 +59,37 @@ export const useWishlistDialog = (
     ])
     dialog.hide()
   }
+  async function onSubmitCreate({
+    isPublic,
+    name,
+  }: WishlistDialogValues): Promise<void> {
+    await createWishlist({
+      isPublic,
+      name,
+    })
+  }
+
+  async function oSubmitCreateAndAdd({
+    isPublic,
+    name,
+  }: WishlistDialogValues): Promise<void> {
+    if (!item || item.productId === undefined)
+      throw new Error('Item is required')
+    await createWishlist({
+      isPublic,
+      name,
+      item: {
+        productId: item.productId,
+        variantId: item.variantId,
+      },
+    })
+  }
   return {
     ...dialog,
     ...item,
     wishlists,
     onSubmitAdd,
+    onSubmitCreate,
+    oSubmitCreateAndAdd,
   }
 }

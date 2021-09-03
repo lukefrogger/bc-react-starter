@@ -19,7 +19,7 @@ import {
   useAddCartItem,
   useProduct,
   useProductOptions,
-  useWishlistDialog,
+  useWishlistItemDialog,
 } from '@hooks'
 
 import * as styles from './styles'
@@ -50,7 +50,7 @@ export function ProductPage({
     variantId: variant?.node.entityId,
   })
 
-  const wishlistDialog = useWishlistDialog({
+  const wishlistDialog = useWishlistItemDialog({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
   })
