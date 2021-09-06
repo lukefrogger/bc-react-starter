@@ -23,6 +23,7 @@ export const userMenu = (theme: Theme): SerializedStyles => css`
   background: ${theme.colors['neutral-0']};
   border: 2px solid ${theme.colors['neutral-15']};
   margin-top: 25px;
+  z-index: 3;
 `
 
 export const userMenuItem = (theme: Theme): SerializedStyles => css`
