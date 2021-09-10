@@ -131,9 +131,24 @@ export function ProductPage({
               />
               <Typography variant="body-small">2 reviews</Typography>
             </div> */}
-            <div>
+            <div css={styles.addToWishlist}>
               <DialogDisclosure {...wishlistDialog} css={styles.link}>
-                Add to wishlist
+                <svg
+                  width={16}
+                  height={14}
+                  viewBox="0 0 16 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.328 1.673a4 4 0 00-5.657 0c-.28.28-.491.598-.671.929a3.948 3.948 0 00-.672-.93 4 4 0 00-5.657 5.657L8 13.5l6.328-6.172a3.997 3.997 0 000-5.656z"
+                    stroke={theme.colors['neutral-50']}
+                    strokeMiterlimit={10}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <em>Add to wishlist</em>
               </DialogDisclosure>
               <WishlistItemDialog {...wishlistDialog} />
             </div>
@@ -184,7 +199,7 @@ export function ProductPage({
           {isLimited && (
             <div css={styles.findMore}>
               <Link to={`/product/${slug}`} css={styles.link}>
-                <em>{t('bc.product.find_more', 'Find out more')}</em>{' '}
+                <em>{t('bc.product.find_more', 'Find out more')}</em>
                 <svg
                   width={7}
                   height={12}

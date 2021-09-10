@@ -81,6 +81,15 @@ export const link = (theme: Theme): SerializedStyles => css`
   ${getBaseStyle(theme.components.Button.variants?.link, theme)}
 `
 
+export const addToWishlist = css`
+  button {
+    padding-left: 0;
+    em {
+      padding-left: 8px;
+    }
+  }
+`
+
 export const findMore = (theme: Theme): SerializedStyles => css`
   width: 100%;
   text-align: end;
@@ -90,10 +99,8 @@ export const findMore = (theme: Theme): SerializedStyles => css`
     padding-top: 48px;
   }
   a {
-    text-decoration: none;
     em {
-      text-decoration: underline;
-      padding-right: 2px;
+      padding-right: 8px;
     }
   }
 `
