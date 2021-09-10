@@ -95,9 +95,9 @@ export function ProductPage({
           <ImageGallery
             items={images || []}
             showPlayButton={false}
-            {...(isLimited || isMobile
+            {...(isMobile
               ? {
-                  showNav: !isMobile,
+                  showNav: false,
                   showThumbnails: false,
                   showBullets: true,
                 }

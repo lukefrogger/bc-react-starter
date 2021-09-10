@@ -22,7 +22,7 @@ export const dialog = (theme: Theme): SerializedStyles => css`
   overflow-y: scroll;
   ${theme.mq[1]} {
     width: calc(100vw - 56px);
-    padding: 48px 56px 56px;
+    padding: 48px 40px 40px;
   }
 `
 
@@ -38,8 +38,9 @@ export const title = css`
 
 export const close = (theme: Theme): SerializedStyles => css`
   position: absolute;
-  top: 4px;
-  right: 0;
+  top: 40px;
+  right: 40px;
+  z-index: 1;
   padding: 8px;
   margin-right: -8px;
   border: none;

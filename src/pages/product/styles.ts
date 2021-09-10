@@ -6,7 +6,7 @@ export const container = css`
   --horizontal-spacing: 24px;
   max-width: calc(1208px + (var(--horizontal-spacing) * 2));
   margin: 0 auto;
-  padding: 0 var(--horizontal-spacing);
+  padding: 16px 0;
 `
 
 export const grid = (isLimited?: boolean): ReturnType<typeof css> => css`
@@ -62,7 +62,7 @@ export const product = css`
 export const productDescription = css`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 `
 export const productOptions = css`
   margin-top: 32px;
@@ -83,7 +83,7 @@ export const link = (theme: Theme): SerializedStyles => css`
 
 export const row = css`
   display: flex;
-  gap: 12px;
+  gap: 16px;
   padding-top: 16px;
   flex-wrap: wrap;
 `
