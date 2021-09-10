@@ -85,7 +85,7 @@ export function OrderPage(): React.ReactElement {
                   }}
                   itemPrice={Number(product.price_inc_tax) ?? 0}
                   options={product.product_options}
-                  quantity={{ quantity: product.quantity ?? null }}
+                  quantity={{ quantity: product.quantity ?? 0 }}
                   editable={false}
                 />
               ))
