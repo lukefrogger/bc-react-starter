@@ -15,6 +15,7 @@ import {
 import { Arrow } from '@components/header/icons'
 import { useOrder } from '@hooks/order'
 
+import { orderStatusColor } from '../../utils/get-status-color'
 import * as styles from './styles'
 
 export function OrderPage(): React.ReactElement {
@@ -36,6 +37,11 @@ export function OrderPage(): React.ReactElement {
   const handleContactSupport = (): void => {
     window.open('mailto:support@bc.com')
   }
+
+  const statusColor: string =
+    !isLoading && order && order?.status in orderStatusColor
+      ? order?.status
+      : 'info'
 
   if (!isLoading && !order) {
     return (
@@ -70,9 +76,6 @@ export function OrderPage(): React.ReactElement {
                 // TODO: Order from API missing some data: salePrice, product image
                 <ProductRow
                   key={product.id}
-                  image={{
-                    src: 'https://cdn11.bigcommerce.com/s-wrur4yohpn/images/stencil/500w/products/77/266/foglinenbeigestripetowel1b.1626110985.jpg',
-                  }}
                   onClick={() => handleRedirectToProduct(product)}
                   name={product.name ?? ''}
                   prices={{
@@ -80,7 +83,9 @@ export function OrderPage(): React.ReactElement {
                     salePrice: 0,
                     currencySettings: { currency: order?.currency_code },
                   }}
-                  quantity={{ quantity: product.quantity ?? 5 }}
+                  itemPrice={Number(product.price_inc_tax) ?? 0}
+                  options={product.product_options}
+                  quantity={{ quantity: product.quantity ?? null }}
                   editable={false}
                 />
               ))
@@ -96,7 +101,11 @@ export function OrderPage(): React.ReactElement {
           {isLoading
             ? 'Loading...'
             : order && (
-                <Orders.OrderDetail css={styles.Detail} order={order as any} />
+                <Orders.OrderDetail
+                  css={styles.Detail}
+                  order={order as any}
+                  statusVariant={orderStatusColor[statusColor]}
+                />
               )}
         </div>
       </>
