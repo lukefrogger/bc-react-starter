@@ -53,7 +53,7 @@ export const gallery = (theme: Theme): SerializedStyles => css`
 export const product = css`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  min-height: 100%;
   @media (min-width: 1024px) {
     grid-column: span 5 / span 5;
   }
@@ -81,11 +81,32 @@ export const link = (theme: Theme): SerializedStyles => css`
   ${getBaseStyle(theme.components.Button.variants?.link, theme)}
 `
 
+export const findMore = (theme: Theme): SerializedStyles => css`
+  width: 100%;
+  text-align: end;
+  margin-top: auto;
+  padding-top: 36px;
+  ${theme.mq[1]} {
+    padding-top: 48px;
+  }
+  a {
+    text-decoration: none;
+    em {
+      text-decoration: underline;
+      padding-right: 2px;
+    }
+  }
+`
+
 export const row = css`
   display: flex;
   gap: 16px;
   padding-top: 16px;
   flex-wrap: wrap;
+`
+export const selectors = css`
+  ${row}
+  gap: 12px;
 `
 
 export const productDetail = css`
