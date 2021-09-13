@@ -81,7 +81,7 @@ export function ProductPage({
   )
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container(isLimited)}>
       {!isLimited && (
         <Breadcrumbs>
           <Breadcrumbs.Item to="/">

@@ -2,11 +2,11 @@ import { css, SerializedStyles, Theme } from '@emotion/react'
 
 import { getBaseStyle } from '@utils/get-base-style'
 
-export const container = css`
+export const container = (isLimited?: boolean): ReturnType<typeof css> => css`
   --horizontal-spacing: 24px;
   max-width: calc(1208px + (var(--horizontal-spacing) * 2));
   margin: 0 auto;
-  padding: 16px 0;
+  padding: ${isLimited ? 0 : 16}px 0;
 `
 
 export const grid = (isLimited?: boolean): ReturnType<typeof css> => css`
