@@ -26,18 +26,19 @@ export const gallery = (theme: Theme): SerializedStyles => css`
     grid-column: span 7 / span 7;
   }
   .image-gallery-thumbnails-wrapper.left {
+    --border-width: 3px;
     margin: 0;
-    margin-right: 24px;
+    margin-right: calc(24px - (var(--border-width) * 2));
     width: 80px;
     .image-gallery-thumbnail {
       width: 80px;
       &.active,
       &:hover {
-        border-width: 3px;
+        border-width: var(--border-width);
         border-color: ${theme.colors['primary-60']};
       }
       + .image-gallery-thumbnail {
-        margin-top: 12px;
+        margin-top: calc(16px - (var(--border-width) * 2));
       }
     }
   }
