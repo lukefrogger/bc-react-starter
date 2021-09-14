@@ -148,7 +148,7 @@ export function ProductPage({
                     strokeLinejoin="round"
                   />
                 </svg>
-                <em>Add to wishlist</em>
+                <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
               </DialogDisclosure>
               <WishlistItemDialog {...wishlistDialog} />
             </div>
