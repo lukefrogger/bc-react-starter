@@ -6,6 +6,7 @@ import loginApiHandlers from '@bigcommerce/storefront-data-hooks/api/customers/h
 import customersApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
 import getProduct from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 import getSiteInfo from '@bigcommerce/storefront-data-hooks/api/operations/get-site-info'
+import fetchGraphqlApi from '@bigcommerce/storefront-data-hooks/api/utils/fetch-graphql-api'
 import axios from 'axios'
 import csc from 'country-state-city'
 
@@ -34,11 +35,62 @@ export const getProductHelper = async (req, res) => {
 
 export const getProductSingleHelper = async (req, res) => {
   const { productSlug: slug } = req.params || {}
-
   const { product } = await getProduct({
     variables: { slug },
   })
   return res.json(product)
+}
+
+export const getProductReviewsQuery = /* GraphQL */ `
+  query getProductReviews($path: String!) {
+    site {
+      route(path: $path) {
+        node {
+          __typename
+          ... on Product {
+            reviews {
+              edges {
+                node {
+                  author {
+                    name
+                  }
+                  title
+                  text
+                  rating
+                  createdAt {
+                    utc
+                  }
+                  entityId
+                }
+                cursor
+              }
+              pageInfo {
+                startCursor
+                endCursor
+                hasNextPage
+                hasPreviousPage
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const getProductReviewsHelper = async (req, res) => {
+  const { productSlug: slug } = req.params || {}
+  const { data } = await fetchGraphqlApi(getProductReviewsQuery, {
+    variables: {
+      path: `/${slug}/`,
+    },
+  })
+  try {
+    const { reviews } = data.site.route.node
+    return res.status(200).json(reviews)
+  } catch (e) {
+    return res.status(500).end()
+  }
 }
 
 export const cartHelper = async (req, res) => {

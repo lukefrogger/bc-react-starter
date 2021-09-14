@@ -24,6 +24,7 @@ import {
   cartHelper,
   countryHelper,
   getProductHelper,
+  getProductReviewsHelper,
   getProductSingleHelper,
   getSiteInfoHelper,
   onStoreProxyReq,
@@ -59,6 +60,10 @@ app.use('/checkout', checkoutApi())
 app.use('/api/site-info', getSiteInfoHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
+app.use(
+  '/api/bigcommerce/product/:productSlug/reviews',
+  getProductReviewsHelper
+)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/cart', cartApi())
 app.use('/api/bigcommerce/address', addressesApi())
