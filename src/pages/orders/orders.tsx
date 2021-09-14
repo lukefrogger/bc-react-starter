@@ -9,7 +9,7 @@ import { Order } from 'unsafe-bc-react-components/dist/components/core/orders/ty
 
 import { OrderLoading } from '@components'
 
-import { orderStatusColor } from '../../utils/get-status-color'
+import { getStatusColor } from '../../utils/get-status-color'
 import * as styles from './styles'
 
 const OrderRow = (props: any): React.ReactElement => {
@@ -27,11 +27,6 @@ export function OrdersPage(): React.ReactElement {
   const history = useHistory()
   const isLoading = typeof orders === 'undefined' && !error
   const orderHistory = Array.isArray(orders) ? orders : []
-
-  const statusColor: string = (order) =>
-    !isLoading && order && order?.status in orderStatusColor
-      ? order?.status
-      : 'info'
 
   orders?.sort(SortOrders)
 
@@ -70,7 +65,7 @@ export function OrdersPage(): React.ReactElement {
         <OrderRow
           key={order.id}
           order={order}
-          statusVariant={orderStatusColor[statusColor(order)]}
+          statusVariant={getStatusColor(order.status)}
           onOrderAction={handleOrderAction}
         />
       ))}

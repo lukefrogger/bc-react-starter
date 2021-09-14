@@ -1,22 +1,28 @@
-export type OrderStatusColorType = {
-  'Awaiting Payment': string
-  'Awaiting Fulfillment': string
-  'Awaiting Shipment': string
-  'Awaiting Pickup': string
-  Cancelled: string
-  Completed: string
-  Disputed: string
-  Declined: string
-  Info: string
-  'Manual Verification Required': string
-  Shipped: string
-  'Partially Shipped': string
-  'Partially Refunded': string
-  Pending: string
-  Refunded: string
-}
+export type OrderStatuses =
+  | 'Awaiting Payment'
+  | 'Awaiting Fulfillment'
+  | 'Awaiting Shipment'
+  | 'Awaiting Pickup'
+  | 'Cancelled'
+  | 'Completed'
+  | 'Disputed'
+  | 'Declined'
+  | 'Info'
+  | 'Manual Verification Required'
+  | 'Shipped'
+  | 'Partially Shipped'
+  | 'Partially Refunded'
+  | 'Pending'
+  | 'Refunded'
 
-export const orderStatusColor: OrderStatusColorType = {
+export type OrderStatusColor =
+  | 'warning'
+  | 'attention'
+  | 'success'
+  | 'danger'
+  | 'info'
+
+export const orderStatusColor: Record<OrderStatuses, OrderStatusColor> = {
   'Awaiting Payment': 'warning',
   'Awaiting Fulfillment': 'attention',
   'Awaiting Shipment': 'attention',
@@ -32,4 +38,16 @@ export const orderStatusColor: OrderStatusColorType = {
   Pending: 'info',
   'Partially Refunded': 'info',
   Refunded: 'warning',
+}
+
+export function getStatusColor(
+  status?: string | OrderStatuses
+): OrderStatusColor {
+  if (!status) {
+    return 'info'
+  }
+  if (!(status in orderStatusColor)) {
+    return 'info'
+  }
+  return orderStatusColor[status as OrderStatuses]
 }

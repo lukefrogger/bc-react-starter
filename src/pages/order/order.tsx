@@ -15,7 +15,7 @@ import {
 import { Arrow } from '@components/header/icons'
 import { useOrder } from '@hooks/order'
 
-import { orderStatusColor } from '../../utils/get-status-color'
+import { getStatusColor } from '../../utils/get-status-color'
 import * as styles from './styles'
 
 export function OrderPage(): React.ReactElement {
@@ -37,11 +37,6 @@ export function OrderPage(): React.ReactElement {
   const handleContactSupport = (): void => {
     window.open('mailto:support@bc.com')
   }
-
-  const statusColor: string =
-    !isLoading && order && order?.status in orderStatusColor
-      ? order?.status
-      : 'info'
 
   if (!isLoading && !order) {
     return (
@@ -83,8 +78,7 @@ export function OrderPage(): React.ReactElement {
                     salePrice: 0,
                     currencySettings: { currency: order?.currency_code },
                   }}
-                  itemPrice={Number(product.price_inc_tax) ?? 0}
-                  options={product.product_options}
+                  options={product.product_options ?? []}
                   quantity={{ quantity: product.quantity ?? 0 }}
                   editable={false}
                 />
@@ -104,7 +98,7 @@ export function OrderPage(): React.ReactElement {
                 <Orders.OrderDetail
                   css={styles.Detail}
                   order={order as any}
-                  statusVariant={orderStatusColor[statusColor]}
+                  statusVariant={getStatusColor(order?.status)}
                 />
               )}
         </div>
