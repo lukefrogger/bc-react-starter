@@ -4,6 +4,7 @@ import { useTheme } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
 import { useMediaQuery } from 'react-responsive'
+import { Link } from 'react-router-dom'
 import { DialogDisclosure } from 'reakit/Dialog'
 import {
   Button,
@@ -82,7 +83,7 @@ export function ProductPage({
   )
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container(isLimited)}>
       {!isLimited && (
         <Breadcrumbs>
           <Breadcrumbs.Item to="/">
@@ -97,9 +98,9 @@ export function ProductPage({
           <ImageGallery
             items={images || []}
             showPlayButton={false}
-            {...(isLimited || isMobile
+            {...(isMobile
               ? {
-                  showNav: !isMobile,
+                  showNav: false,
                   showThumbnails: false,
                   showBullets: true,
                 }
@@ -132,9 +133,24 @@ export function ProductPage({
               />
               <Typography variant="body-small">2 reviews</Typography>
             </div> */}
-            <div>
+            <div css={styles.addToWishlist}>
               <DialogDisclosure {...wishlistDialog} css={styles.link}>
-                Add to wishlist
+                <svg
+                  width={16}
+                  height={14}
+                  viewBox="0 0 16 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.328 1.673a4 4 0 00-5.657 0c-.28.28-.491.598-.671.929a3.948 3.948 0 00-.672-.93 4 4 0 00-5.657 5.657L8 13.5l6.328-6.172a3.997 3.997 0 000-5.656z"
+                    stroke={theme.colors['neutral-50']}
+                    strokeMiterlimit={10}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
               </DialogDisclosure>
               <WishlistItemDialog {...wishlistDialog} />
             </div>
@@ -145,15 +161,14 @@ export function ProductPage({
                 <Typography variant="display-xx-small">
                   {option.displayName.toUpperCase()}
                 </Typography>
-                <div css={styles.row}>
+                <div css={styles.selectors}>
                   {option.values.map((value) => {
                     const active = choices[option.displayName]
                     return (
                       <Button
-                        variant={
-                          value.label === active ? 'secondary' : 'tertiary'
-                        }
+                        variant="selector"
                         key={value.label}
+                        data-selected={active === value.label}
                         onClick={() => {
                           setChoices({
                             ...choices,
@@ -182,8 +197,29 @@ export function ProductPage({
                 </Button>
               </div>
             </div>
-            {isLimited && description}
           </div>
+          {isLimited && (
+            <div css={styles.findMore}>
+              <Link to={`/product/${slug}`} css={styles.link}>
+                <em>{t('bc.product.find_more', 'Find out more')}</em>
+                <svg
+                  width={7}
+                  height={12}
+                  viewBox="0 0 7 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M.813 11l5.625-5L.813 1"
+                    stroke={theme.colors['neutral-50']}
+                    strokeMiterlimit={10}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       {!isLimited && (
