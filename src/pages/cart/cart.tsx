@@ -29,8 +29,8 @@ export function CartPage(): React.ReactElement {
         <div css={styles.ProductList}>
           {cart?.line_items?.physical_items.map((product) => (
             <CartItem
-              // TODO: Show selected variants
               {...product}
+              options={[]} // TODO: Show selected variants
               key={product.id}
               image={{
                 src: product.image_url,
