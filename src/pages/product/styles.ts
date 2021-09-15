@@ -136,6 +136,7 @@ export const productDetailRow = css`
   gap: 40px;
   > * {
     max-width: 580px;
+    width: 100%;
   }
   flex-direction: column;
   @media (min-width: 1024px) {

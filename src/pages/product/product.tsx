@@ -247,10 +247,10 @@ export function ProductPage({
                 <ProductReview
                   key={edge?.node.entityId}
                   review={{
-                    author: edge?.node.author.name || '',
+                    author: edge?.node.author.name,
                     rating: edge?.node.rating || 0,
                     date: new Date(edge?.node.createdAt.utc),
-                    text: edge?.node.text || '',
+                    text: edge?.node.text,
                     title: edge?.node.title || '',
                   }}
                   style={{ marginTop: 0 }}
