@@ -18,30 +18,35 @@ export const dialog = (theme: Theme): SerializedStyles => css`
   z-index: 999;
   max-width: 792px;
   width: calc(100vw - 32px);
-  padding: 16px 20px 20px;
+  padding: 20px;
   overflow-y: scroll;
   ${theme.mq[1]} {
     width: calc(100vw - 56px);
-    padding: 48px 56px 56px;
+    padding: 40px;
   }
 `
 
 export const header = css`
   position: relative;
-  padding-bottom: 32px;
+  /*   padding-bottom: 32px; */
+  padding-bottom: 56px;
+  padding-top: 8px;
 `
 
 export const title = css`
-  margin: 0 40px;
+  margin: 0 56px;
   text-align: center;
 `
 
 export const close = (theme: Theme): SerializedStyles => css`
+  --padding: 8px;
+  --spacing: 40px;
   position: absolute;
-  top: 4px;
-  right: 0;
-  padding: 8px;
-  margin-right: -8px;
+  top: calc(var(--spacing) - var(--padding));
+  right: var(--spacing);
+  z-index: 1;
+  padding: var(--padding);
+  margin-right: calc(var(--padding) * -1);
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -54,6 +59,6 @@ export const back = (theme: Theme): SerializedStyles => css`
   ${close(theme)}
   right: initial;
   margin-right: initial;
-  left: 0;
-  margin-left: -8px;
+  left: var(--spacing);
+  margin-left: calc(var(--padding) * -1);
 `
