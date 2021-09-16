@@ -28,6 +28,7 @@ export const dialog = (theme: Theme): SerializedStyles => css`
 
 export const header = css`
   position: relative;
+  /*   padding-bottom: 32px; */
   padding-bottom: 56px;
   padding-top: 8px;
 `
@@ -53,4 +54,11 @@ export const close = (theme: Theme): SerializedStyles => css`
   :hover {
     opacity: 0.8;
   }
+`
+export const back = (theme: Theme): SerializedStyles => css`
+  ${close(theme)}
+  right: initial;
+  margin-right: initial;
+  left: var(--spacing);
+  margin-left: calc(var(--padding) * -1);
 `
