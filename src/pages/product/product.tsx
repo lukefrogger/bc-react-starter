@@ -270,7 +270,7 @@ export function ProductPage({
                   reviewDialog.hide()
                 }}
               />
-              <DialogDisclosure {...reviewDialog} css={styles.link}>
+              <DialogDisclosure {...reviewDialog} css={styles.addNewReview}>
                 {t('bc.review.add', 'Add new review')}
               </DialogDisclosure>
             </div>

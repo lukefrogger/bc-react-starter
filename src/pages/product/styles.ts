@@ -91,6 +91,11 @@ export const addToWishlist = css`
   }
 `
 
+export const addNewReview = (theme: Theme): SerializedStyles => css`
+  ${link(theme)}
+  padding-left: 0;
+`
+
 export const findMore = (theme: Theme): SerializedStyles => css`
   width: 100%;
   text-align: end;
