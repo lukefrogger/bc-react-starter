@@ -1,7 +1,7 @@
 import getCustomerId from '@bigcommerce/storefront-data-hooks/api/operations/get-customer-id'
 
 export const createWishlist = async ({ res, config, body }) => {
-  const { customerToken, name, isPublic } = body
+  const { customerToken, name, isPublic, item } = body
 
   const customerId =
     customerToken && (await getCustomerId({ customerToken, config }))
@@ -12,12 +12,21 @@ export const createWishlist = async ({ res, config, body }) => {
     })
   }
 
+  const items = item
+    ? [
+        {
+          product_id: item.productId,
+          variant_id: item.variantId,
+        },
+      ]
+    : []
+
   const options = {
     method: 'POST',
     body: JSON.stringify({
       name,
       customer_id: customerId,
-      items: [],
+      items,
       is_public: isPublic,
     }),
   }
