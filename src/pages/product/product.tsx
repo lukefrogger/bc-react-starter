@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
 import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
-import { DialogDisclosure } from 'reakit/Dialog'
+import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
   ProductPrice,
@@ -15,9 +15,10 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
-import { Breadcrumbs, WishlistItemDialog } from '@components'
+import { Breadcrumbs, ReviewDialog, WishlistItemDialog } from '@components'
 import {
   useAddCartItem,
+  useAddReview,
   useProduct,
   useProductOptions,
   useReviews,
@@ -41,7 +42,8 @@ export function ProductPage({
 
   const { data: product } = useProduct(slug)
   const { data: reviews } = useReviews(slug)
-
+  console.log(reviews)
+  const addReview = useAddReview(slug)
   const { options, choices, setChoices, variant } = useProductOptions(product)
   const theme = useTheme()
 
@@ -57,6 +59,8 @@ export function ProductPage({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
   })
+
+  const reviewDialog = useDialogState()
 
   if (!product) return <p>Loading</p>
 
@@ -256,6 +260,19 @@ export function ProductPage({
                   style={{ marginTop: 0 }}
                 />
               ))}
+              <ReviewDialog
+                {...reviewDialog}
+                onSubmit={async (values) => {
+                  await addReview({
+                    productId: product.entityId,
+                    ...values,
+                  })
+                  reviewDialog.hide()
+                }}
+              />
+              <DialogDisclosure {...reviewDialog} css={styles.link}>
+                {t('bc.review.add', 'Add new review')}
+              </DialogDisclosure>
             </div>
           </div>
         </div>
