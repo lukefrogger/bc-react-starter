@@ -42,7 +42,6 @@ export function ProductPage({
 
   const { data: product } = useProduct(slug)
   const { data: reviews } = useReviews(slug)
-  console.log(reviews)
   const addReview = useAddReview(slug)
   const { options, choices, setChoices, variant } = useProductOptions(product)
   const theme = useTheme()
