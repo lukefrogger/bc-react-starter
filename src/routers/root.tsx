@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
-import { useBanners } from '@hooks/useBanners'
+import { useBanners } from '@hooks'
 import {
   AllCategories,
   CartPage,
