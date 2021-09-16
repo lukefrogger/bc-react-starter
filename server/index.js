@@ -24,13 +24,12 @@ import { getWishlistsItemsHelper } from './wishlist/items'
 import {
   cartHelper,
   countryHelper,
-  getProductReviewsHelper,
   getSiteInfoHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
 import { getOrdersHelper } from './orders'
-import { productApi } from './product'
+import { productApi, productReviewsApi } from './product'
 import { getWishlistsHelper } from './wishlist'
 
 const app = express()
@@ -60,10 +59,7 @@ app.use('/checkout', checkoutApi())
 app.use('/api/site-info', getSiteInfoHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
-app.use(
-  '/api/bigcommerce/product/:productSlug/reviews',
-  getProductReviewsHelper
-)
+app.use('/api/bigcommerce/product/:productSlug/reviews', productReviewsApi)
 app.use('/api/bigcommerce/product/:productSlug', productApi)
 app.use('/api/bigcommerce/cart', cartApi())
 app.use('/api/bigcommerce/address', addressesApi())

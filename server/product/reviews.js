@@ -1,14 +1,9 @@
-// import { getConfig } from '@bigcommerce/storefront-data-hooks/api/'
-
 import * as handlers from './handlers'
 
-export * from './reviews'
-
-export const productApi = async (req, res) => {
-  // const config = getConfig()
+export const productReviewsApi = async (req, res) => {
   try {
     if (req.method === 'GET') {
-      return await handlers.getProduct({
+      return await handlers.getProductReviews({
         req,
         res,
       })
