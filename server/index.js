@@ -20,6 +20,7 @@ import * as proxy from 'http-proxy-middleware'
 import serveStatic from 'serve-static'
 
 import { getWishlistsItemsHelper } from './wishlist/items'
+import { bannersApi } from './banners'
 import {
   cartHelper,
   countryHelper,
@@ -59,6 +60,7 @@ app.use('/checkout', checkoutApi())
 app.use('/api/site-info', getSiteInfoHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
+app.use('/api/bigcommerce/banners', bannersApi)
 app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
 app.use('/api/bigcommerce/cart', cartApi())
 app.use('/api/bigcommerce/address', addressesApi())
