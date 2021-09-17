@@ -28,3 +28,8 @@ export const ButtonGroup = css`
   justify-content: center;
   gap: 20px;
 `
+
+export const Optional = ({ colors }: Theme): any => css`
+  font-weight: normal;
+  color: ${colors['neutral-55']};
+`
