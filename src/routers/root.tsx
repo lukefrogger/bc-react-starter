@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
 import { Footer, Header } from '@components'
-import { useBanners } from '@hooks/useBanners'
+import { useBanners } from '@hooks'
 import {
   AllCategories,
   CartPage,
@@ -22,13 +22,21 @@ import { ScrollToTop } from './scroll-top'
 import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
-  const { banner, onBannerClose } = useBanners()
+  const { data: banners, onBannerClose } = useBanners()
 
   return (
     <BrowserRouter>
       <ScrollToTop />
       <div>
-        {banner && <Banner onClose={onBannerClose}>{banner?.content}</Banner>}
+        {banners?.[0] && (
+          <Banner
+            position={banners[0].location}
+            onClose={() => onBannerClose(banners[0].id)}
+          >
+            {banners[0].content}
+          </Banner>
+        )}
+        {/*         {banner && <Banner onClose={onBannerClose}>{banner?.content}</Banner>} */}
         <Header />
         <Switch>
           <Route exact path="/">
