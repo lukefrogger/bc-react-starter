@@ -2,11 +2,11 @@ import { css, SerializedStyles, Theme } from '@emotion/react'
 
 import { getBaseStyle } from '@utils/get-base-style'
 
-export const container = css`
+export const container = (isLimited?: boolean): ReturnType<typeof css> => css`
   --horizontal-spacing: 24px;
   max-width: calc(1208px + (var(--horizontal-spacing) * 2));
   margin: 0 auto;
-  padding: 0 var(--horizontal-spacing);
+  padding: ${isLimited ? 0 : 16}px 0;
 `
 
 export const grid = (isLimited?: boolean): ReturnType<typeof css> => css`
@@ -26,18 +26,19 @@ export const gallery = (theme: Theme): SerializedStyles => css`
     grid-column: span 7 / span 7;
   }
   .image-gallery-thumbnails-wrapper.left {
+    --border-width: 3px;
     margin: 0;
-    margin-right: 24px;
+    margin-right: calc(24px - (var(--border-width) * 2));
     width: 80px;
     .image-gallery-thumbnail {
       width: 80px;
       &.active,
       &:hover {
-        border-width: 3px;
+        border-width: var(--border-width);
         border-color: ${theme.colors['primary-60']};
       }
       + .image-gallery-thumbnail {
-        margin-top: 12px;
+        margin-top: calc(16px - (var(--border-width) * 2));
       }
     }
   }
@@ -53,7 +54,7 @@ export const gallery = (theme: Theme): SerializedStyles => css`
 export const product = css`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  min-height: 100%;
   @media (min-width: 1024px) {
     grid-column: span 5 / span 5;
   }
@@ -62,7 +63,7 @@ export const product = css`
 export const productDescription = css`
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 `
 export const productOptions = css`
   margin-top: 32px;
@@ -81,11 +82,39 @@ export const link = (theme: Theme): SerializedStyles => css`
   ${getBaseStyle(theme.components.Button.variants?.link, theme)}
 `
 
+export const addToWishlist = css`
+  button {
+    padding-left: 0;
+    em {
+      padding-left: 8px;
+    }
+  }
+`
+
+export const findMore = (theme: Theme): SerializedStyles => css`
+  width: 100%;
+  text-align: end;
+  margin-top: auto;
+  padding-top: 36px;
+  ${theme.mq[1]} {
+    padding-top: 48px;
+  }
+  a {
+    em {
+      padding-right: 8px;
+    }
+  }
+`
+
 export const row = css`
   display: flex;
-  gap: 12px;
+  gap: 16px;
   padding-top: 16px;
   flex-wrap: wrap;
+`
+export const selectors = css`
+  ${row}
+  gap: 12px;
 `
 
 export const productDetail = css`
