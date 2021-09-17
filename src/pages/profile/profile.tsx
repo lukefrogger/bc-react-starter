@@ -13,6 +13,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { UpdateCustomerInput, useUpdateCustomer } from '@hooks'
+
 import {
   contactSection,
   Fields,
@@ -55,10 +57,24 @@ const createValidateFn =
   }
 
 const infoFields = ['company', 'email', 'firstName', 'lastName', 'phone']
+const transformCustomerInput = (
+  customer: Customer,
+  password: string,
+  new_password?: string
+): UpdateCustomerInput => ({
+  first_name: customer.firstName,
+  last_name: customer.lastName,
+  id: customer.entityId,
+  phone: customer.phone,
+  company: customer.company,
+  email: customer.email,
+  authentication: new_password ? { new_password, password } : undefined,
+})
 
 export function ProfilePage(): React.ReactElement {
   const { t } = useTranslation()
-  const { data: customer, mutate } = useCustomer()
+  const { data: customer } = useCustomer()
+  const updateCustomer = useUpdateCustomer()
   const formik = useFormik({
     initialValues: {
       company: '',
@@ -77,7 +93,9 @@ export function ProfilePage(): React.ReactElement {
         ...customer,
         ...pick(values, infoFields),
       } as Customer
-      return mutate(fields, false)
+      return updateCustomer(
+        transformCustomerInput(fields, values.currPwd || '', values.newPwd)
+      )
     },
     validate: createValidateFn(t),
     enableReinitialize: true,
