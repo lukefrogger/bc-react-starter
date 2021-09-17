@@ -4,6 +4,7 @@ import path from 'path'
 
 import addressesApi from '@bigcommerce/storefront-data-hooks/api/address'
 import cartApi from '@bigcommerce/storefront-data-hooks/api/cart'
+import catalogProductsApi from '@bigcommerce/storefront-data-hooks/api/catalog/products'
 import checkoutApi from '@bigcommerce/storefront-data-hooks/api/checkout'
 import customerApi from '@bigcommerce/storefront-data-hooks/api/customers'
 import loginApi from '@bigcommerce/storefront-data-hooks/api/customers/login'
@@ -21,15 +22,13 @@ import serveStatic from 'serve-static'
 
 import { getWishlistsItemsHelper } from './wishlist/items'
 import {
-  cartHelper,
   countryHelper,
-  getProductHelper,
-  getProductSingleHelper,
   getSiteInfoHelper,
   onStoreProxyReq,
   stateHelper,
 } from './helpers'
 import { getOrdersHelper } from './orders'
+import { productApi, productReviewsApi } from './product'
 import { getWishlistsHelper } from './wishlist'
 
 const app = express()
@@ -54,15 +53,15 @@ app.use(serveStatic(path.join(dirname, 'build')))
 app.use(serveStatic(path.join(dirname, 'public')))
 
 // respond to all requests
-app.use('/cart-helper', cartHelper)
 app.use('/checkout', checkoutApi())
 app.use('/api/site-info', getSiteInfoHelper)
 app.use('/api/countries/:code/states', stateHelper)
 app.use('/api/countries', countryHelper)
-app.use('/api/bigcommerce/product/:productSlug', getProductSingleHelper)
+app.use('/api/bigcommerce/product/:productSlug/reviews', productReviewsApi)
+app.use('/api/bigcommerce/product/:productSlug', productApi)
 app.use('/api/bigcommerce/cart', cartApi())
 app.use('/api/bigcommerce/address', addressesApi())
-app.use('/api/bigcommerce/catalog/products', getProductHelper)
+app.use('/api/bigcommerce/catalog/products', catalogProductsApi())
 app.use('/api/bigcommerce/customers/login', loginApi())
 app.use('/api/bigcommerce/customers/logout', logoutApi())
 app.use('/api/bigcommerce/customers/signup', signupApi())

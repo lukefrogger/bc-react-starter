@@ -5,21 +5,23 @@ import { useTranslation } from 'react-i18next'
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
 import { useMediaQuery } from 'react-responsive'
 import { Link } from 'react-router-dom'
-import { DialogDisclosure } from 'reakit/Dialog'
+import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
   ProductPrice,
-  // ProductReview,
+  ProductReview,
   QuantitySelector,
   // StarRating,
   Typography,
 } from 'unsafe-bc-react-components'
 
-import { Breadcrumbs, WishlistItemDialog } from '@components'
+import { Breadcrumbs, ReviewDialog, WishlistItemDialog } from '@components'
 import {
   useAddCartItem,
+  useAddReview,
   useProduct,
   useProductOptions,
+  useReviews,
   useWishlistItemDialog,
 } from '@hooks'
 
@@ -39,7 +41,8 @@ export function ProductPage({
   const { t } = useTranslation()
 
   const { data: product } = useProduct(slug)
-
+  const { data: reviews } = useReviews(slug)
+  const addReview = useAddReview(slug)
   const { options, choices, setChoices, variant } = useProductOptions(product)
   const theme = useTheme()
 
@@ -55,6 +58,8 @@ export function ProductPage({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
   })
+
+  const reviewDialog = useDialogState()
 
   if (!product) return <p>Loading</p>
 
@@ -238,41 +243,37 @@ export function ProductPage({
               dangerouslySetInnerHTML={{ __html: product.description }} // TODO: Change to specifications
             />
           </div> */}
-          {/*         <div css={styles.productDetailRow}>
-          <Typography variant="display-small">Reviews</Typography>
-          <div css={styles.reviewList}>
-            <ProductReview
-              review={{
-                author: productMock.review.name,
-                rating: productMock.review.rating,
-                date: new Date(productMock.review.date_modified),
-                text: productMock.review.text,
-                title: productMock.review.title,
-              }}
-              style={{ marginTop: 0 }}
-            />
-            <ProductReview
-              review={{
-                author: productMock.review.name,
-                rating: productMock.review.rating,
-                date: new Date(productMock.review.date_modified),
-                text: productMock.review.text,
-                title: productMock.review.title,
-              }}
-              style={{ marginTop: 0 }}
-            />
-            <ProductReview
-              review={{
-                author: productMock.review.name,
-                rating: productMock.review.rating,
-                date: new Date(productMock.review.date_modified),
-                text: productMock.review.text,
-                title: productMock.review.title,
-              }}
-              style={{ marginTop: 0 }}
-            />
+          <div css={styles.productDetailRow}>
+            <Typography variant="display-small">Reviews</Typography>
+            <div css={styles.reviewList}>
+              {reviews?.edges?.map((edge) => (
+                <ProductReview
+                  key={edge?.node.entityId}
+                  review={{
+                    author: edge?.node.author.name,
+                    rating: edge?.node.rating || 0,
+                    date: new Date(edge?.node.createdAt.utc),
+                    text: edge?.node.text,
+                    title: edge?.node.title || '',
+                  }}
+                  style={{ marginTop: 0 }}
+                />
+              ))}
+              <ReviewDialog
+                {...reviewDialog}
+                onSubmit={async (values) => {
+                  await addReview({
+                    productId: product.entityId,
+                    ...values,
+                  })
+                  reviewDialog.hide()
+                }}
+              />
+              <DialogDisclosure {...reviewDialog} css={styles.addNewReview}>
+                {t('bc.review.add', 'Add new review')}
+              </DialogDisclosure>
+            </div>
           </div>
-        </div> */}
         </div>
       )}
       {/*       <Typography
