@@ -8,7 +8,7 @@
     "category": "Category"
   },
   "submenu": {
-    "profile": "Account Profile",
+    "profile": "Account profile",
     "orders": "Order history",
     "addresses": "My addresses",
     "wishlists": "My wish lists"
