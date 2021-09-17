@@ -25,7 +25,6 @@ const transformAddressForPayload = (
   address: Address
 ): Address => ({
   ...values,
-  country_code: address.country_code,
   address_type: address.address_type,
   customer_id: address.customer_id,
   id: address.id,
