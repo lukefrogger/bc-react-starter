@@ -156,7 +156,7 @@ export function AddressForm({
                 onChange={handleCountryChange(props)}
                 validate={required}
               >
-                <option selected>Select a country</option>
+                <option>Select a country</option>
                 {countries?.map((country: any) => (
                   <option key={country.id} value={country.name}>
                     {country.name}
@@ -174,7 +174,7 @@ export function AddressForm({
                 label={t(`profile.fields.state`, 'State/province')}
                 validate={states?.length ? required : null}
               >
-                <option selected>Select a state / country</option>
+                <option>Select a state / country</option>
 
                 {states?.map((state: any) => (
                   <option key={state.id} value={state.name}>
