@@ -44,6 +44,7 @@ export const icon = css`
   display: flex;
   position: relative;
   width: 36px;
+  z-index: 20;
 `
 
 export const button = css`
@@ -74,9 +75,9 @@ export const badge = (theme: Theme): SerializedStyles => css`
 `
 export const mobileMenu = css`
   position: absolute;
-  top: 80px;
-  height: calc(100vh - 80px);
-  padding: 20px 0;
+  top: 48px;
+  height: calc(100vh - 48px);
+  padding: 60px 0 20px;
   right: 0;
   left: 0;
   display: flex;

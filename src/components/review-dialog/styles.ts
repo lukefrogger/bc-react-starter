@@ -1,14 +1,12 @@
 import { css } from '@emotion/react'
 
+export const field = css``
+
 export const form = css`
   padding-top: 24px;
-  * input {
-    max-width: none;
-  }
-`
-
-export const description = css`
-  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `
 
 export const checkbox = css`
@@ -24,5 +22,5 @@ export const checkbox = css`
 export const footer = css`
   display: flex;
   justify-content: center;
-  padding-top: 56px;
+  padding-top: 24px;
 `

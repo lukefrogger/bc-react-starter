@@ -107,7 +107,14 @@ export function AddressForm({
               />
               <FormikField
                 name="company"
-                label={t(`profile.fields.company`, 'Company Name (optional)')}
+                label={
+                  <span>
+                    {t(`profile.fields.company`, 'Company Name')}{' '}
+                    <span css={styles.Optional}>
+                      ({t('profile.fields.optional', 'optional')})
+                    </span>
+                  </span>
+                }
               />
               <FormikField
                 name="phone"
@@ -128,10 +135,14 @@ export function AddressForm({
               />
               <FormikField
                 name="address2"
-                label={t(
-                  `profile.fields.address2`,
-                  'Address line 2 (optional)'
-                )}
+                label={
+                  <span>
+                    {t(`profile.fields.address2`, 'Address line 2')}{' '}
+                    <span css={styles.Optional}>
+                      ({t('profile.fields.optional', 'optional')})
+                    </span>
+                  </span>
+                }
               />
               <FormikField
                 name="city"
@@ -145,7 +156,7 @@ export function AddressForm({
                 onChange={handleCountryChange(props)}
                 validate={required}
               >
-                <option selected>Select a country</option>
+                <option>Select a country</option>
                 {countries?.map((country: any) => (
                   <option key={country.id} value={country.name}>
                     {country.name}
@@ -163,7 +174,7 @@ export function AddressForm({
                 label={t(`profile.fields.state`, 'State/province')}
                 validate={states?.length ? required : null}
               >
-                <option selected>Select a state / country</option>
+                <option>Select a state / country</option>
 
                 {states?.map((state: any) => (
                   <option key={state.id} value={state.name}>

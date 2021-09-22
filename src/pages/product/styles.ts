@@ -91,6 +91,11 @@ export const addToWishlist = css`
   }
 `
 
+export const addNewReview = (theme: Theme): SerializedStyles => css`
+  ${link(theme)}
+  padding-left: 0;
+`
+
 export const findMore = (theme: Theme): SerializedStyles => css`
   width: 100%;
   text-align: end;
@@ -136,6 +141,7 @@ export const productDetailRow = css`
   gap: 40px;
   > * {
     max-width: 580px;
+    width: 100%;
   }
   flex-direction: column;
   @media (min-width: 1024px) {

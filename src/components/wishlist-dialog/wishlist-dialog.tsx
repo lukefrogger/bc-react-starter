@@ -3,34 +3,37 @@ import React from 'react'
 import { FormikHelpers, useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Checkbox } from 'reakit/Checkbox'
-import { DialogStateReturn } from 'reakit/Dialog'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
+
+import { DialogProps } from '@components'
 
 import { Dialog } from '../dialog'
 import * as styles from './styles'
 
-type Values = {
+export type WishlistDialogValues = {
   name: string
   isPublic: boolean
 }
 
-type Props = DialogStateReturn & {
+export type WishlistDialogProps = DialogProps & {
   title?: string
+  description?: string
   button?: string
-  initialValues?: Values
+  initialValues?: WishlistDialogValues
   resetOnSubmit?: boolean
   onSubmit?: (
-    values: Values,
-    formikHelpers: FormikHelpers<Values>
+    values: WishlistDialogValues,
+    formikHelpers: FormikHelpers<WishlistDialogValues>
   ) => void | Promise<any>
 }
 
-export function WishlistDialog(props: Props): React.ReactElement {
+export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
   const { t } = useTranslation()
 
   const {
     title = t('bc.wish_list.new', 'New wish list'),
     button = t('bc.wish_list.create', 'Create wish list'),
+    description = null,
     onSubmit = () => {},
     initialValues,
     resetOnSubmit = false,
@@ -57,7 +60,8 @@ export function WishlistDialog(props: Props): React.ReactElement {
 
   return (
     <Dialog {...dialog} title={title}>
-      <form onSubmit={formik.handleSubmit}>
+      {description && <p css={styles.description}>{description}</p>}
+      <form onSubmit={formik.handleSubmit} css={styles.form}>
         <Field
           name="name"
           required
@@ -69,7 +73,6 @@ export function WishlistDialog(props: Props): React.ReactElement {
           value={formik.values.name}
           error={formik.errors.name}
           onChange={formik.handleChange}
-          css={styles.field}
         />
         <label css={styles.checkbox}>
           <Checkbox

@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
 import { Pricing, Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
@@ -27,6 +28,15 @@ export function CartPage(): React.ReactElement {
       </Typography>
       <div css={styles.Grid}>
         <div css={styles.ProductList}>
+          {cart === null && (
+            <p>
+              {t(
+                'cart.empty',
+                'There are no items in your basket. Please return '
+              )}
+              <Link to="/">{t('cart.empty', 'Home')}</Link>
+            </p>
+          )}
           {cart?.line_items?.physical_items.map((product) => (
             <CartItem
               {...product}
