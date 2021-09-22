@@ -60,7 +60,9 @@ export function AddressForm({
   initialValues = ADDRESS_INITIAL_VALUES,
 }: AddressFormProps): React.ReactElement {
   const { t } = useTranslation()
-  const [countryCode, setCountryCode] = React.useState<string>()
+  const [countryCode, setCountryCode] = React.useState<string>(
+    initialValues?.country_code || ''
+  )
   const history = useHistory()
   const { data: countries } = useCountries()
   const { data: states } = useStates(
