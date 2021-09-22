@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { useLogin } from '@hooks/use-login'
 
 const defaultOpts = {
-  url: '/api/v3/customers',
+  url: '/api/bigcommerce/update-customer',
   method: 'PUT',
 }
 
