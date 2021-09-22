@@ -30,6 +30,7 @@ import {
 } from './helpers'
 import { getOrdersHelper } from './orders'
 import { productApi, productReviewsApi } from './product'
+import { updateCustomerHelper } from './update-customer'
 import { getWishlistsHelper } from './wishlist'
 
 const app = express()
@@ -78,20 +79,22 @@ app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
 app.use('/api/bigcommerce/orders/products', orderProductsApi())
 app.use('/api/bigcommerce/orders/:orderId', getOrdersHelper)
 app.use('/api/bigcommerce/orders', ordersApi())
+app.use('/api/bigcommerce/update-customer', updateCustomerHelper)
+
 app.use(
   '/api',
   proxy.createProxyMiddleware({
     target: process.env.BIGCOMMERCE_STORE_API_URL,
     changeOrigin: true,
     logLevel: 'debug',
-    pathRewrite(newPath, req) {
+    pathRewrite(newPath) {
       return newPath.replace('/api', '')
     },
     onProxyReq: onStoreProxyReq,
   })
 )
 
-app.use('/hello', function (req, res) {
+app.use('/hello', (req, res) => {
   res.end('Hello from your Bigcommerce Proxy Server!\n')
 })
 

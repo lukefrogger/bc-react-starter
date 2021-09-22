@@ -7,6 +7,10 @@ export const onStoreProxyReq = (proxyReq, req, res) => {
     process.env.BIGCOMMERCE_STORE_API_CLIENT_ID
   )
   proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN)
+  if (req.method === 'PUT' || req.method === 'POST') {
+    proxyReq.write(JSON.stringify(req.body))
+    proxyReq.end()
+  }
 }
 
 export const countryHelper = (req, res) => {
