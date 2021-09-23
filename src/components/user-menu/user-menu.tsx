@@ -103,7 +103,7 @@ export const UserMenuMobile = ({
               {t(link.labelKey)}
             </Link>
           ))}
-          <Link to="/" onClick={onLogout} css={styles.userMenuItem}>
+          <Link to="/" onClick={onLogout} css={styles.logoutMobile}>
             {t('btn.logout', 'Logout')}
           </Link>
         </>
