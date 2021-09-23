@@ -64,3 +64,7 @@ export const category = (theme: Theme): SerializedStyles => css`
     color: ${theme.colors.primary};
   }
 `
+
+export const logoutMobile = css`
+  margin-bottom: 150px;
+`
