@@ -84,23 +84,23 @@ export function ReviewDialog(props: Props): React.ReactElement {
           placeholder="Select Rating"
           options={[
             {
-              label: '1 star (worst)',
+              label: t('bc.review.rating_1', '1 star (worst)'),
               id: '1',
             },
             {
-              label: '2 stars',
+              label: t('bc.review.rating_2', '2 stars'),
               id: '2',
             },
             {
-              label: '3 stars (average)',
+              label: t('bc.review.rating_3', '3 stars (average)'),
               id: '3',
             },
             {
-              label: '4 stars',
+              label: t('bc.review.rating_4', '4 stars'),
               id: '4',
             },
             {
-              label: '5 stars (best)',
+              label: t('bc.review.rating_5', '5 stars (best)'),
               id: '5',
             },
           ]}
