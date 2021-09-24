@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { css, Theme } from '@emotion/react'
 
 export const field = css``
 
@@ -23,4 +23,9 @@ export const footer = css`
   display: flex;
   justify-content: center;
   padding-top: 24px;
+`
+
+export const Optional = ({ colors }: Theme): any => css`
+  font-weight: normal;
+  color: ${colors['neutral-55']};
 `

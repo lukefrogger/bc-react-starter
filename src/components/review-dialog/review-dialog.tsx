@@ -84,23 +84,23 @@ export function ReviewDialog(props: Props): React.ReactElement {
           placeholder="Select Rating"
           options={[
             {
-              label: '1 star (worst)',
+              label: t('bc.review.rating_1', '1 star (worst)'),
               id: '1',
             },
             {
-              label: '2 stars',
+              label: t('bc.review.rating_2', '2 stars'),
               id: '2',
             },
             {
-              label: '3 stars (average)',
+              label: t('bc.review.rating_3', '3 stars (average)'),
               id: '3',
             },
             {
-              label: '4 stars',
+              label: t('bc.review.rating_4', '4 stars'),
               id: '4',
             },
             {
-              label: '5 stars (best)',
+              label: t('bc.review.rating_5', '5 stars (best)'),
               id: '5',
             },
           ]}
@@ -109,7 +109,14 @@ export function ReviewDialog(props: Props): React.ReactElement {
         />
         <Field
           name="name"
-          label={t('bc.review.name', 'Name')}
+          label={
+            <span>
+              {t('bc.review.name', 'Name')}{' '}
+              <span css={styles.Optional}>
+                ({t('profile.fields.optional', 'optional')})
+              </span>
+            </span>
+          }
           value={formik.values.name}
           error={formik.errors.name}
           onChange={formik.handleChange}
@@ -118,6 +125,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         <Field
           name="email"
           type="email"
+          required
           label={t('bc.review.email', 'Email')}
           value={formik.values.email}
           error={formik.errors.email}
@@ -135,6 +143,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         />
         <Field
           name="text"
+          required
           label={t('bc.review.comments', 'Comments')}
           value={formik.values.text}
           error={formik.errors.text}
