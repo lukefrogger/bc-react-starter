@@ -109,7 +109,14 @@ export function ReviewDialog(props: Props): React.ReactElement {
         />
         <Field
           name="name"
-          label={t('bc.review.name', 'Name')}
+          label={
+            <span>
+              {t('bc.review.name', 'Name')}{' '}
+              <span css={styles.Optional}>
+                ({t('profile.fields.optional', 'optional')})
+              </span>
+            </span>
+          }
           value={formik.values.name}
           error={formik.errors.name}
           onChange={formik.handleChange}
@@ -118,6 +125,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         <Field
           name="email"
           type="email"
+          required
           label={t('bc.review.email', 'Email')}
           value={formik.values.email}
           error={formik.errors.email}
@@ -135,6 +143,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         />
         <Field
           name="text"
+          required
           label={t('bc.review.comments', 'Comments')}
           value={formik.values.text}
           error={formik.errors.text}
