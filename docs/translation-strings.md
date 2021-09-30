@@ -1,6 +1,6 @@
 # How to use Translation Strings
 
-To make your site multi-lingual any hard coded copy should have translation strings enabled.
+To make your site multilingual any hard coded copy should have translation strings enabled.
 
 ## Add a string to i18n json file.
 
@@ -22,7 +22,7 @@ Don't forget to include the translated string in other languages if you have the
 
 ## Add string to component file
 
-In any template file, we can import translation string dependancy at the top of the file:
+In any template file, we can import translation string dependency at the top of the file:
 
 ```js
 import { useTranslation } from 'react-i18next'
@@ -44,7 +44,7 @@ Once this is imported we can add the string to anywhere in the component like so
 ```
 
 - The first parameter is the route to the string in the translation.json file
-- The second parameter is a fallback string, incase the the text string in the translation file is missing.
+- The second parameter is a fallback string, in case the text string in the translation file is missing.
 
 That's it!
 
