@@ -4,17 +4,17 @@ import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-produ
 import useOrders from '@bigcommerce/storefront-data-hooks/use-orders'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import { Orders, Typography } from 'unsafe-bc-react-components'
-import { Order } from 'unsafe-bc-react-components/dist/components/core/orders/types'
+import { OrderRow, Typography } from 'unsafe-bc-react-components'
+import { Order } from 'unsafe-bc-react-components/dist/components/order-detail/types'
 
 import { OrderLoading } from '@components'
 
 import { getStatusColor } from '../../utils/get-status-color'
 import * as styles from './styles'
 
-const OrderRow = (props: any): React.ReactElement => {
+const OrderRowWithProducts = (props: any): React.ReactElement => {
   const { data: products } = useOrderProducts({ orderId: props.order?.id })
-  return <Orders.OrderRow {...props} products={products} />
+  return <OrderRow {...props} products={products} />
 }
 
 const SortOrders = (a: any, b: any): number => {
@@ -62,7 +62,7 @@ export function OrdersPage(): React.ReactElement {
       )}
 
       {orders?.map((order) => (
-        <OrderRow
+        <OrderRowWithProducts
           key={order.id}
           order={order}
           statusVariant={getStatusColor(order.status)}

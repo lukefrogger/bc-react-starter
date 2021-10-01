@@ -5,8 +5,12 @@ import useRemoveAddress from '@bigcommerce/storefront-data-hooks/address/use-rem
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-import { Button, Profile, Typography } from 'unsafe-bc-react-components'
-import { AddressType } from 'unsafe-bc-react-components/dist/components/core/profile/types'
+import {
+  AddressCard,
+  AddressType,
+  Button,
+  Typography,
+} from 'unsafe-bc-react-components'
 
 import * as styles from './styles'
 
@@ -39,7 +43,7 @@ export function AddressesPage(): React.ReactElement {
         {isLoading && <div>{t('common.loading', 'Loading...')}</div>}
         {addresses?.map(
           (address: Address): React.ReactElement => (
-            <Profile.AddressCard
+            <AddressCard
               key={address.id}
               address={address as AddressType}
               onEdit={handleEdit}

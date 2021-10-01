@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import {
   Button,
-  Orders,
+  OrderDetail,
   ProductRow,
   Typography,
 } from 'unsafe-bc-react-components'
@@ -95,7 +95,7 @@ export function OrderPage(): React.ReactElement {
           {isLoading
             ? 'Loading...'
             : order && (
-                <Orders.OrderDetail
+                <OrderDetail
                   css={styles.Detail}
                   order={order as any}
                   statusVariant={getStatusColor(order?.status)}

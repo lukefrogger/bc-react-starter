@@ -2,10 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import { Link } from 'react-router-dom'
-import {
-  ProductCard,
-  Props as ProductCardProps,
-} from 'unsafe-bc-react-components'
+import { ProductCard, ProductCardProps } from 'unsafe-bc-react-components'
 
 import { useAddCartItem, useQuickView } from '@hooks'
 import { ProductModal } from '@pages/product-modal'
