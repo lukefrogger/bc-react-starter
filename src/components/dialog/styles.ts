@@ -45,6 +45,8 @@ export const close = (theme: Theme): SerializedStyles => css`
   top: calc(var(--spacing) - var(--padding));
   right: var(--spacing);
   z-index: 1;
+  // Needed to prevent the close button from being hidden in safari
+  -webkit-transform: translate3d(0, 0, 0);
   padding: var(--padding);
   margin-right: calc(var(--padding) * -1);
   border: none;
