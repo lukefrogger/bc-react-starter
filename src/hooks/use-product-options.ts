@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 
@@ -17,9 +17,22 @@ type UseProductOptions = {
 }
 
 export function useProductOptions(product?: ProductNode): UseProductOptions {
-  const options = getProductOptions(product)
+  const options = React.useMemo(() => getProductOptions(product), [product])
   const [choices, setChoices] = React.useState<Choices>({})
   const variant = getCurrentVariant(product, choices)
+
+  React.useEffect(() => {
+    setChoices((prevChoices) => {
+      return options.reduce<Choices>((acc, option) => {
+        const defaultChoice = option.values.find((value) => value.isDefault)
+        acc[option.displayName] =
+          prevChoices[option.displayName] ||
+          defaultChoice?.label ||
+          option.values[0].label
+        return acc
+      }, {})
+    })
+  }, [options])
 
   return {
     options,
