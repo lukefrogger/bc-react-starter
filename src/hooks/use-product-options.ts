@@ -27,8 +27,8 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
         const defaultChoice = option.values.find((value) => value.isDefault)
         acc[option.displayName] =
           prevChoices[option.displayName] ||
-          defaultChoice?.label ||
-          option.values[0].label
+          defaultChoice?.entityId ||
+          option.values[0].entityId
         return acc
       }, {})
     })
