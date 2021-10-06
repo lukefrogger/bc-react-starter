@@ -49,6 +49,11 @@ export const gallery = (theme: Theme): SerializedStyles => css`
     border-color: ${theme.colors['neutral-40']};
     background: ${theme.colors['neutral-40']};
   }
+  // Needed to prevent the bullets and the fullscreen button from being hidden in safari
+  .image-gallery-bullets-container,
+  .image-gallery-fullscreen-button {
+    -webkit-transform: translate3d(0, 0, 0);
+  }
 `
 
 export const product = css`
