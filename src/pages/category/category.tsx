@@ -46,7 +46,7 @@ export function CategoryPage(): React.ReactElement {
     window.scrollTo(0, 0)
     setPage(newPage)
   }
-  console.log('error', error, isValidating)
+
   if (!isValidating && !category) {
     return <NoMatch404 />
   }
