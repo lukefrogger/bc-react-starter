@@ -25,7 +25,7 @@ export function CategoryPage(): React.ReactElement {
   const history = useHistory()
   const { t } = useTranslation()
 
-  const { data: category, isValidating, error } = useCategory(params)
+  const { data: category, isValidating } = useCategory(params)
   const [page, setPage] = React.useState<number>(1)
   const { data: search } = useSearch({
     categoryId: category?.entityId,
