@@ -87,6 +87,6 @@ export const useUpdateCustomer = (): ((
         return Promise.resolve(customer)
       }
     },
-    [fn, customer]
+    [fn, customer, t, login]
   )
 }

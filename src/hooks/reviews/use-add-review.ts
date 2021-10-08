@@ -86,6 +86,6 @@ export const useAddReview = (
         })
       }
     },
-    [fn, revalidate, customer]
+    [fn, revalidate, customer, t]
   )
 }
