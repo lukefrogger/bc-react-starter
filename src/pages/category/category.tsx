@@ -12,6 +12,7 @@ import {
 
 import {
   Breadcrumbs,
+  NoMatch404,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
 } from '@components'
@@ -24,7 +25,7 @@ export function CategoryPage(): React.ReactElement {
   const history = useHistory()
   const { t } = useTranslation()
 
-  const { data: category } = useCategory(params)
+  const { data: category, isValidating, error } = useCategory(params)
   const [page, setPage] = React.useState<number>(1)
   const { data: search } = useSearch({
     categoryId: category?.entityId,
@@ -44,6 +45,10 @@ export function CategoryPage(): React.ReactElement {
   function onChangePage(_: unknown, newPage: number): void {
     window.scrollTo(0, 0)
     setPage(newPage)
+  }
+  console.log('error', error, isValidating)
+  if (!isValidating && !category) {
+    return <NoMatch404 />
   }
 
   return (

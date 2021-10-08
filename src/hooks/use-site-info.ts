@@ -10,5 +10,5 @@ const fetcher = async (): Promise<any> => {
 }
 
 export function useSiteInfo(): SWRResponse<GetSiteInfoResult, Error> {
-  return useSWR('site-info', fetcher)
+  return useSWR('site-info', fetcher, { revalidateOnFocus: false })
 }
