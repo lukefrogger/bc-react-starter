@@ -121,13 +121,15 @@ export function ProductPage({
               </Typography>
             )}
             <Typography variant="display">{product.name}</Typography>
-            <ProductPrice
-              price={variant.node.prices.basePrice.value}
-              salePrice={variant.node.prices.salePrice?.value || 0}
-              currencySettings={{
-                currency: variant.node.prices.basePrice.code,
-              }}
-            />
+            {variant && (
+              <ProductPrice
+                price={variant.node.prices.basePrice.value}
+                salePrice={variant.node.prices.salePrice?.value || 0}
+                currencySettings={{
+                  currency: variant.node.prices.basePrice.code,
+                }}
+              />
+            )}
             {!isLimited && description}
             {/*             <div css={styles.starRow}>
               <StarRating
@@ -170,12 +172,12 @@ export function ProductPage({
                     return (
                       <Button
                         variant="selector"
-                        key={value.label}
-                        data-selected={active === value.label}
+                        key={value.entityId}
+                        data-selected={active === value.entityId}
                         onClick={() => {
                           setChoices({
                             ...choices,
-                            [option.displayName]: value.label,
+                            [option.displayName]: value.entityId,
                           })
                         }}
                       >
