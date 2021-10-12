@@ -1,9 +1,10 @@
 import * as React from 'react'
 
+import { css } from '@emotion/react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
-import { Footer, Header } from '@components'
+import { Footer, Header, NoMatch404 } from '@components'
 import { useBanners } from '@hooks'
 import {
   AllCategories,
@@ -27,7 +28,13 @@ export function RootRouter(): React.ReactElement {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div>
+      <div
+        css={css`
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        `}
+      >
         {banners?.[0] && (
           <Banner
             position={banners[0].location}
@@ -93,6 +100,9 @@ export function RootRouter(): React.ReactElement {
           </Route>
           <Route path="/user">
             <UserRouter />
+          </Route>
+          <Route path="*">
+            <NoMatch404 />
           </Route>
         </Switch>
         <Footer />

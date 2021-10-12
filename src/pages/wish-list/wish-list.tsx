@@ -10,6 +10,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import {
+  NoMatch404,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
   WishlistActions,
@@ -39,7 +40,7 @@ export function WishListPage(): React.ReactElement {
   }
 
   if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
-  if (!wishlist) return <p>Not found</p>
+  if (!wishlist) return <NoMatch404 />
   if (error) return <p>Error</p>
 
   const { is_guest: isGuest } = wishlist
