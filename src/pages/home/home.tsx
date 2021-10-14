@@ -10,6 +10,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import {
+  PageWithTitle,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
 } from '@components'
@@ -75,60 +76,62 @@ export function HomePage(): React.ReactElement {
   const history = useHistory()
 
   return (
-    <div css={styles.container}>
-      <Hero {...HERO} />
-      <div css={styles.main}>
-        <SideMenu
-          css={css`
-            padding-top: 20px;
-            min-width: 240px;
-            @media (max-width: 1023px) {
-              display: none;
-            }
-          `}
-        >
-          <SideMenu.Level title="Categories">
-            {categories?.map((category) => (
-              <SideMenu.Item
-                key={category.entityId}
-                onClick={() => {
-                  history.push(`/category${category.path}`)
-                }}
-              >
-                {category.name}
-              </SideMenu.Item>
-            ))}
-          </SideMenu.Level>
-        </SideMenu>
-        <div css={styles.grid}>
-          {data?.products
-            .map(
-              (product): ProductCardWithButtonsProps => ({
-                brand: {
-                  name: product.node.brand?.name || '',
-                },
-                product: {
-                  condition: 'new',
-                  name: product.node.name,
-                  price: product.node.prices?.basePrice?.value,
-                  sale_price: product.node.prices?.salePrice?.value || 0,
-                },
-                currencySettings: {},
-                image: {
-                  meta: product.node.images.edges?.[0]?.node.altText || '',
-                  url_standard:
-                    product.node.images.edges?.[0]?.node.urlOriginal || '',
-                },
-                productId: product.node.entityId,
-                variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
-                path: product.node.path,
-              })
-            )
-            .map((product) => (
-              <ProductCardWithButtons {...product} key={product.productId} />
-            ))}
+    <PageWithTitle title="Home | Stellar Store">
+      <div css={styles.container}>
+        <Hero {...HERO} />
+        <div css={styles.main}>
+          <SideMenu
+            css={css`
+              padding-top: 20px;
+              min-width: 240px;
+              @media (max-width: 1023px) {
+                display: none;
+              }
+            `}
+          >
+            <SideMenu.Level title="Categories">
+              {categories?.map((category) => (
+                <SideMenu.Item
+                  key={category.entityId}
+                  onClick={() => {
+                    history.push(`/category${category.path}`)
+                  }}
+                >
+                  {category.name}
+                </SideMenu.Item>
+              ))}
+            </SideMenu.Level>
+          </SideMenu>
+          <div css={styles.grid}>
+            {data?.products
+              .map(
+                (product): ProductCardWithButtonsProps => ({
+                  brand: {
+                    name: product.node.brand?.name || '',
+                  },
+                  product: {
+                    condition: 'new',
+                    name: product.node.name,
+                    price: product.node.prices?.basePrice?.value,
+                    sale_price: product.node.prices?.salePrice?.value || 0,
+                  },
+                  currencySettings: {},
+                  image: {
+                    meta: product.node.images.edges?.[0]?.node.altText || '',
+                    url_standard:
+                      product.node.images.edges?.[0]?.node.urlOriginal || '',
+                  },
+                  productId: product.node.entityId,
+                  variantId: product.node.variants?.edges?.[0]?.node.entityId, // TODO: Handle variant
+                  path: product.node.path,
+                })
+              )
+              .map((product) => (
+                <ProductCardWithButtons {...product} key={product.productId} />
+              ))}
+          </div>
         </div>
       </div>
-    </div>
+    </PageWithTitle>
   )
 }
