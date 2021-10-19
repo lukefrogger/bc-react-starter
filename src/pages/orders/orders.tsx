@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useOrderProducts from '@bigcommerce/storefront-data-hooks/use-order-products'
 import useOrders from '@bigcommerce/storefront-data-hooks/use-orders'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { OrderRow, Typography } from 'unsafe-bc-react-components'
@@ -53,6 +54,12 @@ export function OrdersPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
+      <Helmet>
+        <title>
+          {t('orders.title', 'Order history')} |{' '}
+          {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Typography css={styles.Title} variant="display-large">
         {t('orders.title', 'Order history')}
       </Typography>

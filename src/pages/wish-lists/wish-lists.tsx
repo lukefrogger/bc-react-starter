@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import { Typography } from 'unsafe-bc-react-components'
@@ -20,6 +21,12 @@ export function WishListsPage(): React.ReactElement {
 
   return (
     <div css={styles.container}>
+      <Helmet>
+        <title>
+          {t('bc.wish_list.title', 'My wish lists')} |{' '}
+          {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Typography variant="display-large" css={styles.title}>
         {t('bc.wish_list.title', 'My wish lists')}
       </Typography>

@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useFormik } from 'formik'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
@@ -43,6 +44,11 @@ export function LoginPage(): React.ReactElement {
 
   return (
     <div css={styles.container}>
+      <Helmet>
+        <title>
+          {t('login.title', 'Login')} | {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Typography css={styles.centered} variant="display-large">
         {t('login.title', 'Login')}
       </Typography>

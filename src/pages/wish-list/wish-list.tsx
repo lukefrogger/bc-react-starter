@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useDialogState } from 'reakit/Dialog'
@@ -10,6 +11,7 @@ import {
 } from 'unsafe-bc-react-components'
 
 import {
+  NoMatch404,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
   WishlistActions,
@@ -39,13 +41,18 @@ export function WishListPage(): React.ReactElement {
   }
 
   if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
-  if (!wishlist) return <p>Not found</p>
+  if (!wishlist) return <NoMatch404 />
   if (error) return <p>Error</p>
 
   const { is_guest: isGuest } = wishlist
   if (isGuest) {
     return (
       <div css={styles.container}>
+        <Helmet>
+          <title>
+            {wishlist.name} | {t('store.name', 'Stellar Store')}
+          </title>
+        </Helmet>
         <div css={styles.header}>
           <span css={styles.titleWrapper}>
             <Typography variant="display-large" css={styles.title}>
@@ -92,6 +99,11 @@ export function WishListPage(): React.ReactElement {
 
   return (
     <div css={styles.container}>
+      <Helmet>
+        <title>
+          {wishlist.name} | {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <div css={styles.header}>
         <span>
           <Link css={styles.back} to="/user/wishlists">

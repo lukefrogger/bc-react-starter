@@ -1319,10 +1319,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bigcommerce/storefront-data-hooks@^1.7.1-beta.5":
-  version "1.7.1-beta.5"
-  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.7.1-beta.5.tgz#2016d77e70d2035aef793fbb0f0d238494767ac0"
-  integrity sha512-B5iIwB3MhXq3HHsN8YbV4sVEXWd6AAw990HMZ5lqHiwkbLCJ58ZwUjhYXQC/r2fnWY+BoIo2VoMoys7INmrXUA==
+"@bigcommerce/storefront-data-hooks@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@bigcommerce/storefront-data-hooks/-/storefront-data-hooks-1.7.0.tgz#e8167ca1c5bbe8d7d47429d4080bf2b49ffb1c6e"
+  integrity sha512-acPAJze1OClNjfW8v1WXkk+5C+R/SEkhZ3JhhfOBdffGPfHX9ZZctcbymu57gySbemHY+7UTOJE74ZNwG0HufA==
   dependencies:
     "@vercel/fetch" "6.1.0"
     cookie "0.4.1"
@@ -2968,6 +2968,13 @@
   dependencies:
     "@types/react" "*"
     flatpickr "^4.0.6"
+
+"@types/react-helmet@^6.1.4":
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-6.1.4.tgz#3e54a3eb37ba7fb34ffafc64f425be4e68df03b9"
+  integrity sha512-jyx50RNZXVaTGHY3MsoRPNpeiVk8b0XTPgD/O6KHF6COTDnG/+lRjPYvTK5nfWtR3xDOux0w6bHLAsaHo2ZLTA==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-image-gallery@^1.0.4":
   version "1.0.4"
@@ -13691,7 +13698,7 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
+react-fast-compare@^3.0.1, react-fast-compare@^3.1.1, react-fast-compare@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
@@ -13714,6 +13721,16 @@ react-helmet-async@^1.0.7:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
+
+react-helmet@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-6.1.0.tgz#a750d5165cb13cf213e44747502652e794468726"
+  integrity sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.7.2"
+    react-fast-compare "^3.1.1"
+    react-side-effect "^2.1.0"
 
 react-i18next@^11.9.0:
   version "11.11.4"
@@ -13817,6 +13834,11 @@ react-router@5.2.0:
     react-is "^16.6.0"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-side-effect@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
+  integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
 
 react-sizeme@^3.0.1:
   version "3.0.1"

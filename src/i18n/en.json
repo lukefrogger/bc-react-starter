@@ -1,4 +1,8 @@
 {
+  "store": {
+    "name": "Stellar Store",
+    "home": "Home"
+  },
   "hero": {
     "headline": "Headline in the Hero"
   },

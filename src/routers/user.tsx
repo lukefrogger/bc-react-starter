@@ -4,7 +4,7 @@ import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTranslation } from 'react-i18next'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 
-import { Submenu } from '@components'
+import { NoMatch404, Submenu } from '@components'
 import {
   AddAddressPage,
   AddressesPage,
@@ -41,7 +41,7 @@ export function UserRouter(): React.ReactElement {
   }, [])
 
   // User is unauthenticated
-  if (error && !customer) {
+  if (error || !customer) {
     return <Redirect to={`/login?forward_url=${location.pathname}`} />
   }
 
@@ -85,7 +85,10 @@ export function UserRouter(): React.ReactElement {
         <Route exact path="/user/wishlists">
           <WishListsPage />
         </Route>
-        <Redirect from="/user" to="/user/profile" />
+        <Route path="*">
+          <NoMatch404 />
+        </Route>
+        {/*         <Redirect from="/user" to="/user/profile" /> */}
       </Switch>
     </>
   )

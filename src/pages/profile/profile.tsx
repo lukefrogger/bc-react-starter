@@ -5,6 +5,7 @@ import useCustomer, {
 } from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useFormik } from 'formik'
 import { pick } from 'lodash'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import {
   Button,
@@ -123,6 +124,12 @@ export function ProfilePage(): React.ReactElement {
 
   return (
     <div>
+      <Helmet>
+        <title>
+          {t('profile.title', 'Account profile')} |{' '}
+          {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Typography css={styles.Title} variant="display-large">
         {t('profile.title', 'Account profile')}
       </Typography>

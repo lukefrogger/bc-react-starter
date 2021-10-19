@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import {
@@ -12,6 +13,7 @@ import {
 
 import {
   Breadcrumbs,
+  NoMatch404,
   ProductCardWithButtons,
   ProductCardWithButtonsProps,
 } from '@components'
@@ -24,7 +26,7 @@ export function CategoryPage(): React.ReactElement {
   const history = useHistory()
   const { t } = useTranslation()
 
-  const { data: category } = useCategory(params)
+  const { data: category, isValidating } = useCategory(params)
   const [page, setPage] = React.useState<number>(1)
   const { data: search } = useSearch({
     categoryId: category?.entityId,
@@ -46,8 +48,17 @@ export function CategoryPage(): React.ReactElement {
     setPage(newPage)
   }
 
+  if (!isValidating && !category) {
+    return <NoMatch404 />
+  }
+
   return (
     <div css={styles.Container}>
+      <Helmet>
+        <title>
+          {category?.name} | {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Breadcrumbs>
         <Breadcrumbs.Item to="/">
           {t('breadcrumbs.home', 'Home')}

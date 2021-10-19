@@ -1,6 +1,8 @@
 import * as React from 'react'
 
+import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTheme } from '@emotion/react'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
 import { useMediaQuery } from 'react-responsive'
@@ -40,6 +42,7 @@ export function ProductPage({
   isLimited,
 }: ProductPageProps): React.ReactElement {
   const { t } = useTranslation()
+  const { data: customer } = useCustomer()
 
   const { data: product } = useProduct(slug)
   const { data: reviews } = useReviews(slug)
@@ -82,6 +85,9 @@ export function ProductPage({
 
   return (
     <div css={styles.container(isLimited)}>
+      <Helmet>
+        <title>{product?.name}</title>
+      </Helmet>
       {!isLimited && (
         <Breadcrumbs>
           <Breadcrumbs.Item to="/">
@@ -116,13 +122,15 @@ export function ProductPage({
               </Typography>
             )}
             <Typography variant="display">{product.name}</Typography>
-            <ProductPrice
-              price={variant.node.prices.basePrice.value}
-              salePrice={variant.node.prices.salePrice?.value || 0}
-              currencySettings={{
-                currency: variant.node.prices.basePrice.code,
-              }}
-            />
+            {variant && (
+              <ProductPrice
+                price={variant.node.prices.basePrice.value}
+                salePrice={variant.node.prices.salePrice?.value || 0}
+                currencySettings={{
+                  currency: variant.node.prices.basePrice.code,
+                }}
+              />
+            )}
             {reviewSummary && (
               <div css={styles.starRow}>
                 <StarRating rating={reviewSummary.averageOfRatings} />
@@ -133,27 +141,29 @@ export function ProductPage({
                 </Typography>
               </div>
             )}
-            <div css={styles.addToWishlist}>
-              <DialogDisclosure {...wishlistDialog} css={styles.link}>
-                <svg
-                  width={16}
-                  height={14}
-                  viewBox="0 0 16 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.328 1.673a4 4 0 00-5.657 0c-.28.28-.491.598-.671.929a3.948 3.948 0 00-.672-.93 4 4 0 00-5.657 5.657L8 13.5l6.328-6.172a3.997 3.997 0 000-5.656z"
-                    stroke={theme.colors['neutral-50']}
-                    strokeMiterlimit={10}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
-              </DialogDisclosure>
-              <WishlistItemDialog {...wishlistDialog} />
-            </div>
+            {!!customer && (
+              <div css={styles.addToWishlist}>
+                <DialogDisclosure {...wishlistDialog} css={styles.link}>
+                  <svg
+                    width={16}
+                    height={14}
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14.328 1.673a4 4 0 00-5.657 0c-.28.28-.491.598-.671.929a3.948 3.948 0 00-.672-.93 4 4 0 00-5.657 5.657L8 13.5l6.328-6.172a3.997 3.997 0 000-5.656z"
+                      stroke={theme.colors['neutral-50']}
+                      strokeMiterlimit={10}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
+                </DialogDisclosure>
+                <WishlistItemDialog {...wishlistDialog} />
+              </div>
+            )}
           </div>
           <div css={styles.productOptions}>
             {options?.map((option) => (
@@ -167,12 +177,12 @@ export function ProductPage({
                     return (
                       <Button
                         variant="selector"
-                        key={value.label}
-                        data-selected={active === value.label}
+                        key={value.entityId}
+                        data-selected={active === value.entityId}
                         onClick={() => {
                           setChoices({
                             ...choices,
-                            [option.displayName]: value.label,
+                            [option.displayName]: value.entityId,
                           })
                         }}
                       >

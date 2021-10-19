@@ -2,6 +2,7 @@ import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operati
 
 type ProductOptionValue = {
   label: string
+  entityId: number
   [key: string]: any
 }
 

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router-dom'
 import { Typography } from 'unsafe-bc-react-components'
 
+import { NoMatch404 } from '@components'
 import {
   ADDRESS_INITIAL_VALUES,
   AddressForm,
@@ -34,6 +35,8 @@ export function AddressPage(): React.ReactElement {
   const { t } = useTranslation()
   const { slug }: { slug: string } = useParams()
   const { data, error } = useAddresses()
+  const isLoading = !error && !data
+
   const updateAddress = useUpdateAddress()
   const history = useHistory()
 
@@ -47,8 +50,8 @@ export function AddressPage(): React.ReactElement {
     return history.push('/user/addresses')
   }
 
-  if (!address && error) {
-    return <div>{t('errors.no_address', 'No address for given ID')}</div>
+  if (!address && !isLoading) {
+    return <NoMatch404 />
   }
 
   return (

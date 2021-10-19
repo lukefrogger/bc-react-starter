@@ -12,6 +12,7 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { NoMatch404 } from '@components'
 import { Arrow } from '@components/header/icons'
 import { useOrder } from '@hooks/order'
 
@@ -39,15 +40,7 @@ export function OrderPage(): React.ReactElement {
   }
 
   if (!isLoading && !order) {
-    return (
-      <div css={styles.Container}>
-        <div css={styles.Header}>
-          <Typography css={styles.Title} variant="display-large">
-            {t('order.not_found', 'No order found')}
-          </Typography>
-        </div>
-      </div>
-    )
+    return <NoMatch404 />
   }
 
   return (
