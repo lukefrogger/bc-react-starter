@@ -50,7 +50,9 @@
       "copy_link": "Copy Link"
     },
     "reviews": {
-      "save": "Save Review"
+      "save": "Save Review",
+      "review": "{{count}} review",
+      "review_plural": "{{count}} reviews"
     },
     "wishlist": {
       "name": "Wishlist Name",

@@ -81,6 +81,9 @@ export const starRow = css`
   display: flex;
   align-items: center;
   gap: 16px;
+  * > div {
+    margin: 0;
+  }
 `
 
 export const link = (theme: Theme): SerializedStyles => css`

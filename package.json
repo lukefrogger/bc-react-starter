@@ -28,7 +28,7 @@
     "@types/react": "^17.0.0"
   },
   "dependencies": {
-    "@bigcommerce/storefront-data-hooks": "^1.6.0",
+    "@bigcommerce/storefront-data-hooks": "^1.7.0",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@rehooks/local-storage": "2.4.0",

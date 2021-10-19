@@ -13,7 +13,7 @@ import {
   ProductPrice,
   ProductReview,
   QuantitySelector,
-  // StarRating,
+  StarRating,
   Typography,
 } from 'unsafe-bc-react-components'
 
@@ -24,6 +24,7 @@ import {
   useProduct,
   useProductOptions,
   useReviews,
+  useReviewSummary,
   useWishlistItemDialog,
 } from '@hooks'
 
@@ -45,6 +46,7 @@ export function ProductPage({
 
   const { data: product } = useProduct(slug)
   const { data: reviews } = useReviews(slug)
+  const reviewSummary = useReviewSummary(product?.reviewSummary)
   const addReview = useAddReview(slug)
   const { options, choices, setChoices, variant } = useProductOptions(product)
   const theme = useTheme()
@@ -65,13 +67,6 @@ export function ProductPage({
   const reviewDialog = useDialogState()
 
   if (!product) return <p>Loading</p>
-
-  const description = (
-    <Typography
-      variant="body-small"
-      dangerouslySetInnerHTML={{ __html: product.description }}
-    />
-  )
 
   const images = product.images?.edges?.reduce<ReactImageGalleryItem[]>(
     (acc, edge) => {
@@ -136,14 +131,16 @@ export function ProductPage({
                 }}
               />
             )}
-            {!isLimited && description}
-            {/*             <div css={styles.starRow}>
-              <StarRating
-                rating={4}
-                style={{ marginTop: 0, marginBottom: 0 }}
-              />
-              <Typography variant="body-small">2 reviews</Typography>
-            </div> */}
+            {reviewSummary && (
+              <div css={styles.starRow}>
+                <StarRating rating={reviewSummary.averageOfRatings} />
+                <Typography variant="body-small">
+                  {t('bc.reviews.review', '{{count}} reviews', {
+                    count: reviewSummary.numberOfReviews,
+                  })}
+                </Typography>
+              </div>
+            )}
             {!!customer && (
               <div css={styles.addToWishlist}>
                 <DialogDisclosure {...wishlistDialog} css={styles.link}>
