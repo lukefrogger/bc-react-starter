@@ -1,6 +1,8 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { Helmet } from 'react-helmet'
+import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Banner } from 'unsafe-bc-react-components'
 
@@ -24,9 +26,13 @@ import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
   const { data: banners, onBannerClose } = useBanners()
+  const { t } = useTranslation()
 
   return (
     <BrowserRouter>
+      <Helmet>
+        <title>{t('store.name', 'Stellar Store')}</title>
+      </Helmet>
       <ScrollToTop />
       <div
         css={css`
