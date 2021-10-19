@@ -3,6 +3,7 @@ import * as React from 'react'
 import useAddresses from '@bigcommerce/storefront-data-hooks/address/use-addresses'
 import useRemoveAddress from '@bigcommerce/storefront-data-hooks/address/use-remove-address'
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import {
@@ -33,6 +34,12 @@ export function AddressesPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
+      <Helmet>
+        <title>
+          {t('addresses.title', 'My addresses')} |{' '}
+          {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <Typography css={styles.Title} variant="display-large">
         {t('addresses.title', 'My addresses')}
       </Typography>

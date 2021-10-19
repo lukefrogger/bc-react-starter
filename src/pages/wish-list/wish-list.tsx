@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { useDialogState } from 'reakit/Dialog'
@@ -47,6 +48,11 @@ export function WishListPage(): React.ReactElement {
   if (isGuest) {
     return (
       <div css={styles.container}>
+        <Helmet>
+          <title>
+            {wishlist.name} | {t('store.name', 'Stellar Store')}
+          </title>
+        </Helmet>
         <div css={styles.header}>
           <span css={styles.titleWrapper}>
             <Typography variant="display-large" css={styles.title}>
@@ -93,6 +99,11 @@ export function WishListPage(): React.ReactElement {
 
   return (
     <div css={styles.container}>
+      <Helmet>
+        <title>
+          {wishlist.name} | {t('store.name', 'Stellar Store')}
+        </title>
+      </Helmet>
       <div css={styles.header}>
         <span>
           <Link css={styles.back} to="/user/wishlists">
