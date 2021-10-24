@@ -1,15 +1,33 @@
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
+import {
+  CatalogProductOptionValue,
+  DateFieldOption,
+  MultipleChoiceOption,
+} from '@bigcommerce/storefront-data-hooks/schema'
 
-type ProductOptionValue = {
-  label: string
-  entityId: number
-  [key: string]: any
-}
+type ProductOptionValue = CatalogProductOptionValue
 
-export type ProductOption = {
-  displayName: string
-  values: ProductOptionValue[]
-}
+export type ProductOption =
+  | (Pick<
+      MultipleChoiceOption,
+      'entityId' | 'displayName' | 'isVariantOption' | 'isRequired'
+    > & {
+      values: ProductOptionValue[]
+      type: 'multipleChoice'
+    })
+  | (Pick<
+      DateFieldOption,
+      | 'entityId'
+      | 'displayName'
+      | 'isVariantOption'
+      | 'isRequired'
+      | 'earliest'
+      | 'latest'
+      | 'limitDateBy'
+    > & {
+      type: 'dateField'
+      defaultDate?: string
+    })
 
 // Returns the available options of a product
 export function getProductOptions(product?: ProductNode): ProductOption[] {
@@ -27,10 +45,20 @@ export function getProductOptions(product?: ProductNode): ProductOption[] {
         )
         if (values !== undefined) {
           acc.push({
+            ...edge.node,
             displayName: edge.node.displayName.toLowerCase(),
             values,
+            type: 'multipleChoice',
           })
         }
+      }
+      // eslint-disable-next-line no-underscore-dangle
+      if (edge?.node.__typename === 'DateFieldOption') {
+        acc.push({
+          ...edge.node,
+          displayName: edge.node.displayName,
+          type: 'dateField',
+        })
       }
       return acc
     },

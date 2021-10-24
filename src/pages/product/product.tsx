@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import { DialogDisclosure, useDialogState } from 'reakit/Dialog'
 import {
   Button,
+  DatePicker,
   ProductPrice,
   ProductReview,
   QuantitySelector,
@@ -48,7 +49,8 @@ export function ProductPage({
   const { data: reviews } = useReviews(slug)
   const reviewSummary = useReviewSummary(product?.reviewSummary)
   const addReview = useAddReview(slug)
-  const { options, choices, setChoices, variant } = useProductOptions(product)
+  const { options, choices, setChoices, variant, optionSelections } =
+    useProductOptions(product)
   const theme = useTheme()
 
   const isMobile = !useMediaQuery({
@@ -57,6 +59,7 @@ export function ProductPage({
   const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
+    optionSelections,
   })
 
   const wishlistDialog = useWishlistItemDialog({
@@ -166,33 +169,61 @@ export function ProductPage({
             )}
           </div>
           <div css={styles.productOptions}>
-            {options?.map((option) => (
-              <div key={option.displayName}>
-                <Typography variant="display-xx-small">
-                  {option.displayName.toUpperCase()}
-                </Typography>
-                <div css={styles.selectors}>
-                  {option.values.map((value) => {
-                    const active = choices[option.displayName]
-                    return (
-                      <Button
-                        variant="selector"
-                        key={value.entityId}
-                        data-selected={active === value.entityId}
-                        onClick={() => {
-                          setChoices({
-                            ...choices,
-                            [option.displayName]: value.entityId,
-                          })
-                        }}
-                      >
-                        {value.label}
-                      </Button>
-                    )
-                  })}
-                </div>
-              </div>
-            ))}
+            {options?.map((option) => {
+              // TODO: Refactor to a different file
+              if (option.type === 'multipleChoice')
+                return (
+                  <div key={option.displayName}>
+                    <Typography variant="display-xx-small">
+                      {option.displayName.toUpperCase()}
+                    </Typography>
+                    <div css={styles.selectors}>
+                      {option.values.map((value) => {
+                        const active = choices[option.displayName]
+                        return (
+                          <Button
+                            variant="selector"
+                            key={value.entityId}
+                            data-selected={active === value.entityId}
+                            onClick={() => {
+                              setChoices({
+                                ...choices,
+                                [option.displayName]: value.entityId,
+                              })
+                            }}
+                          >
+                            {value.label}
+                          </Button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )
+              if (option.type === 'dateField') {
+                return (
+                  <DatePicker
+                    // TODO: Get props from original component
+                    minDate={new Date(option.earliest)}
+                    {...(option.earliest && {
+                      minDate: new Date(option.earliest),
+                    })}
+                    {...(option.latest && {
+                      maxDate: new Date(option.latest),
+                    })}
+                    label={option.displayName.toUpperCase()}
+                    placeholderText="Placeholder text"
+                    selected={choices[option.entityId]}
+                    onChange={(date: Date) => {
+                      setChoices({
+                        ...choices,
+                        [option.entityId]: date,
+                      })
+                    }}
+                  />
+                )
+              }
+              return null
+            })}
             <div>
               <Typography variant="display-xx-small">
                 {t('bc.product.quantity', 'QUANTITY')}

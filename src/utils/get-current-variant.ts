@@ -1,7 +1,8 @@
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 
-export type Choices = Record<string, number | null>
+export type Choices = Record<string, number | null | Date>
 
+// TODO: Check isVariant property
 // Finds a variant in the product that matches the selected options
 export function getCurrentVariant(
   product?: ProductNode,
@@ -17,7 +18,10 @@ export function getCurrentVariant(
     const numberOfEdges = node?.productOptions?.edges?.length
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    const isEdgeEqualToOption = ([key, value]: [string, number | null]) =>
+    const isEdgeEqualToOption = ([key, value]: [
+      string,
+      number | null | Date
+    ]) =>
       node?.productOptions.edges?.find((productOptionEdge) => {
         if (
           // eslint-disable-next-line no-underscore-dangle
