@@ -2,12 +2,14 @@ import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operati
 
 export type Choices = Record<string, number | null | Date>
 
+export type Variant = any
+
 // TODO: Check isVariant property
 // Finds a variant in the product that matches the selected options
 export function getCurrentVariant(
   product?: ProductNode,
   choices: Choices = {}
-): any {
+): Variant {
   if (!product) return null
 
   const variant = product.variants.edges?.find((edge) => {

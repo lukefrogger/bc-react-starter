@@ -47,8 +47,14 @@ function getOptionSelections(choices: Choices): OptionSelection[] {
 export function useProductOptions(product?: ProductNode): UseProductOptions {
   const options = React.useMemo(() => getProductOptions(product), [product])
   const [choices, setChoices] = React.useState<Choices>({})
-  const variant = getCurrentVariant(product, choices)
-  const optionSelections = getOptionSelections(choices) // TODO: Refactor to useOptionSelections with useMemo
+  const variant = React.useMemo(
+    () => getCurrentVariant(product, choices),
+    [product, choices]
+  )
+  const optionSelections = React.useMemo(
+    () => getOptionSelections(choices),
+    [choices]
+  )
 
   React.useEffect(() => {
     setChoices((prevChoices) => {
