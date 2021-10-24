@@ -179,7 +179,7 @@ export function ProductPage({
                     </Typography>
                     <div css={styles.selectors}>
                       {option.values.map((value) => {
-                        const active = choices[option.displayName]
+                        const active = choices[option.entityId]
                         return (
                           <Button
                             variant="selector"
@@ -188,7 +188,7 @@ export function ProductPage({
                             onClick={() => {
                               setChoices({
                                 ...choices,
-                                [option.displayName]: value.entityId,
+                                [option.entityId]: value.entityId,
                               })
                             }}
                           >

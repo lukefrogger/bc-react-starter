@@ -55,8 +55,8 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
       return options.reduce<Choices>((acc, option) => {
         if (option.type === 'multipleChoice') {
           const defaultChoice = option.values.find((value) => value.isDefault)
-          acc[option.displayName] =
-            prevChoices[option.displayName] ||
+          acc[option.entityId] =
+            prevChoices[option.entityId] ||
             defaultChoice?.entityId ||
             // TODO: Don't set first value if it's not required
             option.values[0].entityId
