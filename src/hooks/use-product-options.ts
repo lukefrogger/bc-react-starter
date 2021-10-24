@@ -9,7 +9,7 @@ import {
   ProductOption,
 } from '@utils'
 
-type UseProductOptions = {
+export type UseProductOptions = {
   options: ProductOption[]
   choices: Choices
   variant: any
