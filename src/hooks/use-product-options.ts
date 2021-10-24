@@ -1,5 +1,6 @@
 import React from 'react'
 
+import type { ItemBody } from '@bigcommerce/storefront-data-hooks/api/cart'
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 
 import {
@@ -17,10 +18,7 @@ export type UseProductOptions = {
   optionSelections: OptionSelection[]
 }
 
-type OptionSelection = {
-  option_id: number
-  option_value: number
-}
+type OptionSelection = NonNullable<ItemBody['optionSelections']>[number]
 
 function getOptionSelections(choices: Choices): OptionSelection[] {
   return Object.entries(choices).reduce<OptionSelection[]>(
