@@ -58,8 +58,11 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
           acc[option.entityId] =
             prevChoices[option.entityId] ||
             defaultChoice?.entityId ||
-            // TODO: Don't set first value if it's not required
-            option.values[0].entityId
+            // Auto-set first value if it's required
+            option.isVariantOption ||
+            option.isRequired
+              ? option.values[0].entityId
+              : null
         }
         if (option.type === 'dateField') {
           const defaultDate = option.defaultDate
