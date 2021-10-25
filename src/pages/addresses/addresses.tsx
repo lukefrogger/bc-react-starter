@@ -13,6 +13,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { AddressCardLoading } from '@components'
+
 import * as styles from './styles'
 
 export function AddressesPage(): React.ReactElement {
@@ -22,6 +24,7 @@ export function AddressesPage(): React.ReactElement {
   const removeAddress = useRemoveAddress()
   const addresses = data?.addresses
   const isLoading = !data && !error
+  // const isLoading = true
 
   const handleAdd = (): void => history.push('/user/addresses/new')
   const handleEdit = (address: AddressType): void => {
@@ -47,17 +50,20 @@ export function AddressesPage(): React.ReactElement {
         {t('addresses.add', 'Add new address')}
       </Button>
       <div css={styles.Grid}>
-        {isLoading && <div>{t('common.loading', 'Loading...')}</div>}
-        {addresses?.map(
-          (address: Address): React.ReactElement => (
-            <AddressCard
-              key={address.id}
-              address={address as AddressType}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          )
-        )}
+        {isLoading
+          ? [1, 2].map((loading) => {
+              return <AddressCardLoading key={loading} />
+            })
+          : addresses?.map(
+              (address: Address): React.ReactElement => (
+                <AddressCard
+                  key={address.id}
+                  address={address as AddressType}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                />
+              )
+            )}
       </div>
     </div>
   )
