@@ -35,6 +35,7 @@ export const ProductList = css`
 
 export const Checkout = (theme: Theme): SerializedStyles => css`
   ${getBaseStyle(theme.components.Button.variants?.primary, theme)}
+  line-height: 1;
   margin-top: 48px;
   display: block;
   text-decoration: none;
