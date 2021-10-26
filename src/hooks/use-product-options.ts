@@ -82,7 +82,10 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
             : null
           acc[option.entityId] = prevChoices[option.entityId] || defaultDate
         }
-        if (option.__typename === 'TextFieldOption') {
+        if (
+          option.__typename === 'TextFieldOption' ||
+          option.__typename === 'MultiLineTextFieldOption'
+        ) {
           const defaultText = option.defaultValue || ''
           acc[option.entityId] = prevChoices[option.entityId] || defaultText
         }

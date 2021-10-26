@@ -75,9 +75,15 @@ export function ProductOption(
       />
     )
   }
-  if (option.__typename === 'TextFieldOption') {
+  if (
+    option.__typename === 'TextFieldOption' ||
+    option.__typename === 'MultiLineTextFieldOption'
+  ) {
     return (
       <Field
+        {...(option.__typename === 'MultiLineTextFieldOption' && {
+          as: 'textarea',
+        })}
         value={String(choices[option.entityId])}
         name={option.displayName}
         label={option.displayName.toUpperCase()}

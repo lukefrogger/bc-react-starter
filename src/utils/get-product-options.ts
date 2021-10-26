@@ -9,6 +9,7 @@ const SUPPORTED_OPTION_TYPES: (ProductOption['__typename'] | undefined)[] = [
   'MultipleChoiceOption',
   'DateFieldOption',
   'TextFieldOption',
+  'MultiLineTextFieldOption',
 ]
 
 // Returns the supported options of a product
