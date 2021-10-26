@@ -29,10 +29,16 @@ function getOptionSelections(choices: Choices): OptionSelection[] {
             option_id: Number(optionId),
             option_value: Math.floor(Number(optionValue) / 1000), // BigCommerce expects unix timestamp (seconds)
           })
-        } else {
+        } else if (!Number.isNaN(Number(optionValue))) {
           acc.push({
             option_id: Number(optionId),
             option_value: Number(optionValue),
+          })
+        } else {
+          // TextField
+          acc.push({
+            option_id: Number(optionId),
+            option_value: optionValue,
           })
         }
       }
@@ -75,6 +81,10 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
             ? new Date(option.defaultDate)
             : null
           acc[option.entityId] = prevChoices[option.entityId] || defaultDate
+        }
+        if (option.__typename === 'TextFieldOption') {
+          const defaultText = option.defaultValue || ''
+          acc[option.entityId] = prevChoices[option.entityId] || defaultText
         }
         return acc
       }, {})

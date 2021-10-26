@@ -8,6 +8,7 @@ export type ProductOption = NonNullable<
 const SUPPORTED_OPTION_TYPES: (ProductOption['__typename'] | undefined)[] = [
   'MultipleChoiceOption',
   'DateFieldOption',
+  'TextFieldOption',
 ]
 
 // Returns the supported options of a product

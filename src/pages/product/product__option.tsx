@@ -1,7 +1,12 @@
 import * as React from 'react'
 
 import type { UseProductOptions } from '@hooks'
-import { Button, DatePicker, Typography } from 'unsafe-bc-react-components'
+import {
+  Button,
+  DatePicker,
+  Field,
+  Typography,
+} from 'unsafe-bc-react-components'
 
 import * as styles from './styles'
 
@@ -70,5 +75,23 @@ export function ProductOption(
       />
     )
   }
+  if (option.__typename === 'TextFieldOption') {
+    return (
+      <Field
+        value={String(choices[option.entityId])}
+        name={option.displayName}
+        label={option.displayName.toUpperCase()}
+        onChange={(e) => {
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type '{}'.
+          const { value } = e.target
+          setChoices({
+            ...choices,
+            [option.entityId]: value,
+          })
+        }}
+      />
+    )
+  }
+
   return null
 }

@@ -1,6 +1,6 @@
 import type { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/get-product'
 
-export type Choices = Record<string, number | null | Date>
+export type Choices = Record<string, string | number | null | Date>
 
 export type Variant = any
 
@@ -22,7 +22,7 @@ export function getCurrentVariant(
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
     const isEdgeEqualToOption = ([key, value]: [
       string,
-      number | null | Date
+      string | number | null | Date
     ]) =>
       node?.productOptions.edges?.find((productOptionEdge) => {
         if (
