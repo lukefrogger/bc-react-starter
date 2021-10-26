@@ -4,7 +4,7 @@ export type Choices = Record<string, number | null | Date>
 
 export type Variant = any
 
-// TODO: Check isVariant property
+// TODO: Check isVariant property and displayName vs entityId
 // Finds a variant in the product that matches the selected options
 export function getCurrentVariant(
   product?: ProductNode,
@@ -26,7 +26,6 @@ export function getCurrentVariant(
     ]) =>
       node?.productOptions.edges?.find((productOptionEdge) => {
         if (
-          // eslint-disable-next-line no-underscore-dangle
           productOptionEdge?.node.__typename === 'MultipleChoiceOption' &&
           productOptionEdge.node.displayName.toLowerCase() === key
         ) {

@@ -57,18 +57,20 @@ export function useProductOptions(product?: ProductNode): UseProductOptions {
   React.useEffect(() => {
     setChoices((prevChoices) => {
       return options.reduce<Choices>((acc, option) => {
-        if (option.type === 'multipleChoice') {
-          const defaultChoice = option.values.find((value) => value.isDefault)
+        if (option.__typename === 'MultipleChoiceOption') {
+          const defaultChoice = option.values?.edges?.find(
+            (value) => value?.node.isDefault
+          )
           acc[option.entityId] =
             prevChoices[option.entityId] ||
-            defaultChoice?.entityId ||
+            defaultChoice?.node.entityId ||
             // Auto-set first value if it's required
             option.isVariantOption ||
             option.isRequired
-              ? option.values[0].entityId
+              ? option.values.edges?.[0]?.node.entityId || null
               : null
         }
-        if (option.type === 'dateField') {
+        if (option.__typename === 'DateFieldOption') {
           const defaultDate = option.defaultDate
             ? new Date(option.defaultDate)
             : null

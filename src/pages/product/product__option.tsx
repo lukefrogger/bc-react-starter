@@ -17,35 +17,37 @@ export function ProductOption(
 ): React.ReactElement | null {
   const { option, choices, setChoices } = props
 
-  if (option.type === 'multipleChoice')
+  if (option.__typename === 'MultipleChoiceOption')
     return (
       <div key={option.displayName}>
         <Typography variant="display-xx-small">
           {option.displayName.toUpperCase()}
         </Typography>
         <div css={styles.selectors}>
-          {option.values.map((value) => {
+          {option.values?.edges?.map((value) => {
+            if (!value) return null
+            const { entityId, label } = value.node
             const active = choices[option.entityId]
             return (
               <Button
                 variant="selector"
-                key={value.entityId}
-                data-selected={active === value.entityId}
+                key={entityId}
+                data-selected={active === entityId}
                 onClick={() => {
                   setChoices({
                     ...choices,
-                    [option.entityId]: value.entityId,
+                    [option.entityId]: entityId,
                   })
                 }}
               >
-                {value.label}
+                {label}
               </Button>
             )
           })}
         </div>
       </div>
     )
-  if (option.type === 'dateField') {
+  if (option.__typename === 'DateFieldOption') {
     return (
       <DatePicker
         // TODO: Get props from original component
