@@ -88,6 +88,7 @@ export function ProductOption(
         name={option.displayName}
         label={option.displayName.toUpperCase()}
         onChange={(e) => {
+          // TODO: Add support for target.value in components library
           // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type '{}'.
           const { value } = e.target
           setChoices({
