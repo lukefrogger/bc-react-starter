@@ -1,5 +1,6 @@
 import { useLocalStorage } from '@rehooks/local-storage'
 import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 import { stripHtml } from 'string-strip-html'
 import useSWR, { SWRResponse } from 'swr'
 
@@ -65,16 +66,34 @@ const fetcher = async (): Promise<Banner[] | undefined> => {
 
 export function useBanners(): UseBanners {
   const banners = useSWR(['banners'], fetcher)
+  const location = useLocation()
   const [dismissedBanners, setDismissedBanners] = useLocalStorage<number[]>(
     DISMISSED_BANNER_IDS,
     []
   )
+  const respectLocation = (banner: Banner): boolean => {
+    if (banner.page === 'home_page' && location.pathname === '/') {
+      return true
+    }
+    if (
+      banner.page === 'category_page' &&
+      (location.pathname.includes('categories') ||
+        location.pathname.includes('category'))
+    ) {
+      return true
+    }
+    if (banner.page === 'search_page' && location.pathname.includes('search')) {
+      return true
+    }
+    return false
+  }
 
   return {
     ...banners,
     data: banners?.data
       ?.filter((banner) => banner.visible === '1')
       .filter((banner) => !dismissedBanners.includes(banner.id))
+      .filter(respectLocation)
       .map((banner) => ({
         ...banner,
         content: stripHtml(banner.content || '').result,
