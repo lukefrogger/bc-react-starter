@@ -91,6 +91,7 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     'jest/no-mocks-import': 'off',
+    'no-underscore-dangle': ["error", { "allow": [ "__typename"] }]
   },
   ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts', 'src/config/reportWebVitals.ts', 'src/setupTests.ts'],
   overrides: [

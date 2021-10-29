@@ -28,6 +28,7 @@ import {
   useWishlistItemDialog,
 } from '@hooks'
 
+import { ProductOption } from './product__option'
 import * as styles from './styles'
 
 import 'react-image-gallery/styles/css/image-gallery.css'
@@ -48,7 +49,8 @@ export function ProductPage({
   const { data: reviews } = useReviews(slug)
   const reviewSummary = useReviewSummary(product?.reviewSummary)
   const addReview = useAddReview(slug)
-  const { options, choices, setChoices, variant } = useProductOptions(product)
+  const { options, choices, setChoices, variant, optionSelections } =
+    useProductOptions(product)
   const theme = useTheme()
 
   const isMobile = !useMediaQuery({
@@ -57,6 +59,7 @@ export function ProductPage({
   const { addCartItem, isAdding, setQuantity, quantity } = useAddCartItem({
     productId: product?.entityId,
     variantId: variant?.node.entityId,
+    optionSelections,
   })
 
   const wishlistDialog = useWishlistItemDialog({
@@ -166,33 +169,16 @@ export function ProductPage({
             )}
           </div>
           <div css={styles.productOptions}>
-            {options?.map((option) => (
-              <div key={option.displayName}>
-                <Typography variant="display-xx-small">
-                  {option.displayName.toUpperCase()}
-                </Typography>
-                <div css={styles.selectors}>
-                  {option.values.map((value) => {
-                    const active = choices[option.displayName]
-                    return (
-                      <Button
-                        variant="selector"
-                        key={value.entityId}
-                        data-selected={active === value.entityId}
-                        onClick={() => {
-                          setChoices({
-                            ...choices,
-                            [option.displayName]: value.entityId,
-                          })
-                        }}
-                      >
-                        {value.label}
-                      </Button>
-                    )
-                  })}
-                </div>
-              </div>
-            ))}
+            {options?.map((option) => {
+              return (
+                <ProductOption
+                  key={option.entityId}
+                  option={option}
+                  choices={choices}
+                  setChoices={setChoices}
+                />
+              )
+            })}
             <div>
               <Typography variant="display-xx-small">
                 {t('bc.product.quantity', 'QUANTITY')}
