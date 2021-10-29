@@ -91,6 +91,7 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     'jest/no-mocks-import': 'off',
+    "react/jsx-no-literals": [1, {"noStrings": true, "ignoreProps": true, "noAttributeStrings": false }]
   },
   ignorePatterns: ['.eslintrc.js', 'src/react-app-env.d.ts', 'src/config/reportWebVitals.ts', 'src/setupTests.ts'],
   overrides: [
