@@ -23,7 +23,7 @@ export function useAddCartItem(item?: Partial<ItemBody>): UseAddCartItem {
     setIsAdding(true)
     try {
       if (!item || item.productId === undefined)
-        throw new Error('Item is required')
+        throw new Error(t('errors.cart_item', 'Item is required'))
       await addItem({ quantity, ...item, productId: item.productId })
       toast.success(t('bc.cart.added', 'Added to cart'), {
         position: 'bottom-right',

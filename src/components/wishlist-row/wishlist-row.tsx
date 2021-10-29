@@ -58,7 +58,9 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
         }}
         onSubmit={async ({ isPublic, name }) => {
           if (!wishlist.id) {
-            throw new Error('Wishlist id not found')
+            throw new Error(
+              t('errors.wishlist_not_found', 'Wishlist id not found')
+            )
           }
           await updateWishlist({
             isPublic,

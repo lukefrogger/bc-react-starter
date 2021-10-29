@@ -52,9 +52,6 @@ const FormikField = ({
 const getCountryCodeByName = (countries: any, name: string): string =>
   countries?.find((country: any) => country.name === name)?.id
 
-const required = (value: string): string | undefined =>
-  !value?.trim() ? 'This field is required' : undefined
-
 export function AddressForm({
   onSubmit,
   initialValues = ADDRESS_INITIAL_VALUES,
@@ -72,6 +69,10 @@ export function AddressForm({
     e.preventDefault()
     history.goBack()
   }
+  const required = (value: string): string | undefined =>
+    !value?.trim()
+      ? t('errors.required_field', 'This field is required')
+      : undefined
 
   const handleCountryChange =
     (props: FormikProps<AddressValues>) =>

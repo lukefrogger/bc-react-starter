@@ -48,7 +48,9 @@ export function SignupPage(): React.ReactElement {
         })
         history.push('/user/profile')
       } catch (err) {
-        formik.setErrors({ password: 'Signup failed' })
+        formik.setErrors({
+          password: t('errors.signup_failed', 'Signup failed'),
+        })
       }
     },
   })
@@ -79,12 +81,12 @@ export function SignupPage(): React.ReactElement {
           <div css={styles.FieldGrid}>
             <Field
               css={styles.Field}
-              label={t('signup.first_name', 'First name')}
+              label={t('profile.fields.firstName', 'First name')}
               {...getFieldProps('firstName')}
             />
             <Field
               css={styles.Field}
-              label={t('signup.last_name', 'Last name')}
+              label={t('profile.fields.lastName', 'Last name')}
               {...getFieldProps('lastName')}
             />
           </div>
@@ -92,7 +94,7 @@ export function SignupPage(): React.ReactElement {
             <Field
               optional
               css={styles.Field}
-              label={t('signup.company_name', 'Company name')}
+              label={t('profile.fields.company', 'Company name')}
               {...getFieldProps('company')}
             />
           </div>
@@ -100,18 +102,18 @@ export function SignupPage(): React.ReactElement {
 
         <fieldset css={styles.Fieldset}>
           <h3 css={styles.Heading}>
-            {t('signup.contact_info_title', 'Contact info')}
+            {t('profile.contact_info_title', 'Contact info')}
           </h3>
           <div css={styles.FieldGrid}>
             <Field
               css={styles.Field}
-              label={t('signup.email', 'Email address')}
+              label={t('profile.fields.email', 'Email address')}
               type="email"
               {...getFieldProps('email')}
             />
             <Field
               css={styles.Field}
-              label={t('signup.phone', 'Phone number')}
+              label={t('profile.fields.phone', 'Phone number')}
               optional
               type="tel"
               {...getFieldProps('phone')}

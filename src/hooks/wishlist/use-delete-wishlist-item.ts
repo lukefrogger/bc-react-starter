@@ -4,6 +4,7 @@ import { CommerceError } from '@bigcommerce/storefront-data-hooks/commerce/utils
 import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/types'
 import useAction from '@bigcommerce/storefront-data-hooks/commerce/utils/use-action'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
+import { useTranslation } from 'react-i18next'
 
 import { useWishlists } from './use-wishlists'
 
@@ -40,13 +41,14 @@ export const useDeleteWishlistItem = (): ((
   const { data: customer } = useCustomer()
   const { revalidate } = useWishlists()
   const fn = useAction(defaultOpts, fetcher)
+  const { t } = useTranslation()
 
   return useCallback(
     async function removeItem(input: RemoveItemInput) {
       if (!customer) {
         // A signed customer is required in order to have a wishlist
         throw new CommerceError({
-          message: 'Signed customer not found',
+          message: t('errors.customer_not_found', 'Signed customer not found'),
         })
       }
 

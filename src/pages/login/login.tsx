@@ -32,7 +32,9 @@ export function LoginPage(): React.ReactElement {
         const params = new URLSearchParams(search)
         history.push(params.get('forward_url') || '/')
       } catch (err) {
-        formik.setErrors({ password: 'Invalid credentials' })
+        formik.setErrors({
+          password: t('errors.credentials', 'Invalid credentials'),
+        })
       }
     },
   })

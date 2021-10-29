@@ -47,11 +47,11 @@ export function OrderPage(): React.ReactElement {
     <div css={styles.Container}>
       <div css={styles.Header}>
         <Typography css={styles.Title} variant="display-large">
-          {t('order.title', 'Order')} #{slug}
+          {t('bc.order.title', 'Order')} #{slug}
         </Typography>
         <Link css={styles.Link} to="/user/orders">
           <Arrow orientation="left" />
-          {t('order.back_to_list', 'Back to orders')}
+          {t('bc.order.back_to_list', 'Back to orders')}
         </Link>
       </div>
       <>
@@ -82,7 +82,7 @@ export function OrderPage(): React.ReactElement {
               css={styles.Button}
               variant="tertiary"
             >
-              {t('order.contact_support', 'Contact support')}
+              {t('bc.order.contact_support', 'Contact support')}
             </Button>
           </div>
           {isLoading

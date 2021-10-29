@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { useTranslation } from 'react-i18next'
 import { Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs, CategoryCard } from '@components'
@@ -11,6 +12,7 @@ import * as styles from './styles'
 export function AllCategories(): React.ReactElement {
   const { data } = useCategories()
   const breadcrumbs = [{ to: '/', label: 'Home' }, { label: 'All Categories' }]
+  const { t } = useTranslation()
 
   return (
     <div css={styles.Container}>
@@ -28,7 +30,9 @@ export function AllCategories(): React.ReactElement {
           ))}
         </Breadcrumbs>
       </Typography>
-      <Typography variant="display">All Categories</Typography>
+      <Typography variant="display">
+        {t('category.all_categories', 'All Categories')}
+      </Typography>
       <div css={styles.Main}>
         {data?.map((category) => (
           <CategoryCard

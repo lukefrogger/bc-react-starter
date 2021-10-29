@@ -6,6 +6,7 @@ import { HookFetcher } from '@bigcommerce/storefront-data-hooks/commerce/utils/t
 import useAction from '@bigcommerce/storefront-data-hooks/commerce/utils/use-action'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { Wishlist } from '@bigcommerce/storefront-data-hooks/wishlist/use-wishlist'
+import { useTranslation } from 'react-i18next'
 
 import { useWishlists } from './use-wishlists'
 
@@ -42,13 +43,14 @@ export const useCreateWishlist = (): ((
   const { data: customer } = useCustomer()
   const { revalidate } = useWishlists()
   const fn = useAction(defaultOpts, fetcher)
+  const { t } = useTranslation()
 
   return useCallback(
     async function addItem(input: CreateWishlistInput) {
       if (!customer) {
         // A signed customer is required in order to have a wishlist
         throw new CommerceError({
-          message: 'Signed customer not found',
+          message: t('errors.customer_not_found', 'Signed customer not found'),
         })
       }
 
@@ -56,6 +58,6 @@ export const useCreateWishlist = (): ((
       await revalidate()
       return data
     },
-    [fn, revalidate, customer]
+    [fn, revalidate, customer, t]
   )
 }

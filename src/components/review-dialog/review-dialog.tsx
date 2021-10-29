@@ -58,7 +58,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
     onSubmit: async (values) => {
       try {
         if (!values.rating) {
-          throw new Error('rating must be a string')
+          throw new Error(t('errors.rating', 'rating must be a string'))
         }
         await onSubmit({
           ...values,

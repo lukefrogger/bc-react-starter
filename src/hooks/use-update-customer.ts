@@ -63,7 +63,7 @@ export const useUpdateCustomer = (): ((
       if (!customer) {
         // A signed customer is required in order to have a wishlist
         throw new CommerceError({
-          message: 'Signed customer not found',
+          message: t('errors.customer_not_found', 'Signed customer not found'),
         })
       }
 

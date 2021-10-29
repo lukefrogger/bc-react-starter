@@ -140,7 +140,9 @@ export function WishListPage(): React.ReactElement {
           }}
           onSubmit={async ({ isPublic, name }) => {
             if (!wishlist.id) {
-              throw new Error('Wishlist id not found')
+              throw new Error(
+                t('errors.wishlist_not_found', 'Wishlist id not found')
+              )
             }
             await updateWishlist({
               isPublic,
@@ -177,10 +179,14 @@ export function WishListPage(): React.ReactElement {
               id: String(item.id),
               onDelete: async () => {
                 if (!wishlist.id) {
-                  throw new Error('Wishlist id not found')
+                  throw new Error(
+                    t('errors.wishlist_not_found', 'Wishlist id not found')
+                  )
                 }
                 if (!item.id) {
-                  throw new Error('Item id not found')
+                  throw new Error(
+                    t('errors.wishlist_item_not_found', 'Item id not found')
+                  )
                 }
                 await deleteWishlistItem({
                   wishlistId: wishlist.id,

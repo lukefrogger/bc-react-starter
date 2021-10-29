@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useDialogState } from 'reakit/Dialog'
 
 import {
@@ -22,6 +23,7 @@ export const useWishlistItemDialog = (
   const addWishlistItem = useAddWishlistItem()
   const deleteWishlistItem = useDeleteWishlistItem()
   const createWishlist = useCreateWishlist()
+  const { t } = useTranslation()
 
   async function onSubmitAdd({
     additions,
@@ -74,7 +76,7 @@ export const useWishlistItemDialog = (
     name,
   }: WishlistDialogValues): Promise<void> {
     if (!item || item.productId === undefined)
-      throw new Error('Item is required')
+      throw new Error(t('errors.wishlist_item', 'Item is required'))
     await createWishlist({
       isPublic,
       name,

@@ -40,7 +40,7 @@ export const UserMenuDesktop = ({
         {...userMenu}
         hideOnClickOutside
         css={styles.userMenu}
-        aria-label="User menu"
+        aria-label={t('submenu.user_menu', 'User menu')}
       >
         {submenuLinks.map((link) => (
           <MenuItem
@@ -61,7 +61,7 @@ export const UserMenuDesktop = ({
           onClick={handleLogout}
           css={styles.userMenuItem}
         >
-          {t('btn.logout', 'Logout')}
+          {t('bc.btn.logout', 'Logout')}
         </MenuItem>
       </Menu>
     </>
@@ -104,7 +104,7 @@ export const UserMenuMobile = ({
             </Link>
           ))}
           <Link to="/" onClick={onLogout} css={styles.logoutMobile}>
-            {t('btn.logout', 'Logout')}
+            {t('bc.btn.logout', 'Logout')}
           </Link>
         </>
       )}

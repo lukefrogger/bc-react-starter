@@ -159,7 +159,9 @@ export function ProductPage({
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
+                  <em>
+                    {t('bc.wish_list.add_to_wishlist', 'Add to wishlist')}
+                  </em>
                 </DialogDisclosure>
                 <WishlistItemDialog {...wishlistDialog} />
               </div>
@@ -203,7 +205,7 @@ export function ProductPage({
                   onChangeQuantity={setQuantity}
                 />
                 <Button onClick={addCartItem} disabled={isAdding}>
-                  {t('bc.cart.add_to_cart', 'Add to Cart')}
+                  {t('bc.cart.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
             </div>
@@ -277,7 +279,7 @@ export function ProductPage({
                 }}
               />
               <DialogDisclosure {...reviewDialog} css={styles.addNewReview}>
-                {t('bc.review.add', 'Add new review')}
+                {t('bc.reviews.add', 'Add new review')}
               </DialogDisclosure>
             </div>
           </div>

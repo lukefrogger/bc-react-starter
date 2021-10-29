@@ -41,7 +41,7 @@ export function WishlistItemDialog(
 
   const {
     title = t('bc.wish_list.add', 'New wish list'),
-    button = t('bc.btn.add', 'Create wish list'),
+    button = t('bc.btn.wishlist_add', 'Create wish list'),
     productId,
     variantId,
     wishlists = [],
@@ -90,7 +90,8 @@ export function WishlistItemDialog(
     },
   })
 
-  if (!productId) throw new Error('productId is required')
+  if (!productId)
+    throw new Error(t('errors.wishlist_id', 'productId is required'))
 
   if (wishlists?.length === 0) {
     return (
