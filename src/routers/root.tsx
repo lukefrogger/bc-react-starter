@@ -4,10 +4,8 @@ import { css } from '@emotion/react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Banner } from 'unsafe-bc-react-components'
 
-import { Footer, Header, NoMatch404 } from '@components'
-import { useBanners } from '@hooks'
+import { Footer, Header, NoMatch404, Notices } from '@components'
 import {
   AllCategories,
   CartPage,
@@ -25,7 +23,6 @@ import { ScrollToTop } from './scroll-top'
 import { UserRouter } from './user'
 
 export function RootRouter(): React.ReactElement {
-  const { data: banners, onBannerClose } = useBanners()
   const { t } = useTranslation()
 
   return (
@@ -41,15 +38,7 @@ export function RootRouter(): React.ReactElement {
           flex-direction: column;
         `}
       >
-        {banners?.[0] && (
-          <Banner
-            position={banners[0].location}
-            onClose={() => onBannerClose(banners[0].id)}
-          >
-            {banners[0].content}
-          </Banner>
-        )}
-        {/*         {banner && <Banner onClose={onBannerClose}>{banner?.content}</Banner>} */}
+        <Notices />
         <Header />
         <Switch>
           <Route exact path="/">
