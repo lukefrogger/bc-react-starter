@@ -45,6 +45,16 @@ app.use(
 // gzip/deflate outgoing responses
 app.use(compression())
 
+// force https on production
+app.use((req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    if (req.headers['x-forwarded-proto'] !== 'https')
+      return res.redirect(`https://${req.headers.host}${req.url}`)
+    return next()
+  }
+  return next()
+})
+
 // parse urlencoded request bodies into req.body
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
