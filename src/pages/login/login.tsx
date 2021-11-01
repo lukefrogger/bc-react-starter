@@ -48,7 +48,12 @@ export function LoginPage(): React.ReactElement {
     <div css={styles.container}>
       <Helmet>
         <title>
-          {t('login.title', 'Login')} | {t('store.name', 'Stellar Store')}
+          {t('login.title', 'Login')}
+          {
+            // eslint-disable-next-line react/jsx-no-literals
+            ' | '
+          }
+          {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
       <Typography css={styles.centered} variant="display-large">

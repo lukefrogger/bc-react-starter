@@ -113,7 +113,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
             <span>
               {t('bc.review.name', 'Name')}{' '}
               <span css={styles.Optional}>
-                ({t('profile.fields.optional', 'optional')})
+                {t('profile.fields.optional', '(optional)')}
               </span>
             </span>
           }

@@ -56,7 +56,12 @@ export function CategoryPage(): React.ReactElement {
     <div css={styles.Container}>
       <Helmet>
         <title>
-          {category?.name} | {t('store.name', 'Stellar Store')}
+          {category?.name}
+          {
+            // eslint-disable-next-line react/jsx-no-literals
+            ' | '
+          }
+          {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
       <Breadcrumbs>

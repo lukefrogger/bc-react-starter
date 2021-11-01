@@ -76,6 +76,7 @@
       "wishlist_add": "Create wish list"
     },
     "reviews": {
+      "title": "Reviews",
       "save": "Save Review",
       "review": "{{count}} review",
       "review_plural": "{{count}} reviews",
@@ -94,19 +95,6 @@
       "saved": "Your review was saved and is pending approval.",
       "error_adding": "Error saving the review",
       "add": "Add new review"
-    },
-    "wish_list": {
-      "name": "Wish list Name",
-      "title": "My wish lists",
-      "make_it_public": "Make it public",
-      "save": "Save Wishlist",
-      "new": "New wish list",
-      "create": "Create wish list",
-      "name_placeholder": "Name your wish list",
-      "add": "New wish list",
-      "add_to_wishlist": "Add to wishlist",
-      "empty": "This whishlist is empty",
-      "edit": "Edit wish list"
     },
     "inventory": {
       "left_in_stock": "left in stock"
@@ -180,7 +168,10 @@
       "name": "Wish list name",
       "name_placeholder": "Name your wish list",
       "create_add": "Create and add item",
-      "no_wishlists": "Oh-oh, seems like you have no wishlists yet. Create one below:"
+      "no_wishlists": "Oh-oh, seems like you have no wishlists yet. Create one below:",
+      "save": "Save Wishlist",
+      "add_to_wishlist": "Add to wishlist",
+      "empty": "This whishlist is empty"
     },
     "profile": {
       "updated": "Profile updated",
@@ -213,17 +204,31 @@
       "phone": "Phone",
       "address1": "Address line 1",
       "address2": "Address line 2",
-      "optional": "optional",
+      "optional": "(optional)",
       "city": "City/suburb",
       "country": "Country",
       "zip": "Zip/postcode",
       "state": "State/province",
-      "email": "Email address"
+      "email": "Email address",
+      "select_country": "Select a country",
+      "select_state": "Select a state / country"
     }
   },
   "generic_error": "Unexpected error",
+  "pages": {
+    "titles": {
+      "404": "404",
+      "shipping": "Shipping",
+      "return": "Return",
+      "guarantee": "Guarantee",
+      "privacy_policy": "Privacy Policy",
+      "about_us": "About us",
+      "help": "Help",
+      "contact_us": "Contact Us"
+    }
+  },
   "errors": {
-    "no_match_for": "No match for",
+    "no_match_for": "No match for {{location.pathname}}",
     "required_field": "This field is required",
     "rating": "rating must be a string",
     "wishlist_id": "productId is required",

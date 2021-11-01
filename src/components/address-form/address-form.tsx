@@ -114,7 +114,7 @@ export function AddressForm({
                   <span>
                     {t(`profile.fields.company`, 'Company Name')}{' '}
                     <span css={styles.Optional}>
-                      ({t('profile.fields.optional', 'optional')})
+                      {t('profile.fields.optional', '(optional)')}
                     </span>
                   </span>
                 }
@@ -142,7 +142,7 @@ export function AddressForm({
                   <span>
                     {t(`profile.fields.address2`, 'Address line 2')}{' '}
                     <span css={styles.Optional}>
-                      ({t('profile.fields.optional', 'optional')})
+                      {t('profile.fields.optional', '(optional)')}
                     </span>
                   </span>
                 }
@@ -159,7 +159,9 @@ export function AddressForm({
                 onChange={handleCountryChange(props)}
                 validate={required}
               >
-                <option>Select a country</option>
+                <option>
+                  {t('profile.fields.select_country', 'Select a country')}
+                </option>
                 {countries?.map((country: any) => (
                   <option key={country.id} value={country.name}>
                     {country.name}
@@ -177,7 +179,9 @@ export function AddressForm({
                 label={t(`profile.fields.state`, 'State/province')}
                 validate={states?.length ? required : null}
               >
-                <option>Select a state / country</option>
+                <option>
+                  {t('profile.fields.select_state', 'Select a state / country')}
+                </option>
 
                 {states?.map((state: any) => (
                   <option key={state.id} value={state.name}>

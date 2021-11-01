@@ -56,6 +56,6 @@ export const useDeleteWishlistItem = (): ((
       await revalidate()
       return data
     },
-    [fn, revalidate, customer]
+    [fn, revalidate, customer, t]
   )
 }

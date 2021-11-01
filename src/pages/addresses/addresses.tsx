@@ -39,7 +39,11 @@ export function AddressesPage(): React.ReactElement {
     <div css={styles.Container}>
       <Helmet>
         <title>
-          {t('addresses.title', 'My addresses')} |{' '}
+          {t('addresses.title', 'My addresses')}
+          {
+            // eslint-disable-next-line react/jsx-no-literals
+            ' | '
+          }
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>

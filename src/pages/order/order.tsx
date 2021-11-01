@@ -47,7 +47,11 @@ export function OrderPage(): React.ReactElement {
     <div css={styles.Container}>
       <div css={styles.Header}>
         <Typography css={styles.Title} variant="display-large">
-          {t('bc.order.title', 'Order')} #{slug}
+          {t('bc.order.title', 'Order')}
+          {
+            // eslint-disable-next-line react/jsx-no-literals
+            ` #${slug}`
+          }
         </Typography>
         <Link css={styles.Link} to="/user/orders">
           <Arrow orientation="left" />
@@ -58,7 +62,7 @@ export function OrderPage(): React.ReactElement {
         <div css={styles.Grid}>
           <div css={styles.List}>
             {isProductsLoading ? (
-              <div>Loading...</div>
+              <div>{t('bc.notices.loading', 'Loading...')}</div>
             ) : (
               products?.map((product) => (
                 // TODO: Order from API missing some data: salePrice, product image
@@ -85,15 +89,17 @@ export function OrderPage(): React.ReactElement {
               {t('bc.order.contact_support', 'Contact support')}
             </Button>
           </div>
-          {isLoading
-            ? 'Loading...'
-            : order && (
-                <OrderDetail
-                  css={styles.Detail}
-                  order={order as any}
-                  statusVariant={getStatusColor(order?.status)}
-                />
-              )}
+          {isLoading ? (
+            <div>{t('bc.notices.loading', 'Loading...')}</div>
+          ) : (
+            order && (
+              <OrderDetail
+                css={styles.Detail}
+                order={order as any}
+                statusVariant={getStatusColor(order?.status)}
+              />
+            )
+          )}
         </div>
       </>
     </div>

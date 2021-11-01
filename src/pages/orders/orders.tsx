@@ -56,7 +56,11 @@ export function OrdersPage(): React.ReactElement {
     <div css={styles.Container}>
       <Helmet>
         <title>
-          {t('bc.orders.title_history', 'Order history')} |{' '}
+          {t('bc.orders.title_history', 'Order history')}
+          {
+            // eslint-disable-next-line react/jsx-no-literals
+            ' | '
+          }
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>

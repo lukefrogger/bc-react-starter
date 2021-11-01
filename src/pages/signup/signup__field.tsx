@@ -21,7 +21,7 @@ export function SignupField(props: SignupFieldProps): React.ReactElement {
             {label}
             <span css={styles.Optional}>
               {' '}
-              ({t('profile.fields.optional', 'optional')})
+              {t('profile.fields.optional', 'optional')}
             </span>
           </>
         ) : (

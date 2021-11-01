@@ -69,7 +69,7 @@ export function ProductPage({
 
   const reviewDialog = useDialogState()
 
-  if (!product) return <p>Loading</p>
+  if (!product) return <p>{t('bc.notices.loading', 'Loading')}</p>
 
   const images = product.images?.edges?.reduce<ReactImageGalleryItem[]>(
     (acc, edge) => {
@@ -239,7 +239,9 @@ export function ProductPage({
             />
           </div> */}
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Reviews</Typography>
+            <Typography variant="display-small">
+              {t('bc.reviews.title', 'Reviews')}
+            </Typography>
             <div css={styles.reviewList}>
               {reviews?.edges?.map((edge) => (
                 <ProductReview
