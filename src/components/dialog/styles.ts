@@ -28,8 +28,8 @@ export const dialog = (theme: Theme): SerializedStyles => css`
 
 export const header = css`
   position: relative;
-  /*   padding-bottom: 32px; */
-  padding-bottom: 56px;
+  padding-bottom: 32px;
+  /* padding-bottom: 56px; */
   padding-top: 8px;
 `
 

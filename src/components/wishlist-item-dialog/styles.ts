@@ -12,6 +12,14 @@ export const checkbox = (theme: Theme): SerializedStyles => css`
     display: inline-block;
     ${theme.typography['body-large'] as CSSPrimitive}
   }
+  input {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    &:checked {
+      filter: contrast(5) brightness(90%) grayscale(100%);
+    }
+  }
   border-bottom: 2px solid ${theme.colors['neutral-15']};
   :first-of-type {
     border-top: 2px solid ${theme.colors['neutral-15']};
