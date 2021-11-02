@@ -12,9 +12,17 @@ export const description = css`
 `
 
 export const checkbox = css`
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
   input {
-    margin-top: 32px;
     margin-right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    &:checked {
+      filter: contrast(5) brightness(90%) grayscale(100%);
+    }
   }
   p {
     display: inline-block;

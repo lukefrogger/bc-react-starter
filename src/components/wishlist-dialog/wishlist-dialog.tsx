@@ -69,7 +69,7 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
             'bc.wish_list.name_placeholder',
             'Name your wish list'
           )}
-          label={t('bc.wish_list.name', 'Wish list name')}
+          label={t('bc.wish_list.name', 'New wish list name')}
           value={formik.values.name}
           error={formik.errors.name}
           onChange={formik.handleChange}

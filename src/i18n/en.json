@@ -155,7 +155,7 @@
     },
     "wish_list": {
       "title": "My wish lists",
-      "new": "New wish list",
+      "new": "New wish list name",
       "create": "Create wish list",
       "edit": "Edit wish list",
       "add": "Add to wish list",
@@ -165,7 +165,7 @@
       "item_plural": "items",
       "back": "Back to my wish lists",
       "make_it_public": "Make it public",
-      "name": "Wish list name",
+      "name": "New wish list name",
       "name_placeholder": "Name your wish list",
       "create_add": "Create and add item",
       "no_wishlists": "Oh-oh, seems like you have no wishlists yet. Create one below:",
