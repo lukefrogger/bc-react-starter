@@ -40,7 +40,7 @@ export function WishlistItemDialog(
   const dialogTwo = useDialogState()
 
   const {
-    title = t('bc.wish_list.add', 'New wish list'),
+    title = t('bc.wish_list.add', 'Add to wish list'),
     button = t('bc.btn.add', 'Create wish list'),
     productId,
     variantId,
