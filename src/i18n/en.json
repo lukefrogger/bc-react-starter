@@ -49,6 +49,7 @@
     "calculated_at": "Calculated at checkout"
   },
   "errors": {
+    "generic_error": "Unexpected error",
     "no_match_for": "No match for {{location.pathname}}",
     "required_field": "This field is required",
     "rating": "rating must be a string",
@@ -93,7 +94,6 @@
     "powered_by": "Powered by BigCommerce",
     "rights": "© All rights reserved, Modern Tribe"
   },
-  "generic_error": "Unexpected error",  
   "header": {
     "more_categories": "More categories"
   },

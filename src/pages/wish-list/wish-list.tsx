@@ -42,7 +42,7 @@ export function WishListPage(): React.ReactElement {
 
   if (isLoading) return <p>{t('notices.loading', 'Loading...')}</p> // TODO: Add a skeleton loading
   if (!wishlist) return <NoMatch404 />
-  if (error) return <p>{t('generic_error', 'Error')}</p>
+  if (error) return <p>{t('errors.generic_error', 'Error')}</p>
 
   const { is_guest: isGuest } = wishlist
   if (isGuest) {
