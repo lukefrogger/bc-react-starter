@@ -134,17 +134,15 @@
     "title_history": "Order history",
     "none": "No orders"
   },
-  "pages": {
-    "titles": {
-      "404": "404",
-      "shipping": "Shipping",
-      "return": "Return",
-      "guarantee": "Guarantee",
-      "privacy_policy": "Privacy Policy",
-      "about_us": "About us",
-      "help": "Help",
-      "contact_us": "Contact Us"
-    }
+  "page_titles": {
+    "404": "404",
+    "shipping": "Shipping",
+    "return": "Return",
+    "guarantee": "Guarantee",
+    "privacy_policy": "Privacy Policy",
+    "about_us": "About us",
+    "help": "Help",
+    "contact_us": "Contact Us"
   },  
   "product": {
     "color": "COLOR",

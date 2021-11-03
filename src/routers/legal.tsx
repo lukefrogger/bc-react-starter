@@ -8,16 +8,16 @@ export function LegalRouter(): React.ReactElement {
   return (
     <Switch>
       <Route exact path="/legal/shipping">
-        <h1>{t('pages.titles.shipping', 'Shipping')}</h1>
+        <h1>{t('page_titles.shipping', 'Shipping')}</h1>
       </Route>
       <Route exact path="/legal/return">
-        <h1>{t('pages.titles.return', 'Return')}</h1>
+        <h1>{t('page_titles.return', 'Return')}</h1>
       </Route>
       <Route exact path="/legal/guarantee">
-        <h1>{t('pages.titles.guarantee', 'Guarantee')}</h1>
+        <h1>{t('page_titles.guarantee', 'Guarantee')}</h1>
       </Route>
       <Route exact path="/legal/privacy-policy">
-        <h1>{t('pages.titles.privacy_policy', 'Privacy Policy')}</h1>
+        <h1>{t('page_titles.privacy_policy', 'Privacy Policy')}</h1>
       </Route>
 
       <Redirect from="/legal" to="/legal/shipping" />

@@ -78,13 +78,13 @@ export function RootRouter(): React.ReactElement {
             // TODO: Create this pages
           }
           <Route path="/about-us">
-            <h1>{t('pages.titles.about_us', 'About us')}</h1>
+            <h1>{t('page_titles.about_us', 'About us')}</h1>
           </Route>
           <Route path="/help">
-            <h1>{t('pages.titles.help', 'Help')}</h1>
+            <h1>{t('page_titles.help', 'Help')}</h1>
           </Route>
           <Route path="/contact-us">
-            <h1>{t('pages.titles.contact_us', 'Contact Us')}</h1>
+            <h1>{t('page_titles.contact_us', 'Contact Us')}</h1>
           </Route>
 
           <Route path="/legal">
