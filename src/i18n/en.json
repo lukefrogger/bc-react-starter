@@ -98,7 +98,24 @@
     "more_categories": "More categories"
   },
   "hero": {
-    "headline": "Headline in the Hero"
+    "1": {
+      "title": "Woman in red",
+      "text": "Wow your friends with this classic Heinz Hoodie",
+      "button": "Get the look",
+      "alt": "Woman Red"
+    },
+    "2": {
+      "title": "Woman with orange background",
+      "text": "Seriously stylish handbags",
+      "button": "Grab them here",
+      "alt": "Woman Orange"
+    },
+    "3": {
+      "title": "Man with white background",
+      "text": "New Mens T-shirts now in stock",
+      "button": "Take a look",
+      "alt": "Man White"
+    }
   },
   "inventory": {
     "left_in_stock": "left in stock"

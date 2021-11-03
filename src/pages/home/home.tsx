@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import {
   Hero,
@@ -17,62 +18,66 @@ import { useCategories, useSearch } from '@hooks'
 
 import * as styles from './styles'
 
-const SLIDES: HeroProps[] = [
-  {
-    headline: {
-      text: 'Woman in red',
-    },
-    description: {
-      text: 'Wow your friends with this classic Heinz Hoodie',
-    },
-    button: {
-      text: 'Get the look',
-    },
-    image: {
-      src: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
-      alt: 'Woman Red',
-    },
-  },
-  {
-    headline: {
-      text: 'Woman with orange background',
-    },
-    description: {
-      text: 'Seriously stylish handbags',
-    },
-    button: {
-      text: 'Grab them here',
-    },
-    image: {
-      src: 'https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
-      alt: 'Woman Orange',
-    },
-  },
-  {
-    headline: {
-      text: 'Man with white background',
-    },
-    description: {
-      text: 'New Mens T-shirts now in stock',
-    },
-    button: {
-      text: 'Take a look',
-    },
-    image: {
-      src: 'https://images.unsplash.com/photo-1515600051222-a3c338ff16f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
-      alt: 'Man White',
-    },
-  },
-]
-
-const HERO: HeroArray = {
-  slides: SLIDES,
-}
-
 export function HomePage(): React.ReactElement {
   const { data } = useSearch()
   const { data: categories } = useCategories()
   const history = useHistory()
+  const { t } = useTranslation()
+
+  const SLIDES: HeroProps[] = [
+    {
+      headline: {
+        text: t('hero.1.title', 'Woman in red'),
+      },
+      description: {
+        text: t(
+          'hero.1.text',
+          'Wow your friends with this classic Heinz Hoodie'
+        ),
+      },
+      button: {
+        text: t('hero.1.button', 'Get the look'),
+      },
+      image: {
+        src: 'https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
+        alt: t('hero.1.alt', 'Woman Red'),
+      },
+    },
+    {
+      headline: {
+        text: t('hero.2.title', 'Woman with orange background'),
+      },
+      description: {
+        text: t('hero.2.text', 'Seriously stylish handbags'),
+      },
+      button: {
+        text: t('hero.2.button', 'Grab them here'),
+      },
+      image: {
+        src: 'https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
+        alt: t('hero.2.alt', 'Woman Orange'),
+      },
+    },
+    {
+      headline: {
+        text: t('hero.3.title', 'Man with white background'),
+      },
+      description: {
+        text: t('hero.3.text', 'New Mens T-shirts now in stock'),
+      },
+      button: {
+        text: t('hero.3.button', 'Take a look'),
+      },
+      image: {
+        src: 'https://images.unsplash.com/photo-1515600051222-a3c338ff16f6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&w=1350&q=80',
+        alt: t('hero.3.alt', 'Man White'),
+      },
+    },
+  ]
+
+  const HERO: HeroArray = {
+    slides: SLIDES,
+  }
 
   return (
     <div css={styles.container}>
