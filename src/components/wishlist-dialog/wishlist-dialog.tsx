@@ -52,7 +52,9 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
           formik.resetForm()
         }
       } catch (e) {
-        formik.setErrors({ name: t('errors.generic_error', 'Unexpected error') })
+        formik.setErrors({
+          name: t('errors.generic_error', 'Unexpected error'),
+        })
         formik.setSubmitting(false)
       }
     },
