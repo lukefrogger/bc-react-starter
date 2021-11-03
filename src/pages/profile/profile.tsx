@@ -126,11 +126,7 @@ export function ProfilePage(): React.ReactElement {
     <div>
       <Helmet>
         <title>
-          {t('profile.title', 'Account profile')}
-          {
-            // eslint-disable-next-line react/jsx-no-literals
-            ' | '
-          }
+          {t('profile.title', 'Account profile')} |{' '}
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>

@@ -147,11 +147,7 @@ export function WishlistItemDialog(
             )
           })}
           <DialogDisclosure {...dialogTwo} css={styles.link}>
-            {
-              // eslint-disable-next-line react/jsx-no-literals
-              '+ '
-            }
-            <em>{t('wish_list.new', 'New wish list')}</em>
+            + <em>{t('wish_list.new', 'New wish list')}</em>
           </DialogDisclosure>
 
           <div css={styles.footer}>

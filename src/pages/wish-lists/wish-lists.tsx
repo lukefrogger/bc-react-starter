@@ -23,11 +23,7 @@ export function WishListsPage(): React.ReactElement {
     <div css={styles.container}>
       <Helmet>
         <title>
-          {t('wish_list.title', 'My wish lists')}
-          {
-            // eslint-disable-next-line react/jsx-no-literals
-            ' | '
-          }
+          {t('wish_list.title', 'My wish lists')}|{' '}
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>

@@ -50,12 +50,7 @@ export function WishListPage(): React.ReactElement {
       <div css={styles.container}>
         <Helmet>
           <title>
-            {wishlist.name}
-            {
-              // eslint-disable-next-line react/jsx-no-literals
-              ' | '
-            }
-            {t('store.name', 'Stellar Store')}
+            {wishlist.name} | {t('store.name', 'Stellar Store')}
           </title>
         </Helmet>
         <div css={styles.header}>
@@ -106,12 +101,7 @@ export function WishListPage(): React.ReactElement {
     <div css={styles.container}>
       <Helmet>
         <title>
-          {wishlist.name}
-          {
-            // eslint-disable-next-line react/jsx-no-literals
-            ' | '
-          }
-          {t('store.name', 'Stellar Store')}
+          {wishlist.name} | {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
       <div css={styles.header}>
