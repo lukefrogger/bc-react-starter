@@ -1,186 +1,4 @@
 {
-  "store": {
-    "name": "Stellar Store",
-    "home": "Home"
-  },
-  "hero": {
-    "headline": "Headline in the Hero"
-  },
-  "breadcrumbs": {
-    "home": "Home",
-    "cart": "Cart",
-    "category": "Category",
-    "all_categories": "All Categories"
-  },
-  "submenu": {
-    "profile": "Account profile",
-    "orders": "Order history",
-    "addresses": "My addresses",
-    "wishlists": "My wish lists",
-    "user_menu": "User menu"
-  },
-  "header": {
-    "more_categories": "More categories"
-  },
-  "login": {
-    "title": "Login",
-    "create_prompt_question": "Don’t have an account yet?",
-    "create_prompt_link": "Create one",
-    "email": "Email",
-    "password": "Password",
-    "forgot_password": "Forgot password"
-  },
-  "signup": {
-    "title": "Create account",
-    "login_prompt_question": "Aleady have an account?",
-    "login_prompt": "Login",
-    "general_info_title": "General info",
-    "password": "Password",
-    "password_confirm": "Confirm password"
-  },
-  "footer": {
-    "shipping": "Shipping",
-    "return": "Return",
-    "guarantee": "Guarantee",
-    "privacy_policy": "Privacy policy",
-    "about_us": "About us",
-    "help": "Help",
-    "contact_us": "Contact us",
-    "powered_by": "Powered by BigCommerce",
-    "rights": "© All rights reserved, Modern Tribe"
-  },
-  "features": {
-    "secure": "Secure",
-    "fast": "Fast shipping",
-    "easy": "Easy",
-    "safe": "Safe"
-  },
-  "category": {
-    "item_in": "{{count}} item in '{{category}}'",
-    "item_in_plural": "{{count}} items in '{{category}}'",
-    "all_categories": "All Categories"
-  },
-  "bc": {
-    "btn": {
-      "yes": "Yes",
-      "no": "No",
-      "add": "Add",
-      "delete": "Delete",
-      "edit": "Edit",
-      "share": "Share",
-      "remove": "Remove",
-      "copy_link": "Copy Link",
-      "add_to_cart": "Add to Cart",
-      "quick_view": "Quick view",
-      "logout": "Logout",
-      "wishlist_add": "Create wish list"
-    },
-    "reviews": {
-      "title": "Reviews",
-      "save": "Save Review",
-      "review": "{{count}} review",
-      "review_plural": "{{count}} reviews",
-      "write": "Write a Review",
-      "submit": "Submit Review",
-      "rating": "Rating",
-      "rating_1": "1 star (worst)",
-      "rating_2": "2 stars",
-      "rating_3": "3 stars (average)",
-      "rating_4": "4 stars",
-      "rating_5": "5 stars (best)",
-      "name": "Name",
-      "email": "Email",
-      "subject": "Review Subject",
-      "comments": "Comments",
-      "saved": "Your review was saved and is pending approval.",
-      "error_adding": "Error saving the review",
-      "add": "Add new review"
-    },
-    "inventory": {
-      "left_in_stock": "left in stock"
-    },
-    "order": {
-      "status": "Status",
-      "date_created": "Date Created",
-      "date_updated": "Date Updated",
-      "last_update": "Last Update",
-      "payment_method": "Payment Method",
-      "items_subtotal": "Items Subtotal",
-      "store_credit": "Store Credit Applied",
-      "gift_certificate": "Gift certificate applied",
-      "tax": "Taxes",
-      "total": "Total",
-      "subtotal": "Subtotal",
-      "order": "Order",
-      "details": "Order Details",
-      "title": "Order",
-      "back_to_list": "Back to orders",
-      "contact_support": "Contact support",
-      "title_history": "Order history",
-      "none": "No orders"
-    },
-    "cart": {
-      "empty": "There are no items in your basket. Please return",
-      "empty_home": "Home",
-      "checkout": "Checkout",
-      "added": "Product added to your cart",
-      "error_adding": "Error adding to cart",
-      "add_to_cart": "Add to Cart",
-      "your_order": "Your order",
-      "subtotal": "Subtotal",
-      "total": "Total",
-      "proceed": "Proceed",
-      "taxes": "Taxes",
-      "calculated_at": "Calculated at checkout"
-    },
-    "product": {
-      "color": "COLOR",
-      "quantity": "QUANTITY",
-      "description": "Description",
-      "specifications": "Specifications",
-      "find_more": "Find out more"
-    },
-    "search": {
-      "search": "Search",
-      "result": "{{count}} result",
-      "result_plural": "{{count}} results",
-      "for": " for '{{search}}'"
-    },
-    "fields": {
-      "comments": "Comments",
-      "subject": "Subject",
-      "rating": "Rating",
-      "name": "Name",
-      "email": "Email Address"
-    },
-    "wish_list": {
-      "title": "My wish lists",
-      "new": "New wish list name",
-      "create": "Create wish list",
-      "edit": "Edit wish list",
-      "add": "Add to wish list",
-      "public": "Public",
-      "private": "Private",
-      "item": "item",
-      "item_plural": "items",
-      "back": "Back to my wish lists",
-      "make_it_public": "Make it public",
-      "name": "New wish list name",
-      "name_placeholder": "Name your wish list",
-      "create_add": "Create and add item",
-      "no_wishlists": "Oh-oh, seems like you have no wishlists yet. Create one below:",
-      "save": "Save Wishlist",
-      "add_to_wishlist": "Add to wishlist",
-      "empty": "This whishlist is empty"
-    },
-    "profile": {
-      "updated": "Profile updated",
-      "update_error": "Error updating profile"
-    },
-    "notices": {
-      "loading": "Loading..."
-    }
-  },
   "addresses": {
     "general_info_title": "General info",
     "address_info_title": "Address info",
@@ -191,41 +9,44 @@
     "title": "My addresses",
     "add": "Add new address"
   },
-  "profile": {
-    "title": "Account profile",
-    "general_info_title": "General info",
-    "contact_info_title": "Contact info",
-    "password_info_title": "Change password",
-    "submit_form": "Update details",
-    "fields": {
-      "firstName": "First name",
-      "lastName": "Last name",
-      "company": "Company Name",
-      "phone": "Phone",
-      "address1": "Address line 1",
-      "address2": "Address line 2",
-      "optional": "(optional)",
-      "city": "City/suburb",
-      "country": "Country",
-      "zip": "Zip/postcode",
-      "state": "State/province",
-      "email": "Email address",
-      "select_country": "Select a country",
-      "select_state": "Select a state / country"
-    }
+  "breadcrumbs": {
+    "home": "Home",
+    "cart": "Cart",
+    "category": "Category",
+    "all_categories": "All Categories"
   },
-  "generic_error": "Unexpected error",
-  "pages": {
-    "titles": {
-      "404": "404",
-      "shipping": "Shipping",
-      "return": "Return",
-      "guarantee": "Guarantee",
-      "privacy_policy": "Privacy Policy",
-      "about_us": "About us",
-      "help": "Help",
-      "contact_us": "Contact Us"
-    }
+  "btn": {
+    "yes": "Yes",
+    "no": "No",
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "share": "Share",
+    "remove": "Remove",
+    "copy_link": "Copy Link",
+    "add_to_cart": "Add to Cart",
+    "quick_view": "Quick view",
+    "logout": "Logout",
+    "wishlist_add": "Create wish list"
+  },
+  "category": {
+    "item_in": "{{count}} item in '{{category}}'",
+    "item_in_plural": "{{count}} items in '{{category}}'",
+    "all_categories": "All Categories"
+  },
+  "cart": {
+    "empty": "There are no items in your basket. Please return",
+    "empty_home": "Home",
+    "checkout": "Checkout",
+    "added": "Product added to your cart",
+    "error_adding": "Error adding to cart",
+    "add_to_cart": "Add to Cart",
+    "your_order": "Your order",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "proceed": "Proceed",
+    "taxes": "Taxes",
+    "calculated_at": "Calculated at checkout"
   },
   "errors": {
     "no_match_for": "No match for {{location.pathname}}",
@@ -247,5 +68,180 @@
     "email": "Email is required",
     "password": "Password is required",
     "pwd_length": "Password must contain at least one number and one special character"
+  },
+  "features": {
+    "secure": "Secure",
+    "fast": "Fast shipping",
+    "easy": "Easy",
+    "safe": "Safe"
+  },
+  "fields": {
+    "comments": "Comments",
+    "subject": "Subject",
+    "rating": "Rating",
+    "name": "Name",
+    "email": "Email Address"
+  },  
+  "footer": {
+    "shipping": "Shipping",
+    "return": "Return",
+    "guarantee": "Guarantee",
+    "privacy_policy": "Privacy policy",
+    "about_us": "About us",
+    "help": "Help",
+    "contact_us": "Contact us",
+    "powered_by": "Powered by BigCommerce",
+    "rights": "© All rights reserved, Modern Tribe"
+  },
+  "generic_error": "Unexpected error",  
+  "header": {
+    "more_categories": "More categories"
+  },
+  "hero": {
+    "headline": "Headline in the Hero"
+  },
+  "inventory": {
+    "left_in_stock": "left in stock"
+  },
+  "login": {
+    "title": "Login",
+    "create_prompt_question": "Don’t have an account yet?",
+    "create_prompt_link": "Create one",
+    "email": "Email",
+    "password": "Password",
+    "forgot_password": "Forgot password"
+  },
+  "notices": {
+    "loading": "Loading..."
+  }, 
+  "order": {
+    "status": "Status",
+    "date_created": "Date Created",
+    "date_updated": "Date Updated",
+    "last_update": "Last Update",
+    "payment_method": "Payment Method",
+    "items_subtotal": "Items Subtotal",
+    "store_credit": "Store Credit Applied",
+    "gift_certificate": "Gift certificate applied",
+    "tax": "Taxes",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "order": "Order",
+    "details": "Order Details",
+    "title": "Order",
+    "back_to_list": "Back to orders",
+    "contact_support": "Contact support",
+    "title_history": "Order history",
+    "none": "No orders"
+  },
+  "pages": {
+    "titles": {
+      "404": "404",
+      "shipping": "Shipping",
+      "return": "Return",
+      "guarantee": "Guarantee",
+      "privacy_policy": "Privacy Policy",
+      "about_us": "About us",
+      "help": "Help",
+      "contact_us": "Contact Us"
+    }
+  },  
+  "product": {
+    "color": "COLOR",
+    "quantity": "QUANTITY",
+    "description": "Description",
+    "specifications": "Specifications",
+    "find_more": "Find out more"
+  },
+  "profile": {
+    "title": "Account profile",
+    "general_info_title": "General info",
+    "contact_info_title": "Contact info",
+    "password_info_title": "Change password",
+    "submit_form": "Update details",
+    "updated": "Profile updated",
+    "update_error": "Error updating profile",
+    "fields": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "company": "Company Name",
+      "phone": "Phone",
+      "address1": "Address line 1",
+      "address2": "Address line 2",
+      "optional": "(optional)",
+      "city": "City/suburb",
+      "country": "Country",
+      "zip": "Zip/postcode",
+      "state": "State/province",
+      "email": "Email address",
+      "select_country": "Select a country",
+      "select_state": "Select a state / country"
+    }
+  },
+  "reviews": {
+    "title": "Reviews",
+    "save": "Save Review",
+    "review": "{{count}} review",
+    "review_plural": "{{count}} reviews",
+    "write": "Write a Review",
+    "submit": "Submit Review",
+    "rating": "Rating",
+    "rating_1": "1 star (worst)",
+    "rating_2": "2 stars",
+    "rating_3": "3 stars (average)",
+    "rating_4": "4 stars",
+    "rating_5": "5 stars (best)",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Review Subject",
+    "comments": "Comments",
+    "saved": "Your review was saved and is pending approval.",
+    "error_adding": "Error saving the review",
+    "add": "Add new review"
+  },
+  "search": {
+    "search": "Search",
+    "result": "{{count}} result",
+    "result_plural": "{{count}} results",
+    "for": " for '{{search}}'"
+  },
+  "signup": {
+    "title": "Create account",
+    "login_prompt_question": "Aleady have an account?",
+    "login_prompt": "Login",
+    "general_info_title": "General info",
+    "password": "Password",
+    "password_confirm": "Confirm password"
+  },
+  "store": {
+    "name": "Stellar Store",
+    "home": "Home"
+  },  
+  "submenu": {
+    "profile": "Account profile",
+    "orders": "Order history",
+    "addresses": "My addresses",
+    "wishlists": "My wish lists",
+    "user_menu": "User menu"
+  },
+  "wish_list": {
+    "title": "My wish lists",
+    "new": "New wish list name",
+    "create": "Create wish list",
+    "edit": "Edit wish list",
+    "add": "Add to wish list",
+    "public": "Public",
+    "private": "Private",
+    "item": "item",
+    "item_plural": "items",
+    "back": "Back to my wish lists",
+    "make_it_public": "Make it public",
+    "name": "New wish list name",
+    "name_placeholder": "Name your wish list",
+    "create_add": "Create and add item",
+    "no_wishlists": "Oh-oh, seems like you have no wishlists yet. Create one below:",
+    "save": "Save Wishlist",
+    "add_to_wishlist": "Add to wishlist",
+    "empty": "This whishlist is empty"
   }
 }
