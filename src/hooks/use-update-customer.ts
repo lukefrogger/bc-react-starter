@@ -75,13 +75,13 @@ export const useUpdateCustomer = (): ((
           })
         }
         const data = await fn(input)
-        toast.success(t('bc.profile.updated', 'Profile updated'), {
+        toast.success(t('profile.updated', 'Profile updated'), {
           position: 'bottom-right',
         })
 
         return data
       } catch {
-        toast.error(t('bc.profile.update_error', 'Error updating profile'), {
+        toast.error(t('profile.update_error', 'Error updating profile'), {
           position: 'bottom-right',
         })
         return Promise.resolve(customer)

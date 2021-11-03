@@ -24,8 +24,8 @@ export function ReviewDialog(props: Props): React.ReactElement {
   const { t } = useTranslation()
 
   const {
-    title = t('bc.review.write', 'Write a Review'),
-    button = t('bc.review.submit', 'Submit Review'),
+    title = t('review.write', 'Write a Review'),
+    button = t('review.submit', 'Submit Review'),
     onSubmit = () => {},
     initialValues,
     resetOnSubmit = false,
@@ -79,28 +79,28 @@ export function ReviewDialog(props: Props): React.ReactElement {
       <form onSubmit={formik.handleSubmit} css={styles.form}>
         <Dropdown
           name="rating"
-          label={t('bc.review.rating', 'Rating')}
+          label={t('review.rating', 'Rating')}
           required
           placeholder="Select Rating"
           options={[
             {
-              label: t('bc.review.rating_1', '1 star (worst)'),
+              label: t('review.rating_1', '1 star (worst)'),
               id: '1',
             },
             {
-              label: t('bc.review.rating_2', '2 stars'),
+              label: t('review.rating_2', '2 stars'),
               id: '2',
             },
             {
-              label: t('bc.review.rating_3', '3 stars (average)'),
+              label: t('review.rating_3', '3 stars (average)'),
               id: '3',
             },
             {
-              label: t('bc.review.rating_4', '4 stars'),
+              label: t('review.rating_4', '4 stars'),
               id: '4',
             },
             {
-              label: t('bc.review.rating_5', '5 stars (best)'),
+              label: t('review.rating_5', '5 stars (best)'),
               id: '5',
             },
           ]}
@@ -111,7 +111,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
           name="name"
           label={
             <span>
-              {t('bc.review.name', 'Name')}{' '}
+              {t('review.name', 'Name')}{' '}
               <span css={styles.Optional}>
                 {t('profile.fields.optional', '(optional)')}
               </span>
@@ -126,7 +126,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
           name="email"
           type="email"
           required
-          label={t('bc.review.email', 'Email')}
+          label={t('review.email', 'Email')}
           value={formik.values.email}
           error={formik.errors.email}
           onChange={formik.handleChange}
@@ -135,7 +135,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         <Field
           name="title"
           required
-          label={t('bc.review.subject', 'Review Subject')}
+          label={t('review.subject', 'Review Subject')}
           value={formik.values.title}
           error={formik.errors.title}
           onChange={formik.handleChange}
@@ -144,7 +144,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
         <Field
           name="text"
           required
-          label={t('bc.review.comments', 'Comments')}
+          label={t('review.comments', 'Comments')}
           value={formik.values.text}
           error={formik.errors.text}
           onChange={formik.handleChange}

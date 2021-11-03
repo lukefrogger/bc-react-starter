@@ -47,7 +47,7 @@ export function OrderPage(): React.ReactElement {
     <div css={styles.Container}>
       <div css={styles.Header}>
         <Typography css={styles.Title} variant="display-large">
-          {t('bc.order.title', 'Order')}
+          {t('order.title', 'Order')}
           {
             // eslint-disable-next-line react/jsx-no-literals
             ` #${slug}`
@@ -55,14 +55,14 @@ export function OrderPage(): React.ReactElement {
         </Typography>
         <Link css={styles.Link} to="/user/orders">
           <Arrow orientation="left" />
-          {t('bc.order.back_to_list', 'Back to orders')}
+          {t('order.back_to_list', 'Back to orders')}
         </Link>
       </div>
       <>
         <div css={styles.Grid}>
           <div css={styles.List}>
             {isProductsLoading ? (
-              <div>{t('bc.notices.loading', 'Loading...')}</div>
+              <div>{t('notices.loading', 'Loading...')}</div>
             ) : (
               products?.map((product) => (
                 // TODO: Order from API missing some data: salePrice, product image
@@ -86,11 +86,11 @@ export function OrderPage(): React.ReactElement {
               css={styles.Button}
               variant="tertiary"
             >
-              {t('bc.order.contact_support', 'Contact support')}
+              {t('order.contact_support', 'Contact support')}
             </Button>
           </div>
           {isLoading ? (
-            <div>{t('bc.notices.loading', 'Loading...')}</div>
+            <div>{t('notices.loading', 'Loading...')}</div>
           ) : (
             order && (
               <OrderDetail

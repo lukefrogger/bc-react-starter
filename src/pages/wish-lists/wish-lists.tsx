@@ -23,7 +23,7 @@ export function WishListsPage(): React.ReactElement {
     <div css={styles.container}>
       <Helmet>
         <title>
-          {t('bc.wish_list.title', 'My wish lists')}
+          {t('wish_list.title', 'My wish lists')}
           {
             // eslint-disable-next-line react/jsx-no-literals
             ' | '
@@ -32,10 +32,10 @@ export function WishListsPage(): React.ReactElement {
         </title>
       </Helmet>
       <Typography variant="display-large" css={styles.title}>
-        {t('bc.wish_list.title', 'My wish lists')}
+        {t('wish_list.title', 'My wish lists')}
       </Typography>
       <DialogDisclosure {...dialog} css={styles.button}>
-        {t('bc.wish_list.new', 'New wish list')}
+        {t('wish_list.new', 'New wish list')}
       </DialogDisclosure>
       <WishlistDialog
         {...dialog}

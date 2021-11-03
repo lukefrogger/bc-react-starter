@@ -44,7 +44,7 @@ export function OrdersPage(): React.ReactElement {
     return (
       <div css={styles.Container}>
         <Typography css={styles.Title} variant="display-large">
-          {t('bc.orders.title_history', 'Order history')}
+          {t('orders.title_history', 'Order history')}
         </Typography>
         {[...Array(3)].map((loading) => (
           <OrderLoading key={loading} />
@@ -56,7 +56,7 @@ export function OrdersPage(): React.ReactElement {
     <div css={styles.Container}>
       <Helmet>
         <title>
-          {t('bc.orders.title_history', 'Order history')}
+          {t('orders.title_history', 'Order history')}
           {
             // eslint-disable-next-line react/jsx-no-literals
             ' | '
@@ -65,11 +65,11 @@ export function OrdersPage(): React.ReactElement {
         </title>
       </Helmet>
       <Typography css={styles.Title} variant="display-large">
-        {t('bc.orders.title_history', 'Order history')}
+        {t('orders.title_history', 'Order history')}
       </Typography>
 
       {Array.isArray(orderHistory) && orderHistory.length === 0 && (
-        <p css={styles.NoOrders}>{t('bc.orders.none', 'No orders')}</p>
+        <p css={styles.NoOrders}>{t('orders.none', 'No orders')}</p>
       )}
 
       {orders?.map((order) => (

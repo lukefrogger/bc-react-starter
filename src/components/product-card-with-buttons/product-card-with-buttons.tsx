@@ -41,12 +41,12 @@ export function ProductCardWithButtons(
             {
               onClick: addCartItem,
               disabled: isAdding,
-              children: t('bc.btn.add_to_cart', 'Add to Cart'),
+              children: t('btn.add_to_cart', 'Add to Cart'),
               id: 'add-to-cart',
             },
             {
               onClick: () => quickView.onShow(path),
-              children: t('bc.btn.quick_view', 'Quick view'),
+              children: t('btn.quick_view', 'Quick view'),
               variant: 'tertiary',
               id: 'quick-view',
             },

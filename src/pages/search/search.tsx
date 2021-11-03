@@ -37,7 +37,7 @@ export function SearchPage(): React.ReactElement {
   return (
     <div css={styles.Container}>
       <Typography css={styles.Title} variant="display-large">
-        {t('bc.search.search', 'Search')}
+        {t('search.search', 'Search')}
       </Typography>
 
       <Formik initialValues={{ search: '' }} onSubmit={onSubmit}>
@@ -56,15 +56,15 @@ export function SearchPage(): React.ReactElement {
         )}
       </Formik>
 
-      {isLoading && t('bc.notices.loading', 'Loading...')}
+      {isLoading && t('notices.loading', 'Loading...')}
 
       {data?.pagination && (
         <Typography variant="body-small" css={styles.Results}>
-          {t('bc.search.result', '{{count}} results for', {
+          {t('search.result', '{{count}} results for', {
             count: data.pagination.total,
           })}
           {search.search &&
-            t('bc.search.for', {
+            t('search.for', {
               search: search.search,
             })}
         </Typography>

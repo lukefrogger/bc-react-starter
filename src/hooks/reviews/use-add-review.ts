@@ -84,7 +84,7 @@ export const useAddReview = (
         )
         await revalidate()
       } catch (e) {
-        toast.error(t('bc.reviews.error_adding', 'Error saving the review'), {
+        toast.error(t('reviews.error_adding', 'Error saving the review'), {
           position: 'bottom-right',
         })
       }

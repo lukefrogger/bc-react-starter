@@ -61,7 +61,7 @@ export const UserMenuDesktop = ({
           onClick={handleLogout}
           css={styles.userMenuItem}
         >
-          {t('bc.btn.logout', 'Logout')}
+          {t('btn.logout', 'Logout')}
         </MenuItem>
       </Menu>
     </>
@@ -104,7 +104,7 @@ export const UserMenuMobile = ({
             </Link>
           ))}
           <Link to="/" onClick={onLogout} css={styles.logoutMobile}>
-            {t('bc.btn.logout', 'Logout')}
+            {t('btn.logout', 'Logout')}
           </Link>
         </>
       )}
