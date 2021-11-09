@@ -134,7 +134,7 @@ export function CategoryPage(): React.ReactElement {
           <div css={styles.Meta}>
             {search?.pagination && (
               <Typography variant="body-small">
-                {t('category_item_in', "{{count}} items in '{{category}}'", {
+                {t('category.item_in', "{{count}} items in '{{category}}'", {
                   count: search.pagination.total,
                   category: category?.name,
                 })}

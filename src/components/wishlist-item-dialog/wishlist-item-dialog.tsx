@@ -40,8 +40,8 @@ export function WishlistItemDialog(
   const dialogTwo = useDialogState()
 
   const {
-    title = t('bc.wish_list.add', 'Add to wish list'),
-    button = t('bc.btn.add', 'Create wish list'),
+    title = t('wish_list.add', 'Add to wish list'),
+    button = t('btn.wishlist_add', 'Create wish list'),
     productId,
     variantId,
     wishlists = [],
@@ -90,14 +90,15 @@ export function WishlistItemDialog(
     },
   })
 
-  if (!productId) throw new Error('productId is required')
+  if (!productId)
+    throw new Error(t('errors.wishlist_id', 'productId is required'))
 
   if (wishlists?.length === 0) {
     return (
       <WishlistDialog
         {...dialog}
         title={title}
-        button={t('bc.wish_list.create_add', 'Create and add item')}
+        button={t('wish_list.create_add', 'Create and add item')}
         description={t(
           'bc.wish_list.no_wishlists',
           'Oh-oh, seems like you have no wishlists yet. Create one below:'
@@ -146,7 +147,7 @@ export function WishlistItemDialog(
             )
           })}
           <DialogDisclosure {...dialogTwo} css={styles.link}>
-            + <em>{t('bc.wish_list.new', 'New wish list')}</em>
+            + <em>{t('wish_list.new', 'New wish list')}</em>
           </DialogDisclosure>
 
           <div css={styles.footer}>

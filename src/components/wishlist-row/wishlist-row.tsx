@@ -40,7 +40,7 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
           </Link>
           <span css={styles.items}>
             {wishlist?.items?.length}{' '}
-            {t('bc.wish_list.item', 'item', { count: wishlist?.items?.length })}
+            {t('wish_list.item', 'item', { count: wishlist?.items?.length })}
           </span>
         </div>
         <div css={styles.columnRight}>
@@ -50,15 +50,17 @@ export function WishlistRow(props: WishlistRowProps): React.ReactElement {
       </Role>
       <WishlistDialog
         {...dialog}
-        title={t('bc.wish_list.edit', 'Edit wish list')}
-        button={t('bc.wish_list.edit', 'Edit wish list')}
+        title={t('wish_list.edit', 'Edit wish list')}
+        button={t('wish_list.edit', 'Edit wish list')}
         initialValues={{
           name: wishlist.name || '',
           isPublic: wishlist.is_public || false,
         }}
         onSubmit={async ({ isPublic, name }) => {
           if (!wishlist.id) {
-            throw new Error('Wishlist id not found')
+            throw new Error(
+              t('errors.wishlist_not_found', 'Wishlist id not found')
+            )
           }
           await updateWishlist({
             isPublic,
@@ -110,7 +112,7 @@ export function WishlistActions(
               strokeLinejoin="round"
             />
           </svg>
-          {t('bc.btn.copy_link', 'Copy link')}
+          {t('btn.copy_link', 'Copy link')}
         </Button>
       )}
       <Button css={styles.action} variant="link" onClick={dialog?.show}>
@@ -122,7 +124,7 @@ export function WishlistActions(
             strokeLinejoin="round"
           />
         </svg>
-        {t('bc.btn.edit', 'Edit')}
+        {t('btn.edit', 'Edit')}
       </Button>
       <Button
         css={styles.action}
@@ -137,7 +139,7 @@ export function WishlistActions(
             strokeLinejoin="round"
           />
         </svg>
-        {t('bc.btn.delete', 'Delete')}
+        {t('btn.delete', 'Delete')}
       </Button>
     </span>
   )
@@ -169,7 +171,7 @@ export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
               strokeLinejoin="round"
             />
           </svg>
-          {t('bc.wish_list.public', 'Public')}
+          {t('wish_list.public', 'Public')}
         </>
       ) : (
         <>
@@ -187,7 +189,7 @@ export function WishlistStatus(props: WishlistStatusProps): React.ReactElement {
               strokeLinejoin="round"
             />
           </svg>
-          {t('bc.wish_list.private', 'Private')}
+          {t('wish_list.private', 'Private')}
         </>
       )}
     </span>

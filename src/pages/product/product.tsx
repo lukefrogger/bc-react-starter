@@ -69,7 +69,7 @@ export function ProductPage({
 
   const reviewDialog = useDialogState()
 
-  if (!product) return <p>Loading</p>
+  if (!product) return <p>{t('notices.loading', 'Loading')}</p>
 
   const images = product.images?.edges?.reduce<ReactImageGalleryItem[]>(
     (acc, edge) => {
@@ -138,7 +138,7 @@ export function ProductPage({
               <div css={styles.starRow}>
                 <StarRating rating={reviewSummary.averageOfRatings} />
                 <Typography variant="body-small">
-                  {t('bc.reviews.review', '{{count}} reviews', {
+                  {t('reviews.review', '{{count}} reviews', {
                     count: reviewSummary.numberOfReviews,
                   })}
                 </Typography>
@@ -162,7 +162,7 @@ export function ProductPage({
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <em>{t('bc.product.add_to_wishlist', 'Add to wishlist')}</em>
+                  <em>{t('wish_list.add_to_wishlist', 'Add to wishlist')}</em>
                 </DialogDisclosure>
                 <WishlistItemDialog {...wishlistDialog} />
               </div>
@@ -181,7 +181,7 @@ export function ProductPage({
             })}
             <div>
               <Typography variant="display-xx-small">
-                {t('bc.product.quantity', 'QUANTITY')}
+                {t('product.quantity', 'QUANTITY')}
               </Typography>
               <div css={styles.row}>
                 <QuantitySelector
@@ -189,7 +189,7 @@ export function ProductPage({
                   onChangeQuantity={setQuantity}
                 />
                 <Button onClick={addCartItem} disabled={isAdding}>
-                  {t('bc.cart.add_to_cart', 'Add to Cart')}
+                  {t('cart.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
             </div>
@@ -197,7 +197,7 @@ export function ProductPage({
           {isLimited && (
             <div css={styles.findMore}>
               <Link to={`/product/${slug}`} css={styles.link}>
-                <em>{t('bc.product.find_more', 'Find out more')}</em>
+                <em>{t('product.find_more', 'Find out more')}</em>
                 <svg
                   width={7}
                   height={12}
@@ -222,7 +222,7 @@ export function ProductPage({
         <div css={styles.productDetail}>
           <div css={styles.productDetailRow}>
             <Typography variant="display-small">
-              {t('bc.product.description', 'Description')}
+              {t('product.description', 'Description')}
             </Typography>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }}
@@ -230,14 +230,16 @@ export function ProductPage({
           </div>
           {/*           <div css={styles.productDetailRow}>
             <Typography variant="display-small">
-              {t('bc.product.specifications', 'Specifications')}
+              {t('product.specifications', 'Specifications')}
             </Typography>
             <Typography
               dangerouslySetInnerHTML={{ __html: product.description }} // TODO: Change to specifications
             />
           </div> */}
           <div css={styles.productDetailRow}>
-            <Typography variant="display-small">Reviews</Typography>
+            <Typography variant="display-small">
+              {t('reviews.title', 'Reviews')}
+            </Typography>
             <div css={styles.reviewList}>
               {reviews?.edges?.map((edge) => (
                 <ProductReview
@@ -263,7 +265,7 @@ export function ProductPage({
                 }}
               />
               <DialogDisclosure {...reviewDialog} css={styles.addNewReview}>
-                {t('bc.review.add', 'Add new review')}
+                {t('reviews.add', 'Add new review')}
               </DialogDisclosure>
             </div>
           </div>

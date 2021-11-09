@@ -65,14 +65,17 @@ export const useAddReview = (
         if (!customer) {
           // A signed customer is required in order to create a comment
           throw new CommerceError({
-            message: 'Signed customer not found',
+            message: t(
+              'errors.customer_not_found',
+              'Signed customer not found'
+            ),
           })
         }
 
         await fn(input)
         toast.success(
           t(
-            'bc.review.saved',
+            'bc.reviews.saved',
             'Your review was saved and is pending approval.'
           ),
           {
@@ -81,7 +84,7 @@ export const useAddReview = (
         )
         await revalidate()
       } catch (e) {
-        toast.error(t('bc.review.error_adding', 'Error saving the review'), {
+        toast.error(t('reviews.error_adding', 'Error saving the review'), {
           position: 'bottom-right',
         })
       }

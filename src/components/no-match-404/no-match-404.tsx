@@ -13,10 +13,11 @@ export function NoMatch404(): React.ReactElement {
   return (
     <div css={styles.Container}>
       <Typography variant="display" as="h1" css={styles.Title}>
-        404
+        {t('page_titles.404', '404')}
       </Typography>
       <Typography variant="body-small" css={styles.Text}>
-        {`${t('errors.no_match_for', 'No match for')} ${location.pathname}`}
+        {t('errors.no_match_for', 'No match for ')}
+        {location.pathname}
       </Typography>
     </div>
   )

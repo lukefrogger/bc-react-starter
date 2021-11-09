@@ -40,7 +40,7 @@ export const UserMenuDesktop = ({
         {...userMenu}
         hideOnClickOutside
         css={styles.userMenu}
-        aria-label="User menu"
+        aria-label={t('submenu.user_menu', 'User menu')}
       >
         {submenuLinks.map((link) => (
           <MenuItem

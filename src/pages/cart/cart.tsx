@@ -24,7 +24,7 @@ export function CartPage(): React.ReactElement {
         <Breadcrumbs.Item>{t('breadcrumbs.cart', 'Cart')}</Breadcrumbs.Item>
       </Breadcrumbs>
       <Typography as="h1" variant="display-xx-small" css={styles.Title}>
-        {t('bc.cart.your_order', 'Your order')}
+        {t('cart.your_order', 'Your order')}
       </Typography>
       <div css={styles.Grid}>
         <div css={styles.ProductList}>
@@ -34,7 +34,7 @@ export function CartPage(): React.ReactElement {
                 'cart.empty',
                 'There are no items in your basket. Please return '
               )}
-              <Link to="/">{t('cart.empty', 'Home')}</Link>
+              <Link to="/">{t('cart.empty_home', 'Home')}</Link>
             </p>
           )}
           {cart?.line_items?.physical_items.map((product) => (
@@ -61,7 +61,7 @@ export function CartPage(): React.ReactElement {
           <Pricing
             items={[
               {
-                label: t('bc.cart.subtotal', 'Subtotal'),
+                label: t('cart.subtotal', 'Subtotal'),
                 price: {
                   price: cart?.cart_amount || 0,
                   salePrice: 0,
@@ -69,12 +69,12 @@ export function CartPage(): React.ReactElement {
                 },
               },
               {
-                label: t('bc.cart.taxes', 'Taxes'),
-                value: t('bc.cart.calculated_at', 'Calculated at checkout'),
+                label: t('cart.taxes', 'Taxes'),
+                value: t('cart.calculated_at', 'Calculated at checkout'),
               },
             ]}
             total={{
-              label: t('bc.cart.total', 'Total'),
+              label: t('cart.total', 'Total'),
               price: {
                 price: cart?.cart_amount || 0,
                 salePrice: 0,
@@ -83,7 +83,7 @@ export function CartPage(): React.ReactElement {
             }}
           />
           <a css={styles.Checkout} href="/checkout">
-            {t('bc.cart.proceed', 'Proceed')}
+            {t('cart.proceed', 'Proceed')}
           </a>
         </div>
       </div>

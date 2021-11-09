@@ -144,14 +144,14 @@ export function ProfilePage(): React.ReactElement {
 
         <fieldset css={styles.Fieldset}>
           <h3 css={styles.Heading}>
-            {t('profile.general_info_title', 'Contact info')}
+            {t('profile.contact_info_title', 'Contact info')}
           </h3>
           {contactSection.map(renderField)}
         </fieldset>
 
         <fieldset css={styles.Fieldset}>
           <h3 css={styles.Heading}>
-            {t('profile.general_info_title', 'Change password')}
+            {t('profile.password_info_title', 'Change password')}
           </h3>
           {passwordSection.map(renderField)}
         </fieldset>

@@ -31,8 +31,8 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
   const { t } = useTranslation()
 
   const {
-    title = t('bc.wish_list.new', 'New wish list'),
-    button = t('bc.wish_list.create', 'Create wish list'),
+    title = t('wish_list.new', 'New wish list'),
+    button = t('wish_list.create', 'Create wish list'),
     description = null,
     onSubmit = () => {},
     initialValues,
@@ -52,7 +52,9 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
           formik.resetForm()
         }
       } catch (e) {
-        formik.setErrors({ name: 'Unexpected error' })
+        formik.setErrors({
+          name: t('errors.generic_error', 'Unexpected error'),
+        })
         formik.setSubmitting(false)
       }
     },
@@ -69,7 +71,7 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
             'bc.wish_list.name_placeholder',
             'Name your wish list'
           )}
-          label={t('bc.wish_list.name', 'New wish list name')}
+          label={t('wish_list.name', 'New wish list name')}
           value={formik.values.name}
           error={formik.errors.name}
           onChange={formik.handleChange}
@@ -81,7 +83,7 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
             onChange={formik.handleChange}
           />
           <Typography variant="body-small">
-            {t('bc.wish_list.make_it_public', 'Make it public')}
+            {t('wish_list.make_it_public', 'Make it public')}
           </Typography>
         </label>
         <div css={styles.footer}>

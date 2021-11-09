@@ -35,14 +35,14 @@ export function WishListPage(): React.ReactElement {
   const WishlistEmpty = (): React.ReactElement => {
     return (
       <p css={styles.wishlistEmpty}>
-        {t('bc.wish_list.empty', 'This whishlist is empty')}
+        {t('wish_list.empty', 'This whishlist is empty')}
       </p>
     )
   }
 
-  if (isLoading) return <p>Loading...</p> // TODO: Add a skeleton loading
+  if (isLoading) return <p>{t('notices.loading', 'Loading...')}</p> // TODO: Add a skeleton loading
   if (!wishlist) return <NoMatch404 />
-  if (error) return <p>Error</p>
+  if (error) return <p>{t('errors.generic_error', 'Error')}</p>
 
   const { is_guest: isGuest } = wishlist
   if (isGuest) {
@@ -116,7 +116,7 @@ export function WishListPage(): React.ReactElement {
                 strokeLinecap="square"
               />
             </svg>
-            {t('bc.wish_list.back', 'Back to my wish lists')}
+            {t('wish_list.back', 'Back to my wish lists')}
           </Link>
         </span>
         <span css={styles.titleWrapper}>
@@ -132,15 +132,17 @@ export function WishListPage(): React.ReactElement {
         />
         <WishlistDialog
           {...dialog}
-          title={t('bc.wish_list.edit', 'Edit wish list')}
-          button={t('bc.wish_list.edit', 'Edit wish list')}
+          title={t('wish_list.edit', 'Edit wish list')}
+          button={t('wish_list.edit', 'Edit wish list')}
           initialValues={{
             name: wishlist.name || '',
             isPublic: wishlist.is_public || false,
           }}
           onSubmit={async ({ isPublic, name }) => {
             if (!wishlist.id) {
-              throw new Error('Wishlist id not found')
+              throw new Error(
+                t('errors.wishlist_not_found', 'Wishlist id not found')
+              )
             }
             await updateWishlist({
               isPublic,
@@ -177,10 +179,14 @@ export function WishListPage(): React.ReactElement {
               id: String(item.id),
               onDelete: async () => {
                 if (!wishlist.id) {
-                  throw new Error('Wishlist id not found')
+                  throw new Error(
+                    t('errors.wishlist_not_found', 'Wishlist id not found')
+                  )
                 }
                 if (!item.id) {
-                  throw new Error('Item id not found')
+                  throw new Error(
+                    t('errors.wishlist_item_not_found', 'Item id not found')
+                  )
                 }
                 await deleteWishlistItem({
                   wishlistId: wishlist.id,

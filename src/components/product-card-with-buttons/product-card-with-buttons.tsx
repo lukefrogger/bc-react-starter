@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ProductCard, ProductCardProps } from 'unsafe-bc-react-components'
 
@@ -17,6 +18,7 @@ export function ProductCardWithButtons(
   props: ProductCardWithButtonsProps
 ): React.ReactElement {
   const { productId, variantId, path, ...rest } = props
+  const { t } = useTranslation()
 
   const quickView = useQuickView()
 
@@ -39,12 +41,12 @@ export function ProductCardWithButtons(
             {
               onClick: addCartItem,
               disabled: isAdding,
-              children: 'Add to Cart',
+              children: t('btn.add_to_cart', 'Add to Cart'),
               id: 'add-to-cart',
             },
             {
               onClick: () => quickView.onShow(path),
-              children: 'Quick view',
+              children: t('btn.quick_view', 'Quick view'),
               variant: 'tertiary',
               id: 'quick-view',
             },
