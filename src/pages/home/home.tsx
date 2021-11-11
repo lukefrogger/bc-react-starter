@@ -18,8 +18,17 @@ import { useCategories, useSearch } from '@hooks'
 
 import * as styles from './styles'
 
+const { REACT_APP_HOME_CATEGORIES_IDS } = process.env
+const homeCategoryIDs = REACT_APP_HOME_CATEGORIES_IDS?.replace(/\s+/g, '')
+  .split(',')
+  .map((item) => {
+    return parseInt(item, 10)
+  })
+
 export function HomePage(): React.ReactElement {
-  const { data } = useSearch()
+  const { data } = useSearch({
+    categoryIds: homeCategoryIDs,
+  })
   const { data: categories } = useCategories()
   const history = useHistory()
   const { t } = useTranslation()
