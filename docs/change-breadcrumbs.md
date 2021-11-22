@@ -1,6 +1,6 @@
 # How to change the Breadcrumbs
 
-The `<Breadcrumb>` component can be used on any page to create breadcumbs. Go to `src/pages/page-to-modify` to change or add a breadcrumb
+The `<Breadcrumb>` component can be used on any page to create breadcrumbs. Go to `src/pages/page-to-modify` to change or add a breadcrumb
 
 First import the `Breadcrumbs` from `@components`.
 
