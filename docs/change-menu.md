@@ -6,7 +6,7 @@ The top menu is a dynamic menu based on the first four categories on the site. T
 
 ## Add More Categories
 
-To add more categories to the top level menu (not recomended) find the `dataSliced` variable and modify the code.
+To add more categories to the top level menu (not recommended) find the `dataSliced` variable and modify the code.
 
 For example to change the number of items from 4 to five, find this line:
 `const dataSliced = data?.slice(0, 4)`
@@ -33,7 +33,7 @@ You can add a new link to the menu by adding in a new `<Link>` component:
 ```
 
 `to="/new-page"` should be the url of your new page
-`onClick={dialog.hide}` closes the pop-up navigaton box (otherwise it will stay open after the navigation has completed)
+`onClick={dialog.hide}` closes the pop-up navigation box (otherwise it will stay open after the navigation has completed)
 `{t('header.new_page', 'New Page')}` This is the translation string for the navigation item, don't forget to add in the matching entry in the `src/i18n` files for each language you support.
 
 ### Change the Desktop menu.
