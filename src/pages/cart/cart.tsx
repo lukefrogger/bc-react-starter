@@ -16,8 +16,7 @@ export function CartPage(): React.ReactElement {
   const { t } = useTranslation()
   const physicalProducts = cart?.line_items?.physical_items ?? []
   const digitalProducts = cart?.line_items?.digital_items ?? []
-  const lineItems = physicalProducts?.concat(digitalProducts)
-  lineItems.sort((a, b) => {
+  const lineItems = physicalProducts?.concat(digitalProducts).sort((a, b) => {
     return a.product_id - b.product_id
   })
 
