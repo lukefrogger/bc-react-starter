@@ -14,6 +14,11 @@ import * as styles from './styles'
 export function CartPage(): React.ReactElement {
   const { data: cart } = useCart()
   const { t } = useTranslation()
+  const physicalProducts = cart?.line_items?.physical_items ?? []
+  const digitalProducts = cart?.line_items?.digital_items ?? []
+  const lineItems = physicalProducts?.concat(digitalProducts).sort((a, b) => {
+    return a.product_id - b.product_id
+  })
 
   return (
     <div css={styles.Container}>
@@ -37,7 +42,7 @@ export function CartPage(): React.ReactElement {
               <Link to="/">{t('cart.empty_home', 'Home')}</Link>
             </p>
           )}
-          {cart?.line_items?.physical_items.map((product) => (
+          {lineItems.map((product) => (
             <CartItem
               {...product}
               options={[]} // TODO: Show selected variants
@@ -49,7 +54,7 @@ export function CartPage(): React.ReactElement {
               prices={{
                 price: product.list_price || 0,
                 salePrice: 0,
-                currencySettings: { currency: cart.currency.code },
+                currencySettings: { currency: cart?.currency.code },
               }}
               quantity={{
                 defaultQuantity: product.quantity ?? 0,
@@ -63,7 +68,7 @@ export function CartPage(): React.ReactElement {
               {
                 label: t('cart.subtotal', 'Subtotal'),
                 price: {
-                  price: cart?.cart_amount || 0,
+                  price: cart?.base_amount || 0,
                   salePrice: 0,
                   currencySettings: {},
                 },
@@ -76,7 +81,7 @@ export function CartPage(): React.ReactElement {
             total={{
               label: t('cart.total', 'Total'),
               price: {
-                price: cart?.cart_amount || 0,
+                price: cart?.base_amount || 0,
                 salePrice: 0,
                 currencySettings: {},
               },
