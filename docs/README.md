@@ -7,8 +7,8 @@ To get started using this theme with this theme, [follow the instructions here.]
 - [How to change the Logo](change-logo.md)
 - [How to change Component Styles](change-component-styles.md)
 - [How to use Translation Strings](translation-strings.md)
-- How to set default images for products/categories
-- How to change the Menu
+- [How to set default images for products/categories](set-default-images.md)
+- [How to change the Menu](change-menu.md)
 - [How to change the Breadcrumbs](change-breadcrumbs.md)
 - How to change the Footer
 - How to change the Carousel
