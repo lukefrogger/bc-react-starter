@@ -160,13 +160,16 @@
     "about_us": "About us",
     "help": "Help",
     "contact_us": "Contact Us"
-  },  
+  },
   "product": {
     "color": "COLOR",
     "quantity": "QUANTITY",
     "description": "Description",
     "specifications": "Specifications",
-    "find_more": "Find out more"
+    "find_more": "Find out more",
+    "num_in_stock": "{{availableToSell}} in stock",
+    "only_in_stock": "Only {{availableToSell}} in stock",
+    "out_of_stock": "Out of stock"
   },
   "profile": {
     "title": "Account profile",
