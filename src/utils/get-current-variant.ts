@@ -18,10 +18,11 @@ export function getCurrentVariant(
 
   const variant = product.variants.edges?.find((edge) => {
     const { node } = edge ?? {}
-    const numberOfDefinedOpts = Object.entries(choices).filter(
+    const definedOpts = Object.entries(choices).filter(
       ([key, value]) =>
         value !== null && variantOptionsEntityIds?.includes(Number(key))
-    ).length
+    )
+    const numberOfDefinedOpts = definedOpts.length
     const numberOfEdges = node?.productOptions?.edges?.length
 
     // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -32,7 +33,7 @@ export function getCurrentVariant(
       node?.productOptions.edges?.find((productOptionEdge) => {
         if (
           productOptionEdge?.node.__typename === 'MultipleChoiceOption' &&
-          productOptionEdge.node.displayName.toLowerCase() === key
+          productOptionEdge?.node.entityId === parseInt(key, 10)
         ) {
           return productOptionEdge.node.values.edges?.find(
             (valueEdge) => valueEdge?.node.entityId === value
@@ -42,8 +43,8 @@ export function getCurrentVariant(
       })
 
     return numberOfDefinedOpts === numberOfEdges
-      ? Object.entries(choices).every(isEdgeEqualToOption)
-      : Object.entries(choices).some(isEdgeEqualToOption)
+      ? definedOpts.every(isEdgeEqualToOption)
+      : definedOpts.some(isEdgeEqualToOption)
   })
 
   return variant ?? null
