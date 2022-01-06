@@ -13,7 +13,12 @@ export function FooterSocial(props: FooterSocialProps): React.ReactElement {
   return (
     <div css={styles.social}>
       {instagram && (
-        <a href={instagram} target="_blank" rel="noreferrer">
+        <a
+          href={instagram}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Instagram"
+        >
           <svg
             width={31}
             height={31}
@@ -27,7 +32,12 @@ export function FooterSocial(props: FooterSocialProps): React.ReactElement {
         </a>
       )}
       {facebook && (
-        <a href={facebook} target="_blank" rel="noreferrer">
+        <a
+          href={facebook}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Facebook"
+        >
           <svg
             width={16}
             height={30}
@@ -40,7 +50,7 @@ export function FooterSocial(props: FooterSocialProps): React.ReactElement {
         </a>
       )}
       {youtube && (
-        <a href={youtube} target="_blank" rel="noreferrer">
+        <a href={youtube} target="_blank" rel="noreferrer" aria-label="Youtube">
           <svg
             width={32}
             height={24}
