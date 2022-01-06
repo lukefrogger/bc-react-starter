@@ -88,6 +88,7 @@ export function CategoryPage(): React.ReactElement {
       </Breadcrumbs>
       {category?.image?.urlOriginal ? (
         <Card
+          as="h1"
           variant="large"
           name={category?.name}
           imageUrl={category?.image?.urlOriginal}
