@@ -54,6 +54,7 @@ export const UserMenuDesktop = ({
             to={link.to}
             onClick={userMenu.hide}
             css={styles.userMenuItem}
+            title={t(link.labelKey)}
           >
             {t(link.labelKey)}
           </MenuItem>
@@ -64,6 +65,7 @@ export const UserMenuDesktop = ({
           to="/"
           onClick={handleLogout}
           css={styles.userMenuItem}
+          title={t('btn.logout', 'Logout')}
         >
           {t('btn.logout', 'Logout')}
         </MenuItem>

@@ -85,6 +85,7 @@ export function Header(): React.ReactElement {
             css={styles.category}
             to="/categories/all"
             onClick={dialog.hide}
+            title={t('header.more_categories', 'More categories')}
           >
             {t('header.more_categories', 'More categories')}
           </Link>
