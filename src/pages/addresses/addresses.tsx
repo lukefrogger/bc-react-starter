@@ -43,7 +43,7 @@ export function AddressesPage(): React.ReactElement {
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('addresses.title', 'My addresses')}
       </Typography>
       <Button css={styles.Button} onClick={handleAdd} variant="secondary">

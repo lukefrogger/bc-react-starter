@@ -46,7 +46,7 @@ export function OrderPage(): React.ReactElement {
   return (
     <div css={styles.Container}>
       <div css={styles.Header}>
-        <Typography css={styles.Title} variant="display-large">
+        <Typography as="h1" css={styles.Title} variant="display-large">
           {t('order.title', 'Order')} #{slug}
         </Typography>
         <Link css={styles.Link} to="/user/orders">

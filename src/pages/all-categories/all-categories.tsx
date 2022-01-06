@@ -30,7 +30,7 @@ export function AllCategories(): React.ReactElement {
           ))}
         </Breadcrumbs>
       </Typography>
-      <Typography variant="display">
+      <Typography as="h1" variant="display">
         {t('category.all_categories', 'All Categories')}
       </Typography>
       <div css={styles.Main}>
