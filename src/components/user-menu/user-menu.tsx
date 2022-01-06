@@ -27,7 +27,11 @@ export const UserMenuDesktop = ({
   return (
     <>
       {isLoggedIn ? (
-        <MenuButton {...userMenu} css={styles.userButton}>
+        <MenuButton
+          {...userMenu}
+          css={styles.userButton}
+          title={t('profile.title', 'Account profile')}
+        >
           <Icons.User />
           <Icons.Arrow orientation={userMenu.visible ? 'up' : 'down'} />
         </MenuButton>
