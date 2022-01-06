@@ -93,11 +93,15 @@ export function Header(): React.ReactElement {
       )}
       <div css={styles.section}>
         {!isMobile && (
-          <Link css={styles.button} to="/search">
+          <Link
+            css={styles.button}
+            to="/search"
+            title={t('search.search', 'Search')}
+          >
             <Icons.Search />
           </Link>
         )}
-        <Link css={styles.button} to="/cart">
+        <Link css={styles.button} to="/cart" title={t('cart.cart', 'Cart')}>
           {badge && <span css={styles.badge}>{badge}</span>}
           <Icons.Bag />
         </Link>
