@@ -75,7 +75,11 @@ export function ReviewDialog(props: Props): React.ReactElement {
   })
 
   return (
-    <Dialog {...dialog} title={title}>
+    <Dialog
+      {...dialog}
+      title={title}
+      aria-label={t('reviews.write', 'Write a Review')}
+    >
       <form onSubmit={formik.handleSubmit} css={styles.form}>
         <Dropdown
           name="rating"

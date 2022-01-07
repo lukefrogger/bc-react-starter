@@ -131,6 +131,7 @@ export function WishlistItemDialog(
         {...dialog}
         title={title}
         visible={dialog.visible && !dialogTwo.visible}
+        aria-label={t('wish_list.add_to_wishlist', 'Add to wishlist')}
       >
         <form onSubmit={formik.handleSubmit} css={styles.list}>
           {wishlists?.map((wishlist) => {

@@ -166,7 +166,8 @@
     "quantity": "QUANTITY",
     "description": "Description",
     "specifications": "Specifications",
-    "find_more": "Find out more"
+    "find_more": "Find out more",
+    "label": "Product"
   },
   "profile": {
     "title": "Account profile",

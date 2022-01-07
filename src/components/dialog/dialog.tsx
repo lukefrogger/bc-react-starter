@@ -24,12 +24,7 @@ export function Dialog(props: DialogProps): React.ReactElement {
 
   return (
     <DialogBackdrop {...dialog} css={styles.backdrop}>
-      <ReakitDialog
-        {...dialog}
-        // TODO: Add a aria-label
-        className={className}
-        css={styles.dialog}
-      >
+      <ReakitDialog {...dialog} className={className} css={styles.dialog}>
         {onClickBack && (
           <ReakitButton css={styles.back} onClick={onClickBack}>
             <svg

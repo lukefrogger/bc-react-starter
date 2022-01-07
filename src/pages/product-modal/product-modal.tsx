@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { useTranslation } from 'react-i18next'
 import { DialogStateReturn } from 'reakit'
 
 import { Dialog } from '@components'
@@ -26,8 +27,16 @@ type ProductModalProps = {
 export const ProductModal = ({
   modal,
   slug,
-}: ProductModalProps): React.ReactElement => (
-  <Dialog {...modal} css={modalStyles}>
-    {slug && <ProductPage slug={slug} isLimited />}
-  </Dialog>
-)
+}: ProductModalProps): React.ReactElement => {
+  const { t } = useTranslation()
+
+  return (
+    <Dialog
+      {...modal}
+      aria-label={t('product.label', 'Product')}
+      css={modalStyles}
+    >
+      {slug && <ProductPage slug={slug} isLimited />}
+    </Dialog>
+  )
+}

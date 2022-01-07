@@ -61,7 +61,11 @@ export function WishlistDialog(props: WishlistDialogProps): React.ReactElement {
   })
 
   return (
-    <Dialog {...dialog} title={title}>
+    <Dialog
+      {...dialog}
+      title={title}
+      aria-label={t('wish_list.add_to_wishlist', 'Add to wishlist')}
+    >
       {description && <p css={styles.description}>{description}</p>}
       <form onSubmit={formik.handleSubmit} css={styles.form}>
         <Field
