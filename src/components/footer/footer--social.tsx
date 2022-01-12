@@ -50,7 +50,7 @@ export function FooterSocial(props: FooterSocialProps): React.ReactElement {
         </a>
       )}
       {youtube && (
-        <a href={youtube} target="_blank" rel="noreferrer" aria-label="Youtube">
+        <a href={youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
           <svg
             width={32}
             height={24}
