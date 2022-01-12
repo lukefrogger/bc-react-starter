@@ -54,9 +54,9 @@ export const UserMenuDesktop = ({
             to={link.to}
             onClick={userMenu.hide}
             css={styles.userMenuItem}
-            title={t(link.labelKey)}
+            title={t(link.labelKey, link.labelDefault)}
           >
-            {t(link.labelKey)}
+            {t(link.labelKey, link.labelDefault)}
           </MenuItem>
         ))}
         <MenuItem

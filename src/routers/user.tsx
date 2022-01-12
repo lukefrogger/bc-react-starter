@@ -18,13 +18,30 @@ import {
 type SubmenuLink = {
   to: string
   labelKey: string
+  labelDefault: string
 }
 
 export const submenuLinks: SubmenuLink[] = [
-  { to: '/user/profile', labelKey: 'submenu.profile' },
-  { to: '/user/orders', labelKey: 'submenu.orders' },
-  { to: '/user/addresses', labelKey: 'submenu.addresses' },
-  { to: '/user/wishlists', labelKey: 'submenu.wishlists' },
+  {
+    to: '/user/profile',
+    labelKey: 'submenu.profile',
+    labelDefault: 'Account profile',
+  },
+  {
+    to: '/user/orders',
+    labelKey: 'submenu.orders',
+    labelDefault: 'Order history',
+  },
+  {
+    to: '/user/addresses',
+    labelKey: 'submenu.addresses',
+    labelDefault: 'My addresses',
+  },
+  {
+    to: '/user/wishlists',
+    labelKey: 'submenu.wishlists',
+    labelDefault: 'My wish lists',
+  },
 ]
 
 export function UserRouter(): React.ReactElement {
