@@ -23,7 +23,12 @@ export function Dialog(props: DialogProps): React.ReactElement {
     props
 
   return (
-    <DialogBackdrop {...dialog} css={styles.backdrop}>
+    <DialogBackdrop
+      {...dialog}
+      aria-modal="true"
+      role="dialog"
+      css={styles.backdrop}
+    >
       <ReakitDialog {...dialog} className={className} css={styles.dialog}>
         {onClickBack && (
           <ReakitButton css={styles.back} onClick={onClickBack}>
