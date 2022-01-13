@@ -68,7 +68,11 @@ export function Header(): React.ReactElement {
         </div>
       )}
       <div css={styles.section}>
-        <Link css={styles.logo} to="/">
+        <Link
+          css={styles.logo}
+          to="/"
+          aria-label={t('store.name', 'Stellar Store')}
+        >
           <Logo />
         </Link>
       </div>
