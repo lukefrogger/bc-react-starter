@@ -85,6 +85,7 @@ export function Header(): React.ReactElement {
             css={styles.category}
             to="/categories/all"
             onClick={dialog.hide}
+            title={t('header.more_categories', 'More categories')}
           >
             {t('header.more_categories', 'More categories')}
           </Link>
@@ -92,11 +93,15 @@ export function Header(): React.ReactElement {
       )}
       <div css={styles.section}>
         {!isMobile && (
-          <Link css={styles.button} to="/search">
+          <Link
+            css={styles.button}
+            to="/search"
+            title={t('search.search', 'Search')}
+          >
             <Icons.Search />
           </Link>
         )}
-        <Link css={styles.button} to="/cart">
+        <Link css={styles.button} to="/cart" title={t('cart.cart', 'Cart')}>
           {badge && <span css={styles.badge}>{badge}</span>}
           <Icons.Bag />
         </Link>

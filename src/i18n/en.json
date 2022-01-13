@@ -35,6 +35,7 @@
     "all_categories": "All Categories"
   },
   "cart": {
+    "cart": "Cart",
     "empty": "There are no items in your basket. Please return",
     "empty_home": "Home",
     "checkout": "Checkout",

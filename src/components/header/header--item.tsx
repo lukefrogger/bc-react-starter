@@ -132,7 +132,12 @@ export function HeaderItem(props: Props): React.ReactElement | null {
   }
 
   return (
-    <Link css={styles.category} to={`/category${category.path}`} {...rest}>
+    <Link
+      css={styles.category}
+      to={`/category${category.path}`}
+      {...rest}
+      title={category.name}
+    >
       {category.name}
     </Link>
   )

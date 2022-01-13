@@ -27,7 +27,11 @@ export const UserMenuDesktop = ({
   return (
     <>
       {isLoggedIn ? (
-        <MenuButton {...userMenu} css={styles.userButton}>
+        <MenuButton
+          {...userMenu}
+          css={styles.userButton}
+          title={t('profile.title', 'Account profile')}
+        >
           <Icons.User />
           <Icons.Arrow orientation={userMenu.visible ? 'up' : 'down'} />
         </MenuButton>
@@ -50,8 +54,9 @@ export const UserMenuDesktop = ({
             to={link.to}
             onClick={userMenu.hide}
             css={styles.userMenuItem}
+            title={t(link.labelKey, link.labelDefault)}
           >
-            {t(link.labelKey)}
+            {t(link.labelKey, link.labelDefault)}
           </MenuItem>
         ))}
         <MenuItem
@@ -60,6 +65,7 @@ export const UserMenuDesktop = ({
           to="/"
           onClick={handleLogout}
           css={styles.userMenuItem}
+          title={t('btn.logout', 'Logout')}
         >
           {t('btn.logout', 'Logout')}
         </MenuItem>
