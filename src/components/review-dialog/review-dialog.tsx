@@ -106,6 +106,7 @@ export function ReviewDialog(props: Props): React.ReactElement {
           ]}
           onChange={formik.handleChange}
           value={formik.values.rating}
+          aria-label={t('review.rating', 'Rating')}
         />
         <Field
           name="name"
