@@ -105,7 +105,12 @@ export const UserMenuMobile = ({
       {!isCollapsed && isLoggedIn && (
         <>
           {submenuLinks.map((link) => (
-            <Link key={link.labelKey} to={link.to} css={styles.userMenuItem}>
+            <Link
+              key={link.labelKey}
+              to={link.to}
+              onClick={onDialogHide}
+              css={styles.userMenuItem}
+            >
               {t(link.labelKey)}
             </Link>
           ))}
