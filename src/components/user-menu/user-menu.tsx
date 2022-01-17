@@ -36,7 +36,7 @@ export const UserMenuDesktop = ({
           <Icons.Arrow orientation={userMenu.visible ? 'up' : 'down'} />
         </MenuButton>
       ) : (
-        <Link css={styles.button} to="/login">
+        <Link css={styles.button} title={t('title.login', 'Login')} to="/login">
           <Icons.User />
         </Link>
       )}
@@ -97,7 +97,12 @@ export const UserMenuMobile = ({
           <Icons.Arrow orientation={isCollapsed ? 'down' : 'up'} />
         </Clickable>
       ) : (
-        <Link css={styles.category} to="/login" onClick={onDialogHide}>
+        <Link
+          css={styles.category}
+          to="/login"
+          title={t('title.login', 'Login')}
+          onClick={onDialogHide}
+        >
           <Icons.User />
         </Link>
       )}
@@ -114,7 +119,12 @@ export const UserMenuMobile = ({
               {t(link.labelKey)}
             </Link>
           ))}
-          <Link to="/" onClick={onLogout} css={styles.logoutMobile}>
+          <Link
+            to="/"
+            title={t('btn.logout', 'Logout')}
+            onClick={onLogout}
+            css={styles.logoutMobile}
+          >
             {t('btn.logout', 'Logout')}
           </Link>
         </>
