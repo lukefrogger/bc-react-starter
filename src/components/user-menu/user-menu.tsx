@@ -27,12 +27,16 @@ export const UserMenuDesktop = ({
   return (
     <>
       {isLoggedIn ? (
-        <MenuButton {...userMenu} css={styles.userButton}>
+        <MenuButton
+          {...userMenu}
+          css={styles.userButton}
+          title={t('profile.title', 'Account profile')}
+        >
           <Icons.User />
           <Icons.Arrow orientation={userMenu.visible ? 'up' : 'down'} />
         </MenuButton>
       ) : (
-        <Link css={styles.button} to="/login">
+        <Link css={styles.button} title={t('title.login', 'Login')} to="/login">
           <Icons.User />
         </Link>
       )}
@@ -50,8 +54,9 @@ export const UserMenuDesktop = ({
             to={link.to}
             onClick={userMenu.hide}
             css={styles.userMenuItem}
+            title={t(link.labelKey, link.labelDefault)}
           >
-            {t(link.labelKey)}
+            {t(link.labelKey, link.labelDefault)}
           </MenuItem>
         ))}
         <MenuItem
@@ -60,6 +65,7 @@ export const UserMenuDesktop = ({
           to="/"
           onClick={handleLogout}
           css={styles.userMenuItem}
+          title={t('btn.logout', 'Logout')}
         >
           {t('btn.logout', 'Logout')}
         </MenuItem>
@@ -91,7 +97,12 @@ export const UserMenuMobile = ({
           <Icons.Arrow orientation={isCollapsed ? 'down' : 'up'} />
         </Clickable>
       ) : (
-        <Link css={styles.category} to="/login" onClick={onDialogHide}>
+        <Link
+          css={styles.category}
+          to="/login"
+          title={t('title.login', 'Login')}
+          onClick={onDialogHide}
+        >
           <Icons.User />
         </Link>
       )}
@@ -99,11 +110,21 @@ export const UserMenuMobile = ({
       {!isCollapsed && isLoggedIn && (
         <>
           {submenuLinks.map((link) => (
-            <Link key={link.labelKey} to={link.to} css={styles.userMenuItem}>
+            <Link
+              key={link.labelKey}
+              to={link.to}
+              onClick={onDialogHide}
+              css={styles.userMenuItem}
+            >
               {t(link.labelKey)}
             </Link>
           ))}
-          <Link to="/" onClick={onLogout} css={styles.logoutMobile}>
+          <Link
+            to="/"
+            title={t('btn.logout', 'Logout')}
+            onClick={onLogout}
+            css={styles.logoutMobile}
+          >
             {t('btn.logout', 'Logout')}
           </Link>
         </>

@@ -81,6 +81,8 @@ export function ProductPage({
         {
           original: urlOriginal,
           thumbnail: urlOriginal,
+          originalAlt: product.name,
+          thumbnailAlt: product.name,
         },
       ]
     },

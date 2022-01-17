@@ -35,6 +35,7 @@
     "all_categories": "All Categories"
   },
   "cart": {
+    "cart": "Cart",
     "empty": "There are no items in your basket. Please return",
     "empty_home": "Home",
     "checkout": "Checkout",
@@ -170,6 +171,7 @@
     "num_in_stock": "{{availableToSell}} in stock",
     "only_in_stock": "Only {{availableToSell}} in stock",
     "out_of_stock": "Out of stock"
+    "label": "Product"
   },
   "profile": {
     "title": "Account profile",

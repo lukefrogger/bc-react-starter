@@ -42,13 +42,13 @@ export function ProductCardWithButtons(
               onClick: addCartItem,
               disabled: isAdding,
               children: t('btn.add_to_cart', 'Add to Cart'),
-              id: 'add-to-cart',
+              id: `add-to-cart-${productId}`,
             },
             {
               onClick: () => quickView.onShow(path),
               children: t('btn.quick_view', 'Quick view'),
               variant: 'tertiary',
-              id: 'quick-view',
+              id: `quick-view-${productId}`,
             },
           ]}
         />

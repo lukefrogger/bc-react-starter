@@ -5,6 +5,7 @@ import { getBaseStyle } from '@utils/get-base-style'
 export const Container = css`
   --horizontal-spacing: 24px;
   max-width: calc(1208px + (var(--horizontal-spacing) * 2));
+  width: 100%;
   margin: 0 auto;
   padding: 0 var(--horizontal-spacing);
 `

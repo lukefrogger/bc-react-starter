@@ -11,7 +11,7 @@ export function Breadcrumbs({
   children: React.ReactNode
 }): React.ReactElement {
   return (
-    <Role css={styles.container} aria-label="breadcrumb">
+    <Role as="nav" css={styles.container} aria-label="breadcrumb">
       {children}
     </Role>
   )

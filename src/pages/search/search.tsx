@@ -48,6 +48,7 @@ export function SearchPage(): React.ReactElement {
               onChange={props.handleChange}
               name="search"
               value={props.values.search}
+              aria-label={t('search.search', 'Search')}
             />
             <Clickable type="submit" css={styles.SearchIcon}>
               <Search />
