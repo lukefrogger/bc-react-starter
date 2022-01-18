@@ -79,3 +79,96 @@ export const PackageIcon = (): React.ReactElement => (
     />
   </svg>
 )
+
+export const AlarmIcon = (): React.ReactElement => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 7.45312V11.9986H16.5455"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+      strokeLinecap="square"
+    />
+    <path
+      d="M3.81836 21.9995L6.66563 18.2031"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+    />
+    <path
+      d="M12.0002 20.18C16.5189 20.18 20.182 16.5169 20.182 11.9982C20.182 7.47953 16.5189 3.81641 12.0002 3.81641C7.48148 3.81641 3.81836 7.47953 3.81836 11.9982C3.81836 16.5169 7.48148 20.18 12.0002 20.18Z"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+      strokeLinecap="square"
+    />
+    <path
+      d="M2 6.54545L6.54545 2"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+    />
+    <path
+      d="M17.334 18.2031L20.1813 21.9995"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+    />
+    <path
+      d="M22.0005 6.54545L17.4551 2"
+      stroke="#DC004F"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+    />
+  </svg>
+)
+
+export const CheckIcon = (): React.ReactElement => (
+  <svg
+    width="17"
+    height="13"
+    viewBox="0 0 17 13"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M2 7L6 11L15 2"
+      stroke="#46D6BC"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+      strokeLinecap="square"
+    />
+  </svg>
+)
+
+export const ClearIcon = (): React.ReactElement => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M15 9L9 15"
+      stroke="#757575"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+      strokeLinecap="square"
+    />
+    <path
+      d="M15 15L9 9"
+      stroke="#757575"
+      strokeWidth={2}
+      strokeMiterlimit={10}
+      strokeLinecap="square"
+    />
+    <circle cx="12" cy="12" r="9" stroke="#757575" strokeWidth="2" />
+  </svg>
+)

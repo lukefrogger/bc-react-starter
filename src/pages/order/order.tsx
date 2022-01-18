@@ -3,6 +3,7 @@ import * as React from 'react'
 import useOrderProducts, {
   Products,
 } from '@bigcommerce/storefront-data-hooks/use-order-products'
+import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory, useParams } from 'react-router-dom'
 import {
@@ -45,6 +46,11 @@ export function OrderPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
+      <Helmet>
+        <title>
+          {t('order.title', 'Order')} #{slug}
+        </title>
+      </Helmet>
       <div css={styles.Header}>
         <Typography css={styles.Title} variant="display-large">
           {t('order.title', 'Order')} #{slug}

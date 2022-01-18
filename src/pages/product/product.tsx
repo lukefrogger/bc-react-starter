@@ -27,6 +27,7 @@ import {
   useReviewSummary,
   useWishlistItemDialog,
 } from '@hooks'
+import { AlarmIcon, CheckIcon, ClearIcon } from '@icons'
 
 import { ProductOption } from './product__option'
 import * as styles from './styles'
@@ -87,6 +88,17 @@ export function ProductPage({
     },
     []
   )
+
+  const isInStock = variant?.node?.inventory
+    ? variant?.node?.inventory?.isInStock
+    : product.inventory?.isInStock
+  const aggregate =
+    variant?.node?.inventory?.aggregated || product.inventory?.aggregated
+  const displayLowStock =
+    aggregate && isInStock
+      ? aggregate?.availableToSell <= aggregate?.warningLevel
+      : false
+  const availableToSell = isInStock && aggregate?.availableToSell
 
   return (
     <div css={styles.container(isLimited)}>
@@ -181,6 +193,42 @@ export function ProductPage({
                 />
               )
             })}
+            {!isInStock && (
+              <div>
+                <div css={styles.row}>
+                  <ClearIcon />
+                  <Typography variant="display-x-small">
+                    {t('product.out_of_stock', `Out of Stock`)}
+                  </Typography>
+                </div>
+              </div>
+            )}
+            {displayLowStock && (
+              <div>
+                <div css={styles.row}>
+                  <AlarmIcon />
+                  <Typography variant="display-x-small">
+                    {t(
+                      'product.only_in_stock',
+                      `Only ${availableToSell} in stock`,
+                      { availableToSell }
+                    )}
+                  </Typography>
+                </div>
+              </div>
+            )}
+            {availableToSell && !displayLowStock && (
+              <div>
+                <div css={styles.row}>
+                  <CheckIcon />
+                  <Typography variant="display-x-small">
+                    {t('product.num_in_stock', `${availableToSell} in stock`, {
+                      availableToSell,
+                    })}
+                  </Typography>
+                </div>
+              </div>
+            )}
             <div>
               <Typography variant="display-xx-small">
                 {t('product.quantity', 'QUANTITY')}
