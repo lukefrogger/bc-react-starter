@@ -5,7 +5,7 @@ import useLogout from '@bigcommerce/storefront-data-hooks/use-logout'
 import { useTheme } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Dialog, DialogDisclosure, useDialogState } from 'reakit/Dialog'
 
 import { UserMenuDesktop, UserMenuMobile } from '@components/user-menu'
@@ -32,6 +32,16 @@ export function Header(): React.ReactElement {
   const badge = useCartBadge()
   const { data } = useCategories()
   const dataSliced = data?.slice(0, 4)
+
+  let location = useLocation() // eslint-disable-line prefer-const
+
+  React.useEffect(() => {
+    ;(window as any).gtag('event', 'page_view', {
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname + window.location.search,
+    })
+  }, [location])
 
   return (
     <div css={styles.container}>
