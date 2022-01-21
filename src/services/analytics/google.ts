@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-export type Item = {
+export type GaItem = {
   affiliation?: string
   coupon?: string
   currency?: string
@@ -29,7 +29,7 @@ export type Item = {
 export function beginCheckoutEvent(
   currency: string,
   value: number,
-  items: Array<Item>
+  items: GaItem[]
 ): void {
   sendEvent('begin_checkout', {
     currency,
@@ -41,7 +41,7 @@ export function beginCheckoutEvent(
 export function addToCartEvent(
   currency: string,
   value: number,
-  items: Array<Item>
+  items: GaItem[]
 ): void {
   sendEvent('add_to_cart', {
     currency,
@@ -61,7 +61,7 @@ export function pageViewEvent(): void {
 export function removeFromCartEvent(
   currency: string,
   value: number,
-  items: Array<Item>
+  items: GaItem[]
 ): void {
   sendEvent('remove_from_cart', {
     currency,

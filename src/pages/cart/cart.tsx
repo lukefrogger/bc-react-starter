@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
-import { Item, removeFromCartEvent } from '@services/analytics/google'
+import { GaItem, removeFromCartEvent } from '@services/analytics/google'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Pricing, Typography } from 'unsafe-bc-react-components'
@@ -22,7 +22,7 @@ export function CartPage(): React.ReactElement {
   })
 
   const onBeginCheckout = (): void => {
-    const items: Item[] = []
+    const items: GaItem[] = []
 
     lineItems.map((product) =>
       items.push({
