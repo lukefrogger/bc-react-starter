@@ -3,7 +3,7 @@ import * as React from 'react'
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import useLogout from '@bigcommerce/storefront-data-hooks/use-logout'
 import { useTheme } from '@emotion/react'
-import { sendPageView } from '@services/analytics'
+import { pageViewEvent } from '@services/analytics/google'
 import { useTranslation } from 'react-i18next'
 import { useMediaQuery } from 'react-responsive'
 import { Link, useLocation } from 'react-router-dom'
@@ -37,7 +37,7 @@ export function Header(): React.ReactElement {
   let location = useLocation() // eslint-disable-line prefer-const
 
   React.useEffect(() => {
-    sendPageView()
+    pageViewEvent()
   }, [location])
 
   return (

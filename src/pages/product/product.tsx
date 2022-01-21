@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTheme } from '@emotion/react'
+import { addToCartEvent } from '@services/analytics/google'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import ImageGallery, { ReactImageGalleryItem } from 'react-image-gallery'
@@ -238,7 +239,23 @@ export function ProductPage({
                   defaultQuantity={quantity}
                   onChangeQuantity={setQuantity}
                 />
-                <Button onClick={addCartItem} disabled={isAdding}>
+                <Button
+                  onClick={() =>
+                    addCartItem().then(() =>
+                      addToCartEvent('USD', product.prices?.price.value, [
+                        {
+                          item_brand: product.brand?.name,
+                          item_id: product.entityId,
+                          item_name: product.name,
+                          item_variant: variant?.node.entityId,
+                          price: product.prices?.price.value,
+                          quantity,
+                        },
+                      ])
+                    )
+                  }
+                  disabled={isAdding}
+                >
                   {t('cart.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
