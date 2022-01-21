@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import useRemoveItem from '@bigcommerce/storefront-data-hooks/cart/use-remove-item'
 import useUpdateItem from '@bigcommerce/storefront-data-hooks/cart/use-update-item'
+import { removeFromCartEvent } from '@services/analytics/google'
 import { ProductRow, ProductRowProps } from 'unsafe-bc-react-components'
 
 type CartItemProps = ProductRowProps & {
@@ -38,7 +39,17 @@ export function CartItem(product: CartItemProps): React.ReactElement {
       onDelete={() =>
         removeItem({
           id: product.id || '',
-        })
+        }).then(() =>
+          removeFromCartEvent('USD', product.prices.price, [
+            {
+              item_id: product.product_id,
+              item_name: product.name,
+              item_variant: product.variant_id,
+              price: product.prices.price,
+              quantity: product.quantity?.defaultQuantity,
+            },
+          ])
+        )
       }
     />
   )

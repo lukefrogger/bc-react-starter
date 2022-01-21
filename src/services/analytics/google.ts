@@ -46,6 +46,18 @@ export function pageViewEvent(): void {
   })
 }
 
+export function removeFromCartEvent(
+  currency: string,
+  value: number,
+  items: Array<Item>
+): void {
+  sendEvent('remove_from_cart', {
+    currency,
+    value,
+    items,
+  })
+}
+
 export function sendEvent(eventName: string, eventParams?: unknown): void {
   window.gtag('event', eventName, eventParams)
 }
