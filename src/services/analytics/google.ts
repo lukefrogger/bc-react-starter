@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-type Item = {
+export type Item = {
   affiliation?: string
   coupon?: string
   currency?: string
@@ -24,6 +24,18 @@ type Item = {
   location_id?: string
   price?: string | number
   quantity?: number
+}
+
+export function beginCheckoutEvent(
+  currency: string,
+  value: number,
+  items: Array<Item>
+): void {
+  sendEvent('begin_checkout', {
+    currency,
+    value,
+    items,
+  })
 }
 
 export function addToCartEvent(
