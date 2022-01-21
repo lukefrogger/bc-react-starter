@@ -70,6 +70,12 @@ export function removeFromCartEvent(
   })
 }
 
+export function searchEvent(search_term: string): void {
+  sendEvent('search', {
+    search_term,
+  })
+}
+
 export function sendEvent(eventName: string, eventParams?: unknown): void {
   window.gtag('event', eventName, eventParams)
 }
