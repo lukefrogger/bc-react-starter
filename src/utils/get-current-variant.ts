@@ -14,7 +14,8 @@ export function getCurrentVariant(
   const variantOptionsEntityIds = product.productOptions.edges
     ?.filter((edge) => edge?.node.isVariantOption)
     .map((edge) => edge?.node.entityId)
-  if (variantOptionsEntityIds?.length === 0) return null
+  if (variantOptionsEntityIds?.length === 0)
+    return product.variants.edges?.length ? product.variants.edges[0] : null
 
   const variant = product.variants.edges?.find((edge) => {
     const { node } = edge ?? {}
