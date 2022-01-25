@@ -51,7 +51,7 @@ export function LoginPage(): React.ReactElement {
           {t('login.title', 'Login')} | {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
-      <Typography css={styles.centered} variant="display-large">
+      <Typography as="h1" css={styles.centered} variant="display-large">
         {t('login.title', 'Login')}
       </Typography>
       <Typography css={styles.description} variant="body-small">

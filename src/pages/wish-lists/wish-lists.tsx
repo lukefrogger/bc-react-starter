@@ -27,7 +27,7 @@ export function WishListsPage(): React.ReactElement {
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
-      <Typography variant="display-large" css={styles.title}>
+      <Typography as="h1" variant="display-large" css={styles.title}>
         {t('wish_list.title', 'My wish lists')}
       </Typography>
       <DialogDisclosure {...dialog} css={styles.button}>

@@ -56,7 +56,7 @@ export function AddressPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('addresses.edit_address', 'Edit address')}
       </Typography>
 

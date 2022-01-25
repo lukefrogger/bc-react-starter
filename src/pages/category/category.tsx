@@ -88,13 +88,16 @@ export function CategoryPage(): React.ReactElement {
       </Breadcrumbs>
       {category?.image?.urlOriginal ? (
         <Card
+          as="h1"
           variant="large"
           name={category?.name}
           imageUrl={category?.image?.urlOriginal}
           css={styles.Card}
         />
       ) : (
-        <Typography variant="display-x-large">{category?.name}</Typography>
+        <Typography as="h1" variant="display-x-large">
+          {category?.name}
+        </Typography>
       )}
       <div css={styles.Main}>
         {subcategories.length > 0 || brands.length > 0 ? (

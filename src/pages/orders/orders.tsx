@@ -43,7 +43,7 @@ export function OrdersPage(): React.ReactElement {
   if (isLoading)
     return (
       <div css={styles.Container}>
-        <Typography css={styles.Title} variant="display-large">
+        <Typography as="h1" css={styles.Title} variant="display-large">
           {t('orders.title_history', 'Order history')}
         </Typography>
         {[...Array(3)].map((loading) => (
@@ -60,7 +60,7 @@ export function OrdersPage(): React.ReactElement {
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('orders.title_history', 'Order history')}
       </Typography>
 
