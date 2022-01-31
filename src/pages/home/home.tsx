@@ -100,6 +100,7 @@ export function HomePage(): React.ReactElement {
               display: none;
             }
           `}
+          role="group"
         >
           <SideMenu.Level title="Categories">
             {categories?.map((category) => (
