@@ -106,7 +106,7 @@ export function Header(): React.ReactElement {
           </Link>
         )}
         <Link css={styles.button} to="/cart" title={t('cart.cart', 'Cart')}>
-          {badge && <span css={styles.badge}>{badge}</span>}
+          <span css={styles.badge}>{badge}</span>
           <Icons.Bag />
         </Link>
         {!isMobile && (
