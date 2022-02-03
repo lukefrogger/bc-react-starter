@@ -28,6 +28,7 @@ export const container = (theme: Theme): SerializedStyles => css`
 export const section = css`
   display: flex;
   gap: 8px;
+  align-items: center;
 `
 
 export const logo = css`
