@@ -34,7 +34,7 @@ export function Header(): React.ReactElement {
   const { data } = useCategories()
   const dataSliced = data?.slice(0, 4)
 
-  let location = useLocation() // eslint-disable-line prefer-const
+  const location = useLocation() // eslint-disable-line prefer-const
 
   React.useEffect(() => {
     pageViewEvent()
