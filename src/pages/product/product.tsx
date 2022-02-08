@@ -101,6 +101,20 @@ export function ProductPage({
       : false
   const availableToSell = isInStock && aggregate?.availableToSell
 
+  const handleOnAddCartItem = (): Promise<void> =>
+    addCartItem().then(() =>
+      addToCartEvent('USD', product.prices?.price.value, [
+        {
+          item_brand: product.brand?.name,
+          item_id: product.entityId,
+          item_name: product.name,
+          item_variant: variant?.node.entityId,
+          price: product.prices?.price.value,
+          quantity,
+        },
+      ])
+    )
+
   return (
     <div css={styles.container(isLimited)}>
       <Helmet>
@@ -239,23 +253,7 @@ export function ProductPage({
                   defaultQuantity={quantity}
                   onChangeQuantity={setQuantity}
                 />
-                <Button
-                  onClick={() =>
-                    addCartItem().then(() =>
-                      addToCartEvent('USD', product.prices?.price.value, [
-                        {
-                          item_brand: product.brand?.name,
-                          item_id: product.entityId,
-                          item_name: product.name,
-                          item_variant: variant?.node.entityId,
-                          price: product.prices?.price.value,
-                          quantity,
-                        },
-                      ])
-                    )
-                  }
-                  disabled={isAdding}
-                >
+                <Button onClick={handleOnAddCartItem} disabled={isAdding}>
                   {t('cart.cart.add_to_cart', 'Add to Cart')}
                 </Button>
               </div>
