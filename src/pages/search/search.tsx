@@ -39,7 +39,7 @@ export function SearchPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('search.search', 'Search')}
       </Typography>
 

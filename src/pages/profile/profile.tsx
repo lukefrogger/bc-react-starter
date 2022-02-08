@@ -130,7 +130,7 @@ export function ProfilePage(): React.ReactElement {
           {t('store.name', 'Stellar Store')}
         </title>
       </Helmet>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('profile.title', 'Account profile')}
       </Typography>
 

@@ -21,7 +21,7 @@ export function AddAddressPage(): React.ReactElement {
 
   return (
     <div css={styles.Container}>
-      <Typography css={styles.Title} variant="display-large">
+      <Typography as="h1" css={styles.Title} variant="display-large">
         {t('addresses.new_address', 'New address')}
       </Typography>
 

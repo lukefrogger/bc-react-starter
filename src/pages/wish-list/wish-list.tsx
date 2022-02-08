@@ -55,7 +55,7 @@ export function WishListPage(): React.ReactElement {
         </Helmet>
         <div css={styles.header}>
           <span css={styles.titleWrapper}>
-            <Typography variant="display-large" css={styles.title}>
+            <Typography as="h1" variant="display-large" css={styles.title}>
               {wishlist.name}
             </Typography>
           </span>
