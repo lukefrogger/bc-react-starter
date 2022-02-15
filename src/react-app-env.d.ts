@@ -4,6 +4,7 @@
 
 declare namespace NodeJS {
   interface ProcessEnv {
+    readonly GOOGLE_ANALYTICS_TRACKING_ID: string
     readonly NODE_ENV: 'development' | 'production' | 'test'
     readonly PUBLIC_URL: string
   }

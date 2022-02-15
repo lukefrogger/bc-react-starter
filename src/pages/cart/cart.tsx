@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import useCart from '@bigcommerce/storefront-data-hooks/cart/use-cart'
+import { GaItem, removeFromCartEvent } from '@services/analytics/google'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Pricing, Typography } from 'unsafe-bc-react-components'
@@ -19,6 +20,22 @@ export function CartPage(): React.ReactElement {
   const lineItems = physicalProducts?.concat(digitalProducts).sort((a, b) => {
     return a.product_id - b.product_id
   })
+
+  const onBeginCheckout = (): void => {
+    const items: GaItem[] = []
+
+    lineItems.map((product) =>
+      items.push({
+        item_id: product.product_id,
+        item_name: product.name,
+        item_variant: product.variant_id,
+        price: product.sale_price,
+        quantity: product.quantity,
+      })
+    )
+
+    removeFromCartEvent('USD', cart?.cart_amount ?? 0, items)
+  }
 
   return (
     <div css={styles.Container}>
@@ -87,7 +104,7 @@ export function CartPage(): React.ReactElement {
               },
             }}
           />
-          <a css={styles.Checkout} href="/checkout">
+          <a css={styles.Checkout} href="/checkout" onClick={onBeginCheckout}>
             {t('cart.proceed', 'Proceed')}
           </a>
         </div>

@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { css } from '@emotion/react'
+import { addToCartEvent } from '@services/analytics/google'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { ProductCard, ProductCardProps } from 'unsafe-bc-react-components'
@@ -39,7 +40,19 @@ export function ProductCardWithButtons(
           {...rest}
           buttons={[
             {
-              onClick: addCartItem,
+              onClick: () =>
+                addCartItem().then(() =>
+                  addToCartEvent('USD', props.product.price, [
+                    {
+                      item_brand: props.brand.name,
+                      item_id: props.productId,
+                      item_name: props.product.name,
+                      item_variant: props.variantId,
+                      price: props.product.price,
+                      quantity: 1,
+                    },
+                  ])
+                ),
               disabled: isAdding,
               children: t('btn.add_to_cart', 'Add to Cart'),
               id: `add-to-cart-${productId}`,
