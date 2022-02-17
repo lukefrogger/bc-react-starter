@@ -23,7 +23,7 @@ Submenu.Link = React.forwardRef(
     { to, children, isActive = false }: SubmenuLinkProps,
     ref?: React.Ref<HTMLAnchorElement>
   ): React.ReactElement => (
-    <Link innerRef={ref} css={styles.Link(isActive)} to={to}>
+    <Link ref={ref} css={styles.Link(isActive)} to={to}>
       {children}
     </Link>
   )
