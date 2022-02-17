@@ -5,7 +5,7 @@ import useOrderProducts, {
 } from '@bigcommerce/storefront-data-hooks/use-order-products'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { Link, useHistory, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   Button,
   OrderDetail,
@@ -22,8 +22,8 @@ import * as styles from './styles'
 
 export function OrderPage(): React.ReactElement {
   const { t } = useTranslation()
-  const history = useHistory()
-  const { slug }: { slug: string } = useParams()
+  const history = useNavigate()
+  const { slug } = useParams<{ slug?: string }>()
   const { data: order, error: orderError } = useOrder(Number(slug))
   const { data: products, error: productsError } = useOrderProducts({
     orderId: Number(slug),
@@ -32,7 +32,7 @@ export function OrderPage(): React.ReactElement {
   const isProductsLoading = !products && !productsError
 
   const handleRedirectToProduct = (product: Products[0]): void => {
-    history.push(`/product/${product.id}`)
+    history(`/product/${product.id}`)
     window.scrollTo(0, 0)
   }
 

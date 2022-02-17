@@ -3,7 +3,7 @@ import * as React from 'react'
 import { css } from '@emotion/react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {
   Card,
   Pagination,
@@ -23,7 +23,7 @@ import * as styles from './styles'
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
-  const history = useHistory()
+  const history = useNavigate()
   const { t } = useTranslation()
 
   const { data: category, isValidating } = useCategory(params)
@@ -115,7 +115,7 @@ export function CategoryPage(): React.ReactElement {
                   <SideMenu.Item
                     key={subcategory.entityId}
                     onClick={() => {
-                      history.push(`/category${subcategory.path}`)
+                      history(`/category${subcategory.path}`)
                     }}
                   >
                     {subcategory.name}
@@ -164,6 +164,7 @@ export function CategoryPage(): React.ReactElement {
                     },
                     currencySettings: {},
                     image: {
+                      component: null,
                       meta: product.node.images.edges?.[0]?.node.altText || '',
                       url_standard:
                         product.node.images.edges?.[0]?.node.urlOriginal || '',

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useTranslation } from 'react-i18next'
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { NoMatch404, Submenu } from '@components'
 import {
@@ -59,7 +59,7 @@ export function UserRouter(): React.ReactElement {
 
   // User is unauthenticated
   if (error || !customer) {
-    return <Redirect to={`/login?forward_url=${location.pathname}`} />
+    return <Navigate to={`/login?forward_url=${location.pathname}`} />
   }
 
   return (
@@ -80,33 +80,33 @@ export function UserRouter(): React.ReactElement {
           )
         })}
       </Submenu>
-      <Switch>
-        <Route exact path="/user/profile">
+      <Routes>
+        <Route path="/user/profile">
           <ProfilePage />
         </Route>
-        <Route exact path="/user/orders">
+        <Route path="/user/orders">
           <OrdersPage />
         </Route>
-        <Route exact path="/user/orders/:slug">
+        <Route path="/user/orders/:slug">
           <OrderPage />
         </Route>
-        <Route exact path="/user/addresses">
+        <Route path="/user/addresses">
           <AddressesPage />
         </Route>
-        <Route exact path="/user/addresses/new">
+        <Route path="/user/addresses/new">
           <AddAddressPage />
         </Route>
-        <Route exact path="/user/addresses/:slug">
+        <Route path="/user/addresses/:slug">
           <AddressPage />
         </Route>
-        <Route exact path="/user/wishlists">
+        <Route path="/user/wishlists">
           <WishListsPage />
         </Route>
         <Route path="*">
           <NoMatch404 />
         </Route>
         {/*         <Redirect from="/user" to="/user/profile" /> */}
-      </Switch>
+      </Routes>
     </>
   )
 }

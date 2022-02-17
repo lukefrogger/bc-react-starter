@@ -1,9 +1,10 @@
+/* eslint react/no-unused-prop-types: 0 */
 import * as React from 'react'
 
 import { css } from '@emotion/react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Footer, Header, NoMatch404, Notices } from '@components'
 import {
@@ -40,36 +41,35 @@ export function RootRouter(): React.ReactElement {
       >
         <Notices />
         <Header />
-        <Switch>
-          <Route exact path="/">
+        <Routes>
+          <Route path="/">
             <HomePage />
           </Route>
           <Route path="/search">
             <SearchPage />
           </Route>
-          <Route exact path="/login">
+          <Route path="/login">
             <LoginPage />
           </Route>
-          <Route exact path="/signup">
+          <Route path="/signup">
             <SignupPage />
           </Route>
-          <Route exact path="/categories/all">
+          <Route path="/categories/all">
             <AllCategories />
           </Route>
-          <Route exact path="/category/:categories">
+          <Route path="/category/:categories">
             <CategoryPage />
           </Route>
-          <Route exact path="/category/:categories/:subCategories">
+          <Route path="/category/:categories/:subCategories">
             <CategoryPage />
           </Route>
-          <Route
-            exact
-            path="/category/:categories/:subCategories/:subSubCategories"
-          >
+          <Route path="/category/:categories/:subCategories/:subSubCategories">
             <CategoryPage />
           </Route>
           <Route path="/product/:slug">
-            {({ match }) => match && <ProductPage slug={match?.params.slug} />}
+            {({ match }: { match: any }) =>
+              match && <ProductPage slug={match?.params.slug} />
+            }
           </Route>
           <Route path="/cart">
             <CartPage />
@@ -90,7 +90,7 @@ export function RootRouter(): React.ReactElement {
           <Route path="/legal">
             <LegalRouter />
           </Route>
-          <Route exact path="/user/wishlists/:slug">
+          <Route path="/user/wishlists/:slug">
             <WishListPage />
           </Route>
           <Route path="/user">
@@ -99,7 +99,7 @@ export function RootRouter(): React.ReactElement {
           <Route path="*">
             <NoMatch404 />
           </Route>
-        </Switch>
+        </Routes>
         <Footer />
       </div>
     </BrowserRouter>
