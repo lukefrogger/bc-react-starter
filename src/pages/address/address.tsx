@@ -38,7 +38,7 @@ export function AddressPage(): React.ReactElement {
   const isLoading = !error && !data
 
   const updateAddress = useUpdateAddress()
-  const history = useNavigate()
+  const navigate = useNavigate()
 
   const address = data?.addresses?.find(
     (item: Address) => item.id === Number(slug)
@@ -47,7 +47,7 @@ export function AddressPage(): React.ReactElement {
   const handleSubmit = async (values: AddressValues): Promise<void> => {
     if (!data?.addresses?.length) return Promise.resolve()
     await updateAddress(transformAddressForPayload(values, address as Address))
-    return history('/user/addresses')
+    return navigate('/user/addresses')
   }
 
   if (!address && !isLoading) {

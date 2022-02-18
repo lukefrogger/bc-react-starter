@@ -12,11 +12,11 @@ import * as styles from './styles'
 export function AddAddressPage(): React.ReactElement {
   const { t } = useTranslation()
   const addAddress = useAddAddress()
-  const history = useNavigate()
+  const navigate = useNavigate()
 
   const handleSubmit = async (values: AddressValues): Promise<any> => {
     await addAddress(values)
-    history('/user/addresses')
+    navigate('/user/addresses')
   }
 
   return (

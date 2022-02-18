@@ -30,7 +30,7 @@ export function HomePage(): React.ReactElement {
     categoryIds: homeCategoryIDs,
   })
   const { data: categories } = useCategories()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   const SLIDES: HeroProps[] = [
@@ -107,7 +107,7 @@ export function HomePage(): React.ReactElement {
               <SideMenu.Item
                 key={category.entityId}
                 onClick={() => {
-                  history(`/category${category.path}`)
+                  navigate(`/category${category.path}`)
                 }}
               >
                 {category.name}

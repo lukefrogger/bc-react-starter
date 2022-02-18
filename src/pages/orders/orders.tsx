@@ -25,7 +25,7 @@ const SortOrders = (a: any, b: any): number => {
 export function OrdersPage(): React.ReactElement {
   const { data: orders, error } = useOrders()
   const { t } = useTranslation()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const isLoading = typeof orders === 'undefined' && !error
   const orderHistory = Array.isArray(orders) ? orders : []
 
@@ -34,7 +34,7 @@ export function OrdersPage(): React.ReactElement {
   const handleOrderAction = (action: string, order: Order): void => {
     switch (action) {
       case 'details':
-        history(`/user/orders/${order.id}`)
+        navigate(`/user/orders/${order.id}`)
         break
       default:
     }

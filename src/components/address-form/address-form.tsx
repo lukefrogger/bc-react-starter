@@ -60,14 +60,14 @@ export function AddressForm({
   const [countryCode, setCountryCode] = React.useState<string>(
     initialValues?.country_code || ''
   )
-  const history = useNavigate()
+  const navigate = useNavigate()
   const { data: countries } = useCountries()
   const { data: states } = useStates(
     countryCode || getCountryCodeByName(countries, initialValues.country)
   )
   const handleCancel = (e: React.FormEvent): void => {
     e.preventDefault()
-    history(-1)
+    navigate(-1)
   }
   const required = (value: string): string | undefined =>
     !value?.trim()

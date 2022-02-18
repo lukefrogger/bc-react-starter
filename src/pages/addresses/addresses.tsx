@@ -19,16 +19,16 @@ import * as styles from './styles'
 
 export function AddressesPage(): React.ReactElement {
   const { t } = useTranslation()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const { data, error, revalidate } = useAddresses()
   const removeAddress = useRemoveAddress()
   const addresses = data?.addresses
   const isLoading = !data && !error
   // const isLoading = true
 
-  const handleAdd = (): void => history('/user/addresses/new')
+  const handleAdd = (): void => navigate('/user/addresses/new')
   const handleEdit = (address: AddressType): void => {
-    if (address?.id) history(`/user/addresses/${address?.id}`)
+    if (address?.id) navigate(`/user/addresses/${address?.id}`)
   }
   const handleDelete = async (address: AddressType): Promise<void> => {
     await removeAddress({ id: address.id })

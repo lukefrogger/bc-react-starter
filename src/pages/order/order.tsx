@@ -22,7 +22,7 @@ import * as styles from './styles'
 
 export function OrderPage(): React.ReactElement {
   const { t } = useTranslation()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const { slug } = useParams<{ slug?: string }>()
   const { data: order, error: orderError } = useOrder(Number(slug))
   const { data: products, error: productsError } = useOrderProducts({
@@ -32,7 +32,7 @@ export function OrderPage(): React.ReactElement {
   const isProductsLoading = !products && !productsError
 
   const handleRedirectToProduct = (product: Products[0]): void => {
-    history(`/product/${product.id}`)
+    navigate(`/product/${product.id}`)
     window.scrollTo(0, 0)
   }
 

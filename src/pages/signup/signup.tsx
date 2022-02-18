@@ -24,7 +24,7 @@ export function SignupPage(): React.ReactElement {
   const { t } = useTranslation()
   const signup = useSignup()
   const { data: customer } = useCustomer()
-  const history = useNavigate()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +46,7 @@ export function SignupPage(): React.ReactElement {
           password,
           ...rest,
         })
-        history('/user/profile')
+        navigate('/user/profile')
       } catch (err) {
         formik.setErrors({
           password: t('errors.signup_failed', 'Signup failed'),
@@ -58,7 +58,7 @@ export function SignupPage(): React.ReactElement {
 
   // Already authenticated
   if (customer) {
-    return <Navigate to="/" />
+    return <Navigate to="/" replace={true} />
   }
 
   return (

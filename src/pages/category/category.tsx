@@ -23,7 +23,7 @@ import * as styles from './styles'
 
 export function CategoryPage(): React.ReactElement {
   const params = useParams<UseCategoryBody>()
-  const history = useNavigate()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   const { data: category, isValidating } = useCategory(params)
@@ -115,7 +115,7 @@ export function CategoryPage(): React.ReactElement {
                   <SideMenu.Item
                     key={subcategory.entityId}
                     onClick={() => {
-                      history(`/category${subcategory.path}`)
+                      navigate(`/category${subcategory.path}`)
                     }}
                   >
                     {subcategory.name}
