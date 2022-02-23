@@ -58,7 +58,7 @@ export function SignupPage(): React.ReactElement {
 
   // Already authenticated
   if (customer) {
-    return <Navigate to="/" replace={true} />
+    return <Navigate to="/" replace />
   }
 
   return (
