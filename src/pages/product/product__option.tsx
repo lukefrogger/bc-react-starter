@@ -17,6 +17,35 @@ type ProductionOptionProps = Pick<
   option: UseProductOptions['options'][number]
 }
 
+/**
+ * @function renderMinMax
+ * @description Checks the potential settings from the NumberFieldOption and applies min/max attributes.
+ * @param option object of field settings from GraphQL
+ */
+const renderMinMax = (option: {
+  limitNumberBy: string
+  lowest?: number | null
+  highest?: number | null
+}): Record<string, unknown> | null => {
+  switch (option.limitNumberBy.toLowerCase()) {
+    case 'range':
+      return {
+        min: Number(option.lowest),
+        max: Number(option.highest),
+      }
+    case 'lowest_value':
+      return {
+        min: Number(option.lowest),
+      }
+    case 'highest_value':
+      return {
+        max: Number(option.highest),
+      }
+    default:
+      return {}
+  }
+}
+
 export function ProductOption(
   props: ProductionOptionProps
 ): React.ReactElement | null {
@@ -77,6 +106,29 @@ export function ProductOption(
           setChoices({
             ...choices,
             [option.entityId]: date,
+          })
+        }}
+      />
+    )
+  }
+  if (option.__typename === 'NumberFieldOption') {
+    return (
+      <Field
+        type="number"
+        value={Number(choices[option.entityId])}
+        name={option.displayName}
+        label={option.displayName.toUpperCase()}
+        {...(option.isRequired && {
+          required: option.isRequired,
+        })}
+        {...renderMinMax(option)}
+        onChange={(e) => {
+          // TODO: Add support for target.value in components library
+          // @ts-expect-error ts-migrate(2339) FIXME: Property 'value' does not exist on type '{}'.
+          const { value } = e.target
+          setChoices({
+            ...choices,
+            [option.entityId]: value,
           })
         }}
       />

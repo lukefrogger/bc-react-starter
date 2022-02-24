@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { searchEvent } from '@services/analytics/google'
 import { Form, Formik, FormikProps } from 'formik'
 import { useTranslation } from 'react-i18next'
 import { Clickable } from 'reakit'
@@ -31,8 +32,10 @@ export function SearchPage(): React.ReactElement {
     window.scrollTo(0, 0)
     setSearch({ ...search, page })
   }
-  const onSubmit = (values: SearchValues): void =>
+  const onSubmit = (values: SearchValues): void => {
     setSearch({ search: values.search, page: 1 })
+    searchEvent(values.search)
+  }
 
   return (
     <div css={styles.Container}>
@@ -85,6 +88,7 @@ export function SearchPage(): React.ReactElement {
               },
               currencySettings: {},
               image: {
+                component: null,
                 meta: product.node.images.edges?.[0]?.node.altText || '',
                 url_standard:
                   product.node.images.edges?.[0]?.node.urlOriginal || '',

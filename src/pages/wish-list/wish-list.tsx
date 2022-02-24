@@ -78,6 +78,7 @@ export function WishListPage(): React.ReactElement {
                 },
                 currencySettings: {},
                 image: {
+                  component: null,
                   meta:
                     product.product?.images?.edges?.[0]?.node?.altText || '',
                   url_standard:

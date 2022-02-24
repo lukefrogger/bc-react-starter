@@ -4,7 +4,7 @@ import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import { useFormik } from 'formik'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { Link, Redirect, useHistory, useLocation } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { Button, Field, Typography } from 'unsafe-bc-react-components'
 
 import { useLogin } from '@hooks/use-login'
@@ -16,7 +16,7 @@ export function LoginPage(): React.ReactElement {
   const login = useLogin()
   const { data: customer } = useCustomer()
   const { search } = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +30,7 @@ export function LoginPage(): React.ReactElement {
           password,
         })
         const params = new URLSearchParams(search)
-        history.push(params.get('forward_url') || '/')
+        navigate(params.get('forward_url') || '/')
       } catch (err) {
         formik.setErrors({
           password: t('errors.credentials', 'Invalid credentials'),
@@ -41,7 +41,7 @@ export function LoginPage(): React.ReactElement {
 
   // Already authenticated
   if (customer) {
-    return <Redirect to="/" />
+    return <Navigate to="/" />
   }
 
   return (

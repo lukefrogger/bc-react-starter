@@ -5,7 +5,7 @@ import useRemoveAddress from '@bigcommerce/storefront-data-hooks/address/use-rem
 import { Address } from '@bigcommerce/storefront-data-hooks/api/address'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   AddressCard,
   AddressType,
@@ -19,16 +19,16 @@ import * as styles from './styles'
 
 export function AddressesPage(): React.ReactElement {
   const { t } = useTranslation()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { data, error, revalidate } = useAddresses()
   const removeAddress = useRemoveAddress()
   const addresses = data?.addresses
   const isLoading = !data && !error
   // const isLoading = true
 
-  const handleAdd = (): void => history.push('/user/addresses/new')
+  const handleAdd = (): void => navigate('/user/addresses/new')
   const handleEdit = (address: AddressType): void => {
-    if (address?.id) history.push(`/user/addresses/${address?.id}`)
+    if (address?.id) navigate(`/user/addresses/${address?.id}`)
   }
   const handleDelete = async (address: AddressType): Promise<void> => {
     await removeAddress({ id: address.id })

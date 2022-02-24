@@ -1,9 +1,10 @@
+/* eslint react/no-unused-prop-types: 0 */
 import * as React from 'react'
 
 import { css } from '@emotion/react'
 import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Footer, Header, NoMatch404, Notices } from '@components'
 import {
@@ -40,66 +41,49 @@ export function RootRouter(): React.ReactElement {
       >
         <Notices />
         <Header />
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/search">
-            <SearchPage />
-          </Route>
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupPage />
-          </Route>
-          <Route exact path="/categories/all">
-            <AllCategories />
-          </Route>
-          <Route exact path="/category/:categories">
-            <CategoryPage />
-          </Route>
-          <Route exact path="/category/:categories/:subCategories">
-            <CategoryPage />
-          </Route>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/categories/all" element={<AllCategories />} />
+          <Route path="/category/:categories" element={<CategoryPage />} />
           <Route
-            exact
+            path="/category/:categories/:subCategories"
+            element={<CategoryPage />}
+          />
+          <Route
             path="/category/:categories/:subCategories/:subSubCategories"
-          >
-            <CategoryPage />
-          </Route>
-          <Route path="/product/:slug">
-            {({ match }) => match && <ProductPage slug={match?.params.slug} />}
-          </Route>
-          <Route path="/cart">
-            <CartPage />
-          </Route>
+            element={<CategoryPage />}
+          />
+          <Route
+            path="/product/:slug"
+            element={({ match }: { match: any }) =>
+              match && <ProductPage slug={match?.params.slug} />
+            }
+          />
+          <Route path="/cart" element={<CartPage />} />
           {
             // TODO: Create this pages
           }
-          <Route path="/about-us">
-            <h1>{t('page_titles.about_us', 'About us')}</h1>
-          </Route>
-          <Route path="/help">
-            <h1>{t('page_titles.help', 'Help')}</h1>
-          </Route>
-          <Route path="/contact-us">
-            <h1>{t('page_titles.contact_us', 'Contact Us')}</h1>
-          </Route>
+          <Route
+            path="/about-us"
+            element={<h1>{t('page_titles.about_us', 'About us')}</h1>}
+          />
+          <Route
+            path="/help"
+            element={<h1>{t('page_titles.help', 'Help')}</h1>}
+          />
+          <Route
+            path="/contact-us"
+            element={<h1>{t('page_titles.contact_us', 'Contact Us')}</h1>}
+          />
 
-          <Route path="/legal">
-            <LegalRouter />
-          </Route>
-          <Route exact path="/user/wishlists/:slug">
-            <WishListPage />
-          </Route>
-          <Route path="/user">
-            <UserRouter />
-          </Route>
-          <Route path="*">
-            <NoMatch404 />
-          </Route>
-        </Switch>
+          <Route path="/legal" element={<LegalRouter />} />
+          <Route path="/user/wishlists/:slug" element={<WishListPage />} />
+          <Route path="/user" element={<UserRouter />} />
+          <Route path="*" element={<NoMatch404 />} />
+        </Routes>
         <Footer />
       </div>
     </BrowserRouter>
