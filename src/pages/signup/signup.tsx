@@ -4,7 +4,7 @@ import useCustomer from '@bigcommerce/storefront-data-hooks/use-customer'
 import useSignup from '@bigcommerce/storefront-data-hooks/use-signup'
 import { FormikProps, useFormik } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'unsafe-bc-react-components'
 
 import { SignupField as Field } from './signup__field'
@@ -24,7 +24,7 @@ export function SignupPage(): React.ReactElement {
   const { t } = useTranslation()
   const signup = useSignup()
   const { data: customer } = useCustomer()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -46,7 +46,7 @@ export function SignupPage(): React.ReactElement {
           password,
           ...rest,
         })
-        history.push('/user/profile')
+        navigate('/user/profile')
       } catch (err) {
         formik.setErrors({
           password: t('errors.signup_failed', 'Signup failed'),
@@ -58,7 +58,7 @@ export function SignupPage(): React.ReactElement {
 
   // Already authenticated
   if (customer) {
-    return <Redirect to="/" />
+    return <Navigate to="/" replace />
   }
 
   return (

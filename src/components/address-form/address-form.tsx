@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Form, Formik, FormikProps, useField } from 'formik'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button, Field, FieldProps } from 'unsafe-bc-react-components'
 
 import { useCountries } from '@hooks/use-countries'
@@ -60,14 +60,14 @@ export function AddressForm({
   const [countryCode, setCountryCode] = React.useState<string>(
     initialValues?.country_code || ''
   )
-  const history = useHistory()
+  const navigate = useNavigate()
   const { data: countries } = useCountries()
   const { data: states } = useStates(
     countryCode || getCountryCodeByName(countries, initialValues.country)
   )
   const handleCancel = (e: React.FormEvent): void => {
     e.preventDefault()
-    history.goBack()
+    navigate(-1)
   }
   const required = (value: string): string | undefined =>
     !value?.trim()

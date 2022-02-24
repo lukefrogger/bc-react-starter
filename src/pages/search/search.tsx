@@ -88,6 +88,7 @@ export function SearchPage(): React.ReactElement {
               },
               currencySettings: {},
               image: {
+                component: null,
                 meta: product.node.images.edges?.[0]?.node.altText || '',
                 url_standard:
                   product.node.images.edges?.[0]?.node.urlOriginal || '',

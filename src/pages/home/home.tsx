@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { css } from '@emotion/react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Hero,
   HeroArray,
@@ -30,7 +30,7 @@ export function HomePage(): React.ReactElement {
     categoryIds: homeCategoryIDs,
   })
   const { data: categories } = useCategories()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { t } = useTranslation()
 
   const SLIDES: HeroProps[] = [
@@ -107,7 +107,7 @@ export function HomePage(): React.ReactElement {
               <SideMenu.Item
                 key={category.entityId}
                 onClick={() => {
-                  history.push(`/category${category.path}`)
+                  navigate(`/category${category.path}`)
                 }}
               >
                 {category.name}
@@ -130,6 +130,7 @@ export function HomePage(): React.ReactElement {
                 },
                 currencySettings: {},
                 image: {
+                  component: null,
                   meta: product.node.images.edges?.[0]?.node.altText || '',
                   url_standard:
                     product.node.images.edges?.[0]?.node.urlOriginal || '',

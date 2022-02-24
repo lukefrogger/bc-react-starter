@@ -20,7 +20,7 @@ function getArrowOrientation(
   return closed
 }
 
-type Props<S = unknown> = Omit<LinkProps<S>, 'to'> &
+type Props = Omit<LinkProps, 'to'> &
   React.RefAttributes<HTMLAnchorElement> & {
     category: {
       name: string
