@@ -32,11 +32,18 @@ export function ProductOption(
           {option.values?.edges?.map((value) => {
             if (!value) return null
             const { entityId, label } = value.node
+            // TODO: hexColors is currently unavailable on the @bigcommerce/storefront-data-hooks package.
+            const { hexColors } = value.node as any
             const active = choices[option.entityId]
+
             return (
               <Button
                 variant="selector"
+                {...(hexColors && {
+                  css: styles.hexColorOption(hexColors),
+                })}
                 key={entityId}
+                aria-label={label}
                 data-selected={active === entityId}
                 onClick={() => {
                   setChoices({
@@ -45,7 +52,7 @@ export function ProductOption(
                   })
                 }}
               >
-                {label}
+                {hexColors && hexColors.length ? `` : label}
               </Button>
             )
           })}

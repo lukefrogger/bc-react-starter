@@ -175,3 +175,38 @@ export const relatedProducts = css`
     flex-wrap: nowrap;
   }
 `
+
+/* Handles the use of 1, 2, or 3 hex values set to the option's hexColors key */
+export const hexColorOption = (
+  colors: Array<string>
+): ReturnType<typeof css> => css`
+  ${colors.length > 1
+    ? `background: linear-gradient(to right top, ${colors.join(',')})`
+    : `background-color: ${colors[0]}`};
+  &[data-selected='true'] {
+    ${colors.length > 1
+      ? `background: linear-gradient(to right top, ${colors.join(',')})`
+      : `background-color: ${colors[0]}`};
+  }
+  border: 2px solid white;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  transition: all 150ms ease-in-out;
+  &:hover,
+  &:focus {
+    border-color: #fff !important;
+    box-shadow: 0 0 0 2px #ababab;
+  }
+  &[data-selected='true'] {
+    box-shadow: 0 0 0 2px #333;
+  }
+  &[data-disabled='true'] {
+    outline: 2px dashed #ababab;
+    box-shadow: none;
+    cursor: not-allowed;
+    &[data-selected='true'] {
+      box-shadow: none;
+    }
+  }
+`
