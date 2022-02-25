@@ -56,12 +56,7 @@ export function RootRouter(): React.ReactElement {
             path="/category/:categories/:subCategories/:subSubCategories"
             element={<CategoryPage />}
           />
-          <Route
-            path="/product/:slug"
-            element={({ match }: { match: any }) =>
-              match && <ProductPage slug={match?.params.slug} />
-            }
-          />
+          <Route path="/product/:slug" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           {
             // TODO: Create this pages
