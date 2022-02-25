@@ -115,7 +115,11 @@ export function ProductOption(
     return (
       <Field
         type="number"
-        value={Number(choices[option.entityId])}
+        value={
+          choices[option.entityId]
+            ? Number(choices[option.entityId])
+            : Number(option.defaultNumber)
+        }
         name={option.displayName}
         label={option.displayName.toUpperCase()}
         {...(option.isRequired && {
