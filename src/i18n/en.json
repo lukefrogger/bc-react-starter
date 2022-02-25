@@ -37,7 +37,7 @@
   "cart": {
     "cart": "Cart",
     "empty": "There are no items in your basket. Please return",
-    "empty_home": "Home",
+    "empty_home": "Home.",
     "checkout": "Checkout",
     "added": "Product added to your cart",
     "error_adding": "Error adding to cart",
