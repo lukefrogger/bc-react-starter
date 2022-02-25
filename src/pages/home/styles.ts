@@ -3,6 +3,7 @@ import { css, SerializedStyles, Theme } from '@emotion/react'
 export const container = css`
   max-width: 1208px;
   margin: 0 auto;
+  width: 100%;
 `
 
 export const main = css`
