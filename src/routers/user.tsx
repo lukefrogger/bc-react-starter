@@ -89,7 +89,7 @@ export function UserRouter(): React.ReactElement {
         <Route path="/addresses/:slug" element={<AddressPage />} />
         <Route path="/wishlists" element={<WishListsPage />} />
         <Route path="*" element={<NoMatch404 />} />
-        {/*         <Redirect from="/user" to="/user/profile" /> */}
+        <Route path="/" element={<Navigate to="/user/profile" />} />
       </Routes>
     </>
   )

@@ -1,3 +1,4 @@
+import { NoMatch404 } from '@components'
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
@@ -24,7 +25,8 @@ export function LegalRouter(): React.ReactElement {
         element={<h1>{t('page_titles.privacy_policy', 'Privacy Policy')}</h1>}
       />
 
-      <Route path="*" element={<Navigate to="/legal/shipping" />} />
+      <Route path="/" element={<Navigate to="/legal/shipping" />} />
+      <Route path="*" element={<NoMatch404 />} />
     </Routes>
   )
 }
