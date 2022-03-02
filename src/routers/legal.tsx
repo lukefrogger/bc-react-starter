@@ -1,8 +1,9 @@
-import { NoMatch404 } from '@components'
 import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
 import { Navigate, Route, Routes } from 'react-router-dom'
+
+import { NoMatch404 } from '@components'
 
 export function LegalRouter(): React.ReactElement {
   const { t } = useTranslation()
