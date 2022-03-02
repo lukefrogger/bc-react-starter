@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { Footer, Header, NoMatch404, Notices } from '@components'
+import { Footer, Header, Notices } from '@components'
 import {
   AllCategories,
   CartPage,
@@ -74,10 +74,9 @@ export function RootRouter(): React.ReactElement {
             element={<h1>{t('page_titles.contact_us', 'Contact Us')}</h1>}
           />
 
-          <Route path="/legal" element={<LegalRouter />} />
+          <Route path="/legal/*" element={<LegalRouter />} />
           <Route path="/user/wishlists/:slug" element={<WishListPage />} />
-          <Route path="/user" element={<UserRouter />} />
-          <Route path="*" element={<NoMatch404 />} />
+          <Route path="/user/*" element={<UserRouter />} />
         </Routes>
         <Footer />
       </div>
