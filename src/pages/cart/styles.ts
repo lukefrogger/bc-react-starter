@@ -29,9 +29,6 @@ export const Grid = css`
 export const ProductList = css`
   margin-bottom: 48px;
   flex: 1;
-  a {
-    margin-left: 4px;
-  }
   @media (min-width: 1024px) {
     margin-bottom: inherit;
   }

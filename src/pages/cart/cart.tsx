@@ -55,7 +55,7 @@ export function CartPage(): React.ReactElement {
               {t(
                 'cart.empty',
                 'There are no items in your basket. Please return'
-              )}
+              )}{' '}
               <Link to="/">{t('cart.empty_home', 'Home.')}</Link>
             </p>
           )}
