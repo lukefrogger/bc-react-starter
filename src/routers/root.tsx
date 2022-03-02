@@ -74,9 +74,9 @@ export function RootRouter(): React.ReactElement {
             element={<h1>{t('page_titles.contact_us', 'Contact Us')}</h1>}
           />
 
-          <Route path="/legal" element={<LegalRouter />} />
+          <Route path="/legal/*" element={<LegalRouter />} />
           <Route path="/user/wishlists/:slug" element={<WishListPage />} />
-          <Route path="/user" element={<UserRouter />} />
+          <Route path="/user/*" element={<UserRouter />} />
           <Route path="*" element={<NoMatch404 />} />
         </Routes>
         <Footer />

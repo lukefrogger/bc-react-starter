@@ -81,15 +81,15 @@ export function UserRouter(): React.ReactElement {
         })}
       </Submenu>
       <Routes>
-        <Route path="/user/profile" element={<ProfilePage />} />
-        <Route path="/user/orders" element={<OrdersPage />} />
-        <Route path="/user/orders/:slug" element={<OrderPage />} />
-        <Route path="/user/addresses" element={<AddressesPage />} />
-        <Route path="/user/addresses/new" element={<AddAddressPage />} />
-        <Route path="/user/addresses/:slug" element={<AddressPage />} />
-        <Route path="/user/wishlists" element={<WishListsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/orders/:slug" element={<OrderPage />} />
+        <Route path="/addresses" element={<AddressesPage />} />
+        <Route path="/addresses/new" element={<AddAddressPage />} />
+        <Route path="/addresses/:slug" element={<AddressPage />} />
+        <Route path="/wishlists" element={<WishListsPage />} />
         <Route path="*" element={<NoMatch404 />} />
-        {/*         <Redirect from="/user" to="/user/profile" /> */}
+        <Route path="/" element={<Navigate to="/user/profile" />} />
       </Routes>
     </>
   )
