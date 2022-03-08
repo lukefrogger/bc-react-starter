@@ -241,9 +241,9 @@ export function Component(): React.ReactElement {
 
 # How to use Tailwind in the Components
 
-[Tailwind](https://tailwindcss.com) it's a popular CSS framework that contains a bunch of utilities classes that makes the development easier. You can reed more about this library in their docs, with are available here: `https://tailwindcss.com/docs/`.
+[Tailwind](https://tailwindcss.com) it's a popular CSS framework that contains a bunch of utilities classes that makes the development easier. You can read more about this library in [their documentation](https://tailwindcss.com/docs/).
 
-To install the tailwind in the project you need install de dependencies found in the second step of their tutorial: `https://tailwindcss.com/docs/guides/create-react-app` and follow the third step to create the `tailwind.config.js` and the `postcss.config.js`.
+To install the tailwind in the project you need install de dependencies found in the second step of [their tutorial](https://tailwindcss.com/docs/guides/create-react-app) and follow the third step to create the `tailwind.config.js` and the `postcss.config.js`.
 
 After the creation of the two files above, you need to register the files in the `tsconfig.eslint.json` in order to avoid eslint errors:
 
@@ -254,7 +254,7 @@ After the creation of the two files above, you need to register the files in the
 }
 ```
 
-Then in order to make it work with the `@emotion/react` we need to install [`twin.macro`]([https://github.com/ben-rogerson/twin.macro), a npm module that allow the use of Tailwind classes into the css-in-js:
+Then in order to make it work with the `@emotion/react` we need to install `twin.macro`, a npm module that allow the use of Tailwind classes into the css-in-js. You can read more about the library in [Github repo](https://github.com/ben-rogerson/twin.macro).
 
 ```bash
 yarn add twin.macro
