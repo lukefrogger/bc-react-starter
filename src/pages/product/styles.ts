@@ -180,6 +180,7 @@ export const relatedProducts = css`
 export const hexColorOption = (
   colors: Array<string>
 ): ReturnType<typeof css> => css`
+  --swatch-size: 40px;
   ${colors.length > 1
     ? `background: linear-gradient(to right top, ${colors.join(',')})`
     : `background-color: ${colors[0]}`};
@@ -189,9 +190,9 @@ export const hexColorOption = (
       : `background-color: ${colors[0]}`};
   }
   border: 2px solid white;
-  height: 40px;
-  width: 40px;
-  border-radius: 100%;
+  height: var(--swatch-size);
+  width: var(--swatch-size);
+  border-radius: var(--swatch-size);
   transition: all 150ms ease-in-out;
   &:hover,
   &:focus {
