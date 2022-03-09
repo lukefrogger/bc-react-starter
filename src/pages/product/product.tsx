@@ -35,15 +35,12 @@ import * as styles from './styles'
 
 import 'react-image-gallery/styles/css/image-gallery.css'
 
-type ProductPageProps = {
+type ProductProps = {
   slug: string
   isLimited?: boolean
 }
 
-export function ProductPage({
-  slug,
-  isLimited,
-}: ProductPageProps): React.ReactElement {
+export function Product({ slug, isLimited }: ProductProps): React.ReactElement {
   const { t } = useTranslation()
   const { data: customer } = useCustomer()
 

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { DialogStateReturn } from 'reakit'
 
 import { Dialog } from '@components'
-import { ProductPage } from '@pages/product/product'
+import { Product } from '@pages/product/product'
 
 const modalStyles = css`
   min-height: 40vh;
@@ -36,7 +36,7 @@ export const ProductModal = ({
       aria-label={t('product.label', 'Product')}
       css={modalStyles}
     >
-      {slug && <ProductPage slug={slug} isLimited />}
+      {slug && <Product slug={slug} isLimited />}
     </Dialog>
   )
 }
