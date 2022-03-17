@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { SwatchOptionValue } from '@bigcommerce/storefront-data-hooks/schema'
 import type { UseProductOptions } from '@hooks'
 import {
   Button,
@@ -62,7 +63,7 @@ export function ProductOption(
             if (!value) return null
             const { entityId, label } = value.node
             // TODO: hexColors is currently unavailable on the @bigcommerce/storefront-data-hooks package.
-            const { hexColors } = value.node as any
+            const { hexColors } = value.node as SwatchOptionValue
             const active = choices[option.entityId]
 
             return (
