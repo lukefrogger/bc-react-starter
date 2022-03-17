@@ -62,7 +62,6 @@ export function ProductOption(
           {option.values?.edges?.map((value) => {
             if (!value) return null
             const { entityId, label } = value.node
-            // TODO: hexColors is currently unavailable on the @bigcommerce/storefront-data-hooks package.
             const { hexColors } = value.node as SwatchOptionValue
             const active = choices[option.entityId]
 
