@@ -20,7 +20,7 @@ export function WishListsPage(): React.ReactElement {
   const loadingArray = [1, 2]
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} id="content">
       <Helmet>
         <title>
           {t('wish_list.title', 'My wish lists')}|{' '}

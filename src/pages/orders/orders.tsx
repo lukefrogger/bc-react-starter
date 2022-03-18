@@ -42,7 +42,7 @@ export function OrdersPage(): React.ReactElement {
 
   if (isLoading)
     return (
-      <div css={styles.Container}>
+      <div css={styles.Container} id="content">
         <Typography as="h1" css={styles.Title} variant="display-large">
           {t('orders.title_history', 'Order history')}
         </Typography>

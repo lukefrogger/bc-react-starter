@@ -62,7 +62,7 @@ export function SignupPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Typography as="h1" css={styles.Centered} variant="display-large">
         {t('signup.title', 'Create account')}
       </Typography>

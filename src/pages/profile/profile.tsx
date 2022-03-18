@@ -123,7 +123,7 @@ export function ProfilePage(): React.ReactElement {
   )
 
   return (
-    <div>
+    <div id="content">
       <Helmet>
         <title>
           {t('profile.title', 'Account profile')} |{' '}

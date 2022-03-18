@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Footer, Header, NoMatch404, Notices } from '@components'
+import { SkipContentButton } from '@components/skip-content-button'
 import {
   AllCategories,
   CartPage,
@@ -39,6 +40,7 @@ export function RootRouter(): React.ReactElement {
           flex-direction: column;
         `}
       >
+        <SkipContentButton />
         <Notices />
         <Header />
         <Routes>

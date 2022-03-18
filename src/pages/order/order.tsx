@@ -45,7 +45,7 @@ export function OrderPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Helmet>
         <title>
           {t('order.title', 'Order')} #{slug}
