@@ -9,6 +9,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { renderMinMax } from '@utils/number-field'
+
 import * as styles from './styles'
 
 type ProductionOptionProps = Pick<
@@ -16,35 +18,6 @@ type ProductionOptionProps = Pick<
   'choices' | 'setChoices'
 > & {
   option: UseProductOptions['options'][number]
-}
-
-/**
- * @function renderMinMax
- * @description Checks the potential settings from the NumberFieldOption and applies min/max attributes.
- * @param option object of field settings from GraphQL
- */
-const renderMinMax = (option: {
-  limitNumberBy: string
-  lowest?: number | null
-  highest?: number | null
-}): Record<string, unknown> | null => {
-  switch (option.limitNumberBy.toLowerCase()) {
-    case 'range':
-      return {
-        min: Number(option.lowest),
-        max: Number(option.highest),
-      }
-    case 'lowest_value':
-      return {
-        min: Number(option.lowest),
-      }
-    case 'highest_value':
-      return {
-        max: Number(option.highest),
-      }
-    default:
-      return {}
-  }
 }
 
 export function ProductOption(
