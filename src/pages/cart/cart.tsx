@@ -38,7 +38,7 @@ export function CartPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Breadcrumbs>
         <Breadcrumbs.Item to="/">
           {t('breadcrumbs.home', 'Home')}

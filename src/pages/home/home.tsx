@@ -89,7 +89,7 @@ export function HomePage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} id="content">
       <Hero {...HERO} />
       <div css={styles.main}>
         <SideMenu

@@ -45,7 +45,7 @@ export function LoginPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} id="content">
       <Helmet>
         <title>
           {t('login.title', 'Login')} | {t('store.name', 'Stellar Store')}

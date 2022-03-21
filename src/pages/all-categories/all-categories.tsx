@@ -15,7 +15,7 @@ export function AllCategories(): React.ReactElement {
   const { t } = useTranslation()
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Typography
         variant="body-small"
         css={css`

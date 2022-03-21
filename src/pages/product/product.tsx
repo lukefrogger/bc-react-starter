@@ -113,7 +113,7 @@ export function Product({ slug, isLimited }: ProductProps): React.ReactElement {
     )
 
   return (
-    <div css={styles.container(isLimited)}>
+    <div css={styles.container(isLimited)} id="content">
       <Helmet>
         <title>{product?.name}</title>
       </Helmet>

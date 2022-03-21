@@ -53,7 +53,7 @@ export function CategoryPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Helmet>
         <title>
           {category?.name} | {t('store.name', 'Stellar Store')}
