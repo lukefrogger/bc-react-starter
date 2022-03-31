@@ -21,8 +21,7 @@ export function ProductPage(): React.ReactElement {
   }
 
   if (error) {
-    // return <NoMatch404 />
-    return <ProductLoading />
+    return <NoMatch404 />
   }
 
   return <Product slug={slug || ''} />
