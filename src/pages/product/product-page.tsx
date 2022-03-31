@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useParams } from 'react-router-dom'
 
-import { NoMatch404 } from '@components'
+import { NoMatch404, ProductLoading } from '@components'
 import { useProduct } from '@hooks'
 
 import { Product } from './product'
@@ -13,10 +13,16 @@ type ProductPageParams = {
 
 export function ProductPage(): React.ReactElement {
   const { slug } = useParams<ProductPageParams>()
-  const { data: product } = useProduct(slug || '')
+  const { data: product, error } = useProduct(slug || '')
+  const isLoading = !product && !error
 
-  if (!product) {
-    return <NoMatch404 />
+  if (isLoading) {
+    return <ProductLoading />
+  }
+
+  if (error) {
+    // return <NoMatch404 />
+    return <ProductLoading />
   }
 
   return <Product slug={slug || ''} />
