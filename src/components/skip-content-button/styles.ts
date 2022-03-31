@@ -1,7 +1,7 @@
 import { css, SerializedStyles, Theme } from '@emotion/react'
 
 export const SkipContent = (theme: Theme): SerializedStyles => css`
-  background: #f5f5f5;
+  background: ${theme.colors['neutral-10']};
   color: #000;
   left: 5px;
   top: 5px;
