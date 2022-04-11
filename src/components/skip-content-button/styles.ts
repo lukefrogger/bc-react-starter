@@ -1,6 +1,6 @@
-import { css, SerializedStyles, Theme } from '@emotion/react'
+import { css, SerializedStyles } from '@emotion/react'
 
-export const SkipContent = (theme: Theme): SerializedStyles => css`
+export const SkipContent = (): SerializedStyles => css`
   background: #f5f5f5;
   color: #000;
   left: 5px;
