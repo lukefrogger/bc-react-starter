@@ -15,11 +15,12 @@ import {
   ProductCardWithButtonsProps,
 } from '@components'
 import { useCategories, useSearch } from '@hooks'
+import { getEnvVariable } from '@utils/get-env-variable'
 
 import * as styles from './styles'
 
-const { REACT_APP_HOME_CATEGORIES_IDS } = process.env
-const homeCategoryIDs = REACT_APP_HOME_CATEGORIES_IDS?.replace(/\s+/g, '')
+const homeCategoryIDs = getEnvVariable('REACT_APP_HOME_CATEGORIES_IDS')
+  ?.replace(/\s+/g, '')
   .split(',')
   .map((item) => {
     return parseInt(item, 10)

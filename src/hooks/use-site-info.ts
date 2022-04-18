@@ -2,9 +2,11 @@ import { GetSiteInfoResult } from '@bigcommerce/storefront-data-hooks/api/operat
 import axios from 'axios'
 import useSWR, { SWRResponse } from 'swr'
 
+import { getEnvVariable } from '@utils/get-env-variable'
+
 const fetcher = async (): Promise<any> => {
   const { data } = await axios(
-    `${process.env.REACT_APP_API_ENDPOINT}/api/site-info`
+    `${getEnvVariable('REACT_APP_API_ENDPOINT')}/api/site-info`
   )
   return data
 }

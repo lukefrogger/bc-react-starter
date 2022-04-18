@@ -2,9 +2,13 @@ import { ProductNode } from '@bigcommerce/storefront-data-hooks/api/operations/g
 import axios from 'axios'
 import useSWR, { SWRResponse } from 'swr'
 
+import { getEnvVariable } from '@utils/get-env-variable'
+
 const fetcher = async (_: string, slug: string): Promise<any> => {
   const { data } = await axios(
-    `${process.env.REACT_APP_API_ENDPOINT}/api/bigcommerce/product/${slug}`
+    `${getEnvVariable(
+      'REACT_APP_API_ENDPOINT'
+    )}/api/bigcommerce/product/${slug}`
   )
   return data
 }
