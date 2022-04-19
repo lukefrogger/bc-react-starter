@@ -12,6 +12,7 @@
 /build
 
 # misc
+.yalc
 .DS_Store
 .env
 .env.local
