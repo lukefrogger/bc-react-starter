@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import { Footer, Header, NoMatch404, Notices } from '@components'
+import { SkipContentButton } from '@components/skip-content-button'
 import {
   AllCategories,
   CartPage,
@@ -39,6 +40,7 @@ export function RootRouter(): React.ReactElement {
           flex-direction: column;
         `}
       >
+        <SkipContentButton />
         <Notices />
         <Header />
         <Routes>
@@ -56,12 +58,7 @@ export function RootRouter(): React.ReactElement {
             path="/category/:categories/:subCategories/:subSubCategories"
             element={<CategoryPage />}
           />
-          <Route
-            path="/product/:slug"
-            element={({ match }: { match: any }) =>
-              match && <ProductPage slug={match?.params.slug} />
-            }
-          />
+          <Route path="/product/:slug" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           {
             // TODO: Create this pages
@@ -79,9 +76,9 @@ export function RootRouter(): React.ReactElement {
             element={<h1>{t('page_titles.contact_us', 'Contact Us')}</h1>}
           />
 
-          <Route path="/legal" element={<LegalRouter />} />
+          <Route path="/legal/*" element={<LegalRouter />} />
           <Route path="/user/wishlists/:slug" element={<WishListPage />} />
-          <Route path="/user" element={<UserRouter />} />
+          <Route path="/user/*" element={<UserRouter />} />
           <Route path="*" element={<NoMatch404 />} />
         </Routes>
         <Footer />

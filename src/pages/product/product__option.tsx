@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { SwatchOptionValue } from '@bigcommerce/storefront-data-hooks/schema'
 import type { UseProductOptions } from '@hooks'
 import {
   Button,
@@ -8,6 +9,8 @@ import {
   Typography,
 } from 'unsafe-bc-react-components'
 
+import { renderMinMax } from '@utils/number-field'
+
 import * as styles from './styles'
 
 type ProductionOptionProps = Pick<
@@ -15,35 +18,6 @@ type ProductionOptionProps = Pick<
   'choices' | 'setChoices'
 > & {
   option: UseProductOptions['options'][number]
-}
-
-/**
- * @function renderMinMax
- * @description Checks the potential settings from the NumberFieldOption and applies min/max attributes.
- * @param option object of field settings from GraphQL
- */
-const renderMinMax = (option: {
-  limitNumberBy: string
-  lowest?: number | null
-  highest?: number | null
-}): Record<string, unknown> | null => {
-  switch (option.limitNumberBy.toLowerCase()) {
-    case 'range':
-      return {
-        min: Number(option.lowest),
-        max: Number(option.highest),
-      }
-    case 'lowest_value':
-      return {
-        min: Number(option.lowest),
-      }
-    case 'highest_value':
-      return {
-        max: Number(option.highest),
-      }
-    default:
-      return {}
-  }
 }
 
 export function ProductOption(
@@ -61,11 +35,17 @@ export function ProductOption(
           {option.values?.edges?.map((value) => {
             if (!value) return null
             const { entityId, label } = value.node
+            const { hexColors } = value.node as SwatchOptionValue
             const active = choices[option.entityId]
+
             return (
               <Button
                 variant="selector"
+                {...(hexColors && {
+                  css: styles.hexColorOption(hexColors),
+                })}
                 key={entityId}
+                aria-label={label}
                 data-selected={active === entityId}
                 onClick={() => {
                   setChoices({
@@ -74,7 +54,7 @@ export function ProductOption(
                   })
                 }}
               >
-                {label}
+                {hexColors && hexColors.length ? `` : label}
               </Button>
             )
           })}

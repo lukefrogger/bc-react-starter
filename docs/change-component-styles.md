@@ -4,7 +4,7 @@ This theme uses `@emotion/react` for writing CSS in JS. You can read more about 
 
 ## Writing CSS in a styles.ts
 
-When you go to an existing component, you will notice there is a styles.ts file in the component directory. This is the prefered way that we write styles for this project.
+When you go to an existing component, you will notice there is a styles.ts file in the component directory. This is the preferred way that we write styles for this project.
 
 ### Create simple styled component
 
@@ -237,4 +237,63 @@ export function Component(): React.ReactElement {
     </div>
   )
 }
+```
+
+# How to use Tailwind in the Components
+
+[Tailwind](https://tailwindcss.com) it's a popular CSS framework that contains a bunch of utilities classes that makes the development easier. You can read more about this library in [their documentation](https://tailwindcss.com/docs/).
+
+To install the tailwind in the project you need install de dependencies found in the second step of [their tutorial](https://tailwindcss.com/docs/guides/create-react-app).
+
+```bash
+yarn add tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+After the creation of the two files above, you need to register the files created by the Tailwind init in the `tsconfig.eslint.json` in order to avoid eslint errors:
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "include": ["src", "server", "postcss.config.js", "tailwind.config.js"]
+}
+```
+
+Then in order to make it work with the `@emotion/react` we need to install `twin.macro`, a npm module that allow the use of Tailwind classes into the css-in-js. You can read more about the library in [its Github repo](https://github.com/ben-rogerson/twin.macro).
+
+```bash
+yarn add twin.macro
+```
+
+# How to style the components using Tailwind
+
+After completing the installation process, you can use the Tailwind by importing the `twin.macro` in the file you want to work in:
+
+```tsx
+import 'twin.macro'
+```
+
+And then you can use the `tw` property on any component / element:
+
+```tsx
+<h1 tw="text-3xl font-bold underline">
+  Hello world!
+</h1>
+```
+
+Or you use it directly in the css, example editing the `styles.ts`:
+
+```js
+import { css } from '@emotion/react'
+import tw from 'twin.macro'
+
+export const helloWorld = css`
+  ${tw`text-3xl font-bold underline`}
+`
+```
+
+And then apply the css it on the component:
+
+```tsx
+<h1 css={styles.helloWorld}>Hello world!</h1>
 ```

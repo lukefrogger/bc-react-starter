@@ -38,7 +38,7 @@ export function CartPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Breadcrumbs>
         <Breadcrumbs.Item to="/">
           {t('breadcrumbs.home', 'Home')}
@@ -54,9 +54,9 @@ export function CartPage(): React.ReactElement {
             <p>
               {t(
                 'cart.empty',
-                'There are no items in your basket. Please return '
-              )}
-              <Link to="/">{t('cart.empty_home', 'Home')}</Link>
+                'There are no items in your basket. Please return'
+              )}{' '}
+              <Link to="/">{t('cart.empty_home', 'Home.')}</Link>
             </p>
           )}
           {lineItems.map((product) => (

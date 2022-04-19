@@ -36,7 +36,7 @@ export function AddressesPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Helmet>
         <title>
           {t('addresses.title', 'My addresses')} |{' '}

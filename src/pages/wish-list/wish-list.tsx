@@ -99,7 +99,7 @@ export function WishListPage(): React.ReactElement {
   }
 
   return (
-    <div css={styles.container}>
+    <div css={styles.container} id="content">
       <Helmet>
         <title>
           {wishlist.name} | {t('store.name', 'Stellar Store')}
