@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { stripHtml } from 'string-strip-html'
 import useSWR, { SWRResponse } from 'swr'
 
+import { REACT_APP_API_ENDPOINT } from '@config/constants'
 import { getEnvVariable } from '@utils/get-env-variable'
 
 const DISMISSED_BANNER_IDS = 'dismissed-banners-ids'
@@ -61,7 +62,7 @@ type UseBanners = SWRResponse<Banner[] | undefined, Error> & {
 
 const fetcher = async (): Promise<Banner[] | undefined> => {
   const { data } = await axios(
-    `${getEnvVariable('REACT_APP_API_ENDPOINT')}/api/bigcommerce/banners`
+    `${getEnvVariable(REACT_APP_API_ENDPOINT)}/api/bigcommerce/banners`
   )
   return data
 }

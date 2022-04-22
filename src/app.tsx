@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { ToastContainer } from 'react-toastify'
 import { CommerceComponentsProvider, theme } from 'unsafe-bc-react-components'
 
+import { REACT_APP_API_ENDPOINT } from '@config/constants'
 import { getEnvVariable } from '@utils/get-env-variable'
 
 import './i18n'
@@ -21,7 +22,7 @@ export function App(): React.ReactElement {
   return (
     <CommerceProvider
       locale="en-US"
-      base={getEnvVariable('REACT_APP_API_ENDPOINT')}
+      base={getEnvVariable(REACT_APP_API_ENDPOINT)}
       credentials="include"
     >
       <ThemeProvider theme={theme}>
