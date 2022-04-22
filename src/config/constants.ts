@@ -1,5 +1,5 @@
 export const REACT_APP_API_ENDPOINT =
-  process.env.REACT_APP_ENDPOINT || `${window.location}`
+  process.env.REACT_APP_API_ENDPOINT || `${window.location}`
 
 export const REACT_APP_CART_ENDPOINT =
   process.env.REACT_APP_CART_ENDPOINT || `${window.location}/cart`
