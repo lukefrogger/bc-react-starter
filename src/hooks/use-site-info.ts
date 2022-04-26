@@ -3,12 +3,9 @@ import axios from 'axios'
 import useSWR, { SWRResponse } from 'swr'
 
 import { REACT_APP_API_ENDPOINT } from '@config/constants'
-import { getEnvVariable } from '@utils/get-env-variable'
 
 const fetcher = async (): Promise<any> => {
-  const { data } = await axios(
-    `${getEnvVariable(REACT_APP_API_ENDPOINT)}/api/site-info`
-  )
+  const { data } = await axios(`${REACT_APP_API_ENDPOINT}/api/site-info`)
   return data
 }
 
