@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+/.yalc
+yalc.lock
 
 # testing
 /coverage
@@ -12,6 +14,7 @@
 /build
 
 # misc
+.yalc
 .DS_Store
 .env
 .env.local
