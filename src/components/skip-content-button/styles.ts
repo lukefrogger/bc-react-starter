@@ -9,7 +9,7 @@ export const SkipContent = (theme: Theme): SerializedStyles => css`
   text-decoration: none;
   position: absolute;
   z-index: 999;
-  transform: translateY(-100%);
+  transform: translateY(-110%);
   transition: transform 0.3s;
   &:focus {
     transform: translateY(0%);
