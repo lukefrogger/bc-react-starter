@@ -1,11 +1,24 @@
-import React from 'react'
+import * as React from 'react'
 
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
+import { act } from 'react-dom/test-utils'
+
+import { WithTranslation } from '@utils/with-translation'
 
 import { App } from './app'
 
-test('renders learn react link', () => {
-  render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+test('homepage has links', async () => {
+  act(() => {
+    render(
+      <WithTranslation>
+        <App />
+      </WithTranslation>
+    )
+  })
+
+  await waitFor(() => {
+    const links = screen.getAllByRole('link')
+
+    expect(links.length > 0).toBe(true)
+  })
 })

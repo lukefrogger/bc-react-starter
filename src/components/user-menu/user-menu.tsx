@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Clickable } from 'reakit/Clickable'
 import { Menu, MenuButton, MenuItem, useMenuState } from 'reakit/Menu'
-import { submenuLinks } from 'src/routers'
 
+import { submenuLinks } from '../../routers'
 import * as Icons from '../header/icons'
 import * as styles from './styles'
 
