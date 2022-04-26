@@ -10,7 +10,8 @@
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
     "start": "node -r esm -r dotenv/config server",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "sitemap": "node scripts/generate-sitemap.js"
   },
   "browserslist": {
     "production": [
@@ -58,6 +59,7 @@
     "react-toastify": "^7.0.4",
     "reakit": "^1.3.8",
     "serve-static": "^1.14.1",
+    "sitemap": "^7.1.1",
     "string-strip-html": "^8.3.0",
     "swr": "^0.5.6",
     "unsafe-bc-react-components": "^0.0.5-beta.6"
