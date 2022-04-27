@@ -9,6 +9,8 @@ import type {
 import axios from 'axios'
 import useSWR, { SWRResponse } from 'swr'
 
+import { REACT_APP_API_ENDPOINT } from '@config/constants'
+
 export type Review = { __typename?: 'Review' } & Pick<
   DefaultReview,
   'title' | 'text' | 'rating' | 'entityId'
@@ -38,7 +40,7 @@ type Reviews = { __typename?: 'ReviewConnection' } & {
 
 const fetcher = async (_: string, slug: string): Promise<any> => {
   const { data } = await axios(
-    `${process.env.REACT_APP_API_ENDPOINT}/api/bigcommerce/product/${slug}/reviews`
+    `${REACT_APP_API_ENDPOINT}/api/bigcommerce/product/${slug}/reviews`
   )
   return data
 }
