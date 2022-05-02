@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { RootRoutes } from 'src/routers'
-
 import { useCategories } from '@hooks'
+
+import { RootRoutes } from '../routers/routes'
 
 export type SitemapParams = {
   includeParams: {
