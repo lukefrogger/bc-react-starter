@@ -7,7 +7,7 @@ const {
 } = require('babel-plugin-module-resolver')
 
 const configLoaderResult = loadConfig()
-
+const dotenv = require('dotenv')
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 const matchPath = createMatchPath(
@@ -15,6 +15,7 @@ const matchPath = createMatchPath(
   configLoaderResult.paths
 )
 
+dotenv.config()
 require('@babel/register')({
   root: rootPath,
   presets: [
@@ -49,25 +50,17 @@ require('@babel/register')({
 
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom
-const dom = new JSDOM()
+const dom = new JSDOM('<!doctype html><html><body></body></html>')
 
 window = dom.window
 document = dom.window.document
+const root = document.createElement('div')
+root.setAttribute('id', 'root')
+document.body.appendChild(root)
 navigator = dom.window.navigator
 CustomEvent = dom.window.CustomEvent
 
 require.extensions['.css'] = () => {}
 require.extensions['.scss'] = () => {}
 
-// const Sitemap = require('../src/pages/sitemap').Sitemap
-
-// console.log(RootRoutes())
-const { RootRoutes } = require('../src/routers/routes')
-
-require('react-dom');
-window.React2 = require('react');
-
-console.log(window.React1 === window.React2);
-// const test = require('../src/sitemap-xml')
-
-// console.log(router)
+const test = require('../src/sitemap-xml')
