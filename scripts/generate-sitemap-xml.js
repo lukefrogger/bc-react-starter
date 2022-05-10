@@ -63,4 +63,4 @@ CustomEvent = dom.window.CustomEvent
 require.extensions['.css'] = () => {}
 require.extensions['.scss'] = () => {}
 
-const test = require('../src/sitemap-xml')
+require('../src/sitemap-xml')

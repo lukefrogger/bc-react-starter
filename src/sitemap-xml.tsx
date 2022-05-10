@@ -1,9 +1,11 @@
-import React, { ReactElement, useEffect } from 'react'
+import { createWriteStream } from 'fs'
+
+import React, { ReactElement, useEffect, useState } from 'react'
 
 import { CommerceProvider } from '@bigcommerce/storefront-data-hooks'
 import ReactDOM from 'react-dom'
+import { SitemapStream } from 'sitemap'
 import { mutate } from 'swr'
-import { create } from 'xmlbuilder2'
 
 import { siteInfoFetcher } from '@hooks'
 import { useSitemap } from '@hooks/sitemap/use-sitemap'
@@ -12,26 +14,33 @@ import './i18n'
 
 const Sitemap = (): ReactElement => {
   const links = useSitemap()
+  const [isSitemapGenerated, setIsSitemapGenerated] = useState(false)
+
   useEffect(() => {
-    const allLinks = links.filter((link) => link)
-    if (!allLinks?.length) {
-      return
+    if (!isSitemapGenerated) {
+      if (!links?.length) {
+        return
+      }
+
+      setIsSitemapGenerated(true)
+
+      const sitemapStream = new SitemapStream({
+        hostname: process.env.REACT_APP_HOSTNAME,
+      })
+
+      const writeStream = createWriteStream('./public/sitemap.xml', {
+        flags: 'w',
+      })
+
+      sitemapStream.pipe(writeStream)
+
+      links.forEach((link) => {
+        sitemapStream.write(link)
+      })
+
+      sitemapStream.end()
     }
-
-    const sitemapIndexXML = create({ version: '1.0', encoding: 'UTF-8' })
-    const sitemapIndexXMLUP = sitemapIndexXML.ele('sitemapindex', {
-      xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9',
-    })
-    allLinks.forEach((link) => {
-      sitemapIndexXMLUP.ele('sitemap').ele('loc').txt(link).up()
-    })
-
-    const xml = sitemapIndexXML.end({ prettyPrint: true })
-
-    // TODO: write out xml to file
-    // eslint-disable-next-line no-console
-    console.log(xml)
-  }, [links])
+  }, [isSitemapGenerated, links])
 
   return <div />
 }
