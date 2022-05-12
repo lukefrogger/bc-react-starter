@@ -8,7 +8,7 @@ import { SitemapStream } from 'sitemap'
 import { mutate } from 'swr'
 
 import { siteInfoFetcher } from '@hooks'
-import { useSitemap } from '@hooks/sitemap/use-sitemap'
+import { useSitemap } from '@hooks/use-sitemap'
 
 import './i18n'
 
