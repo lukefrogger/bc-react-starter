@@ -12,6 +12,7 @@ import {
   OrderPage,
   OrdersPage,
   ProfilePage,
+  WishListPage,
   WishListsPage,
 } from '@pages'
 
@@ -88,6 +89,7 @@ export function UserRouter(): React.ReactElement {
         <Route path="/addresses/new" element={<AddAddressPage />} />
         <Route path="/addresses/:slug" element={<AddressPage />} />
         <Route path="/wishlists" element={<WishListsPage />} />
+        <Route path="/wishlists/:slug" element={<WishListPage />} />
         <Route path="*" element={<NoMatch404 />} />
         <Route path="/" element={<Navigate to="/user/profile" />} />
       </Routes>
