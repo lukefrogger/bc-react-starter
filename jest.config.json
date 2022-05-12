@@ -1,5 +1,8 @@
 {
-  "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx,ts,tsx}",
+    "!src/**/*.d.ts"
+  ],
   "moduleFileExtensions": [
     "web.js",
     "js",
@@ -26,9 +29,15 @@
   },
   "modulePaths": [],
   "resetMocks": true,
-  "roots": ["<rootDir>/src"],
-  "setupFiles": ["react-app-polyfill/jsdom"],
-  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.ts"],
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "setupFiles": [
+    "react-app-polyfill/jsdom"
+  ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/src/setupTests.ts"
+  ],
   "testEnvironment": "jsdom",
   "testMatch": [
     "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -36,7 +45,7 @@
   ],
   "testRunner": "<rootDir>/node_modules/jest-circus/runner.js",
   "transform": {
-    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
+    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": ["babel-jest", { "rootMode": "upward" }],
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
   },
@@ -47,5 +56,8 @@
   "watchPlugins": [
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname"
+  ],
+  "snapshotSerializers": [
+    "@emotion/jest/serializer"
   ]
 }

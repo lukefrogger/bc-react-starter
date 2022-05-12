@@ -53,7 +53,7 @@ export function OrdersPage(): React.ReactElement {
     )
 
   return (
-    <div css={styles.Container}>
+    <div css={styles.Container} id="content">
       <Helmet>
         <title>
           {t('orders.title_history', 'Order history')} |{' '}

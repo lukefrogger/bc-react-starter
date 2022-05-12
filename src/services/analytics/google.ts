@@ -77,5 +77,7 @@ export function searchEvent(search_term: string): void {
 }
 
 export function sendEvent(eventName: string, eventParams?: unknown): void {
-  window.gtag('event', eventName, eventParams)
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, eventParams)
+  }
 }
