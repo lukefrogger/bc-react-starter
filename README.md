@@ -1,3 +1,11 @@
+# Deploy
+
+
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/moderntribe/bigcommerce-react-starter#BIGCOMMERCE_STORE_HASH=xs0ffdia6b">
+  <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"
+></a>
+
+
 # Getting Started with BigCommerce React Starter
 
 This is the BigCommerce React Starter, built with the
