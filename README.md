@@ -1,7 +1,7 @@
 # Deploy
 
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/moderntribe/bigcommerce-react-starter#BIGCOMMERCE_STORE_HASH=xs0ffdia6b">
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/moderntribe/bigcommerce-react-starter">
   <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"
 ></a>
 
