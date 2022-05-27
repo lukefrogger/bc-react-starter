@@ -821,6 +821,8 @@ const createRoutes = (router) => {
   router.use((req, res) => {
     fs__default["default"].createReadStream('build/index.html').pipe(res);
   });
+
+  return router
 };
 
 const app = express__default["default"]();
