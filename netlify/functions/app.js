@@ -1,90 +1,105 @@
-'use strict';
+'use strict'
 
-Object.defineProperty(exports, '__esModule', { value: true });
+Object.defineProperty(exports, '__esModule', { value: true })
 
-var fs = require('fs');
-var path = require('path');
-var addressesApi = require('@bigcommerce/storefront-data-hooks/api/address');
-var cartApi = require('@bigcommerce/storefront-data-hooks/api/cart');
-var catalogProductsApi = require('@bigcommerce/storefront-data-hooks/api/catalog/products');
-var checkoutApi = require('@bigcommerce/storefront-data-hooks/api/checkout');
-var customerApi = require('@bigcommerce/storefront-data-hooks/api/customers');
-var loginApi = require('@bigcommerce/storefront-data-hooks/api/customers/login');
-var logoutApi = require('@bigcommerce/storefront-data-hooks/api/customers/logout');
-var signupApi = require('@bigcommerce/storefront-data-hooks/api/customers/signup');
-var ordersApi = require('@bigcommerce/storefront-data-hooks/api/orders');
-var orderProductsApi = require('@bigcommerce/storefront-data-hooks/api/orders/products');
-var bodyParser = require('body-parser');
-var compression = require('compression');
-var cookieParser = require('cookie-parser');
-var cors = require('cors');
-var express = require('express');
-var proxy = require('http-proxy-middleware');
-var serveStatic = require('serve-static');
-var _ = require('@bigcommerce/storefront-data-hooks/api/');
-var getAllProducts = require('@bigcommerce/storefront-data-hooks/api/operations/get-all-products');
-var getCustomerId = require('@bigcommerce/storefront-data-hooks/api/operations/get-customer-id');
-var api = require('@bigcommerce/storefront-data-hooks/api');
-var getSiteInfo = require('@bigcommerce/storefront-data-hooks/api/operations/get-site-info');
-var csc = require('country-state-city');
-var getProductOperation = require('@bigcommerce/storefront-data-hooks/api/operations/get-product');
+var fs = require('fs')
+var path = require('path')
+var addressesApi = require('@bigcommerce/storefront-data-hooks/api/address')
+var cartApi = require('@bigcommerce/storefront-data-hooks/api/cart')
+var catalogProductsApi = require('@bigcommerce/storefront-data-hooks/api/catalog/products')
+var checkoutApi = require('@bigcommerce/storefront-data-hooks/api/checkout')
+var customerApi = require('@bigcommerce/storefront-data-hooks/api/customers')
+var loginApi = require('@bigcommerce/storefront-data-hooks/api/customers/login')
+var logoutApi = require('@bigcommerce/storefront-data-hooks/api/customers/logout')
+var signupApi = require('@bigcommerce/storefront-data-hooks/api/customers/signup')
+var ordersApi = require('@bigcommerce/storefront-data-hooks/api/orders')
+var orderProductsApi = require('@bigcommerce/storefront-data-hooks/api/orders/products')
+var bodyParser = require('body-parser')
+var compression = require('compression')
+var cookieParser = require('cookie-parser')
+var cors = require('cors')
+var express = require('express')
+var proxy = require('http-proxy-middleware')
+var serveStatic = require('serve-static')
+var _ = require('@bigcommerce/storefront-data-hooks/api/')
+var getAllProducts = require('@bigcommerce/storefront-data-hooks/api/operations/get-all-products')
+var getCustomerId = require('@bigcommerce/storefront-data-hooks/api/operations/get-customer-id')
+var api = require('@bigcommerce/storefront-data-hooks/api')
+var getSiteInfo = require('@bigcommerce/storefront-data-hooks/api/operations/get-site-info')
+var csc = require('country-state-city')
+var getProductOperation = require('@bigcommerce/storefront-data-hooks/api/operations/get-product')
 
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+function _interopDefaultLegacy(e) {
+  return e && typeof e === 'object' && 'default' in e ? e : { default: e }
+}
 
 function _interopNamespace(e) {
-  if (e && e.__esModule) return e;
-  var n = Object.create(null);
+  if (e && e.__esModule) return e
+  var n = Object.create(null)
   if (e) {
     Object.keys(e).forEach(function (k) {
       if (k !== 'default') {
-        var d = Object.getOwnPropertyDescriptor(e, k);
-        Object.defineProperty(n, k, d.get ? d : {
-          enumerable: true,
-          get: function () { return e[k]; }
-        });
+        var d = Object.getOwnPropertyDescriptor(e, k)
+        Object.defineProperty(
+          n,
+          k,
+          d.get
+            ? d
+            : {
+                enumerable: true,
+                get: function () {
+                  return e[k]
+                },
+              }
+        )
       }
-    });
+    })
   }
-  n["default"] = e;
-  return Object.freeze(n);
+  n['default'] = e
+  return Object.freeze(n)
 }
 
-var fs__default = /*#__PURE__*/_interopDefaultLegacy(fs);
-var path__default = /*#__PURE__*/_interopDefaultLegacy(path);
-var addressesApi__default = /*#__PURE__*/_interopDefaultLegacy(addressesApi);
-var cartApi__default = /*#__PURE__*/_interopDefaultLegacy(cartApi);
-var catalogProductsApi__default = /*#__PURE__*/_interopDefaultLegacy(catalogProductsApi);
-var checkoutApi__default = /*#__PURE__*/_interopDefaultLegacy(checkoutApi);
-var customerApi__default = /*#__PURE__*/_interopDefaultLegacy(customerApi);
-var loginApi__default = /*#__PURE__*/_interopDefaultLegacy(loginApi);
-var logoutApi__default = /*#__PURE__*/_interopDefaultLegacy(logoutApi);
-var signupApi__default = /*#__PURE__*/_interopDefaultLegacy(signupApi);
-var ordersApi__default = /*#__PURE__*/_interopDefaultLegacy(ordersApi);
-var orderProductsApi__default = /*#__PURE__*/_interopDefaultLegacy(orderProductsApi);
-var bodyParser__default = /*#__PURE__*/_interopDefaultLegacy(bodyParser);
-var compression__default = /*#__PURE__*/_interopDefaultLegacy(compression);
-var cookieParser__default = /*#__PURE__*/_interopDefaultLegacy(cookieParser);
-var cors__default = /*#__PURE__*/_interopDefaultLegacy(cors);
-var express__default = /*#__PURE__*/_interopDefaultLegacy(express);
-var proxy__namespace = /*#__PURE__*/_interopNamespace(proxy);
-var serveStatic__default = /*#__PURE__*/_interopDefaultLegacy(serveStatic);
-var getAllProducts__default = /*#__PURE__*/_interopDefaultLegacy(getAllProducts);
-var getCustomerId__default = /*#__PURE__*/_interopDefaultLegacy(getCustomerId);
-var getSiteInfo__default = /*#__PURE__*/_interopDefaultLegacy(getSiteInfo);
-var csc__default = /*#__PURE__*/_interopDefaultLegacy(csc);
-var getProductOperation__default = /*#__PURE__*/_interopDefaultLegacy(getProductOperation);
+var fs__default = /*#__PURE__*/ _interopDefaultLegacy(fs)
+var path__default = /*#__PURE__*/ _interopDefaultLegacy(path)
+var addressesApi__default = /*#__PURE__*/ _interopDefaultLegacy(addressesApi)
+var cartApi__default = /*#__PURE__*/ _interopDefaultLegacy(cartApi)
+var catalogProductsApi__default =
+  /*#__PURE__*/ _interopDefaultLegacy(catalogProductsApi)
+var checkoutApi__default = /*#__PURE__*/ _interopDefaultLegacy(checkoutApi)
+var customerApi__default = /*#__PURE__*/ _interopDefaultLegacy(customerApi)
+var loginApi__default = /*#__PURE__*/ _interopDefaultLegacy(loginApi)
+var logoutApi__default = /*#__PURE__*/ _interopDefaultLegacy(logoutApi)
+var signupApi__default = /*#__PURE__*/ _interopDefaultLegacy(signupApi)
+var ordersApi__default = /*#__PURE__*/ _interopDefaultLegacy(ordersApi)
+var orderProductsApi__default =
+  /*#__PURE__*/ _interopDefaultLegacy(orderProductsApi)
+var bodyParser__default = /*#__PURE__*/ _interopDefaultLegacy(bodyParser)
+var compression__default = /*#__PURE__*/ _interopDefaultLegacy(compression)
+var cookieParser__default = /*#__PURE__*/ _interopDefaultLegacy(cookieParser)
+var cors__default = /*#__PURE__*/ _interopDefaultLegacy(cors)
+var express__default = /*#__PURE__*/ _interopDefaultLegacy(express)
+var proxy__namespace = /*#__PURE__*/ _interopNamespace(proxy)
+var serveStatic__default = /*#__PURE__*/ _interopDefaultLegacy(serveStatic)
+var getAllProducts__default =
+  /*#__PURE__*/ _interopDefaultLegacy(getAllProducts)
+var getCustomerId__default = /*#__PURE__*/ _interopDefaultLegacy(getCustomerId)
+var getSiteInfo__default = /*#__PURE__*/ _interopDefaultLegacy(getSiteInfo)
+var csc__default = /*#__PURE__*/ _interopDefaultLegacy(csc)
+var getProductOperation__default =
+  /*#__PURE__*/ _interopDefaultLegacy(getProductOperation)
 
 const getWishlist = async ({ res, config, body }) => {
-  const { customerToken, includeProducts, wishlistId } = body;
+  const { customerToken, includeProducts, wishlistId } = body
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
 
   const { data: wishlist } = await config.storeApiFetch(
     `/v3/wishlists/${wishlistId}`
-  );
+  )
 
-  const isGuest = customerId !== wishlist.customer_id;
+  const isGuest = customerId !== wishlist.customer_id
 
   if (!wishlist.is_public && isGuest) {
     return res.status(403).json({ data: null })
@@ -97,41 +112,37 @@ const getWishlist = async ({ res, config, body }) => {
   if (includeProducts && wishlist && wishlist.items.length) {
     const entityIds =
       wishlist.items &&
-      wishlist.items.map((item) => item && item.product_id).filter((id) => !!id);
+      wishlist.items.map((item) => item && item.product_id).filter((id) => !!id)
     if (entityIds && entityIds.length) {
-      const graphqlData = await getAllProducts__default["default"]({
+      const graphqlData = await getAllProducts__default['default']({
         variables: { first: 50, entityIds },
         config,
-      });
+      })
       // Put the products in an object that we can use to get them by id
       const productsById = graphqlData.products.reduce((prods, p) => {
         // eslint-disable-next-line no-param-reassign
-        prods[p.node.entityId] = p;
+        prods[p.node.entityId] = p
         return prods
-      }, {});
+      }, {})
       // Populate the wishlist items with the graphql products
       wishlist.items.forEach((item) => {
-        const product = item && productsById[item.product_id];
+        const product = item && productsById[item.product_id]
         if (item && product) {
           // eslint-disable-next-line no-param-reassign
-          item.product = product.node;
+          item.product = product.node
         }
-      });
+      })
     }
   }
 
   return res.status(200).json({ data: { ...wishlist, is_guest: isGuest } })
-};
+}
 
-async function getAllWishlists({
-  config: c,
-  variables,
-  includeProducts,
-}) {
-  const config = api.getConfig(c);
+async function getAllWishlists({ config: c, variables, includeProducts }) {
+  const config = api.getConfig(c)
   const { data = [] } = await config.storeApiFetch(
     `/v3/wishlists?customer_id=${variables.customerId}`
-  );
+  )
   const wishlists = await Promise.all(
     data.map(async (wishlist) => {
       if (includeProducts && wishlist && wishlist.items.length) {
@@ -139,39 +150,40 @@ async function getAllWishlists({
           wishlist.items &&
           wishlist.items
             .map((item) => item && item.product_id)
-            .filter((id) => !!id);
+            .filter((id) => !!id)
         if (entityIds && entityIds.length) {
-          const graphqlData = await getAllProducts__default["default"]({
+          const graphqlData = await getAllProducts__default['default']({
             variables: { first: 50, entityIds },
             config,
-          });
+          })
           // Put the products in an object that we can use to get them by id
           const productsById = graphqlData.products.reduce((acc, product) => {
             return { ...acc, [product.node.entityId]: product }
-          }, {});
+          }, {})
           // Populate the wishlist items with the graphql products
           wishlist.items.forEach((item) => {
-            const product = item && productsById[item.product_id];
+            const product = item && productsById[item.product_id]
             if (item && product) {
               // eslint-disable-next-line no-param-reassign
-              item.product = product.node;
+              item.product = product.node
             }
-          });
+          })
         }
       }
       return wishlist
     })
-  );
+  )
   return { wishlists }
 }
 
 const getAllWishlist = async ({ res, config, body }) => {
-  const { customerToken, includeProducts } = body;
-  let result = {};
+  const { customerToken, includeProducts } = body
+  let result = {}
 
   if (customerToken) {
     const customerId =
-      customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+      customerToken &&
+      (await getCustomerId__default['default']({ customerToken, config }))
 
     if (!customerId) {
       // If the customerToken is invalid, then this request is too
@@ -185,18 +197,19 @@ const getAllWishlist = async ({ res, config, body }) => {
       config,
       variables: { customerId },
       includeProducts,
-    });
-    result = { data: wishlists };
+    })
+    result = { data: wishlists }
   }
 
   return res.status(200).json({ data: result.data || null })
-};
+}
 
 const createWishlist = async ({ res, config, body }) => {
-  const { customerToken, name, isPublic, item } = body;
+  const { customerToken, name, isPublic, item } = body
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
   if (!customerId) {
     return res.status(400).json({
       data: null,
@@ -211,7 +224,7 @@ const createWishlist = async ({ res, config, body }) => {
           variant_id: item.variantId,
         },
       ]
-    : [];
+    : []
 
   const options = {
     method: 'POST',
@@ -221,18 +234,19 @@ const createWishlist = async ({ res, config, body }) => {
       items,
       is_public: isPublic,
     }),
-  };
+  }
 
-  const { data } = await config.storeApiFetch('/v3/wishlists', options);
+  const { data } = await config.storeApiFetch('/v3/wishlists', options)
 
-  res.status(200).json({ data });
-};
+  res.status(200).json({ data })
+}
 
 const deleteWishlist = async ({ res, config, body }) => {
-  const { customerToken, wishlistId } = body;
+  const { customerToken, wishlistId } = body
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
   if (!customerId) {
     return res.status(401).json({
       data: null,
@@ -246,7 +260,7 @@ const deleteWishlist = async ({ res, config, body }) => {
     {
       method: 'GET',
     }
-  );
+  )
 
   if (wishlist.customer_id !== customerId) {
     return res.status(403).json({
@@ -256,18 +270,19 @@ const deleteWishlist = async ({ res, config, body }) => {
 
   await config.storeApiFetch(`/v3/wishlists/${wishlistId}`, {
     method: 'DELETE',
-  });
+  })
 
   return res.status(204).json({
     data: null,
   })
-};
+}
 
 const updateWishlist = async ({ res, config, body }) => {
-  const { customerToken, wishlistId, name, isPublic } = body;
+  const { customerToken, wishlistId, name, isPublic } = body
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
   if (!customerId) {
     return res.status(400).json({
       data: null,
@@ -281,7 +296,7 @@ const updateWishlist = async ({ res, config, body }) => {
     {
       method: 'GET',
     }
-  );
+  )
 
   if (wishlist.customer_id !== customerId) {
     return res.status(401).json({
@@ -297,20 +312,20 @@ const updateWishlist = async ({ res, config, body }) => {
       items: [], // Maybe it should be wishlist.items
       is_public: isPublic,
     }),
-  };
+  }
 
   const { data } = await config.storeApiFetch(
     `/v3/wishlists/${wishlistId}`,
     options
-  );
+  )
 
   return res.status(201).json({
     data,
   })
-};
+}
 
 const addWishlistItem = async ({ res, config, body }) => {
-  const { customerToken, item, wishlistId } = body;
+  const { customerToken, item, wishlistId } = body
 
   if (!wishlistId) {
     return res.status(400).json({
@@ -326,7 +341,8 @@ const addWishlistItem = async ({ res, config, body }) => {
   }
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
 
   if (!customerId) {
     return res.status(400).json({
@@ -345,13 +361,13 @@ const addWishlistItem = async ({ res, config, body }) => {
         },
       ],
     }),
-  });
+  })
 
   return res.status(201).json({ data: null })
-};
+}
 
 const deleteWishlistItem = async ({ res, config, body }) => {
-  const { customerToken, itemId, wishlistId } = body;
+  const { customerToken, itemId, wishlistId } = body
 
   if (!wishlistId) {
     return res.status(400).json({
@@ -367,7 +383,8 @@ const deleteWishlistItem = async ({ res, config, body }) => {
   }
 
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
 
   if (!customerId) {
     return res.status(400).json({
@@ -378,21 +395,21 @@ const deleteWishlistItem = async ({ res, config, body }) => {
 
   await config.storeApiFetch(`/v3/wishlists/${wishlistId}/items/${itemId}`, {
     method: 'DELETE',
-  });
+  })
 
   return res.status(204).json({ data: null })
-};
+}
 
 const getWishlistsItemsHelper = async (req, res) => {
-  const config = _.getConfig();
+  const config = _.getConfig()
 
-  const { wishlistId, itemId } = req.params || {};
+  const { wishlistId, itemId } = req.params || {}
 
-  const customerToken = req.cookies[config.customerCookie];
+  const customerToken = req.cookies[config.customerCookie]
 
   try {
     if (req.method === 'POST') {
-      const body = { ...req.body, customerToken, wishlistId };
+      const body = { ...req.body, customerToken, wishlistId }
       // Add wishlist item
       return await addWishlistItem({
         req,
@@ -402,7 +419,7 @@ const getWishlistsItemsHelper = async (req, res) => {
       })
     }
     if (req.method === 'DELETE') {
-      const body = { customerToken, itemId, wishlistId };
+      const body = { customerToken, itemId, wishlistId }
       // Delete wishlist item
       return await deleteWishlistItem({
         req,
@@ -412,9 +429,9 @@ const getWishlistsItemsHelper = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
@@ -422,19 +439,19 @@ const getWishlistsItemsHelper = async (req, res) => {
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
 const getBanners = async ({ res, config }) => {
   const banners = await config.storeApiFetch(`/v2/banners`, {
     headers: {
       Accept: 'application/json',
     },
-  });
+  })
   return res.status(200).json(banners)
-};
+}
 
 const bannersApi = async (req, res) => {
-  const config = _.getConfig();
+  const config = _.getConfig()
 
   try {
     if (req.method === 'GET') {
@@ -445,56 +462,57 @@ const bannersApi = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
 const onStoreProxyReq = (proxyReq, req, res) => {
   proxyReq.setHeader(
     'X-Auth-Client',
     process.env.BIGCOMMERCE_STORE_API_CLIENT_ID
-  );
-  proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN);
+  )
+  proxyReq.setHeader('X-Auth-Token', process.env.BIGCOMMERCE_STORE_API_TOKEN)
   if (req.method === 'PUT' || req.method === 'POST') {
-    proxyReq.write(JSON.stringify(req.body));
-    proxyReq.end();
+    proxyReq.write(JSON.stringify(req.body))
+    proxyReq.end()
   }
-};
+}
 
 const countryHelper = (req, res) => {
-  const data = csc__default["default"].getAllCountries().map((country) => {
-    const { name, isoCode } = country;
+  const data = csc__default['default'].getAllCountries().map((country) => {
+    const { name, isoCode } = country
     return { name, sortname: name, id: isoCode }
-  });
-  res.json(data);
-};
+  })
+  res.json(data)
+}
 
 const stateHelper = (req, res) => {
-  const { code } = req.params;
-  const states = csc__default["default"].getStatesOfCountry(code);
+  const { code } = req.params
+  const states = csc__default['default'].getStatesOfCountry(code)
 
-  const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }));
-  res.json(data);
-};
+  const data = states.map(({ name, isoCode }) => ({ name, id: isoCode }))
+  res.json(data)
+}
 
 const getSiteInfoHelper = async (req, res) => {
-  const data = await getSiteInfo__default["default"]();
-  res.end(JSON.stringify(data));
-};
+  const data = await getSiteInfo__default['default']()
+  res.end(JSON.stringify(data))
+}
 
 const getOrder = async ({ res, config, body }) => {
   try {
-    const { customerToken, orderId } = body;
+    const { customerToken, orderId } = body
 
     const customerId =
-      customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+      customerToken &&
+      (await getCustomerId__default['default']({ customerToken, config }))
     if (!customerId || !orderId) {
       return res.status(400).json({
         data: null,
@@ -506,28 +524,28 @@ const getOrder = async ({ res, config, body }) => {
       headers: {
         Accept: 'application/json',
       },
-    });
+    })
 
     return res.status(200).json({ data: data || null })
   } catch (error) {
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(404).json({ errors: [{ message }] })
   }
-};
+}
 
 const getOrdersHelper = async (req, res) => {
-  const config = _.getConfig();
+  const config = _.getConfig()
 
-  const { orderId } = req.params || {};
+  const { orderId } = req.params || {}
 
-  const customerToken = req.cookies[config.customerCookie];
+  const customerToken = req.cookies[config.customerCookie]
 
   try {
     if (req.method === 'GET') {
       const body = {
         customerToken,
-      };
+      }
 
       return await getOrder({
         req,
@@ -540,24 +558,24 @@ const getOrdersHelper = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
 const getProduct = async ({ res, req }) => {
-  const { productSlug: slug } = req.params || {};
-  const { product } = await getProductOperation__default["default"]({
+  const { productSlug: slug } = req.params || {}
+  const { product } = await getProductOperation__default['default']({
     variables: { slug },
-  });
+  })
   return res.json(product)
-};
+}
 
 const getProductReviewsQuery = /* GraphQL */ `
   query getProductReviews($path: String!) {
@@ -594,38 +612,38 @@ const getProductReviewsQuery = /* GraphQL */ `
       }
     }
   }
-`;
+`
 const getProductReviews = async ({ res, req, config }) => {
-  const { productSlug: slug } = req.params || {};
+  const { productSlug: slug } = req.params || {}
   const { data } = await config.fetch(getProductReviewsQuery, {
     variables: {
       path: `/${slug}/`,
     },
-  });
-  const { reviews } = data.site.route.node;
+  })
+  const { reviews } = data.site.route.node
   return res.status(200).json(reviews)
-};
+}
 
 const addProductReview = async ({ res, req, config }) => {
-  const { body } = req;
+  const { body } = req
   const options = {
     method: 'POST',
     body: JSON.stringify({
       ...body,
       date_reviewed: new Date().toISOString().replace(/\.[0-9]{3}/, ''),
     }),
-  };
+  }
 
   await config.storeApiFetch(
     `/v3/catalog/products/${body.productId}/reviews`,
     options
-  );
+  )
 
   return res.status(204).end()
-};
+}
 
 const productReviewsApi = async (req, res) => {
-  const config = _.getConfig();
+  const config = _.getConfig()
   try {
     if (req.method === 'GET') {
       return await getProductReviews({
@@ -643,16 +661,16 @@ const productReviewsApi = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
 // import { getConfig } from '@bigcommerce/storefront-data-hooks/api/'
 
@@ -666,24 +684,25 @@ const productApi = async (req, res) => {
       })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
 const updateCustomerHelper = async (req, res) => {
-  const config = _.getConfig();
-  const customerToken = req.cookies[config.customerCookie];
-  const [data] = req.body;
-  const { id } = data || {};
+  const config = _.getConfig()
+  const customerToken = req.cookies[config.customerCookie]
+  const [data] = req.body
+  const { id } = data || {}
   const customerId =
-    customerToken && (await getCustomerId__default["default"]({ customerToken, config }));
+    customerToken &&
+    (await getCustomerId__default['default']({ customerToken, config }))
 
   if (!id || !customerToken) {
     return res.status(400).json({
@@ -702,25 +721,25 @@ const updateCustomerHelper = async (req, res) => {
   await config.storeApiFetch(`/v3/customers`, {
     method: 'PUT',
     body: JSON.stringify(req.body),
-  });
+  })
 
   return res.status(201).json({ data: null })
-};
+}
 
 const getWishlistsHelper = async (req, res) => {
-  const config = _.getConfig();
+  const config = _.getConfig()
 
-  const { wishlistId } = req.params || {};
+  const { wishlistId } = req.params || {}
 
-  const customerToken = req.cookies[config.customerCookie];
+  const customerToken = req.cookies[config.customerCookie]
 
   try {
     if (req.method === 'GET') {
-      const { products } = req.query || {};
+      const { products } = req.query || {}
       const body = {
         customerToken,
         includeProducts: products === '1',
-      };
+      }
       // Get only a single wishlist
       if (wishlistId) {
         return await getWishlist({
@@ -743,89 +762,95 @@ const getWishlistsHelper = async (req, res) => {
     }
     // Create a wishlist
     if (req.method === 'POST') {
-      const body = { ...req.body, customerToken };
+      const body = { ...req.body, customerToken }
       return await createWishlist({ req, res, config, body })
     }
 
     // Remove a wishlist
     if (req.method === 'DELETE') {
-      const body = { customerToken, wishlistId };
+      const body = { customerToken, wishlistId }
       return await deleteWishlist({ req, res, config, body })
     }
     // Update a wishlist
     if (req.method === 'PUT') {
-      const body = { ...req.body, customerToken, wishlistId };
+      const body = { ...req.body, customerToken, wishlistId }
       return await updateWishlist({ req, res, config, body })
     }
   } catch (error) {
-    console.error(error);
+    console.error(error)
 
-    const message = 'An unexpected error ocurred';
+    const message = 'An unexpected error ocurred'
 
     return res.status(500).json({ data: null, errors: [{ message }] })
   }
   return res
     .status(404)
     .json({ data: null, errors: [{ message: 'Not found' }] })
-};
+}
 
-const app = express__default["default"]();
+const app = express__default['default']()
 
 app.use(
-  cors__default["default"]({
+  cors__default['default']({
     credentials: true,
     origin: 'http://localhost:3000',
   })
-);
+)
 
 // gzip/deflate outgoing responses
-app.use(compression__default["default"]());
-
-// force https on production
-app.use((req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
-    if (req.headers['x-forwarded-proto'] !== 'https')
-      return res.redirect(`https://${req.headers.host}${req.url}`)
-    return next()
-  }
-  return next()
-});
+app.use(compression__default['default']())
 
 // parse urlencoded request bodies into req.body
-app.use(bodyParser__default["default"].urlencoded({ extended: false }));
-app.use(bodyParser__default["default"].json());
-app.use(cookieParser__default["default"]());
+app.use(bodyParser__default['default'].urlencoded({ extended: false }))
+app.use(bodyParser__default['default'].json())
+app.use(cookieParser__default['default']())
 
-const dirname = path__default["default"].resolve(path__default["default"].dirname(''));
-app.use(serveStatic__default["default"](path__default["default"].join(dirname, 'build')));
-app.use(serveStatic__default["default"](path__default["default"].join(dirname, 'public')));
+const dirname = path__default['default'].resolve(
+  path__default['default'].dirname('')
+)
+app.use(
+  serveStatic__default['default'](
+    path__default['default'].join(dirname, 'build')
+  )
+)
+app.use(
+  serveStatic__default['default'](
+    path__default['default'].join(dirname, 'public')
+  )
+)
 
 // respond to all requests
-app.use('/checkout', checkoutApi__default["default"]());
-app.use('/api/site-info', getSiteInfoHelper);
-app.use('/api/countries/:code/states', stateHelper);
-app.use('/api/countries', countryHelper);
-app.use('/api/bigcommerce/banners', bannersApi);
-app.use('/api/bigcommerce/product/:productSlug/reviews', productReviewsApi);
-app.use('/api/bigcommerce/product/:productSlug', productApi);
-app.use('/api/bigcommerce/cart', cartApi__default["default"]());
-app.use('/api/bigcommerce/address', addressesApi__default["default"]());
-app.use('/api/bigcommerce/catalog/products', catalogProductsApi__default["default"]());
-app.use('/api/bigcommerce/customers/login', loginApi__default["default"]());
-app.use('/api/bigcommerce/customers/logout', logoutApi__default["default"]());
-app.use('/api/bigcommerce/customers/signup', signupApi__default["default"]());
-app.use('/api/bigcommerce/customers', customerApi__default["default"]());
+app.use('/checkout', checkoutApi__default['default']())
+app.use('/api/site-info', getSiteInfoHelper)
+app.use('/api/countries/:code/states', stateHelper)
+app.use('/api/countries', countryHelper)
+app.use('/api/bigcommerce/banners', bannersApi)
+app.use('/api/bigcommerce/product/:productSlug/reviews', productReviewsApi)
+app.use('/api/bigcommerce/product/:productSlug', productApi)
+app.use('/api/bigcommerce/cart', cartApi__default['default']())
+app.use('/api/bigcommerce/address', addressesApi__default['default']())
+app.use(
+  '/api/bigcommerce/catalog/products',
+  catalogProductsApi__default['default']()
+)
+app.use('/api/bigcommerce/customers/login', loginApi__default['default']())
+app.use('/api/bigcommerce/customers/logout', logoutApi__default['default']())
+app.use('/api/bigcommerce/customers/signup', signupApi__default['default']())
+app.use('/api/bigcommerce/customers', customerApi__default['default']())
 app.use(
   '/api/bigcommerce/wishlist/:wishlistId/items/:itemId',
   getWishlistsItemsHelper
-);
-app.use('/api/bigcommerce/wishlist/:wishlistId/items', getWishlistsItemsHelper);
-app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper);
-app.use('/api/bigcommerce/wishlist', getWishlistsHelper);
-app.use('/api/bigcommerce/orders/products', orderProductsApi__default["default"]());
-app.use('/api/bigcommerce/orders/:orderId', getOrdersHelper);
-app.use('/api/bigcommerce/orders', ordersApi__default["default"]());
-app.use('/api/bigcommerce/update-customer', updateCustomerHelper);
+)
+app.use('/api/bigcommerce/wishlist/:wishlistId/items', getWishlistsItemsHelper)
+app.use('/api/bigcommerce/wishlist/:wishlistId', getWishlistsHelper)
+app.use('/api/bigcommerce/wishlist', getWishlistsHelper)
+app.use(
+  '/api/bigcommerce/orders/products',
+  orderProductsApi__default['default']()
+)
+app.use('/api/bigcommerce/orders/:orderId', getOrdersHelper)
+app.use('/api/bigcommerce/orders', ordersApi__default['default']())
+app.use('/api/bigcommerce/update-customer', updateCustomerHelper)
 
 app.use(
   '/api',
@@ -838,15 +863,15 @@ app.use(
     },
     onProxyReq: onStoreProxyReq,
   })
-);
+)
 
 app.use('/hello', (req, res) => {
-  res.end('Hello from your Bigcommerce Proxy Server!\n');
-});
+  res.end('Hello from your Bigcommerce Proxy Server!\n')
+})
 
 // Handles any requests that don't match the ones above
 app.use((req, res) => {
-  fs__default["default"].createReadStream('build/index.html').pipe(res);
-});
+  fs__default['default'].createReadStream('build/index.html').pipe(res)
+})
 
-exports.app = app;
+exports.app = app
