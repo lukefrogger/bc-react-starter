@@ -881,7 +881,7 @@ app.use(
 )
 
 app.use(
-  '.netlify/functions/index',
+  '/.netlify/functions/index',
   createRoutes(express__default['default'].Router())
 )
 
