@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { useSitemap } from '@hooks/sitemap/use-sitemap'
+import { useSitemap } from '@hooks/use-sitemap'
 
 export function SitemapXML(): React.ReactElement {
   const sitemap = useSitemap()
