@@ -2,13 +2,13 @@ import { GetSiteInfoResult } from '@bigcommerce/storefront-data-hooks/api/operat
 import axios from 'axios'
 import useSWR, { SWRResponse } from 'swr'
 
-import { REACT_APP_API_ENDPOINT } from '@config/constants'
-
-const fetcher = async (): Promise<any> => {
-  const { data } = await axios(`${REACT_APP_API_ENDPOINT}/api/site-info`)
+export const siteInfoFetcher = async (): Promise<any> => {
+  const { data } = await axios(
+    `${process.env.REACT_APP_API_ENDPOINT}/api/site-info`
+  )
   return data
 }
 
 export function useSiteInfo(): SWRResponse<GetSiteInfoResult, Error> {
-  return useSWR('site-info', fetcher, { revalidateOnFocus: false })
+  return useSWR('site-info', siteInfoFetcher, { revalidateOnFocus: false })
 }
