@@ -1,5 +1,7 @@
 export const REACT_APP_API_ENDPOINT =
-  process.env.REACT_APP_API_ENDPOINT || `${window.location.origin}`
+    // Use the env variable if available or auto-set to default netlify functions url
+  process.env.REACT_APP_API_ENDPOINT ||
+  `${window.location.origin}/.netlify/functions/index`
 
 export const REACT_APP_CART_ENDPOINT =
   process.env.REACT_APP_CART_ENDPOINT || `${window.location.origin}/cart`
