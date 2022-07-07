@@ -1,0 +1,20 @@
+[build]
+  publish="build/"
+  
+[context.production]
+  publish = "build/"
+
+[template.environment]
+  REACT_APP_HOME_CATEGORIES_IDS="Category Ids"
+  BIGCOMMERCE_CHANNEL_ID="BigCommerce Channel Id"
+  BIGCOMMERCE_STOREFRONT_API_URL="BigCommerce API Endpoint"
+  BIGCOMMERCE_STORE_API_CLIENT_ID="BigCommerce API Id"
+  BIGCOMMERCE_STORE_API_TOKEN="BigCommerce API Token"
+  BIGCOMMERCE_STORE_API_URL="BigCommerce Store API Url"
+  BIGCOMMERCE_STORE_HASH="BigCommerce Store Hash"
+  SECRET_COOKIE_PASSWORD="BigCommerce Secret"
+  BIGCOMMERCE_STOREFRONT_API_TOKEN="BigCommerce API Token"
+  REACT_APP_HOSTNAME="App Hostname/Url"
+  REACT_APP_API_ENDPOINT="Server Endpoint"
+  REACT_APP_CART_ENDPOINT="Cart Endpoint"
+  BC_STARTER_SERVER_PORT="Server Port"
