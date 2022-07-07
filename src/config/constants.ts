@@ -1,5 +1,5 @@
 export const REACT_APP_API_ENDPOINT =
-    // Use the env variable if available or auto-set to default netlify functions url
+  // Use the env variable if available or auto-set to default netlify functions url
   process.env.REACT_APP_API_ENDPOINT ||
   `${window.location.origin}/.netlify/functions/index`
 
