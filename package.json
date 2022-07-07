@@ -10,7 +10,8 @@
     "lint": "eslint src",
     "regen": "node -r esm -r dotenv/config scripts/renew-graphql-token.js",
     "start": "node -r esm -r dotenv/config server",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "netlify": "rollup --config=./rollup.netlify-config.js"
   },
   "browserslist": {
     "production": [
