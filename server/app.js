@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser'
 import express from 'express'
 import serveStatic from 'serve-static'
 
-import { createRoutes } from './routes'
+import { createRoutes } from '../netlify/functions/app'
 
 const app = express()
 
