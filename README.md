@@ -21,7 +21,7 @@ yarn
 ### For Netlify deployment
 
 To deploy to Netlify you'll need to get an API key from BigCommerce. If you've been working locally this won't be a problem. If you don't have local project use this these details to to get an API.
-- URL: `https://api.bigcommerce.com/stores/{{BIGCOMMERCE_STORE_HASH}}/v3/storefront/api-token`
+- URL: `https://api.bigcommerce.com/stores/{BC_store_hash}/v3/storefront/api-token`
 - Body:
 
   ```json
@@ -35,7 +35,7 @@ To deploy to Netlify you'll need to get an API key from BigCommerce. If you've b
   ```json
   {
     "content-type": "application/json",
-    "x-auth-token": BIGCOMMERCE_STORE_API_TOKEN,
+    "x-auth-token": BC_access_token,
   }
   ```
 
