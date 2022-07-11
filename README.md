@@ -18,9 +18,32 @@ yarn
 
 ## Set environment variables
 
+### For Netlify deploymentment
+
+To deploy to Netlify you'll need to get an API key from BigCommerce. If you've been working locally this won't be a problem. If you don't have local project use this these details to to get an API.
+
+- URL: `https://api.bigcommerce.com/stores/{BC_store_hash}/v3/storefront/api-token`
+- Body:
+
+  ```json
+  {
+    "channel_id": 1,
+    "expires_at": 1689088496
+  }
+  ```
+
+- Headers:
+  ```json
+  {
+    "content-type": "application/json",
+    "x-auth-token": BC_access_token,
+  }
+  ```
+
 The below environment variables are needed to run the starter:
 
 ```
+
 BIGCOMMERCE_STORE_API_TOKEN=
 BIGCOMMERCE_STORE_API_CLIENT_ID=
 BIGCOMMERCE_STORE_HASH=
@@ -30,6 +53,7 @@ BIGCOMMERCE_STOREFRONT_API_TOKEN=
 BC_STARTER_SERVER_PORT=3030
 REACT_APP_API_ENDPOINT=http://localhost:3030/api
 REACT_APP_CART_ENDPOINT=http://localhost:3030/cart
+
 ```
 
 Copy the `.env.example` file and rename it `.env`. Update this file with relevant keys.

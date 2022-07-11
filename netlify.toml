@@ -7,8 +7,8 @@
 [template.environment]
   REACT_APP_HOME_CATEGORIES_IDS="Category Ids"
   BIGCOMMERCE_STOREFRONT_API_URL="BigCommerce API Endpoint"
-  BIGCOMMERCE_STORE_API_CLIENT_ID="BigCommerce API Id"
-  BIGCOMMERCE_STORE_API_TOKEN="BigCommerce API Token"
+  BIGCOMMERCE_STORE_API_CLIENT_ID="BigCommerce API Client Id"
+  BIGCOMMERCE_STORE_API_TOKEN="BigCommerce API Access Token"
   BIGCOMMERCE_STORE_API_URL="BigCommerce Store API Url"
   BIGCOMMERCE_STORE_HASH="BigCommerce Store Hash"
 
