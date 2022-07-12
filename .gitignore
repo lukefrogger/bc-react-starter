@@ -12,6 +12,7 @@ yalc.lock
 
 # production
 /build
+netlify/functions/app.js
 
 # misc
 .yalc
@@ -26,3 +27,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .idea/
+.vscode/
