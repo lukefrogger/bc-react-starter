@@ -16,6 +16,36 @@ To install dependencies, run:
 yarn
 ```
 
+## Netlify Deploymentment
+
+### Behind the scenes
+
+When deployed to Netlify, the app will run a post-build command that generates a serverless function at `netlify/functions/app.js`. Since this is an auto-generated file it is not checked in to source control.
+
+To manually generate this file run `yarn netlify`.
+
+### Generate a BigCommerce API Token
+
+To deploy to Netlify you'll need to get an API key from BigCommerce. If you've been working locally this won't be a problem. If you don't have local project use this these details to to get an API.
+
+- URL: `https://api.bigcommerce.com/stores/{{BC_store_hash}}/v3/storefront/api-token`
+- Body:
+
+  ```json
+  {
+    "channel_id": 1,
+    "expires_at": 1689088496
+  }
+  ```
+
+- Headers:
+  ```json
+  {
+    "content-type": "application/json",
+    "x-auth-token": "{{BC_access_token}}"
+  }
+  ```
+
 ## Set environment variables
 
 The below environment variables are needed to run the starter:
