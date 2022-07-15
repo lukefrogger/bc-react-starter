@@ -9,6 +9,7 @@ yalc.lock
 
 # testing
 /coverage
+.netlify
 
 # production
 /build
@@ -26,3 +27,4 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .idea/
+.vscode/

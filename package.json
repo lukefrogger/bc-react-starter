@@ -30,7 +30,7 @@
     "@types/react": "^17.0.0"
   },
   "dependencies": {
-    "@bigcommerce/storefront-data-hooks": "^1.7.1-beta.10",
+    "@bigcommerce/storefront-data-hooks": "^1.7.1-beta.11",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@rehooks/local-storage": "2.4.0",
@@ -129,6 +129,7 @@
     "jest-watch-typeahead": "0.6.1",
     "mini-css-extract-plugin": "^1.6.0",
     "moment": "^2.29.1",
+    "netlify-cli": "^10.9.0",
     "nodemon": "^2.0.12",
     "optimize-css-assets-webpack-plugin": "5.0.4",
     "pnp-webpack-plugin": "1.6.4",
