@@ -13,3 +13,8 @@
   BIGCOMMERCE_STORE_HASH="BigCommerce Store Hash"
 
   BIGCOMMERCE_STOREFRONT_API_TOKEN="BigCommerce API Token"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 202
