@@ -12,6 +12,7 @@
     "start": "node -r esm -r dotenv/config server",
     "test": "node scripts/test.js",
     "netlify": "rollup --config=./rollup.netlify-config.js",
+    "postbuild": "yarn netlify",
     "sitemap": "node scripts/generate-sitemap-xml.js"
   },
   "browserslist": {

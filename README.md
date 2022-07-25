@@ -1,6 +1,6 @@
 # Deploy
 
-<a href="https://app.netlify.com/start/deploy?repository=https://github.com/lukefrogger/bc-react-starter-test#REACT_APP_HOME_CATEGORIES_IDS=18,19&BIGCOMMERCE_CHANNEL_ID=593155&BIGCOMMERCE_STOREFRONT_API_URL=https://store-xs0ffdia6b.mybigcommerce.com/graphql&BIGCOMMERCE_STORE_API_CLIENT_ID=cv5o85n4nfqxks389988ohi6vo6awhy&BIGCOMMERCE_STORE_API_TOKEN=egs4amrk4mdrwsm7ds7tsc8soklu0hy&BIGCOMMERCE_STORE_API_URL=https://api.bigcommerce.com/stores/xs0ffdia6b&BIGCOMMERCE_STORE_HASH=xs0ffdia6b&SECRET_COOKIE_PASSWORD=bcisawesomebcisawesomebcisawesome&BIGCOMMERCE_STOREFRONT_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOjEsImNvcnMiOlsiaHR0cDovL2xvY2FsaG9zdDozMDMwIl0sImVhdCI6MTY4MzY0NzU1NCwiaWF0IjoxNjUyMTExNTU3LCJpc3MiOiJCQyIsInNpZCI6MTAwMTAwNDUwNywic3ViIjoic3dtbnAwbDA5NW43ZHJ0ZnJxZnQxcWpmY3dmZnFldiIsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxfQ._jcAmEg8DbHp_D-27_z7IbzT20H63VGzdOUCK3noNCQhKh1NX3R9Dxgxa8hgykwBfqN7HhpYW9TiXgg5ZJKqaw">
+<a href="https://app.netlify.com/start/deploy?repository=https://github.com/moderntribe/bigcommerce-react-starter#REACT_APP_HOME_CATEGORIES_IDS=18,19&BIGCOMMERCE_CHANNEL_ID=593155&BIGCOMMERCE_STOREFRONT_API_URL=https://store-xs0ffdia6b.mybigcommerce.com/graphql&BIGCOMMERCE_STORE_API_CLIENT_ID=cv5o85n4nfqxks389988ohi6vo6awhy&BIGCOMMERCE_STORE_API_TOKEN=egs4amrk4mdrwsm7ds7tsc8soklu0hy&BIGCOMMERCE_STORE_API_URL=https://api.bigcommerce.com/stores/xs0ffdia6b&BIGCOMMERCE_STORE_HASH=xs0ffdia6b&SECRET_COOKIE_PASSWORD=bcisawesomebcisawesomebcisawesome&BIGCOMMERCE_STOREFRONT_API_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiJ9.eyJjaWQiOjEsImNvcnMiOlsiaHR0cDovL2xvY2FsaG9zdDozMDMwIl0sImVhdCI6MTY4MzY0NzU1NCwiaWF0IjoxNjUyMTExNTU3LCJpc3MiOiJCQyIsInNpZCI6MTAwMTAwNDUwNywic3ViIjoic3dtbnAwbDA5NW43ZHJ0ZnJxZnQxcWpmY3dmZnFldiIsInN1Yl90eXBlIjoyLCJ0b2tlbl90eXBlIjoxfQ._jcAmEg8DbHp_D-27_z7IbzT20H63VGzdOUCK3noNCQhKh1NX3R9Dxgxa8hgykwBfqN7HhpYW9TiXgg5ZJKqaw">
   <img src="https://www.netlify.com/img/deploy/button.svg" alt="Deploy to Netlify"
 ></a>
 
@@ -15,6 +15,36 @@ To install dependencies, run:
 ```
 yarn
 ```
+
+## Netlify Deploymentment
+
+### Behind the scenes
+
+When deployed to Netlify, the app will run a post-build command that generates a serverless function at `netlify/functions/app.js`. Since this is an auto-generated file it is not checked in to source control.
+
+To manually generate this file run `yarn netlify`.
+
+### Generate a BigCommerce API Token
+
+To deploy to Netlify you'll need to get an API key from BigCommerce. If you've been working locally this won't be a problem. If you don't have local project use this these details to to get an API.
+
+- URL: `https://api.bigcommerce.com/stores/{{BC_store_hash}}/v3/storefront/api-token`
+- Body:
+
+  ```json
+  {
+    "channel_id": 1,
+    "expires_at": 1689088496
+  }
+  ```
+
+- Headers:
+  ```json
+  {
+    "content-type": "application/json",
+    "x-auth-token": "{{BC_access_token}}"
+  }
+  ```
 
 ## Set environment variables
 

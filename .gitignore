@@ -13,6 +13,7 @@ yalc.lock
 
 # production
 /build
+netlify/functions/app.js
 
 # misc
 .yalc
