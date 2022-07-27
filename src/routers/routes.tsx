@@ -14,6 +14,7 @@ import {
   SearchPage,
   SignupPage,
   Sitemap,
+  WishListPage,
 } from '@pages'
 
 import { UserRouter } from './user'
@@ -69,6 +70,7 @@ export function RootRoutes(): React.ReactElement {
       />
       <Route path="/legal" element={<Navigate to="/legal/shipping" />} />
       <Route path="/sitemap" element={<Sitemap />} />
+      <Route path="/user/wishlists/:slug" element={<WishListPage />} />
       <Route path="/user/*" element={<UserRouter />} />
       <Route path="*" element={<NoMatch404 />} />
     </Routes>

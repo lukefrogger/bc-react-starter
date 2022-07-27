@@ -30,7 +30,7 @@ export function LoginPage(): React.ReactElement {
           password,
         })
         const params = new URLSearchParams(search)
-        navigate(params.get('forward_url') || '/')
+        navigate(params.get('forward_url') || '/', { replace: true })
       } catch (err) {
         formik.setErrors({
           password: t('errors.credentials', 'Invalid credentials'),
@@ -41,7 +41,8 @@ export function LoginPage(): React.ReactElement {
 
   // Already authenticated
   if (customer) {
-    return <Navigate to="/" />
+    const params = new URLSearchParams(search)
+    return <Navigate to={params.get('forward_url') || '/'} />
   }
 
   return (
