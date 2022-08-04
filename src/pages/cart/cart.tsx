@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { Pricing, Typography } from 'unsafe-bc-react-components'
 
 import { Breadcrumbs } from '@components'
+import { REACT_APP_API_ENDPOINT } from '@config/constants'
 import { PackageIcon, ReturnsIcon, SecureIcon, ShippingIcon } from '@icons'
 
 import { CartItem } from './cart__item'
@@ -104,7 +105,13 @@ export function CartPage(): React.ReactElement {
               },
             }}
           />
-          <a css={styles.Checkout} href="/checkout" onClick={onBeginCheckout}>
+          <a
+            css={styles.Checkout}
+            href={`${
+              REACT_APP_API_ENDPOINT || window.location.origin
+            }/checkout`}
+            onClick={onBeginCheckout}
+          >
             {t('cart.proceed', 'Proceed')}
           </a>
         </div>
